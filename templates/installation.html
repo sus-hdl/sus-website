@@ -1,5 +1,39 @@
 {% extends "base.html" %}
 
 {% block content %}
-<p><a href="{{ get_url(path='@/installation.md') }}">Examples</a>
-{% endblock %}
+
+<div class="installation-guide">
+    <h2>Installation Guide</h2>
+
+    <div class="installation-step">
+        <h3>1. Install via Rust's Package Manager <a href="https://doc.rust-lang.org/cargo/getting-started/installation.html" target="_blank">cargo installation info</a></h3>
+        <p>Use the following command to install the SUS Compiler:</p>
+
+        <div class="code-container">
+            <pre><code id="install-command">cargo install sus_compiler</code></pre>
+            <button class="copy-button" onclick="copyToClipboard('install-command')">Copy</button>
+        </div>
+        
+    </div>
+
+    <div class="installation-step">
+        <h3>2. Install the VSCode Extension</h3>
+        <p>
+            To enable syntax highlighting and code suggestions, install the 
+            <strong>SUS Hardware Design Language</strong> extension:
+        </p>
+        <ul>
+            <li>Open the VSCode Extension Explorer and search for <code>sus-lsp</code></li>
+            <li>or use the F1 installation command:</li>
+        </ul>
+
+        <div class="code-container">
+            <pre><code>ext install LennartVanHirtum.sus-lsp</code></pre>
+            <button class="copy-button" onclick="copyToClipboard('install-command')">Copy</button>
+            
+        </div>
+   
+    </div>
+</div> 
+
+{% endblock content %}
