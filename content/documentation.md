@@ -1,5 +1,5 @@
 +++
-title = "Documentation"
+title = "documentation"
 template = "index.html"
 +++
 

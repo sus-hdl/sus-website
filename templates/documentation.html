@@ -1,0 +1,897 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<style>body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #1d1a1a;
+    background-color: #f3ecff;;
+
+  }
+
+.logo {
+    height: 80px;           
+    width: auto;
+    vertical-align: left; 
+    margin-right: 15px;
+    transition: transform 0.3s ease
+    
+  }
+
+  .logo:hover {
+    transform: scale(1.01); 
+  }
+
+
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tahoma', sans-serif;
+    font-weight: 500; 
+    background-color:  #1e0f35;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+   
+    }
+
+    
+
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+
+  }
+  
+  nav ul li {
+    margin: 0 10px;
+  }
+  
+  nav ul li a {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #d8d8d8; 
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 20px; 
+    margin-left: auto; 
+  }
+  
+  .icon {
+    height: 60px;
+    width: 60px;
+    transition: transform 0.3s ease;
+
+  }
+  
+  .icon:hover {
+    transform: scale(1.03); 
+  }
+  main {
+    padding: 20px;
+  }
+  
+  h2 {
+    color: #696cff;
+  }
+  
+  
+
+  button {
+    background-color: #4c4eaf;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #4c4eaf;
+  }
+  section {
+    border-bottom: 2px dashed #007bff; /* Ändere den Stil der Trennlinie */
+    background-color: #f8f9fa; /* Füge einen Hintergrund hinzu */
+    padding: 1rem; /* Mehr Innenabstand */
+    margin-bottom: 3rem; /* Größerer Abstand zwischen Sections */
+}
+
+
+section:last-child {
+    border-bottom: none; /* Remove the line after the last section */
+}
+
+   .pipline{
+    height: 100px;
+    width: px;
+   }
+  
+
+
+pre {
+    margin: 0;
+    color: #2e2e2e;
+    font-size: 16px;
+    font-family: Consolas, "Courier New", monospace;
+}
+
+code {
+    display: block;
+    white-space: pre;
+    background: linear-gradient(45deg, #ffc5b6, #7aceff);
+    border-radius: 8px;
+    padding: 5px;
+    
+    overflow-x: auto;
+}
+container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  gap: 1rem; /* Adds spacing between the items */
+  padding: 1rem;
+}
+/* Navigationsleiste (Sidebar) */
+.sidebar {
+  position: fixed; /* Fixes the sidebar in place */
+  background-color: #f4f4f4; /* Heller Hintergrund */
+  width: 250px; /* Festgelegte Breite */
+  padding: 1rem; /* Innenabstand */
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Schatten */
+  position: fixed; /* Behält die Position beim Scrollen */
+  height: 100%; /* Vollständige Höhe */
+}
+
+.sidebar ul {
+  list-style: none; /* Entfernt Aufzählungszeichen */
+  padding: 3rem; /* Kein zusätzlicher Abstand */
+
+}
+
+.sidebar li {
+  margin-bottom: 1rem; /* Abstand zwischen Links */
+  
+}
+
+.sidebar h2 {
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .sidebar a {
+      display: block;
+      margin-bottom: 0.5rem;
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .sidebar a:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+
+/* Hauptinhalt */
+.content {
+  margin-left: 250px; /* Platz für die Sidebar lassen */
+  padding: 4rem; /* Abstand innerhalb des Inhalts */
+  flex: 1; /* Nimmt den verbleibenden Platz ein */
+}
+.LSPExample{height: 500px;
+    width: 500px;}
+.dualPortMem{height: 500px;
+    width: 500px;}
+
+.Architecture{
+  height: 500px;
+    width: 800px;
+
+}
+
+  </style>
+<div class="documentation of SUS Language">
+<!-- Navigation -->
+<div class="container">
+    <nav class="sidebar">
+      <h2>contents</h2>
+      <a href="#What ist SUS Language?">1.What ist SUS Language?</a>
+      <a href="#installation">2.Installation</a>
+      <a href="#learning-sus">3.Learning SUS</a>
+      <a href="#changelog">4.Changelog since Talk</a>
+      <a href="#core-philosophy">5.Core philosophy</a>
+      <a href="#what-sus-gives-you">6.What SUS gives you</a>
+      <a href="#planned">7.Planned</a>
+      <a href="#what-sus-does-not-do">8.What SUS does not do</a>
+      <a href="#example-sus-code">9.Example of some SUS code in the SUS VSCode Language Server</a>
+      <a href="#comparison-hdls">10.Comparison to other HDLs</a>
+      <a href="#main-features">11.Main Features through examples</a>
+      <a href="#roadmap">12.Roadmap</a>
+      <a href="#fun-projects">13.Fun projects to do in SUS</a>
+      <a href="#long-term-strategy">14.Long Term Strategy</a>
+    </nav>
+   
+
+  <!-- Main Content Area -->
+  <main class="content">
+    <div class="docSection">
+      <!-- Sections -->
+      <section id="What ist SUS Language?">
+        <h2>What ist SUS Language?</h2>
+        <p>SUS is a modern RTL (Register-Transfer Level) Hardware Design Language designed to streamline the creation of high-performance computing FPGA accelerators. 
+          It offers simplicity and efficiency without compromising the flexibility and precision demanded by low-level hardware design, 
+          standing as an innovative alternative to traditional languages like Verilog and VHDL.</p>
+      </section>
+      <section id="installation">
+          <h2>Installation</h2>
+          <p>Installation is done through <a
+              href="https://www.rust-lang.org/">Rust</a>’s package manager cargo (<a
+              href="https://doc.rust-lang.org/cargo/getting-started/installation.html">cargo
+              installation info</a>).</p>
+              <div class="sourceCode" id="cb1"><pre
+              class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">cargo</span> install sus_compiler</span></code></pre></div>
+              <p>To use the accompanying VSCode Extension for Syntax Highlighting and
+              Code Suggestions (<a href="https://github.com/pc2/sus-lsp">sus-lsp</a>),
+              install <a
+              href="https://marketplace.visualstudio.com/items?itemName=LennartVanHirtum.sus-lsp">SUS
+              Hardware Design Language</a> through the VSCode Extension Explorer, or
+              use the F1 installation command:</p>
+              <pre><code>ext install LennartVanHirtum.sus-lsp</code></pre>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="learning-sus">
+          <h2>Learning SUS</h2>
+          <p>To get started with learning SUS, have a look at <a
+              href="https://www.youtube.com/watch?v=jJvtZvcimyM">this talk</a>. In 40
+              minutes it goes over most language features through examples. Because
+              further development will make this outdated rather quickly, a changelog
+              is provided below to keep track.</p>
+              <p>For an example project to tinker with, see <a
+              href="https://github.com/VonTum/BitSerialMatrixMultiply">VonTum/BitSerialMatrixMultiply</a>.</p>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="changelog">
+          <h2>Changelog since Talk</h2>
+          <ul>
+              <li>Template syntax has changed to
+              <code>#(NameA: 3, TypeB: type int[3], ValueC: true)</code></li>
+              <li>Standard Library is delivered with SUS Compiler</li>
+              <li>Hindley-Milner for Concrete Typing</li>
+              </ul>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="core-philosophy">
+          <h2>Core philosophy</h2>
+          p>SUS is meant to be a direct competitor to Synthesizeable Verilog and
+VHDL. Its main goal is to be an intuitive and thin syntax for building
+netlists, such that traditional synthesis tools can still be used to
+analyze the resulting hardware. SUS shall impose no paradigm on the
+hardware designer, such as requiring specific communication protocols or
+iteration constructs. In other words, SUS is not there to abstract away
+complexity, but rather to make the inherent complexity of hardware
+design more manageable.</p>
+<p>The one restriction SUS does impose over Verilog and VHDL is that it
+requires the hardware to be <em>synchronous</em> over one or more
+clocks. Asynchronous hardware is therefore <em>unrepresentable</em>
+making SUS less suitable for ASIC development.</p>
+<p>There are three main features that set SUS apart from the rest: -
+Generative Variables and Types can be freely combined. Any “Dependent
+Types” headaches that are caused by this are sidestepped by doing the
+main type checking after instantiation. - Easy Pipelining through an
+orthogonal language construct called “Latency Counting”. ‘Orthogonal’
+means that adding pipeline registers does not interfere with other
+language features such as generative or conditional code. - Separation
+of pipelines with interfaces. This keeps the user from accidentally
+crossing signals that have no logical relationship. At this level Clock
+Domain Crossings are implemented.</p>
+<p>Finally, an important consideration of SUS is the user interface. SUS
+comes with a VSCode IDE plugin that allows the copiler to be used fully
+in-IDE. Compiling, typechecking and instantiation is done as the user
+writes code, leading to a very tight development feedback loop.</p>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="what-sus-gives-you">
+          <h2>What SUS gives you</h2>
+          <ul>
+              <li>A direct 1-to-1 mapping from code to netlist</li>
+              <li>Hardware domain separation with explicit crossing primitives</li>
+              <li>A built-in syntax for pipelining that does not impose structural
+              constraints</li>
+              <li>In-IDE compilation errors &amp; warnings</li>
+              <li>Metaprogramming for hardware generation</li>
+              </ul>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="planned">
+          <h2>Planned</h2>
+          <ul>
+              <li>Type safety with Bounded Integers</li>
+              <li>Multi-Clock modules</li>
+              <li>Formal Verification Integration</li>
+              <li>Syntactic sugar for common constructs like valid signals, resets and
+              submodule communication</li>
+              <li>Moving some<a href="#fn1" class="footnote-ref" id="fnref1"
+              role="doc-noteref"><sup>1</sup></a> timing constraints to the source
+              file</li>
+              </ul>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="what-sus-does-not-do">
+          <h2>What SUS does not do</h2>
+          <ul>
+              <ul>
+                  <li>Provide abstractions for handshake protocols (Like AXI)</li>
+                  <li>Runtime Iteration Constructs</li>
+                  <li>Automatic Pipelining &amp; Retiming</li>
+                  </ul>
+                  <p>Of course, while the language does not support such protocols
+                  directly in the syntax, as this would put unneccesary extra constraints
+                  on the output hardware, modules for handling them will be provided in
+                  the standard library.</p>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="example-sus-code">
+          <h2>Example of some SUS code in the SUS VSCode Language Server</h2>
+          <figure>
+              <img class="LSPExample" src="susLSPExample-2.png" alt="SUS LSP Example" />
+              <figcaption aria-hidden="true">SUS LSP Example</figcaption>
+              </figure>
+            
+              <h4 id="the-old-guard-system-verilog-and-vhdl">The Old Guard:
+              (System-)Verilog and VHDL:</h4>
+              <p>These languages were originally designed as Hardware
+              <em>Description</em> Languages, meant to describe exactly how hand-drawn
+              hardware components function. Later on a “Synthesizeable Subset” was
+              created from these languages to actually create hardware from them. The
+              issue is, these old languages still carry this simulation-first core
+              design. The feature-set that’s actually available for synthesis is
+              rather small, and common constructs like pipelining routinely introduce
+              bugs. Even things like what inputs and outputs mean are left vague.</p>
+              <h4 id="high-level-synthesis-bluespec-intel-oneapi-xilinx-vitis">High
+              Level Synthesis: <a href="https://bluespec.com">BlueSpec</a>, <a
+              href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html">Intel
+              OneAPI</a>, <a
+              href="https://www.xilinx.com/products/design-tools/vitis.html">Xilinx
+              Vitis</a></h4>
+              <p>This approach attempts to generate hardware from an imperative
+              description in an existing software language, usually C++. They rely on
+              control flow analysis and a clever compiler to turn this description
+              into hardware that actually performs the operation. The core issue with
+              these is an over-reliance on such compiler smarts. This usually means
+              fiddling with compiler directives until the compiler actually outputs
+              the hardware you originally had in mind. In some cases, it may not even
+              be possible to express the hardware you intend because the compiler
+              designers didn’t provide it. This means ptimization on such generated
+              hardware is often impossible. The powerful synthesis tools like Intel
+              Quartus and Vivado with their timing analyzers are unuseable. The
+              tradeoff is inefficient use of resources and lower clock speeds.</p>
+              <p>A final thing that must be said about the corporate HLS flows, is
+              that the promise of ‘portability’ is absolute bogus. These systems are
+              simply more attempts to build walled gardens around their respective
+              platforms. This is evident from Intel’s deprecation of the more open
+              OpenCL frontend they used to have, in favor of their platform-locked
+              Intel OneAPI. (Which, funnily enough, is just a thin wrapper around the
+              old OpenCL codebase). If I sound salty, it is because I am.</p>
+              <h4 id="embedded-languages-such-as-chisel-and-spinalhdl">Embedded
+              Languages such as <a href="https://www.chisel-lang.org/">Chisel</a> and
+              <a href="https://github.com/SpinalHDL/SpinalHDL">SpinalHDL</a>:</h4>
+              <p>If one is being pedantic, they actually shouldn’t actually be called
+              “languages” per se, but rather hardware construction libraries within an
+              existing software language; usually Scala. There is a solid argument to
+              be made for this style though. Why invent a new meta-language for the
+              generation of hardware when there’s widely-used software languages
+              already out there? My main arguments against this approach are written
+              below, but they can be summed up as the language designers having made
+              the tradeoff of reducing development time on the compiler sacrificing
+              the useability of the final product.</p>
+              <ul>
+              <li>No hardware-specific language abstractions. Abstractions have to be
+              built on top of the Object-Oriented or Functional basis of Scala. The
+              regular scala constructs don’t map to hardware, so instead functions
+              have to be introduced (like <code>when()</code> for ‘if’) to imitate
+              these but for hardware.</li>
+              <li>Providing hardware-specific tooling for such languages is difficult.
+              One can’t hover over a variable in the code and get hardware-specific
+              information from it, because the LSP is for Scala, not for Chisel. Also
+              the Edit-Test-Debug cycle is longer, as there is no direct in-editor
+              feedback for incorrect hardware.</li>
+              <li>Finally, there is the philosophical question of: “Is the full
+              feature set of a modern software language really necessary for hardware
+              design?”. Are Higher Order Functions, Dynamic Memory Allocation, or
+              Object Oriented Programming necessary to generate hardware? In practice,
+              99% of hardware generation code is simple for loops and conditionals.
+              Anything more complicated than that shouldn’t be happening on every
+              compile.</li>
+              </ul>
+              <h4
+              id="new-hardware-design-languages-such-as-tl-verilog-spade-filament-rusthdl-and-now-sus">New
+              Hardware <em>Design</em> Languages such as <a
+              href="https://arxiv.org/abs/1811.01780">TL-Verilog</a>, <a
+              href="https://spade-lang.org/">Spade</a>, <a
+              href="https://filamenthdl.com/">Filament</a>, <a
+              href="https://rust-hdl.org/">RustHDL</a> and now <a
+              href=".">SUS</a></h4>
+              <p>The above opinions on the other styles of hardware design are shared
+              by my colleagues building these new hardware <em>design</em> languages.
+              The main differences between them are philosophical: What common
+              hardware constructs and concepts should be abstracted and how?</p>
+              <p>One big decision all of these (including SUS) make is going all-in on
+              Synchronous Hardware. A clock becomes a fundamental language construct
+              instead of being a regular wire. A thing most of them also share is a
+              Rust-inspired syntax, and being written in Rust.</p>
+              <h2 id="main-features-through-examples">Main Features through
+              examples</h2>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="comparison-hdls">
+          <h2>Comparison to other HDLs</h2>
+          <p>There’s a few categories of HDLs as I see it nowadays. I shall visit
+              them in turn:</p>
+              <h4 id="the-old-guard-system-verilog-and-vhdl">The Old Guard:
+              (System-)Verilog and VHDL:</h4>
+              <p>These languages were originally designed as Hardware
+              <em>Description</em> Languages, meant to describe exactly how hand-drawn
+              hardware components function. Later on a “Synthesizeable Subset” was
+              created from these languages to actually create hardware from them. The
+              issue is, these old languages still carry this simulation-first core
+              design. The feature-set that’s actually available for synthesis is
+              rather small, and common constructs like pipelining routinely introduce
+              bugs. Even things like what inputs and outputs mean are left vague.</p>
+              <h4 id="high-level-synthesis-bluespec-intel-oneapi-xilinx-vitis">High
+              Level Synthesis: <a href="https://bluespec.com">BlueSpec</a>, <a
+              href="https://www.intel.com/content/www/us/en/developer/tools/oneapi/toolkits.html">Intel
+              OneAPI</a>, <a
+              href="https://www.xilinx.com/products/design-tools/vitis.html">Xilinx
+              Vitis</a></h4>
+              <p>This approach attempts to generate hardware from an imperative
+              description in an existing software language, usually C++. They rely on
+              control flow analysis and a clever compiler to turn this description
+              into hardware that actually performs the operation. The core issue with
+              these is an over-reliance on such compiler smarts. This usually means
+              fiddling with compiler directives until the compiler actually outputs
+              the hardware you originally had in mind. In some cases, it may not even
+              be possible to express the hardware you intend because the compiler
+              designers didn’t provide it. This means ptimization on such generated
+              hardware is often impossible. The powerful synthesis tools like Intel
+              Quartus and Vivado with their timing analyzers are unuseable. The
+              tradeoff is inefficient use of resources and lower clock speeds.</p>
+              <p>A final thing that must be said about the corporate HLS flows, is
+              that the promise of ‘portability’ is absolute bogus. These systems are
+              simply more attempts to build walled gardens around their respective
+              platforms. This is evident from Intel’s deprecation of the more open
+              OpenCL frontend they used to have, in favor of their platform-locked
+              Intel OneAPI. (Which, funnily enough, is just a thin wrapper around the
+              old OpenCL codebase). If I sound salty, it is because I am.</p>
+              <h4 id="embedded-languages-such-as-chisel-and-spinalhdl">Embedded
+              Languages such as <a href="https://www.chisel-lang.org/">Chisel</a> and
+              <a href="https://github.com/SpinalHDL/SpinalHDL">SpinalHDL</a>:</h4>
+              <p>If one is being pedantic, they actually shouldn’t actually be called
+              “languages” per se, but rather hardware construction libraries within an
+              existing software language; usually Scala. There is a solid argument to
+              be made for this style though. Why invent a new meta-language for the
+              generation of hardware when there’s widely-used software languages
+              already out there? My main arguments against this approach are written
+              below, but they can be summed up as the language designers having made
+              the tradeoff of reducing development time on the compiler sacrificing
+              the useability of the final product.</p>
+              <ul>
+              <li>No hardware-specific language abstractions. Abstractions have to be
+              built on top of the Object-Oriented or Functional basis of Scala. The
+              regular scala constructs don’t map to hardware, so instead functions
+              have to be introduced (like <code>when()</code> for ‘if’) to imitate
+              these but for hardware.</li>
+              <li>Providing hardware-specific tooling for such languages is difficult.
+              One can’t hover over a variable in the code and get hardware-specific
+              information from it, because the LSP is for Scala, not for Chisel. Also
+              the Edit-Test-Debug cycle is longer, as there is no direct in-editor
+              feedback for incorrect hardware.</li>
+              <li>Finally, there is the philosophical question of: “Is the full
+              feature set of a modern software language really necessary for hardware
+              design?”. Are Higher Order Functions, Dynamic Memory Allocation, or
+              Object Oriented Programming necessary to generate hardware? In practice,
+              99% of hardware generation code is simple for loops and conditionals.
+              Anything more complicated than that shouldn’t be happening on every
+              compile.</li>
+              </ul>
+              <h4
+              id="new-hardware-design-languages-such-as-tl-verilog-spade-filament-rusthdl-and-now-sus">New
+              Hardware <em>Design</em> Languages such as <a
+              href="https://arxiv.org/abs/1811.01780">TL-Verilog</a>, <a
+              href="https://spade-lang.org/">Spade</a>, <a
+              href="https://filamenthdl.com/">Filament</a>, <a
+              href="https://rust-hdl.org/">RustHDL</a> and now <a
+              href=".">SUS</a></h4>
+              <p>The above opinions on the other styles of hardware design are shared
+              by my colleagues building these new hardware <em>design</em> languages.
+              The main differences between them are philosophical: What common
+              hardware constructs and concepts should be abstracted and how?</p>
+              <p>One big decision all of these (including SUS) make is going all-in on
+              Synchronous Hardware. A clock becomes a fundamental language construct
+              instead of being a regular wire. A thing most of them also share is a
+              Rust-inspired syntax, and being written in Rust.</p>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="main-features">
+          <h2>Main Features through examples</h2>
+          <h3 id="pipelining-through-latency-counting">Pipelining through <a
+              href="philosophy/latency.md">Latency Counting</a></h3>
+              <div class="sourceCode" id="cb3"><pre
+              class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> pow17 <span class="op">{</span></span>
+              <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">interface pow17 :</span> int i <span class="op">-&gt;</span> int o </span>
+              <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>        int i2  <span class="op">=</span> i * i</span>
+              <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reg</span> int i4  <span class="op">=</span> i2 * i2</span>
+              <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        int i8  <span class="op">=</span> i4 * i4</span>
+              <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">reg</span> int i16 <span class="op">=</span> i8 * i8</span>
+              <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            o   <span class="op">=</span> i16 * i</span>
+              <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+              <figure>
+              <img class="pipline" src="insertRegisters.png"
+              alt="Registers can be inserted" />
+              <figcaption aria-hidden="true">Registers can be inserted</figcaption>
+              </figure>
+              <h3 id="fizz-buzz-lookup-table-using-generative-code">FIZZ-BUZZ Lookup
+              Table using Generative Code</h3>
+              <div class="sourceCode" id="cb4"><pre
+              class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> fizz_buzz_gen <span class="op">{</span></span>
+              <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="dv">interface fizz_buzz_gen :</span> int v <span class="op">-&gt;</span> int fb </span>
+              <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    gen int FIZZ <span class="op">=</span> <span class="dv">15</span></span>
+              <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    gen int BUZZ <span class="op">=</span> <span class="dv">11</span></span>
+              <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    gen int FIZZ_BUZZ <span class="op">=</span> <span class="dv">1511</span></span>
+              <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    gen int TABLE_SIZE <span class="op">=</span> <span class="dv">256</span></span>
+              <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+              <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    gen int<span class="op">[</span>TABLE_SIZE<span class="op">]</span> lut</span>
+              <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    </span>
+              <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span> int i in <span class="dv">0</span>..TABLE_SIZE <span class="op">{</span></span>
+              <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        gen bool fizz <span class="op">=</span> i <span class="op">%</span> <span class="dv">3</span> <span class="op">==</span> <span class="dv">0</span></span>
+              <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        gen bool buzz <span class="op">=</span> i <span class="op">%</span> <span class="dv">5</span> <span class="op">==</span> <span class="dv">0</span></span>
+              <span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        </span>
+              <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        gen int tbl_fb</span>
+              <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="kw">if</span> fizz <span class="op">&amp;</span> buzz <span class="op">{</span></span>
+              <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>            tbl_fb <span class="op">=</span> FIZZ_BUZZ</span>
+              <span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> fizz <span class="op">{</span></span>
+              <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>            tbl_fb <span class="op">=</span> FIZZ</span>
+              <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> buzz <span class="op">{</span></span>
+              <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>            tbl_fb <span class="op">=</span> BUZZ</span>
+              <span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+              <span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>            tbl_fb <span class="op">=</span> i</span>
+              <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>        <span class="op">}</span></span>
+              <span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+              <span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        lut<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> tbl_fb</span>
+              <span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+              <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+              <span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    fb <span class="op">=</span> lut<span class="op">[</span>v<span class="op">]</span></span>
+              <span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
+              <p>In the end, the generative code is executed and all that results is a
+              lookup table.</p>
+              <h3
+              id="clock--domains-for-separating-out-logically-distinct-pipelines">(Clock-)
+              Domains for separating out logically distinct pipelines</h3>
+              <p>For this feature to be useable you really must use the LSP. The
+              semantic analysis of the compiler gives important visual feedback while
+              programming that makes this much easier to understand.</p>
+              <p>In this example, we create a memory block with a read port and a
+              write port. This module has two domains: The read interface domain and
+              write interface domain. Every wire in the design is part of one of these
+              domains (or an anonymous domain if it’s not connected to either
+              interface). Signals are not allowed to cross from one domain to another
+              unless explicitly passed through a domain crossing primitive.</p>
+              <figure>
+              <img class="dualPortMem" src="dualPortMem.png" alt="Dual Port Memory" />
+              <figcaption aria-hidden="true">Dual Port Memory</figcaption>
+              </figure>
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+
+      <section id="roadmap">
+          <h2>Roadmap</h2>
+          <h3 id="major-milestones">Major Milestones</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Tree Sitter as parsing
+frontend</label></li>
+<li><label><input type="checkbox" checked="" />Arbitrary pipelined full
+flow</label></li>
+<li><label><input type="checkbox" checked="" />Arbitrary single-clock
+full flow</label></li>
+<li><label><input type="checkbox" />Arbitrary multi-clock full
+flow</label></li>
+<li><label><input type="checkbox" checked="" />Generative
+Code</label></li>
+<li><label><input type="checkbox" checked="" />Generative
+Parameters</label></li>
+<li><label><input type="checkbox" checked="" />Type
+Templates</label></li>
+<li><label><input type="checkbox" />Full Template Inference</label></li>
+<li><label><input type="checkbox" />Actions, Triggers and
+Queries</label></li>
+</ul>
+<h3 id="language-features">Language Features</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Basic
+Tokenizer</label></li>
+<li><label><input type="checkbox" checked="" />Basic Syntax Error
+Reporting</label></li>
+<li><label><input type="checkbox" checked="" />Syntax error reporting
+with infos</label></li>
+<li><label><input type="checkbox" checked="" />Basic Token Highlighting
+in Terminal</label></li>
+<li><label><input type="checkbox" checked="" />Local Variable and Type
+Name highlighting</label></li>
+<li><label><input type="checkbox" checked="" />Array Syntax</label></li>
+<li><label><input type="checkbox" checked="" />Function Call
+Syntax</label></li>
+<li><label><input type="checkbox" checked="" />Unary and Binary
+Operators</label></li>
+<li><label><input type="checkbox" checked="" />Can Parse Multiply-Add
+pipeline</label></li>
+<li><label><input type="checkbox" checked="" />Can Parse Blur2
+filter</label></li>
+<li><label><input type="checkbox" checked="" />If
+Statements</label></li>
+<li><label><input type="checkbox" checked="" />Latency
+Specifiers</label></li>
+<li><label><input type="checkbox" checked="" />Get rid of
+semicolons</label></li>
+<li><label><input type="checkbox" checked="" />Access module inputs /
+outputs through field names</label></li>
+<li><label><input type="checkbox" />Array Slices</label></li>
+<li><label><input type="checkbox" />Bound Specifiers</label></li>
+<li><label><input type="checkbox" />Structs</label></li>
+<li><label><input type="checkbox" />Conditional Bindings</label></li>
+<li><label><input type="checkbox" checked="" />Generative variables and
+assignments</label></li>
+<li><label><input type="checkbox" checked="" />Generative
+Conditions</label></li>
+<li><label><input type="checkbox" checked="" />Generative For
+Loops</label></li>
+<li><label><input type="checkbox" />Generative While Loops</label></li>
+<li><label><input type="checkbox" checked="" />Generative
+Parameters</label></li>
+<li><label><input type="checkbox" />Generative Parameter Default
+Arguments</label></li>
+<li><label><input type="checkbox" checked="" />Type
+Parameters</label></li>
+<li><label><input type="checkbox" />Generative Asserts</label></li>
+<li><label><input type="checkbox" checked="" />Multi-Interface
+Syntax</label></li>
+<li><label><input type="checkbox" checked="" />Native Module integration
+syntax</label></li>
+<li><label><input type="checkbox" checked="" />Intrinsic
+Modules</label></li>
+<li><label><input type="checkbox" checked="" />Can Parse FIFO
+implementation</label></li>
+<li><label><input type="checkbox" />Clock Domain Crossings</label></li>
+<li><label><input type="checkbox" />Submodule Generators</label></li>
+<li><label><input type="checkbox" checked="" />Standard Library Bundled
+with compiler</label></li>
+</ul>
+<h3 id="performance-linking-and-name-resolution">Performance, Linking
+and Name Resolution</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Namespaces</label></li>
+<li><label><input type="checkbox" checked="" />Single File Name
+Resolution</label></li>
+<li><label><input type="checkbox" checked="" />Multi File Name
+Resolution</label></li>
+<li><label><input type="checkbox" />Incremental Parsing</label></li>
+<li><label><input type="checkbox" />Incremental Compilation</label></li>
+<li><label><input type="checkbox" />Multi-Threaded Parsing</label></li>
+<li><label><input type="checkbox" />Multi-Threaded
+Compilation</label></li>
+</ul>
+<h3 id="safety">Safety</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Basic Type Checking
+(bools, ints, arrays, etc)</label></li>
+<li><label><input type="checkbox" />Integer and Array Bounds
+Checking</label></li>
+<li><label><input type="checkbox" />Conflicting assignments (such as
+calling the same module twice in a single cycle, multiple assignments to
+a single variable)</label></li>
+</ul>
+<h3 id="typing-inference">Typing &amp; Inference</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Hindley-Milner typing for
+Abstract Types</label></li>
+<li><label><input type="checkbox" checked="" />Hindley-Milner typing for
+Domain Types</label></li>
+<li><label><input type="checkbox" checked="" />Hindley-Milner typing for
+Concrete Types</label></li>
+<li><label><input type="checkbox" />Template Type Inference</label></li>
+<li><label><input type="checkbox" />Generative Parameter
+Inference</label></li>
+<li><label><input type="checkbox" />Latency Count Inference</label></li>
+<li><label><input type="checkbox" />Let-syntax</label></li>
+</ul>
+<h3 id="latency-counting">Latency Counting</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Basic latency assignment
+algorithm</label></li>
+<li><label><input type="checkbox" checked="" />Net-positive latency
+cycles error</label></li>
+<li><label><input type="checkbox" checked="" />Disjoint nodes
+error</label></li>
+<li><label><input type="checkbox" checked="" />Indeterminable port
+latency</label></li>
+<li><label><input type="checkbox" checked="" />Latency Counting uses
+latency specifiers</label></li>
+<li><label><input type="checkbox" checked="" />Latency for output-only
+modules</label></li>
+<li><label><input type="checkbox" checked="" />Latency Counting is
+invariant across arbitrary algorithm starting nodes (not quite, some
+starting nodes may error. But those that don’t are
+equivalent!)</label></li>
+<li><label><input type="checkbox" checked="" />Integrate into Verilog
+generation</label></li>
+<li><label><input type="checkbox" checked="" />Latency cuts</label></li>
+<li><label><input type="checkbox" checked="" />Latency
+Offset</label></li>
+<li><label><input type="checkbox" />Latency Cuts &amp; Latency Counting
+for “disjoint Input-Output blocks”</label></li>
+<li><label><input type="checkbox" /><del>Split
+Latencies</del></label></li>
+</ul>
+<h3 id="lsp">LSP</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Basic LSP for VSCode
+integration</label></li>
+<li><label><input type="checkbox" checked="" />Syntax
+Highlighting</label></li>
+<li><label><input type="checkbox" checked="" />Coloring of domain
+wires</label></li>
+<li><label><input type="checkbox" checked="" />Error and Warning
+Reporting</label></li>
+<li><label><input type="checkbox" checked="" />Hover type
+information</label></li>
+<li><label><input type="checkbox" checked="" />Hover
+documentation</label></li>
+<li><label><input type="checkbox" checked="" />Go to
+definition</label></li>
+<li><label><input type="checkbox" checked="" />File
+Creation/Deletion/Rename</label></li>
+<li><label><input type="checkbox" checked="" />Show last generation
+value</label></li>
+<li><label><input type="checkbox" checked="" />Find all
+references</label></li>
+<li><label><input type="checkbox" checked="" />Highlighting</label></li>
+<li><label><input type="checkbox" checked="" />Renaming</label></li>
+<li><label><input type="checkbox" checked="" />Basic code
+completion</label></li>
+<li><label><input type="checkbox" />Port code completion</label></li>
+<li><label><input type="checkbox" />Struct field code
+completion</label></li>
+<li><label><input type="checkbox" />Per-Line Resource Utilization
+Reporting</label></li>
+</ul>
+<h3 id="code-generation">Code Generation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Expression
+Flattening</label></li>
+<li><label><input type="checkbox" checked="" />Can Generate Verilog for
+Multiply-Add pipeline</label></li>
+<li><label><input type="checkbox" checked="" />Can Generate Verilog for
+Blur2 filter</label></li>
+<li><label><input type="checkbox" checked="" />Can Generate Verilog for
+FIFO</label></li>
+<li><label><input type="checkbox" />Multi-Clock Modules</label></li>
+<li><label><input type="checkbox" />Clock Tracking for
+SubModules</label></li>
+</ul>
+<h3 id="fun-projects-to-do-in-sus">Fun projects to do in SUS</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" checked="" />Bit-Serial Matrix
+Multiply</label></li>
+<li><label><input type="checkbox" />Dedekind Kernel Port</label></li>
+<li><label><input type="checkbox" />Sparse Matrix Multiply</label></li>
+<li><label><input type="checkbox" />RISC-V CPU</label></li>
+<li><label><input type="checkbox" />Enigma Machine</label></li>
+<li><label><input type="checkbox" />Enigma Code Breaking</label></li>
+<li><label><input type="checkbox" />Bitwise dedekind D10 estimation
+accelerator</label></li>
+</ul>
+<h3 id="safety-through-interface-asserts-pdl-style-asserts">Safety
+through Interface Asserts (PDL-style asserts)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />btor2?</label></li>
+<li><label><input type="checkbox" />Language syntax</label></li>
+<li><label><input type="checkbox" />How powerful is it?</label></li>
+<li><label><input type="checkbox" />Timing Failure extraction from
+vendor tools</label></li>
+</ul>
+<h3 id="simulation">Simulation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Basic testbench</label></li>
+<li><label><input type="checkbox" />“Visualization”</label></li>
+</ul>
+<h2 id="architecture">Architecture</h2>
+<figure>
+<img class="Architecture" src="susArchitecture.png"
+alt="Architecture of the SUS Compiler" />
+<figcaption aria-hidden="true">Architecture of the SUS
+Compiler</figcaption>
+</figure>
+<h2 id="long-term-strategy">Long Term Strategy</h2>
+<p><a href="https://www.youtube.com/watch?v=XZ3w_jec1v8">“The Economics
+of Programming Languages” by Evan Czaplicki (Strange Loop 2023)</a></p>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Some timing constraints affect the cycle-by-cycle
+functioning of the design, such as the relative speeds of synchronous
+clocks and False/Multi-Cycle Path constraints. Because they affect the
+cycle-wise behaviour of the design, they should be provided as part of
+the language and incorporated in simulation. Of course, timing
+constraints like real clock speeds, edge patterns and external component
+timings still rightfully belong in the Timing Constraints file. It
+should not be possible to express SUS code that behaves differently
+between Simulation and Synthesis.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+          <a href="#top" class="back-to-top">Zurück zum Anfang</a>
+      </section>
+    </div>
+
+      
+  </main>
+
+  </div>
+<!-- Code injected by live-server -->
+<script>
+  // <![CDATA[  <-- For SVG support
+  if ('WebSocket' in window) {
+      (function () {
+          function refreshCSS() {
+              var sheets = [].slice.call(document.getElementsByTagName("link"));
+              var head = document.getElementsByTagName("head")[0];
+              for (var i = 0; i < sheets.length; ++i) {
+                  var elem = sheets[i];
+                  var parent = elem.parentElement || head;
+                  parent.removeChild(elem);
+                  var rel = elem.rel;
+                  if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+                      var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+                      elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+                  }
+                  parent.appendChild(elem);
+              }
+          }
+          var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+          var address = protocol + window.location.host + window.location.pathname + '/ws';
+          var socket = new WebSocket(address);
+          socket.onmessage = function (msg) {
+              if (msg.data == 'reload') window.location.reload();
+              else if (msg.data == 'refreshcss') refreshCSS();
+          };
+          if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+              console.log('Live reload enabled.');
+              sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+          }
+      })();
+  }
+  else {
+      console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+  }
+  // ]]>
+</script>
+
+</div>
+{% endblock %}
