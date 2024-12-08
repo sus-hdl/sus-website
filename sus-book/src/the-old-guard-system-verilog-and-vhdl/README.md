@@ -1,0 +1,2 @@
+# The Old Guard: (System-)Verilog and VHDL
+These languages were originally designed as Hardware *Description* Languages, meant to describe exactly how hand-drawn hardware components function. Later on a "Synthesizeable Subset" was created from these languages to actually create hardware from them. The issue is, these old languages still carry this simulation-first core design. The feature-set that's actually available for synthesis is rather small, and common constructs like pipelining routinely introduce bugs. Even things like what inputs and outputs mean are left vague. 
