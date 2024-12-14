@@ -6,7 +6,21 @@ language = "en"
 
 title = "SUS Language"
 
+
 [output.html]
+
+default-theme = "light"
+preferred-dark-theme = "navy"
+smart-punctuation = true
+mathjax-support = false
+copy-fonts = true
+
+no-section-label = false
+git-repository-url = "https://github.com/sus-hdl/sus-website"
+git-repository-icon = "fa-github"
+site-url = "http://127.0.0.1:1111"
+cname = "sus-lang.org"
+
 
 
 

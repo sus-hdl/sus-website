@@ -1,0 +1,34 @@
+# Language Features
+- [x] Basic Tokenizer
+- [x] Basic Syntax Error Reporting
+- [x] Syntax error reporting with infos
+- [x] Basic Token Highlighting in Terminal
+- [x] Local Variable and Type Name highlighting
+- [x] Array Syntax
+- [x] Function Call Syntax
+- [x] Unary and Binary Operators
+- [x] Can Parse Multiply-Add pipeline
+- [x] Can Parse Blur2 filter
+- [x] If Statements
+- [x] Latency Specifiers
+- [x] Get rid of semicolons
+- [x] Access module inputs / outputs through field names
+- [ ] Array Slices
+- [ ] Bound Specifiers
+- [ ] Structs
+- [ ] Conditional Bindings
+- [x] Generative variables and assignments
+- [x] Generative Conditions
+- [x] Generative For Loops
+- [ ] Generative While Loops
+- [x] Generative Parameters
+- [ ] Generative Parameter Default Arguments
+- [x] Type Parameters
+- [ ] Generative Asserts
+- [x] Multi-Interface Syntax
+- [x] Native Module integration syntax
+- [x] Intrinsic Modules
+- [x] Can Parse FIFO implementation
+- [ ] Clock Domain Crossings
+- [ ] Submodule Generators
+- [x] Standard Library Bundled with compiler

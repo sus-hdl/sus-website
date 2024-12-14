@@ -1,6 +1,6 @@
 +++
 title = "Documentation"
-template = "index.html"
+template = "documentation.html"
 +++
 
 
