@@ -1,3 +1,0 @@
-# Simulation
-- [ ] Basic testbench
-- [ ] "Visualization"

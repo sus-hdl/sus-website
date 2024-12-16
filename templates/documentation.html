@@ -1,6 +1,10 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SUS Documentation</title>
 <style>
 body {
     font-family: Arial, sans-serif;
@@ -22,27 +26,16 @@ main {
 iframe {
     width: 100%;
     height: auto; /* Allow iframe to grow with content */
-    min-height: 80vh; /* Ensure iframe takes most of the viewport */
-    border: none;
+    min-height: 100vh; /* Ensure iframe takes most of the viewport */
+    
 }
 
-footer {
-    background-color: #1e0f35;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    margin-top: auto; /* Push footer to the bottom of the page */
-}
+
 
 </style>
-
+</head>
 <body>
 <main>
-    <iframe src="sus-book/book/index.html"></iframe>
+    <iframe src="book/book/index.html"></iframe>
 </main>
-<footer>
-    <p>&copy; 2024 SUS. All rights reserved.</p>
-</footer>
-
 </body>
-{% endblock content %}
