@@ -9,21 +9,34 @@
 - [Learning SUS](learningsus.md)
   - [Changelog since Talk](changelog-since-talk.md)
 
-# Reference Guide
+
+# philosophy
+  - [Compiletime and Runtime](compiletime_and_runtime.md)
+  - [Control Flow](control_flow.md)
+  - [Design Decisions](design_decisions.md)
+  - [Instantiation](instantiation.md)
+  - [Interfaces](interfaces.md)
+  - [Latency](latency.md)
+  - [Library](library.md)
+
+  - [Optimization](optimization.md)
+  - [State](state.md)
+  - [State vs Latency](state_v_latency.md)
+  - [The Trouble with Parsing Templates](template_troubles.md)
+  - [Tensions](tensions.md)
+  - [Tree Sitter](tree_sitter.md)
+  - [Types](types.md)
+
 - [Core Philosophy](core-philosophy.md)
   - [What SUS gives you](what-sus-gives-you.md)
   - [Planned](planned.md)
   - [What SUS does not do](what-sus-does-not-do.md)
   - [SUS Code Examples](example-of-some-sus-code-in-the-sus-vscode-language-server.md)
 
-- [Comparison to Other HDLs](example-of-some-sus-code-in-the-sus-vscode-language-server.mdx)
-  - [The Old Guard: (System-)Verilog and VHDL](the-old-guard-system-verilog-and-vhdl.md)
-  - [High-Level Synthesis](high-level-synthesis-bluespec-intel-oneapi-xilinx-vitis.md)
-  - [Embedded Languages](embedded-languages-such-as-chisel-and-spinalhdl.md)
-  - [New HDLs](new-hardware-design-languages-such-as-tl-verilog-spade-filament-rusthdl-and-now-sus.md)
+- [Comparison to Other HDLs](comparison-to-other-HDLs.md)
   
 - [Main Features through examples](main-features-through-examples.md)
-  - [Pipelining through Latency Counting](latency-counting.md)
+  - [Pipelining through Latency Counting](latency-counting/main-features-through-examples.md#latency-counting)
 
   - [FIZZ-BUZZ Lookup Table using Generative Code](fizz-buzz-lookup-table-using-generative-code.md)
 

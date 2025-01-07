@@ -153,6 +153,9 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="clock--domains-for-separating-out-logically-distinct-pipelines"><a class="header" href="#clock--domains-for-separating-out-logically-distinct-pipelines">(Clock-) Domains for separating out logically distinct pipelines</a></h1>
+<p>For this feature to be useable you really must use the LSP. The semantic analysis of the compiler gives important visual feedback while programming that makes this much easier to understand.</p>
+<p>In this example, we create a memory block with a read port and a write port. This module has two domains: The read interface domain and write interface domain. Every wire in the design is part of one of these domains (or an anonymous domain if it's not connected to either interface). Signals are not allowed to cross from one domain to another unless explicitly passed through a domain crossing primitive.</p>
+<p><img src="/images/dualPortMem.png" alt="Dual Port Memory" /></p>
 
                     </main>
 

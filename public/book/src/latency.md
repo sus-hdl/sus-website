@@ -1,7 +1,8 @@
 # Latency Counting
 For state see [state](state.md)
 
-A short video on how Latency Counting is used is here: ![Latency Counting in the SUS Compiler [LATTE24]](https://youtu.be/7P0BvXSHLpY)
+A short video on how Latency Counting is used is here:[Latency Counting in the SUS Compiler [LATTE24]](https://www.youtube.com/watch?v=7P0BvXSHLpY)
+
 
 ## Theory
 Inserting latency registers on every path that requires them is an incredibly tedious job. Especicially if one has many signals that have to be kept in sync for every latency register added. This is why I propose a terse pipelining notation. Simply add the `reg` keyword to any critical path and any paths running parallel to it will get latency added to compensate. This is accomplished by adding a 'latency' field to every path. Starting from an arbitrary starting point, all locals connected to it can then get an 'absolute' latency value, where locals dependent on multiple paths take the maximum latency of their source paths. From this we can then recompute the path latencies to be exact latencies, and add the necessary registers. 
@@ -23,7 +24,7 @@ module example_md {
 	reg total = product + add_to
 }
 ```
-![Latency Counting Example](images/latencyCountingExample.png)
+![Latency Counting Example](/images/latencyCountingExample.png)
 
 #### Automatic insertion of registers
 ```Verilog
@@ -36,7 +37,7 @@ module pow17 {
 	        o   = i16 * i
 }
 ```
-![Registers can be inserted](images/insertRegisters.png)
+![Registers can be inserted](/images/latencyCountingExample.png)
 
 #### Latency Specifiers
 ```Verilog
@@ -45,7 +46,7 @@ module module_taking_time {
 	o = i
 }
 ```
-![Latency Specifiers](images/latencySpecifiers.png)
+![Latency Specifiers](/images/latencySpecifiers.png)
 
 ### Combinatorial loops with latency are still combinatorial loops
 This is in my opinion a big benefit to making the distinction. When inserting latency registers, we are saying in effect "If we could perform these computations instantaneously, we would", and thus, a loop containing latency registers would still be a combinatorial loop. Sadly, this does break down a little when explicitly building a pipelined loop. Also combinatorial dependencies could show up across interfaces as well. Perhaps we should rethink this feature. 
@@ -74,10 +75,10 @@ module rebase_latency<T, gen int delta> : T i'0 -> T o'delta {/*...*/}
 
 As an example, we can have a module with an internal negative backedge of -3, which itself contains some state that the backedge can originate from. The module wraps the backedge this way, and proves all of the safety requirements that come with using it. The user then is free to connect the output of this module combinatorially with the input, and with at most 3 cycles of latency. 
 
-![Negative Backedge Concept](images/negativeBackedgeConcept.png)
+![Negative Backedge Concept](/images/negativeBackedgeConcept.png)
 
 As a more concrete example, consider the write side of a FIFO. 
-![FIFO Negative Backedge](images/fifoExample.png)
+![FIFO Negative Backedge](/images/fifoExample.png)
 
 ### Latency specification
 Specifying latencies on every single input and output is a bit cumbersome, so we wish to infer latencies as much as possible. Sometims however specific constructions with indeterminable latencies require the user to explicitly specify the latencies. We will explore such cases in later chapters. 
@@ -120,7 +121,7 @@ module Accumulator {
 ```
 
 Which results in the following graph: 
-![Example](images/example.png)
+![Example](/images/example.png)
 
 Nodes are coloured by role. Blue nodes are inputs, green nodes are outputs, orange nodes are state registers, and white nodes are combinatorial. 
 
@@ -142,7 +143,7 @@ module NonDeterminableLatency {
 ```
 
 Simplified latency graph:
-![Non Uniquely Determinable Example](images/nonDeterminable.png)
+![Non Uniquely Determinable Example](/images/nonDeterminable.png)
 
 The issue starts when the inputs and outputs don't have predefined absolute latency. We are tempted to add maximization and minimization to the input and output absolute latencies, to force the module's latency span to be as compact as possible, and therefore maximize how free the user of this module is in using it. But sadly, we cannot make a uniquely determinable latency assignment for our inputs and outputs, as in this example b and y press against each other, permitting two possible implementations. 
 

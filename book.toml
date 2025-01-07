@@ -4,15 +4,16 @@ base-url = "http://127.0.0.1:1111"
 [book]
 src = "src"
 language = "en"
-
 title = "SUS Documentation"
-
 
 [output.html]
 smart-punctuation = true
 mathjax-support = false
-git-repository-url = "https://github.com/sus-hdl/sus-website"
+copy-fonts = true
+git-repository-url = "https://github.com/pc2/sus-compiler"
+git-repository-icon = "fa-github"
 site-url = "http://127.0.0.1:1111"
+cname = "sus-lang.org"
 
 
 

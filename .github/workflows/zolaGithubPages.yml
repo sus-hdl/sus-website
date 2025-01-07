@@ -14,21 +14,17 @@ jobs:
 
       - name: Install and Run Zola
         run: |
-          sudo snap install --edge zola
-          zola build 
-             
-      - name: Install Rust
-        run: bash ci/install-rust.sh stable aarch64-unknown-linux-musl
-      - name: Build
-        run: cargo build --locked --target aarch64-unknown-linux-musl
-    
-      - name: install mdbook 
-        run: cargo install mdbook
-            
-      - name: build mdbook
-        run: | 
-          cd public/book 
-          mdbook build
+         sudo snap install --edge zola
+         zola build
+
+      #install mdbook from mdbook Aktion
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: '0.4.10'
+          # mdbook-version: 'latest'
+
+      - run: mdbook build
 
 
         env:
