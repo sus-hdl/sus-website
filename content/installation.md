@@ -8,8 +8,4 @@ template = "installation.html"
 
 
 
-    1. Download the software.
-
-    2. Run the installer.
-
 
