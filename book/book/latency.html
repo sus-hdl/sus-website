@@ -1,0 +1,350 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Latency</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title"></h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="latency-counting"><a class="header" href="#latency-counting">Latency Counting</a></h1>
+<p>For state see <a href="state.html">state</a></p>
+<p>A short video on how Latency Counting is used is here:<a href="https://www.youtube.com/watch?v=7P0BvXSHLpY">Latency Counting in the SUS Compiler [LATTE24]</a></p>
+<h2 id="theory"><a class="header" href="#theory">Theory</a></h2>
+<p>Inserting latency registers on every path that requires them is an incredibly tedious job. Especicially if one has many signals that have to be kept in sync for every latency register added. This is why I propose a terse pipelining notation. Simply add the <code>reg</code> keyword to any critical path and any paths running parallel to it will get latency added to compensate. This is accomplished by adding a 'latency' field to every path. Starting from an arbitrary starting point, all locals connected to it can then get an 'absolute' latency value, where locals dependent on multiple paths take the maximum latency of their source paths. From this we can then recompute the path latencies to be exact latencies, and add the necessary registers.</p>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<h4 id="inference-of-latencies-on-ports"><a class="header" href="#inference-of-latencies-on-ports">Inference of latencies on ports</a></h4>
+<pre><code class="language-Verilog">module example_md {
+    interface example_md :
+        int[4] factors,
+        int add_to -&gt;
+        int product, 
+        int total
+
+	reg int mul0 = factors[0] * factors[1]
+	reg int mul1 = factors[2] * factors[3]
+
+	reg product = mul0 * mul1
+	reg total = product + add_to
+}
+</code></pre>
+<p><img src="/images/latencyCountingExample.png" alt="Latency Counting Example" /></p>
+<h4 id="automatic-insertion-of-registers"><a class="header" href="#automatic-insertion-of-registers">Automatic insertion of registers</a></h4>
+<pre><code class="language-Verilog">module pow17 {
+    interface pow17 : int i -&gt; int o 
+	    int i2  = i * i
+	reg int i4  = i2 * i2
+	    int i8  = i4 * i4
+	reg int i16 = i8 * i8
+	        o   = i16 * i
+}
+</code></pre>
+<p><img src="/images/latencyCountingExample.png" alt="Registers can be inserted" /></p>
+<h4 id="latency-specifiers"><a class="header" href="#latency-specifiers">Latency Specifiers</a></h4>
+<pre><code class="language-Verilog">module module_taking_time {
+	interface module_taking_time : int i'0 -&gt; int o'5
+	o = i
+}
+</code></pre>
+<p><img src="/images/latencySpecifiers.png" alt="Latency Specifiers" /></p>
+<h3 id="combinatorial-loops-with-latency-are-still-combinatorial-loops"><a class="header" href="#combinatorial-loops-with-latency-are-still-combinatorial-loops">Combinatorial loops with latency are still combinatorial loops</a></h3>
+<p>This is in my opinion a big benefit to making the distinction. When inserting latency registers, we are saying in effect "If we could perform these computations instantaneously, we would", and thus, a loop containing latency registers would still be a combinatorial loop. Sadly, this does break down a little when explicitly building a pipelined loop. Also combinatorial dependencies could show up across interfaces as well. Perhaps we should rethink this feature.</p>
+<h3 id="latency-counting-with-state"><a class="header" href="#latency-counting-with-state">Latency counting with state</a></h3>
+<p>Of course, state registers are also moved around by latency. This means that while it appears like (and we want the programmer's mental model to say that) two state registers get updated at the same time, they may actually be offset from one another in time.</p>
+<p>However, state registers do not count towards the latency count. So specifying <code>reg</code> increases the latency count by 1, but specifying <code>state</code> does not. This makes sense, because state registers are meant to carry data across cycles, whereas latency registers are only meant for meeting timing closure, and don't allow sequential data packets to interact.</p>
+<h3 id="maximum-latency-requirements"><a class="header" href="#maximum-latency-requirements">Maximum Latency Requirements</a></h3>
+<p>It's the intention of the language to hide fixed-size latency as much as possible, making it easy to create pipelined designs.</p>
+<p>Often however, there are limits to how long latency is allowed to be. The most common case is a <code>state</code> to itself feedback loop. If a state register must be updated every cycle, and it depends on itself, the loopback computation path may not include any latency.</p>
+<p>For example, a FIFO with an almost_full threshold of <em>N</em>, may have at most a <code>ready_out -&gt; valid_in</code> latency of <em>N</em>.</p>
+<p>For state to state paths, this could be relaxed in several ways:</p>
+<ul>
+<li>If it is proven the register won't be read for some cycles, then the latency can be hidden in these cycles. (Requires complex validity checking)</li>
+<li>Slow the rate of state updating to the maximum latency, possibly allow automatic C-Slowing.</li>
+</ul>
+<h4 id="breaking-out-of-latency-counting"><a class="header" href="#breaking-out-of-latency-counting">Breaking out of latency counting</a></h4>
+<p>Feed-forward pipelines are an important and useful construct. But feed forward pipelines can't describe all hardware. We need to be able to break out of the latency counting system, and tell the latency counting system that there exists a latency differential between two nodes, without instantiating registers between them. In the case of making a dependent latency earlier than the source one, we call this edge a 'negative backedge'. This should be provided as a template module in the standard library:</p>
+<pre><code class="language-Verilog">module rebase_latency&lt;T, gen int delta&gt; : T i'0 -&gt; T o'delta {/*...*/}
+</code></pre>
+<p>As an example, we can have a module with an internal negative backedge of -3, which itself contains some state that the backedge can originate from. The module wraps the backedge this way, and proves all of the safety requirements that come with using it. The user then is free to connect the output of this module combinatorially with the input, and with at most 3 cycles of latency.</p>
+<p><img src="/images/negativeBackedgeConcept.png" alt="Negative Backedge Concept" /></p>
+<p>As a more concrete example, consider the write side of a FIFO.
+<img src="/images/fifoExample.png" alt="FIFO Negative Backedge" /></p>
+<h3 id="latency-specification"><a class="header" href="#latency-specification">Latency specification</a></h3>
+<p>Specifying latencies on every single input and output is a bit cumbersome, so we wish to infer latencies as much as possible. Sometims however specific constructions with indeterminable latencies require the user to explicitly specify the latencies. We will explore such cases in later chapters.</p>
+<p>When the user specifies latencies on multiple nodes, they are in effect stating that they know what the exact latencies between the given nodes are. Theorethically we should include this into the algorithm as extra edges between each pair of nodes <code>a</code> and <code>b</code>, of latency <code>lb-la</code> and <code>-(lb-la)</code> backwards. This fixes the latency differential to be as the user specifies it. In practice in the Latency Counting Algorithm, we don't actually do this in this way, but instead handle specified latencies in a dedicated part of the algorithm, to provide the user with more readable error messages. In any case, the latencies assigned by the algorithm should be equivalent to doing it with the extra edges.</p>
+<p>If the user provides not a single latency annotation, then we allow the compiler to set an arbitrary node's latency to 0, as a seed for the algorithm. Because input and output nodes have to be fully constrained, the compiler picks one of these if possible.</p>
+<h2 id="requirements-for-the-latency-counting-system"><a class="header" href="#requirements-for-the-latency-counting-system">Requirements for the latency counting system</a></h2>
+<ul>
+<li>Addition or Removal of any latency registers that do not violate a constraint must not affect the operation of the design.</li>
+<li>Feedback loops containing only latency are considered combinatorial feedback loops, and are therefore forbidden. Feedback loops must therefore have at least one state register in them.</li>
+<li>When the user specifies a latency of 1 somewhere using the <code>reg</code> keyword, this instructs the compiler that the <em>minimum</em> latency between these points is now 1. The compiler is allowed to insert additional latency registers between any two nodes as it sees fit.</li>
+<li>State registers to not impact the latency counting. They count as 0 latency.</li>
+<li>Any loop (which must contain at least one state register) must have a roundtrip latency ≤ 0. Negative values are permitted, and are simply attributed to the use of negative back edges.</li>
+<li>Specified latencies must be matched exactly.</li>
+</ul>
+<h3 id="extra-requirements-to-allow-latency-inference"><a class="header" href="#extra-requirements-to-allow-latency-inference">Extra requirements to allow latency inference</a></h3>
+<ul>
+<li>The latency between input and output nodes that have a combinatorial connection must be <em>minimal</em>. In other words, if an output <code>o'lo</code> is reachable from an input <code>i'li</code> by only following forward dependencies, then <code>|lo|-|li|</code> is exactly the latency of the longest path between them.</li>
+<li>Nodes that are not an input or output, don't have a latency specified, and have multiple options for their latency are set to the earliest possible latency.</li>
+</ul>
+<h2 id="latency-counting-graph-algorithm"><a class="header" href="#latency-counting-graph-algorithm">Latency Counting Graph Algorithm</a></h2>
+<p>We are given a directed graph of all wires and how they combinatorially depend on each other. Each edge can have a number of latency registers placed on it.</p>
+<p>Example:</p>
+<pre><code class="language-Verilog">// timeline is omitted here, not important
+module Accumulator {
+    interface Accumulator : int term, bool done -&gt; int total_out 
+    state int total
+
+    int new_total = total + term
+
+    if done {
+        reg total_out = new_total
+        total = 0
+    } else {
+        total = new_total
+    }
+}
+</code></pre>
+<p>Which results in the following graph:
+<img src="/images/example.png" alt="Example" /></p>
+<p>Nodes are coloured by role. Blue nodes are inputs, green nodes are outputs, orange nodes are state registers, and white nodes are combinatorial.</p>
+<p>On the edges are noted the minimum latency offsets in black. These are given. The goal of the algorithm is to compute a set of 'absolute latencies', which are all relative to an arbitrary node. These are given with the red nodes on the picture. Because these absolute latencies are relative to an arbitrary reference point, we accept any constant shift applied to all absolute latencies as equivalent.</p>
+<h3 id="non-determinable-inference-of-input-and-output-absolute-latencies"><a class="header" href="#non-determinable-inference-of-input-and-output-absolute-latencies">Non Determinable inference of Input and Output absolute latencies</a></h3>
+<p>Sadly, while it appears reasonable to think it's possible to assign a determinable latency. Observe this contrived example:</p>
+<pre><code class="language-Verilog">module NonDeterminableLatency {
+    interface NonDeterminableLatency : int a, int b -&gt; int x, int y 
+    reg int a_d = a
+    int t = a_d + b
+    reg reg reg int a_dd = a
+    reg int t_d = t
+    x = t_d + a_dd
+    y = t
+}
+</code></pre>
+<p>Simplified latency graph:
+<img src="/images/nonDeterminable.png" alt="Non Uniquely Determinable Example" /></p>
+<p>The issue starts when the inputs and outputs don't have predefined absolute latency. We are tempted to add maximization and minimization to the input and output absolute latencies, to force the module's latency span to be as compact as possible, and therefore maximize how free the user of this module is in using it. But sadly, we cannot make a uniquely determinable latency assignment for our inputs and outputs, as in this example b and y press against each other, permitting two possible implementations.</p>
+<p>One may think the solution would simply be to prefer inputs over outputs or something, just to get a unique latency assignment. Just move b to be the earliest of the available latencies, but even in this case, if we instead looked at the possibilities of a, and fixed b, we would again make b later by making a earlier. And since there's no way to distinguish meaningfully between inputs, there's no uniquely determinable solution either.</p>
+<p>To this problem I only really see three options:</p>
+<ul>
+<li>Still perform full latency computation when compiling each module separately. In the case of non-determinable latency assignment, reject the code and require the programmer to add explicit latency annotations. The benefit is better encapsulation, the programmer requires only the module itself to know what latencies are. The downside is of course less flexible modules. Though is this flexibility <em>really</em> needed?</li>
+<li><del>Infer absolute latencies on the inputs and outputs of submodules using templates which can be inferred. This would be really handy to allow latency information to flow back into the templating system, thus allowing a FIFO that alters its almostFull threshold based on its input latency. Of course, this makes absolute latency information flow from top-down instead of bottom up, so now getting the latency information back from the module would be impossible. The issue is that templates can't be instantiated partially. Either the submodule takes all of its port latencies from the calling module, or it determines its latencies itself</del></li>
+<li><del>Perform latency computation at integration level, we don't define the absolute latencies on the ports of a module, unless the programmer explicitly does so. For simlpicity, this requires that every single module instantiation now compiles to its own Verilog module though, which is less than ideal for debugging</del></li>
+</ul>
+<p>Simply solve the above module by explicitly specifying latencies to the two inputs:</p>
+<pre><code class="language-Verilog">module LatencySpecified {
+    interface LatencySpecified : int a'0, int b'1 -&gt; int x, int y 
+    reg int a_d = a
+    int t = a_d + b
+    reg reg reg int a_dd = a
+    reg int t_d = t
+    x = t_d + a_dd
+    y = t
+}
+</code></pre>
+<h3 id="latency-graph-cycles-are-the-key"><a class="header" href="#latency-graph-cycles-are-the-key">Latency Graph Cycles are the key</a></h3>
+<p>So assigning absolute latencies is difficult, and no good solution can be found in isolated cases. Perhaps another approach would work better.</p>
+<p>In essense, what are the reasons for which we want to count out latencies? The initial one of course was keeping signals in sync. In the vast majority of cases when you pipeline a design, you don't want to cross signals from different time steps. But of course, after pipelining a design, you need to <em>deal</em> with the effect that this module now takes several cycles, and has a certain capacity to store in progress data.</p>
+<p>Maybe instead of trying to infer the latencies from the pipeline with inputs and outputs, we focussed our attention purely on the cycles. These are already nice and constrained.</p>
+<h3 id="should-compound-types-latency-be-kept-in-sync"><a class="header" href="#should-compound-types-latency-be-kept-in-sync">Should Compound Types' latency be kept in sync?</a></h3>
+<p>Arrays, structs, tuples, etc. Should the absolute latencies of these be kept in sync? On the one hand, it's easier on the programmer if they do stay in sync. It's easier to reason about. A problem is though, that strictly keeping all latencies of an array in sync could introduce unnecessary dependencies, and therefore make the pipeline deeper than it needed to be. Also, if we forcibly keep array and struct elements in sync, then we can't express certain generic construct, such as a latency shift register, or allowing us to pipeline a sequence of similar steps where intermediary results are all stored in the same array.</p>
+<p>If you go all the way to the opposite end of the spectrum however, splitting up every struct, every array, and every tuple into their component wires, then the development experience suffers. For Arrays or structs with differing latencies the compiler can't give nice diagnostics. Also from a simulation perspective, simulators know the concepts of arrays and structs. Should SUS outputs only be simulable on a wire-by-wire basis? Or should we keep the structures intact but have internally different latencies? None of these options are really appealing.</p>
+<p>Of course, we could mostly mitigate this by re-merging structs and arrays that happen to all have the same latency. But then again, it feels like it would be brittle and cause unexpected errors for the programmer.</p>
+<p>In the end, I think that having the programmer explicitly state when to split a latency is best. And we do this with the <code>'split</code> latency specifier. This explicitly splits the underlying wire into separate 'real' wires. This allows the programmer to make the tradeoff, for explicit latency flexibility, and accepting the cost that this structure will be less nice in the resulting verilog.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="interfaces.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="library.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="interfaces.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="library.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
