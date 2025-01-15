@@ -1,13 +1,13 @@
 
 [build]
-base-url = "http://127.0.0.1:1111"
+base-url = "https://sus-lang.org"
 [book]
 title = "SUS Documentation"
 
 [output.html]
 smart-punctuation = true
 mathjax-support = true
-site-url = "http://127.0.0.1:1111"
+site-url = "https://sus-lang.org"
 git-repository-url = "https://github.com/sus-hdl/sus-website"
 cname = "sus-lang.org"
 
