@@ -7,7 +7,7 @@ title = "SUS Documentation"
 [output.html]
 smart-punctuation = true
 mathjax-support = true
-site-url = "/sus-website/"
+site-url = "http://127.0.0.1:1111"
 git-repository-url = "https://github.com/sus-hdl/sus-website"
 cname = "sus-lang.org"
 
