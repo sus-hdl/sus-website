@@ -17,10 +17,7 @@ jobs:
           mdbook-version: '0.4.10'
           # mdbook-version: 'latest'
       - run: mdbook build
-      - name: Install and Run Zola
-        run: |
-          sudo snap install --edge zola
-          zola build
+      
 
     
 
