@@ -471,3 +471,89 @@ pre {
   background-color: #004f88;
 }
 
+.examples-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 80px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--secondarycolor);
+  border: none;
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--secondarycolor);
+  padding: 20px;
+  border: none;
+}
+
+.example h2 {
+  color: #ffffff;
+  font-size: 24px;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+.example-container {
+  display: flex;
+  gap: 20px;
+  
+  padding: 0;
+  justify-content: space-between;
+  align-items: stretch; /* Beide Boxen auf gleiche Höhe strecken */
+}
+
+/* Textbox-Stile */
+.example-description {
+  flex: 1; /* Gleiche Flex-Wertung wie der Editor */
+  border-left: 5px solid var(--tertiarycolor);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex; /* Falls Inhalte wie Text das Layout beeinflussen */
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Editor-Stile */
+.example-editor {
+  flex: 1.5; /* Flexibilität der Codebox */
+  border-right: 5px solid var(--tertiarycolor);
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex; /* Editor-Inhalte anpassen */
+  justify-content: space-between;
+}
+
+/* Individuelle Höhen für Editoren */
+.example-editor.small,
+.example-description.small {
+  min-height: 200px;
+}
+
+.example-editor.large,
+.example-description.large {
+  min-height: 700px;
+}
+
+.example-editor.xtra-large,
+.example-description.xtra-large {
+  flex: 1.5;
+  min-height: 1000px;
+}
+
+/* Für größere Displays */
+@media screen and (min-width: 768px) {
+  .example-container {
+    align-items: stretch; /* Sicherstellen, dass beide Boxen sich strecken */
+  }
+}

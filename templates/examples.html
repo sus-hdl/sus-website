@@ -1,48 +1,53 @@
-{% extends "base.html" %}
-
-{% block content %}
-
+{% extends "base.html" %} {% block content %}
 <div class="examples-wrapper">
-    <!-- Example 1 -->
-    <section class="example">
-      <h2>Latency Counting for Aiding Pipelining</h2>
+  <!-- Example 1 -->
+  <section class="example">
+    <h2>Latency Counting for Aiding Pipelining</h2>
+    <div class="example-container">
       <p class="example-description">
-        This example shows how to count latencies to simplify pipelining. <!--Adding hover info for latency counts would enhance user experience-->
+        This example shows how to count latencies to simplify pipelining.
       </p>
-      <div class="editor-container" id="editor-latency"></div>
-    </section>
-  
-    <!-- Example 2 -->
-    <section class="example">
-      <h2>Compile-Time Generation of Look-Up Tables</h2>
+      <div class="example-editor small" id="editor-latency"></div>
+    </div>
+  </section>
+
+  <!-- Example 2 -->
+  <section class="example">
+    <h2>Compile-Time Generation of Look-Up Tables</h2>
+    <div class="example-container">
       <p class="example-description">
-        This module generates a lookup table at compile time, demonstrating efficient use of compile-time constants.
+        This module generates a lookup table at compile time, demonstrating
+        efficient use of compile-time constants.
       </p>
-      <div class="editor-container" id="editor-lut"></div>
-    </section>
-  
-    <!-- Example 3 -->
-    <section class="example">
-      <h2>Multiple Interfaces and Clock Domain Separation</h2>
+      <div class="example-editor large" id="editor-lut"></div>
+    </div>
+  </section>
+
+  <!-- Example 3 -->
+  <section class="example">
+    <h2>Multiple Interfaces and Clock Domain Separation</h2>
+    <div class="example-container">
       <p class="example-description">
-        This example showcases the use of multiple interfaces and visual separation of clock domains in an IDE setting.
+        This example showcases the use of multiple interfaces and visual
+        separation of clock domains in an IDE setting.
       </p>
-      <div class="editor-container" id="editor-fifo"></div>
-    </section>
-  </div>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
-  <script>
+      <div class="example-editor xtra-large" id="editor-fifo"></div>
+    </div>
+  </section>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
+<script>
     require.config({
       paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs" },
     });
-  
+
     require(["vs/editor/editor.main"], function () {
       const examples = [
         {
           id: "editor-latency",
           code: `module pow17 {
-      interface pow17 : int i -> int o 
+      interface pow17 : int i -> int o
           int i2  = i   * i
       reg int i4  = i2  * i2
           int i8  = i4  * i4
@@ -53,18 +58,18 @@
         {
           id: "editor-lut",
           code: `module fizz_buzz_gen {
-      interface fizz_buzz_gen : int v -> int fb 
+      interface fizz_buzz_gen : int v -> int fb
       gen int FIZZ = 888
       gen int BUZZ = 555
       gen int FIZZ_BUZZ = 888555
       gen int TABLE_SIZE = 256
-  
+
       gen int[TABLE_SIZE] lut
-  
+
       for int i in 0..TABLE_SIZE {
           gen bool fizz = i % 3 == 0
           gen bool buzz = i % 5 == 0
-          
+
           gen int tbl_fb
           if fizz & buzz {
               tbl_fb = FIZZ_BUZZ
@@ -75,10 +80,10 @@
           } else {
               tbl_fb = i
           }
-  
+
           lut[i] = tbl_fb
       }
-  
+
       fb = lut[v]
   }`,
         },
@@ -92,26 +97,26 @@
       state T[DEPTH] mem
       state int read_addr
       state int write_addr
-  
+
       initial read_addr = 0
       initial write_addr = 0
-  
+
       domain push
       output bool ready'0
       interface push : bool push'READY_SLACK, T data_in'READY_SLACK
-  
+
       domain pop
       interface pop : bool pop -> bool data_valid, T data_out
-      
+
       CrossDomain write_to_pop
       write_to_pop.in = write_addr
-  
+
       CrossDomain read_to_push
       read_to_push.in = read_addr
-  
+
       CrossDomain mem_to_pop
       mem_to_pop.in = mem
-  
+
       if pop {
           data_valid = read_addr != write_to_pop.out
           if data_valid {
@@ -119,12 +124,12 @@
               read_addr = (read_addr + 1) % DEPTH
           }
       }
-  
+
       if push {
           mem[write_addr] = data_in
           write_addr = (write_addr + 1) % DEPTH
       }
-  
+
       int space_remaining = (read_to_push.out - write_addr) % DEPTH
       gen int ALMOST_FULL_TRESHOLD = READY_SLACK + 1
       reg bool r = space_remaining > ALMOST_FULL_TRESHOLD
@@ -132,19 +137,24 @@
   }`,
         },
       ];
-  
+
       examples.forEach((example) => {
         monaco.editor.create(document.getElementById(example.id), {
           value: example.code,
-          language: "javascript", // Change to 'sus' once available
+          language: "sus", // Change to 'sus' once available
           theme: "vs-dark",
+          readOnly: true, 
+          scrollBeyondLastLine: false,
           automaticLayout: true,
           minimap: { enabled: false },
-          fontSize: 15,
+          scrollbar: {
+          vertical: "hidden",
+          horizontal: "hidden"},
+          fontSize: 14,
           lineNumbers: "on",
         });
       });
     });
-  </script>
+</script>
 
 {% endblock content %}

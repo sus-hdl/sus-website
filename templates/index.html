@@ -98,12 +98,14 @@
             reg sum = left.sum + right.sum + values[WIDTH - 1]
         }
     }
-}`,       language: "javascript", // TODO: Change to 'sus' language later
+}`,       language: "sus", // TODO: Change to 'sus' language later
           theme: "vs-dark",
           automaticLayout: true,
+          readOnly: true, 
+          scrollBeyondLastLine: false,
           minimap: { enabled: false },
           showFoldingControls: "never",
-          scrollbar: { vertical: "auto", horizontal: "auto" },
+          scrollbar: { vertical: "hidden", horizontal: "hidden" },
           fontSize: 13,
           lineNumbersMinChars: 3,
           renderLineHighlight: "none",
