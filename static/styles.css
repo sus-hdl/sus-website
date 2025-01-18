@@ -398,11 +398,11 @@ section {
 }
 
 .installation-guide {
-  font-family: Arial, sans-serif;
+  
   margin: 20px auto;
   padding: 40px;
   max-width: 800px;
-  border: 2px solid #130921;
+  border-left: 5px solid var(--tertiarycolor);
   background-color: #1e0f35;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -411,7 +411,7 @@ section {
 .installation-step {
   margin-bottom: 20px;
   padding: 15px;
-  border: 1px solid #000000;
+
   border-radius: 5px;
   background-color: #353a44;
 }
@@ -452,7 +452,7 @@ pre {
 }
 
 .copy-button {
-  background-color: #007acc;
+  background-color: var(--tertiarycolor);
   color: #ffffff;
   border: none;
   padding: 5px 10px;
@@ -464,12 +464,9 @@ pre {
 }
 
 .copy-button:hover {
-  background-color: #005f99;
+  background-color: var(--buttonhovercolor);
 }
 
-.copy-button:active {
-  background-color: #004f88;
-}
 
 .examples-wrapper {
   display: flex;
@@ -506,35 +503,35 @@ pre {
   
   padding: 0;
   justify-content: space-between;
-  align-items: stretch; /* Beide Boxen auf gleiche Höhe strecken */
+  align-items: stretch;
 }
 
-/* Textbox-Stile */
+
 .example-description {
-  flex: 1; /* Gleiche Flex-Wertung wie der Editor */
+  flex: 1; 
   border-left: 5px solid var(--tertiarycolor);
   border-radius: 8px;
   padding: 20px;
   margin: 0;
   background-color: rgba(255, 255, 255, 0.1);
-  display: flex; /* Falls Inhalte wie Text das Layout beeinflussen */
+  display: flex; 
   flex-direction: column;
   justify-content: space-between;
 }
 
-/* Editor-Stile */
+
 .example-editor {
-  flex: 1.5; /* Flexibilität der Codebox */
+  flex: 1.5; 
   border-right: 5px solid var(--tertiarycolor);
   border-radius: 8px;
   background-color: #1e1e1e;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex; /* Editor-Inhalte anpassen */
+  display: flex; 
   justify-content: space-between;
 }
 
-/* Individuelle Höhen für Editoren */
+
 .example-editor.small,
 .example-description.small {
   min-height: 200px;
@@ -551,9 +548,9 @@ pre {
   min-height: 1000px;
 }
 
-/* Für größere Displays */
+
 @media screen and (min-width: 768px) {
   .example-container {
-    align-items: stretch; /* Sicherstellen, dass beide Boxen sich strecken */
+    align-items: stretch;
   }
 }
