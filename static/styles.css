@@ -554,3 +554,171 @@ pre {
     align-items: stretch;
   }
 }
+
+/* Mobile Support Test */
+@media screen and (max-width: 768px) {
+
+  /* Header */
+  header {
+    flex-direction: column; /* Stacked header elements on mobile */
+    padding: 15px;
+    text-align: left;
+  }
+
+  .logo {
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  /* Navigation */
+  nav ul {
+    flex-direction: column; /* Vertical layout for nav items */
+    align-items: flex-start; /* Align left */
+    width: 100%;
+  }
+
+  nav ul li {
+    margin: 10px 0; /* Increase space between items */
+  }
+
+  /* Social Links */
+  .social-links {
+    margin-top: 10px;
+    justify-content: center; /* Center icons on mobile */
+  }
+
+  .icon {
+    height: 40px;
+    width: 40px;
+  }
+
+  /* Hauptbereich */
+  main {
+    padding: 10px;
+    flex-grow: 1;
+  }
+
+  h2 {
+    font-size: 24px; /* Make the heading size smaller */
+  }
+
+  /* Hero Section */
+  .hero {
+    padding: 20px;
+  }
+
+  /* Call-to-Action Buttons */
+  .cta-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .cta-buttons .btn {
+    width: 100%; /* Full-width buttons on mobile */
+  }
+
+  /* Features Section */
+  .features-code-wrapper {
+    flex-direction: column; /* Stack the features vertically */
+  }
+
+  .features-grid {
+    max-width: 100%;
+    flex: 1;
+  }
+
+  .editor-container {
+    max-width: 100%;
+    min-height: 300px;
+  }
+
+  .feature {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 15px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 12px;
+  }
+
+  footer a {
+    font-size: 14px;
+  }
+
+  .footer-logo img {
+    width: 20px;
+  }
+
+  /* Accordion */
+  .accordion-header {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .accordion-content {
+    padding: 10px;
+  }
+
+  /* Installation Guide */
+  .installation-guide {
+    margin: 10px;
+    padding: 25px;
+  }
+
+  .installation-step {
+    padding: 10px;
+  }
+
+  .installation-step pre {
+    font-size: 12px;
+  }
+
+  /* Example Section */
+  .examples-wrapper {
+    gap: 40px;
+  }
+
+  .example-container {
+    flex-direction: column;
+  }
+
+  .example-editor, .example-description {
+    flex: 1;
+    min-height: 300px; /* Adjust min-height for smaller devices */
+  }
+
+  /* Community & Getting Started Sections */
+  #community h2, #getting-started h2 {
+    font-size: 22px;
+  }
+
+  #community p, #getting-started p {
+    font-size: 14px;
+  }
+
+  .social-links a {
+    margin: 0 5px; /* Reduce space between social icons */
+  }
+  
+  /* Section Container */
+  .section-container {
+    flex-direction: column; /* Stack the sections */
+  }
+
+  .section-item {
+    width: 100%; /* Full width for each item */
+    margin-bottom: 20px;
+  }
+
+  .video-container iframe {
+    width: 100%;
+    max-width: 100%;
+    height: 200px;
+  }
+}
