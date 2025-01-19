@@ -16,13 +16,13 @@
             mobileMenu.classList.toggle("active");
           });
 
-          window.addEventListener("scroll", function () {
+          const handleScroll = () => {
             if (mobileMenu.classList.contains("active")) {
               mobileMenu.classList.remove("active");
             }
-          });
-        } else {
-          console.error("could not find elements.");
+          };
+          window.addEventListener("touchstart", handleScroll);
+          window.addEventListener("touchmove", handleScroll);
         }
       });
     </script>
