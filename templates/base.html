@@ -16,14 +16,12 @@
             mobileMenu.classList.toggle("active");
           });
 
-          const handleScroll = () => {
+          window.addEventListener("touchmove", function () {
             if (mobileMenu.classList.contains("active")) {
               mobileMenu.classList.remove("active");
             }
-          };
-          window.addEventListener("touchstart", handleScroll);
-          window.addEventListener("touchmove", handleScroll);
-        }
+          });
+        } 
       });
     </script>
   </head>
