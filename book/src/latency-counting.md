@@ -9,4 +9,4 @@ module pow17 {
             o   = i16 * i
 }
 ```
-![Registers can be inserted](philosophy/images/insertRegisters.png)
+![Registers can be inserted](/images/insertRegisters.png)
