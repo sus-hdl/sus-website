@@ -9,6 +9,10 @@
   --buttonclickcolor:  #1e0f35;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -17,7 +21,11 @@ body {
   background-color: var(--secondarycolor);
   display: flex;
   flex-direction: column; /* Ensures content and footer are in a column layout */
+  overflow-x: hidden;
+  height: 100vh;
 }
+
+
 
 .logo {
   height: 80px;
@@ -58,6 +66,11 @@ nav ul li a {
   color: white;
   text-decoration: none;
   transition: color 0.3s ease;
+}
+
+.mobile-menu,
+.menu-toggle {
+  display: none;
 }
 
 nav ul li a:hover {
@@ -112,7 +125,7 @@ footer a {
 }
 
 footer a:hover {
-  color: #f2f2f2; /* Lightens text on hover */
+  color: #f2f2f2; 
 }
 
 .footer-logo img {
@@ -219,6 +232,7 @@ section {
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
   text-align: left;
+  box-sizing: border-box;
 }
 
 .feature-icon {
@@ -230,7 +244,7 @@ section {
 .feature h3 {
   font-size: 20px;
   margin-bottom: 10px;
-  color: var(--buttonhovercolor);
+  color: #d7acff;
   margin-top: 0;
 }
 
@@ -242,7 +256,7 @@ section {
 .editor-container {
   flex: 1;
   max-width: 50%;
-  height: 100%;
+  height: auto;
   min-height: 357px;
   border: 2px solid var(--tertiarycolor);
   border-radius: 8px;
@@ -279,7 +293,8 @@ section {
   background-color: var(--secondarycolor);
   border-radius: 8px;
   margin: 0 auto;
-  max-width: 900px;
+  width: 70%; 
+   
 }
 
 #core-philosophy h2, #core-philosophy h3 {
@@ -370,8 +385,8 @@ section {
 
 .video-container iframe {
   width: 100%;
-  max-width: 400px;
-  height: 225px;
+  max-width: 50%;
+  height: 50%; 
   margin: 0 auto;
   display: block;
 }
@@ -397,11 +412,11 @@ section {
 }
 
 .installation-guide {
-  font-family: Arial, sans-serif;
+  
   margin: 20px auto;
   padding: 40px;
   max-width: 800px;
-  border: 2px solid #130921;
+  border-left: 5px solid var(--tertiarycolor);
   background-color: #1e0f35;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -410,7 +425,7 @@ section {
 .installation-step {
   margin-bottom: 20px;
   padding: 15px;
-  border: 1px solid #000000;
+
   border-radius: 5px;
   background-color: #353a44;
 }
@@ -451,7 +466,7 @@ pre {
 }
 
 .copy-button {
-  background-color: #007acc;
+  background-color: var(--tertiarycolor);
   color: #ffffff;
   border: none;
   padding: 5px 10px;
@@ -463,9 +478,294 @@ pre {
 }
 
 .copy-button:hover {
-  background-color: #005f99;
+  background-color: var(--buttonhovercolor);
 }
 
-.copy-button:active {
-  background-color: #004f88;
+
+.examples-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 80px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: var(--secondarycolor);
+  border: none;
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: var(--secondarycolor);
+  padding: 20px;
+  border: none;
+}
+
+.example h2 {
+  color: #ffffff;
+  font-size: 24px;
+  text-align: center;
+  margin: 0 0 10px 0;
+}
+
+.example-container {
+  display: flex;
+  gap: 20px;
+  
+  padding: 0;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+
+.example-description {
+  flex: 1; 
+  border-left: 5px solid var(--tertiarycolor);
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex; 
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.example-editor {
+  flex: 1.5; 
+  border-right: 5px solid var(--tertiarycolor);
+  border-radius: 8px;
+  background-color: #1e1e1e;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex; 
+  justify-content: space-between;
+}
+
+
+.example-editor.small,
+.example-description.small {
+  min-height: 200px;
+}
+
+.example-editor.large,
+.example-description.large {
+  min-height: 700px;
+}
+
+.example-editor.xtra-large,
+.example-description.xtra-large {
+  flex: 1.5;
+  min-height: 1000px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .example-container {
+    align-items: stretch;
+  }
+}
+
+/* Mobile Support Test */
+@media screen and (max-width: 768px) {
+
+  body {
+    overflow-x: hidden; 
+   
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #fff;
+  }
+
+  .mobile-menu {
+    display: none; 
+    flex-direction: column;
+    background-color: #1e0f35; 
+    position: absolute;
+    top: 100px; 
+    left: 0;
+    width: 100%; 
+    z-index: 10; 
+    padding: 10px 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+
+  }
+ 
+
+  .mobile-menu.active {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    display: block;
+  }
+
+  .mobile-menu li {
+    margin: 10px 0;
+
+    
+  }
+
+  .mobile-menu a {
+    
+    color: white;
+    text-decoration: underline;
+    width: 100%;
+
+    
+   
+    
+  }
+ 
+
+  .social-links {
+    margin-top: 10px;
+    justify-content: center; 
+  }
+
+  .icon {
+    height: 40px;
+    width: 40px;
+  }
+
+
+  main {
+    padding: 10px;
+    flex-grow: 1;
+  }
+
+  h2 {
+    font-size: 24px; 
+  }
+
+
+  .hero {
+    padding: 20px;
+  }
+
+  
+  .cta-buttons {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .cta-buttons .btn {
+    width: 100%;
+  }
+
+
+  .features-code-wrapper {
+    flex-direction: column;
+  }
+
+  .features-grid {
+    max-width: 100%;
+    flex: 1;
+  }
+
+  .editor-container {
+    max-width: 100%;
+    min-height: 300px;
+  }
+
+  .feature {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 15px;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 12px;
+  }
+
+  footer a {
+    font-size: 14px;
+  }
+
+  .footer-logo img {
+    width: 20px;
+  }
+
+  /* Accordion */
+  .accordion-header {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .accordion-content {
+    padding: 10px;
+  }
+
+  /* Installation Guide */
+  .installation-guide {
+    margin: 10px;
+    padding: 25px;
+  }
+
+  .installation-step {
+    padding: 10px;
+  }
+
+  .installation-step pre {
+    font-size: 12px;
+  }
+
+  /* Example Section */
+  .examples-wrapper {
+    gap: 40px;
+  }
+
+  .example-container {
+    flex-direction: column;
+  }
+
+  .example-editor, .example-description {
+    flex: 1;
+    min-height: 300px; 
+  }
+
+  /* Community & Getting Started Sections */
+  #community h2, #getting-started h2 {
+    font-size: 22px;
+  }
+
+  #community p, #getting-started p {
+    font-size: 14px;
+  }
+
+  .social-links a {
+    margin: 0 5px; 
+  }
+  
+  /* Section Container */
+  .section-container {
+    flex-direction: column; 
+  }
+
+  .section-item {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
 }

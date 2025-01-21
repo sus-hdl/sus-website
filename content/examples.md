@@ -1,6 +1,6 @@
 +++
 title = "Examples"
-template = "index.html"
+template = "examples.html"
 +++
 
 # About Us

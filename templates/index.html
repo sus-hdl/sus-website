@@ -1,12 +1,12 @@
 {% extends "base.html" %} {% block content %}
 
+
 <body>
   <!-- Hero Section -->
   <header class="hero">
     <h1>The SUS Hardware Description Language</h1>
     <p>
-      A modern, modular, and easy-to-learn HDL for the next generation of
-      circuit development.
+      A return to RTL for high-performance Hardware Designs
     </p>
     <div class="cta-buttons">
       <a href="{{ config.base_url }}/installation" class="btn">
@@ -33,23 +33,30 @@
       <div class="features-grid">
         <div class="feature">
           <span class="feature-icon">⚡</span>
-          <h3>The Place Holder 1</h3>
+          <h3>Latency Counting</h3>
           <p>
-            This is a Placeholder Text.Placeholder Text.Placeholder Text.Placeholder Text.
+            Timing and pipelining is easier to reason about because the compiler keeps track of them.
           </p>
         </div>
         <div class="feature">
           <span class="feature-icon">🛠️</span>
-          <h3>The Place Holder 2</h3>
+          <h3>Made for tinkering</h3>
           <p>
-            Placeholder Text.Placeholder Text.Placeholder Text.Placeholder Text.
+            The compiler keeps track of many aspects of your hardware design, and displays them in the editor.
           </p>
         </div>
         <div class="feature">
-          <span class="feature-icon">🔁</span>
-          <h3>The Place Holder 3</h3>
+          <span class="feature-icon">🔒</span>
+          <h3>Full Control</h3>
           <p>
-            Placeholder Text.Placeholder Text.Placeholder Text.Placeholder Text.
+            If you can draw your design as synchronous logic, you can represent it in SUS.
+          </p>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">💡</span>
+          <h3>Powerful Metaprogramming</h3>
+          <p>
+            SUS supports compile-time code execution to
           </p>
         </div>
       </div>
@@ -68,22 +75,38 @@
       });
       require(["vs/editor/editor.main"], function () {
         monaco.editor.create(document.getElementById("monaco-editor"), {
-          value: `module fibonnaci {
-    interface fibonnaci : -> int num 
-	state int cur = 1
-	state int prev = 0
+          value: `
+          module tree_add #(int WIDTH) {
+    input int[WIDTH] values
+    output int sum
 
-	
-	num = cur + prev
-	prev = cur
-	cur = num
-}`,       language: "javascript", // TODO: Change to 'sus' language later
+    if WIDTH == 1 {
+        sum = values[0]
+    } else {
+        gen int HALF_WIDTH = WIDTH / 2
+        tree_add #(WIDTH: HALF_WIDTH) left
+        tree_add #(WIDTH: HALF_WIDTH) right
+
+        for int i in 0..HALF_WIDTH {
+            left.values[i] = values[i]
+            right.values[i] = values[i+HALF_WIDTH]
+        }
+
+        if WIDTH % 2 == 0 {
+            reg sum = left.sum + right.sum
+        } else {
+            reg sum = left.sum + right.sum + values[WIDTH - 1]
+        }
+    }
+}`,       language: "sus", // TODO: Change to 'sus' language later
           theme: "vs-dark",
           automaticLayout: true,
+          readOnly: true, 
+          scrollBeyondLastLine: false,
           minimap: { enabled: false },
           showFoldingControls: "never",
-          scrollbar: { vertical: "auto", horizontal: "auto" },
-          fontSize: 15,
+          scrollbar: { vertical: "hidden", horizontal: "hidden" },
+          fontSize: 13,
           lineNumbersMinChars: 3,
           renderLineHighlight: "none",
           lineNumbers: "on",
