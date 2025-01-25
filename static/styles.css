@@ -580,7 +580,7 @@ pre {
   .desktop-menu {
     display: none;
   }
-
+ 
   .menu-toggle {
     display: inline-block;
     background: none;
@@ -590,15 +590,30 @@ pre {
     color: #fff;
   }
 
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Tahoma', sans-serif;
+    font-weight: 500;
+    background-color: #1e0f35;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    position: relative; /* Basis für das absolute Menü */
+   
+  }
+  
+
   .mobile-menu {
     display: none; 
     flex-direction: column;
     background-color: #1e0f35; 
-    position: absolute;
-    top: 100px; 
+    position:  absolute; /* Relativ zu header */
+    top: 80%; /* Startet direkt unter dem Header */
     left: 0;
     width: 100%; 
-    z-index: 10; 
+    z-index: 1000; 
     padding: 10px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
 
@@ -780,6 +795,7 @@ pre {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     margin-top: 20px;
     color: #ffffff;
   }
