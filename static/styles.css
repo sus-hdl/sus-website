@@ -706,12 +706,15 @@ pre {
 
   
   .cta-buttons {
-    flex-direction: column;
-    gap: 15px;
+    display: flex;
+    justify-content: center; 
+   
+    flex-wrap: wrap;
   }
 
   .cta-buttons .btn {
     width: 100%;
+    align-items: center;
   }
 
 
