@@ -588,6 +588,13 @@ pre {
     font-size: 2rem;
     cursor: pointer;
     color: #fff;
+    position: absolute; 
+    left: 80px;  /* Abstand vom linken Rand des Headers */
+    top: 50%;  /* Vertikal mittig im Header */
+    transform: translateY(-50%);
+    
+  
+    
   }
 
   header {
