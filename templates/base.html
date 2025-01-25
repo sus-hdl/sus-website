@@ -29,7 +29,7 @@
     <header>
       <!-- Logo (left side of header) -->
       <a href="{{ config.base_url }}">
-        <img src="images/susLogo.svg" alt="SUS Logo" class="logo" />
+        <img src="{{ get_url(path="images/susLogo.svg") }}" alt="SUS Logo" class="logo" />
       </a>
 
       <h1>{{ config.title }}</h1>
@@ -124,6 +124,7 @@
       </p>
     </div>
   </footer>
-
-  <script src="monaco-setup.js"></script>
+  
+  <script src="{{ get_url(path="monaco-setup.js") }}"></script>
+  <script src="{{ get_url(path="script.js") }}"></script>
 </html>
