@@ -589,8 +589,8 @@ pre {
     cursor: pointer;
     color: #fff;
     position: absolute; 
-    left: 80px;  /* Abstand vom linken Rand des Headers */
-    top: 50%;  /* Vertikal mittig im Header */
+    left: 80px;  
+    top: 50%;  
     transform: translateY(-50%);
     
   
@@ -720,16 +720,36 @@ pre {
 
   /* Footer */
   footer {
-    padding: 15px;
+    padding: 10px;
+    display: flex;
+   
+
+    align-items: center; 
+    justify-content: center;
+    
+    
+  }
+  .footer-content{
+ 
+    display: flex;
+    align-items: center; 
+    justify-content: center;
     text-align: center;
+
   }
 
   footer p {
-    font-size: 12px;
+    font-size: 8px;
+    text-align: center;
+    align-items: center; 
+
   }
 
   footer a {
-    font-size: 14px;
+    font-size: 10px;
+    text-align: center;
+    align-items: center; 
+    
   }
 
   .footer-logo img {
