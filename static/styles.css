@@ -636,7 +636,14 @@ pre {
 
   .social-links {
     margin-top: 10px;
-    justify-content: center; 
+    justify-content: center;
+    align-items: center;  
+  }
+  
+  .logo {
+    height: 40px;
+    width: auto;
+    vertical-align: left;
   }
 
   .icon {
@@ -760,6 +767,7 @@ pre {
   
   /* Section Container */
   .section-container {
+    width: 100%;
     flex-direction: column; 
   }
 
@@ -768,4 +776,12 @@ pre {
     margin-bottom: 20px;
   }
 
+  .section-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    color: #ffffff;
+  }
+  
 }
