@@ -600,7 +600,7 @@ pre {
     color: white;
     padding: 10px 20px;
     text-align: center;
-    position: relative; /* Basis für das absolute Menü */
+    position: relative; 
    
   }
   
@@ -609,8 +609,8 @@ pre {
     display: none; 
     flex-direction: column;
     background-color: #1e0f35; 
-    position:  absolute; /* Relativ zu header */
-    top: 80%; /* Startet direkt unter dem Header */
+    position:  absolute; 
+    top: 80%; 
     left: 0;
     width: 100%; 
     z-index: 1000; 
