@@ -105,6 +105,7 @@ footer {
   text-align: center;
   width: 100%;
   margin-top: auto; /* Pushes footer down if content is insufficient */
+  box-sizing: border-box;
 }
 
 .footer-content {
@@ -114,8 +115,9 @@ footer {
 }
 
 footer p {
-  margin: 10px 0;
+  
   font-size: 14px;
+  margin: 20 0;
 }
 
 footer a {
