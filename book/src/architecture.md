@@ -1,2 +1,2 @@
 # Architecture
-![Architecture of the SUS Compiler](/images/susArchitecture.png)
+![Architecture of the SUS Compiler](https://sus-lang.org/images/susArchitecture.png)
