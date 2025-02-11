@@ -1,74 +1,60 @@
 require(['vs/editor/editor.main'], function () {
-    // SUS Sprache registrieren
+    
     monaco.languages.register({ id: 'sus' });
 
-    // Syntax-Highlighting für SUS
     monaco.languages.setMonarchTokensProvider('sus', {
+        keywords: [
+           'gen', 'if', 'when', 'else', 'while', 'for', 'in', 'input', 'output',
+          'module', 'struct', 'type', 'const', 'interface', 'action', 'query', 'trigger', 'domain', 'extern', '__builtin__',
+          'reg', 'state', 'initial', 'assume'
+        ],
+        typeKeywords: [
+            'bool', 'double', 'byte', 'int', 'short', 'char', 'void', 'long', 'float','T'
+          ],
+        operators: ['=', '>', '<', '>=', '<=', '==', '!=', '+', '-', '*', '/', '%', '^', '|', '&'],
+        symbols: /[=><!~?:&|+\-*/^%]+/,
         tokenizer: {
-            root: [
-                [/\/\/.*/, 'comment'], // Kommentare
-                [/\b(int|bool|reg|state|initial)\b/, 'keyword'], // Schlüsselwörter
-                [/\b(module|struct|action)\b/, 'type'], // Typen
-                [/\d+/, 'number'], // Zahlen
-                [/".*?"/, 'string'], // Strings
-                [/[{}()[\]]/, 'delimiter'], // Klammern
-            ]
+          root: [
+            [/[a-z_$][\w$]*/, { cases: { '@typeKeywords': 'keyword',
+                '@keywords': 'keyword',
+                '@default': 'identifier' } }],
+            [/[A-Z][\w\$]*/, 'type.identifier' ],
+
+            // Constants (numbers)
+            [/\b\d[\d_]*(?:\.*[\d_]*)\b/, 'number'],
+            
+            // Single-line comments
+            [/\/\/[^\n]*\n/, 'comment'],
+            
+            // Block comments
+            [/\/\*/, 'comment', '@comment'],
+            
+            // Parentheses, brackets, and braces
+            [/[{}()\[\]]/, '@brackets'],
+            
+            // Operators
+            [/[=><!~?:&|+\-*/^%]+/, 'operator'],
+            
+            // Identifiers
+            [/[a-zA-Z_$][\w$]*/, {
+              cases: {
+                '@keywords': 'keyword',
+                '@default': 'identifier'
+              }
+            }],
+            
+            // Expressions
+            [/\b\d[\d_]*(?:\.*[\d_]*)\b/, 'number']
+          ],
+      
+          // Comment state
+          comment: [
+            [/[^*]+/, 'comment'],
+            [/\*\//, 'comment', '@pop'],
+            [/[/*]/, 'comment']
+          ]
         }
-    });
+      });
 
-    // Sprach-Konfiguration für SUS
-    monaco.languages.setLanguageConfiguration('sus', {
-        comments: {
-            lineComment: '//',
-            blockComment: ['/*', '*/'],
-        },
-        brackets: [
-            ['{', '}'],
-            ['[', ']'],
-            ['(', ')']
-        ]
-    });
 
-    // Editor erstellen
-    const editor = monaco.editor.create(document.getElementById('editor-container'), {
-        value: '// Schreibe deinen SUS-Code hier\n',
-        language: 'sus',
-        theme: 'vs-dark',
-        automaticLayout: true,
-    });
-
-    // WebSocket Verbindung zum LSP-Server
-    const webSocket = new WebSocket('ws://localhost:8080'); // Passe die URL deines LSP-Servers an
-
-    webSocket.onopen = () => {
-        console.log('WebSocket verbunden');
-
-        const { listen } = window.monaco.jsonrpc;
-        const { MonacoLanguageClient, createConnection } = window.monaco.languageclient;
-
-        listen({
-            webSocket,
-            onConnection: (connection) => {
-                const languageClient = new MonacoLanguageClient({
-                    name: 'SUS Language Client',
-                    clientOptions: {
-                        documentSelector: [{ language: 'sus' }],
-                        synchronization: {
-                            didSave: true,
-                            didOpen: true,
-                            didChange: true,
-                        },
-                    },
-                    connectionProvider: {
-                        get: () => Promise.resolve(connection),
-                    },
-                });
-
-                languageClient.start();
-                connection.onClose(() => languageClient.stop());
-            },
-        });
-    };
-
-    webSocket.onclose = () => console.log('WebSocket geschlossen');
 });

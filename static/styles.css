@@ -210,12 +210,12 @@ section {
 .why-sus-text p {
   font-size: 18px;
 }
-
 .features-code-wrapper {
   display: flex;
   gap: 20px;
   justify-content: space-between;
   align-items: stretch;
+  align-items: flex-start; 
 }
 
 .features-grid {
@@ -250,20 +250,126 @@ section {
   margin-top: 0;
 }
 
+.code-line {
+  display: block;
+}
+
 .feature p {
   font-size: 16px;
   line-height: 1.4;
 }
 
-.editor-container {
+
+.code-container {
   flex: 1;
   max-width: 50%;
-  height: auto;
-  min-height: 357px;
-  border: 2px solid var(--tertiarycolor);
+  align-self: stretch; 
+  box-sizing: border-box;
+  border-right: 5px solid var(--tertiarycolor);
   border-radius: 8px;
-  overflow: hidden;
   background-color: #1e1e1e;
+  color: #d4d4d4;
+  overflow: auto;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 0.75;
+  text-align: left;
+  white-space: pre-wrap; 
+  position: relative;
+  display: flex;
+  padding: 15px; 
+}
+
+
+pre, code {
+  font-family: 'Fira Code', 'Consolas', monospace !important;
+
+}
+.code-container pre {
+  margin: 0;
+  padding: 0;
+  text-align: left; 
+}
+
+
+        /* Syntax-Highlighting */
+        .keyword {
+          color: rgb(188, 137, 189);
+          font-weight: bold;
+      }
+
+      .type {
+        color: rgb(105, 182, 163);
+      }
+
+      .string {
+          color: rgb(196, 147, 123);
+      }
+
+      .comment {
+          color: rgb(116, 152, 93);
+          font-style: italic;
+      }
+
+      .number {
+        color: rgb(183, 202, 168);
+      }
+
+      .operator {
+        color: rgb(225, 225, 225);
+      }
+
+      .function {
+          color: #50fa7b; 
+      }
+
+      .variable {
+          color: rgb(111, 191, 249);
+      }
+      
+      .in-out-variable {
+        color: rgb(169, 217, 248); /* rename later? */
+    }
+
+    .reg-state-inital {
+      color: rgb(102, 153, 207); /* rename later? */
+  }
+
+      .hdl-module {
+          color: rgb(207, 207, 165);
+      }
+
+
+
+.hoverable {
+  transition: background-color 0.2s ease;
+}
+
+.hoverable:hover {
+  background-color: #3a3a3a;
+  cursor: pointer;
+}
+
+.line:hover {
+  background-color: #252526;
+}
+
+.active-block {
+  border-left: 3px solid #569cd6;
+  padding-left: 10px;
+}
+
+[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #252526;
+  color: #d4d4d4;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-top: -25px;
+  margin-left: 10px;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
@@ -271,11 +377,10 @@ section {
     flex-direction: column;
   }
 
-  .features-grid, .editor-container {
+  .features-grid, .code-container {
     max-width: 100%;
-  }
+  } 
 }
-
 .examples-link-container {
   width: 100%;
   text-align: right;
@@ -450,7 +555,7 @@ section {
   font-size: 14px;
 }
 
-.code-container {
+.installer-code-container {
   position: relative;
   display: flex;
   align-items: center;
@@ -562,21 +667,25 @@ pre {
 }
 
 
-.example-editor.small,
+
+.code-container.small,
 .example-description.small {
   min-height: 200px;
 }
 
-.example-editor.large,
+
+
+.code-container.large,
 .example-description.large {
   min-height: 700px;
 }
 
-.example-editor.xtra-large,
+.code-container.xtra-large,
 .example-description.xtra-large {
   flex: 1.5;
   min-height: 1000px;
 }
+
 
 
 @media screen and (min-width: 768px) {
@@ -585,7 +694,7 @@ pre {
   }
 }
 
-/* Mobile Support Test */
+/* Mobile Support */
 @media screen and (max-width: 768px) {
 
   body {
@@ -727,9 +836,14 @@ pre {
     flex: 1;
   }
 
-  .editor-container {
+  .code-container  {
     max-width: 100%;
+    width: 100%;
     min-height: 300px;
+    padding: 20 16px;
+    box-sizing: border-box;
+    font-size: 12px;
+
   }
 
   .feature {

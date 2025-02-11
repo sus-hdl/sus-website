@@ -1,5 +1,5 @@
 {% extends "base.html" %} {% block content %}
-
+<link rel="stylesheet" href="/code.css" />
 
 <body>
   <!-- Hero Section -->
@@ -60,63 +60,32 @@
           </p>
         </div>
       </div>
-      <!-- Monaco Editor Section -->
-      <div class="editor-container" id="monaco-editor"></div>
-      
-    </div>
+    <div class="code-container">
+  <pre>
+    <span class="keyword">module</span> <span class="hdl-module">tree_add</span> <span class="operator">#(</span><span class="type">int</span> <span class="variable">WIDTH</span><span class="operator">)</span> {<br>
+    &nbsp;&nbsp;<span class="keyword">input</span> <span class="type">int</span>[<span class="variable">WIDTH</span>] <span class="in-out-variable">values</span>;<br>
+    &nbsp;&nbsp;<span class="keyword">output</span> <span class="type">int</span> <span class="in-out-variable">sum</span>;<br><br>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
-    <script>
+    &nbsp;&nbsp;<span class="keyword">if</span> <span class="variable">WIDTH</span> <span class="operator">==</span> <span class="number">1</span> {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">sum</span> <span class="operator">=</span> <span class="in-out-variable">values</span>[<span class="number">0</span>];<br>
+    &nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">HALF_WIDTH</span> <span class="operator">=</span> <span class="variable">WIDTH</span> / <span class="number">2</span>;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">tree_add</span> <span class="operator">#(</span><span class="variable">WIDTH</span>: <span class="variable">HALF_WIDTH</span><span class="operator">)</span> <span class="hdl-module">left</span>;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">tree_add</span> <span class="operator">#(</span><span class="variable">WIDTH</span>: <span class="variable">HALF_WIDTH</span><span class="operator">)</span> <span class="hdl-module">right</span>;<br><br>
 
-      require.config({
-        paths: {
-          vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs",
-        },
-      });
-      require(["vs/editor/editor.main"], function () {
-        monaco.editor.create(document.getElementById("monaco-editor"), {
-          value: `
-          module tree_add #(int WIDTH) {
-    input int[WIDTH] values
-    output int sum
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> <span class="type">int</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0..</span><span class="variable">HALF_WIDTH</span>{<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">left</span>.<span class="in-out-variable">values</span>[<span class="variable">i</span>] <span class="operator">=</span> <span class="in-out-variable">values</span>[<span class="variable">i</span>];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">right</span>.<span class="in-out-variable">values</span>[<span class="variable">i</span>] <span class="operator">=</span> <span class="in-out-variable">values</span>[<span class="variable">i</span>+<span class="variable">HALF_WIDTH</span>];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
 
-    if WIDTH == 1 {
-        sum = values[0]
-    } else {
-        gen int HALF_WIDTH = WIDTH / 2
-        tree_add #(WIDTH: HALF_WIDTH) left
-        tree_add #(WIDTH: HALF_WIDTH) right
-
-        for int i in 0..HALF_WIDTH {
-            left.values[i] = values[i]
-            right.values[i] = values[i+HALF_WIDTH]
-        }
-
-        if WIDTH % 2 == 0 {
-            reg sum = left.sum + right.sum
-        } else {
-            reg sum = left.sum + right.sum + values[WIDTH - 1]
-        }
+    &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="variable">WIDTH</span> % <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span> {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="in-out-variable">sum</span> <span class="operator">=</span> <span class="hdl-module">left</span>.<span class="in-out-variable">sum</span> <span class="operator">+</span> <span class="hdl-module">right</span>.<span class="in-out-variable">sum</span>;<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="in-out-variable">sum</span> <span class="operator">=</span> <span class="hdl-module">left</span>.<span class="in-out-variable">sum</span> <span class="operator">+</span> <span class="hdl-module">right</span>.<span class="in-out-variable">sum</span> <span class="operator">+</span> <span class="in-out-variable">values</span>[<span class="variable">WIDTH</span> - <span class="number">1</span>];<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;}<br>
     }
-}`,       language: "sus", 
-          theme: "vs-dark",
-          automaticLayout: true,
-          readOnly: true, 
-          scrollBeyondLastLine: false,
-          minimap: { enabled: false },
-          showFoldingControls: "never",
-          scrollbar: { vertical: "hidden", horizontal: "hidden" },
-          fontSize: 13,
-          lineNumbersMinChars: 3,
-          renderLineHighlight: "none",
-          lineNumbers: "on",
-          glyphMargin: false,
-        });
-      });
-    </script>
-      <div class="examples-link-container">
-        <a href="{{ config.base_url }}/examples" class="more-examples-link">More Examples</a>
-      </div>
+  </pre>
+</div>
   </section>
 
 
