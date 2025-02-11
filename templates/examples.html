@@ -17,7 +17,18 @@
       <p class="example-description">
         This example shows how to count latencies to simplify pipelining.
       </p>
-      <div class="example-editor small" id="editor-latency"></div>
+      <div class="code-container small">
+        <pre>
+          <span class="keyword">module</span> <span class="hdl-module">pow17</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pow17</span> : <span class="type">int</span> <span class="in-out-variable">i</span> -> <span class="type">int</span> <span class="in-out-variable">o</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="in-out-variable">i2</span>  = <span class="in-out-variable">i</span>   * <span class="in-out-variable">i</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="type">int</span> <span class="in-out-variable">i4</span>  = <span class="in-out-variable">i2</span>  * <span class="in-out-variable">i2</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="in-out-variable">i8</span>  = <span class="in-out-variable">i4</span>  * <span class="in-out-variable">i4</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="type">int</span> <span class="in-out-variable">i16</span> = <span class="in-out-variable">i8</span>  * <span class="in-out-variable">i8</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">o</span>   = <span class="in-out-variable">i16</span> * <span class="in-out-variable">i</span><br>
+          }
+        </pre>
+      </div>
     </div>
   </section>
 
@@ -29,7 +40,39 @@
         This module generates a lookup table at compile time, demonstrating
         efficient use of compile-time constants.
       </p>
-      <div class="example-editor large" id="editor-lut"></div>
+      <div class="code-container">
+        <pre>
+          <span class="keyword">module</span> <span class="hdl-module">fizz_buzz_gen</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">fizz_buzz_gen</span> : <span class="type">int</span> <span class="in-out-variable">v</span> -> <span class="type">int</span> <span class="in-out-variable">fb</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">FIZZ</span> = <span class="number">888</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">BUZZ</span> = <span class="number">555</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">FIZZ_BUZZ</span> = <span class="number">888555</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">TABLE_SIZE</span> = <span class="number">256</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span>[<span class="variable">TABLE_SIZE</span>] <span class="variable">lut</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">for</span> <span class="type">int</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="number">0..</span><span class="variable">TABLE_SIZE</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">bool</span> <span class="variable">fizz</span> = <span class="variable">i</span> % <span class="number">3</span> == <span class="number">0</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">bool</span> <span class="variable">buzz</span> = <span class="variable">i</span> % <span class="number">5</span> == <span class="number">0</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">tbl_fb</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="variable">fizz</span> & <span class="variable">buzz</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tbl_fb</span> = <span class="variable">FIZZ_BUZZ</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> <span class="keyword">if</span> <span class="variable">fizz</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tbl_fb</span> = <span class="variable">FIZZ</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> <span class="keyword">if</span> <span class="variable">buzz</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tbl_fb</span> = <span class="variable">BUZZ</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="keyword">else</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">tbl_fb</span> = <span class="variable">i</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">lut</span>[<span class="variable">i</span>] = <span class="variable">tbl_fb</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">fb</span> = <span class="variable">lut</span>[<span class="in-out-variable">v</span>]<br>
+          }
+        </pre>
+      </div>
     </div>
   </section>
 
@@ -41,130 +84,62 @@
         This example showcases the use of multiple interfaces and visual
         separation of clock domains in an IDE setting.
       </p>
-      <div class="example-editor xtra-large" id="editor-fifo"></div>
+      <div class="code-container xtra-large">
+        <pre>
+          <span class="keyword">module</span> <span class="hdl-module">FIFO</span> <span class="operator">#(</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">T</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">DEPTH</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// The FIFO may still receive data for several cycles after ready is de-asserted</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">READY_SLACK</span><br>
+          <span class="operator">)</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">state</span> <span class="type">T</span>[<span class="variable">DEPTH</span>] <span class="string">mem</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">state</span> <span class="type">int</span> <span class="variable">read_addr</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">state</span> <span class="type">int</span> <span class="string">write_addr</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">initial</span> <span class="variable">read_addr</span> = <span class="number">0</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">initial</span> <span class="string">write_addr</span> = <span class="number">0</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">domain</span> <span class="variable">push</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">output</span> <span class="type">bool</span> <span class="string">ready</span><span class="number">'0<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">push</span> : <span class="type">bool</span> <span class="string">push</span><span class="variable">'READY_SLACK</span>, <span class="type">T</span> <span class="string">data_in</span><span class="variable">'READY_SLACK</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">domain</span> <span class="variable">pop</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pop</span> : <span class="type">bool</span> <span class="variable">pop</span> -> <span class="type">bool</span> <span class="variable">data_valid</span>, <span class="type">T</span> <span class="variable">data_out</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">CrossDomain</span> <span class="hdl-module">write_to_pop</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">write_to_pop</span>.<span class="variable">in</span> = <span class="string">write_addr</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">CrossDomain</span> <span class="hdl-module">read_to_push</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">read_to_push</span>.<span class="variable">in</span> = <span class="variable">read_addr</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">CrossDomain</span> <span class="hdl-module">mem_to_pop</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">mem_to_pop</span>.<span class="variable">in</span> = <span class="string">mem</span><br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="variable">pop</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">data_valid</span> = <span class="variable">read_addr</span> != <span class="variable">write_to_pop</span>.<span class="string">out</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="variable">data_valid</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Add a pipelining register, because it can usually be fitted to the</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="variable">data_out</span> = <span class="variable">mem_to_pop</span>.<span class="string">out</span>[<span class="variable">read_addr</span>]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">read_addr</span> = (<span class="variable">read_addr</span> + <span class="number">1</span>) % <span class="variable">DEPTH</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="string">push</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">mem</span>[<span class="string">write_addr</span>] = <span class="string">data_in</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">write_addr</span> = (<span class="string">write_addr</span> + <span class="number">1</span>) % <span class="variable">DEPTH</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+      
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Wrapping subtract</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="string">space_remaining</span> = (<span class="hdl-module">read_to_push</span>.<span class="string">out</span> - <span class="string">write_addr</span>) % <span class="variable">DEPTH</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">ALMOST_FULL_TRESHOLD</span> = <span class="variable">READY_SLACK</span> + <span class="number">1</span> <span class="comment">// +1 for the latency reg we introduce here</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="type">bool</span> <span class="string">r</span> = <span class="string">space_remaining</span> >  <span class="variable">ALMOST_FULL_TRESHOLD</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">ready</span> = <span class="hdl-module">LatencyOffset</span> <span class="operator">#(</span><span class="variable">OFFSET</span>: -<span class="variable">ALMOST_FULL_TRESHOLD</span><span class="operator">)</span>(<span class="string">r</span>)<br>
+          }
+        </pre>
+      </div>
     </div>
   </section>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs/loader.min.js"></script>
-<script>
-    require.config({
-      paths: { vs: "https://cdnjs.cloudflare.com/ajax/libs/monaco-editor/0.38.0/min/vs" },
-    });
-
-    require(["vs/editor/editor.main"], function () {
-      const examples = [
-        {
-          id: "editor-latency",
-          code: `module pow17 {
-      interface pow17 : int i -> int o
-          int i2  = i   * i
-      reg int i4  = i2  * i2
-          int i8  = i4  * i4
-      reg int i16 = i8  * i8
-              o   = i16 * i
-  }`,
-        },
-        {
-          id: "editor-lut",
-          code: `module fizz_buzz_gen {
-      interface fizz_buzz_gen : int v -> int fb
-      gen int FIZZ = 888
-      gen int BUZZ = 555
-      gen int FIZZ_BUZZ = 888555
-      gen int TABLE_SIZE = 256
-
-      gen int[TABLE_SIZE] lut
-
-      for int i in 0..TABLE_SIZE {
-          gen bool fizz = i % 3 == 0
-          gen bool buzz = i % 5 == 0
-
-          gen int tbl_fb
-          if fizz & buzz {
-              tbl_fb = FIZZ_BUZZ
-          } else if fizz {
-              tbl_fb = FIZZ
-          } else if buzz {
-              tbl_fb = BUZZ
-          } else {
-              tbl_fb = i
-          }
-
-          lut[i] = tbl_fb
-      }
-
-      fb = lut[v]
-  }`,
-        },
-        {
-          id: "editor-fifo",
-          code: `module FIFO #(
-      T,
-      int DEPTH,
-      int READY_SLACK
-  ) {
-      state T[DEPTH] mem
-      state int read_addr
-      state int write_addr
-
-      initial read_addr = 0
-      initial write_addr = 0
-
-      domain push
-      output bool ready'0
-      interface push : bool push'READY_SLACK, T data_in'READY_SLACK
-
-      domain pop
-      interface pop : bool pop -> bool data_valid, T data_out
-
-      CrossDomain write_to_pop
-      write_to_pop.in = write_addr
-
-      CrossDomain read_to_push
-      read_to_push.in = read_addr
-
-      CrossDomain mem_to_pop
-      mem_to_pop.in = mem
-
-      if pop {
-          data_valid = read_addr != write_to_pop.out
-          if data_valid {
-              reg data_out = mem_to_pop.out[read_addr]
-              read_addr = (read_addr + 1) % DEPTH
-          }
-      }
-
-      if push {
-          mem[write_addr] = data_in
-          write_addr = (write_addr + 1) % DEPTH
-      }
-
-      int space_remaining = (read_to_push.out - write_addr) % DEPTH
-      gen int ALMOST_FULL_TRESHOLD = READY_SLACK + 1
-      reg bool r = space_remaining > ALMOST_FULL_TRESHOLD
-      ready = LatencyOffset #(OFFSET: -ALMOST_FULL_TRESHOLD)(r)
-  }`,
-        },
-      ];
-
-      examples.forEach((example) => {
-        monaco.editor.create(document.getElementById(example.id), {
-          value: example.code,
-          language: "sus", // Change to 'sus' once available
-          theme: "vs-dark",
-          readOnly: true, 
-          scrollBeyondLastLine: false,
-          automaticLayout: true,
-          minimap: { enabled: false },
-          scrollbar: {
-          vertical: "hidden",
-          horizontal: "hidden"},
-          fontSize: 14,
-          lineNumbers: "on",
-        });
-      });
-    });
-</script>
 
 {% endblock content %}
