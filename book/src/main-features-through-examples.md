@@ -1,5 +1,5 @@
 ## Main Features through examples
-### Pipelining through [Latency Counting](philosophy/latency.md)
+### Pipelining through [Latency Counting](latency.md)
 ```Verilog
 module pow17 {
     interface pow17 : int i -> int o 

@@ -33,14 +33,9 @@
   - [What SUS does not do](what-sus-does-not-do.md)
   - [SUS Code Examples](example-of-some-sus-code-in-the-sus-vscode-language-server.md)
 
-- [Comparison to Other HDLs](comparison-to-other-HDLs.md)
+
   
-- [Main Features through examples](main-features-through-examples.md)
-  - [Pipelining through Latency Counting](latency-counting/main-features-through-examples.md#latency-counting)
-
-  - [FIZZ-BUZZ Lookup Table using Generative Code](fizz-buzz-lookup-table-using-generative-code.md)
-
-  - [(Clock-) Domains for separating out logically distinct pipelines]((clock-)-domains-for-separating-out-logically-distinct-pipelines.md)
+- [Main Features through examples](main-features-through-examples.md)  
 
 # Roadmap
 
