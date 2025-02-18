@@ -12,24 +12,29 @@
 <div class="examples-wrapper">
   <!-- Example 1 -->
   <section class="example">
-    <h2>Latency Counting for Aiding Pipelining</h2>
+    <h2>Latency Counting - automatic insertion of registers</h2>
     <div class="example-container">
       <p class="example-description">
-        This example shows how to count latencies to simplify pipelining.
+        Simply add the reg keyword to any critical path and any paths running parallel to it will get latency added to compensate. 
+        <br><br>This is accomplished by adding a 'latency' field to every path.
+        
+
+        <img src= "{{ get_url(path="images/insertRegs.png") }}" width="500" height="100" alt="Logo" />
       </p>
-      <div class="code-container small">
+      <div class="example-editor small">
         <pre>
           <span class="keyword">module</span> <span class="hdl-module">pow17</span> {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pow17</span> : <span class="type">int</span> <span class="in-out-variable">i</span> -> <span class="type">int</span> <span class="in-out-variable">o</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pow17</span> : <span class="type">int</span> <span class="signal" data-info="Input signal, initial latency: 0 ">i</span> -> <span class="type">int</span> <span class="in-out-variable">o</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="in-out-variable">i2</span>  = <span class="in-out-variable">i</span>   * <span class="in-out-variable">i</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="type">int</span> <span class="in-out-variable">i4</span>  = <span class="in-out-variable">i2</span>  * <span class="in-out-variable">i2</span><br>
+          &nbsp;&nbsp;&nbsp;<span class="reg">reg</span> <span class="type">int</span> <span class="in-out-variable">i4</span>  = <span class="in-out-variable">i2</span>  * <span class="in-out-variable">i2</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="in-out-variable">i8</span>  = <span class="in-out-variable">i4</span>  * <span class="in-out-variable">i4</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="type">int</span> <span class="in-out-variable">i16</span> = <span class="in-out-variable">i8</span>  * <span class="in-out-variable">i8</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">o</span>   = <span class="in-out-variable">i16</span> * <span class="in-out-variable">i</span><br>
+          &nbsp;&nbsp;&nbsp;<span class="reg">reg</span> <span class="type">int</span> <span class="in-out-variable">i16</span> = <span class="in-out-variable">i8</span>  * <span class="in-out-variable">i8</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span class="signal" data-info="Final output, total latency: 2 ">o</span> = <span class="in-out-variable">i16</span> * <span class="in-out-variable">i</span><br>
           }
         </pre>
       </div>
-    </div>
+  
+      </div>
   </section>
 
   <!-- Example 2 -->
@@ -40,7 +45,7 @@
         This module generates a lookup table at compile time, demonstrating
         efficient use of compile-time constants.
       </p>
-      <div class="code-container">
+      <div class="example-editor">
         <pre>
           <span class="keyword">module</span> <span class="hdl-module">fizz_buzz_gen</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">fizz_buzz_gen</span> : <span class="type">int</span> <span class="in-out-variable">v</span> -> <span class="type">int</span> <span class="in-out-variable">fb</span><br>
@@ -84,7 +89,7 @@
         This example showcases the use of multiple interfaces and visual
         separation of clock domains in an IDE setting.
       </p>
-      <div class="code-container xtra-large">
+      <div class="example-editor xtra-large">
         <pre>
           <span class="keyword">module</span> <span class="hdl-module">FIFO</span> <span class="operator">#(</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">T</span>,<br>
@@ -93,34 +98,34 @@
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="variable">READY_SLACK</span><br>
           <span class="operator">)</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">state</span> <span class="type">T</span>[<span class="variable">DEPTH</span>] <span class="string">mem</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">state</span> <span class="type">int</span> <span class="variable">read_addr</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">state</span> <span class="type">int</span> <span class="number">read_addr</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">state</span> <span class="type">int</span> <span class="string">write_addr</span><br><br>
       
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">initial</span> <span class="variable">read_addr</span> = <span class="number">0</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">initial</span> <span class="number">read_addr</span> = <span class="number">0</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">initial</span> <span class="string">write_addr</span> = <span class="number">0</span><br><br>
       
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">domain</span> <span class="variable">push</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">output</span> <span class="type">bool</span> <span class="string">ready</span><span class="number">'0<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">push</span> : <span class="type">bool</span> <span class="string">push</span><span class="variable">'READY_SLACK</span>, <span class="type">T</span> <span class="string">data_in</span><span class="variable">'READY_SLACK</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">domain</span> <span class="operator">push</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">output</span> <span class="type">bool</span> <span class="string">ready</span>'<span class="number">0<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">push</span> : <span class="type">bool</span> <span class="string">push</span>'<span class="variable">READY_SLACK</span>, <span class="type">T</span> <span class="string">data_in</span>'<span class="variable">READY_SLACK</span><br><br>
       
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">domain</span> <span class="variable">pop</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pop</span> : <span class="type">bool</span> <span class="variable">pop</span> -> <span class="type">bool</span> <span class="variable">data_valid</span>, <span class="type">T</span> <span class="variable">data_out</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">domain</span> <span class="operator">pop</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pop</span> : <span class="type">bool</span> <span class="number">pop</span> -> <span class="type">bool</span> <span class="number">data_valid</span>, <span class="type">T</span> <span class="number">data_out</span><br><br>
       
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">CrossDomain</span> <span class="hdl-module">write_to_pop</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">write_to_pop</span>.<span class="variable">in</span> = <span class="string">write_addr</span><br><br>
       
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">CrossDomain</span> <span class="hdl-module">read_to_push</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">read_to_push</span>.<span class="variable">in</span> = <span class="variable">read_addr</span><br><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">read_to_push</span>.<span class="variable">in</span> = <span class="number">read_addr</span><br><br>
       
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">CrossDomain</span> <span class="hdl-module">mem_to_pop</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="hdl-module">mem_to_pop</span>.<span class="variable">in</span> = <span class="string">mem</span><br><br>
       
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="variable">pop</span> {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">data_valid</span> = <span class="variable">read_addr</span> != <span class="variable">write_to_pop</span>.<span class="string">out</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="variable">data_valid</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="number">pop</span> {<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="number">data_valid</span> = <span class="number">read_addr</span> != <span class="variable">write_to_pop</span>.<span class="string">out</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="number">data_valid</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Add a pipelining register, because it can usually be fitted to the</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="variable">data_out</span> = <span class="variable">mem_to_pop</span>.<span class="string">out</span>[<span class="variable">read_addr</span>]<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">read_addr</span> = (<span class="variable">read_addr</span> + <span class="number">1</span>) % <span class="variable">DEPTH</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="number">data_out</span> = <span class="variable">mem_to_pop</span>.<span class="string">out</span>[<span class="number">read_addr</span>]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="number">read_addr</span> = (<span class="number">read_addr</span> + <span class="number">1</span>) % <span class="variable">DEPTH</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
           &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
       
