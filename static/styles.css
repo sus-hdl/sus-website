@@ -274,7 +274,6 @@ section {
   font-size: 14px;
   line-height: 0.75;
   text-align: left;
-  white-space: pre-wrap; 
   position: relative;
   display: flex;
   padding: 15px; 
@@ -293,9 +292,9 @@ pre, code {
 
 
         /* Syntax-Highlighting */
-        .keyword {
-          color: rgb(188, 137, 189);
-          font-weight: bold;
+      .keyword {
+        color: rgb(188, 137, 189);
+        font-weight: bold;
       }
 
       .type {
@@ -303,12 +302,12 @@ pre, code {
       }
 
       .string {
-          color: rgb(196, 147, 123);
+        color: rgb(196, 147, 123);
       }
 
       .comment {
-          color: rgb(116, 152, 93);
-          font-style: italic;
+        color: rgb(116, 152, 93);
+        font-style: italic;
       }
 
       .number {
@@ -320,24 +319,26 @@ pre, code {
       }
 
       .function {
-          color: #50fa7b; 
+        color: #50fa7b; 
       }
 
       .variable {
-          color: rgb(111, 191, 249);
+        color: rgb(111, 191, 249);
       }
       
       .in-out-variable {
         color: rgb(169, 217, 248); /* rename later? */
-    }
+      }
 
-    .reg-state-inital {
-      color: rgb(102, 153, 207); /* rename later? */
-  }
+      .reg-state-inital {
+       color: rgb(102, 153, 207); /* rename later? */
+      }
 
       .hdl-module {
-          color: rgb(207, 207, 165);
+        color: rgb(207, 207, 165);
       }
+
+ 
 
 
 
@@ -619,10 +620,11 @@ pre {
 .example {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   background-color: var(--secondarycolor);
+  gap: 20px;
   padding: 20px;
   border: none;
+
 }
 
 .example h2 {
@@ -643,48 +645,182 @@ pre {
 
 
 .example-description {
-  flex: 1; 
+  flex: 1;
   border-left: 5px solid var(--tertiarycolor);
   border-radius: 8px;
   padding: 20px;
   margin: 0;
   background-color: rgba(255, 255, 255, 0.1);
-  display: flex; 
+  display: flex;
   flex-direction: column;
   justify-content: space-between;
+  word-wrap: break-word;
+}
+
+.example-container img {
+  width: 100%; 
+  max-width: 500px; 
+  height: auto;
+  margin-top: 40px; 
 }
 
 
 .example-editor {
-  flex: 1.5; 
+  flex: 1;
+  max-width: 50%;
+  align-self: stretch; 
+  box-sizing: border-box;
   border-right: 5px solid var(--tertiarycolor);
   border-radius: 8px;
   background-color: #1e1e1e;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex; 
-  justify-content: space-between;
+  color: #d4d4d4;
+  overflow: auto;
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 0.75;
+  text-align: left;
+  position: relative;
+  display: flex;
+  padding: 15px;
+  margin: 0px auto;
+  
+}
+
+.example-editor pre {
+  margin: 0;
+  padding: 0;
+  text-align: left; 
+
+ 
+}
+
+.example-editor {
+  position: relative;
+  background: #1e1e1e;
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  color: #d4d4d4;
+  overflow: auto;
+  width: 600px;
+  border: 1px solid #333;
+  white-space: pre-wrap;
 }
 
 
 
-.code-container.small,
+
+   .reg {
+    position: relative; 
+    color: rgb(102, 153, 207);
+    font-weight: bold;
+    cursor: pointer; 
+  }
+  
+
+  .reg::before {
+    content: "→";
+    font-size: 14px;
+    color: #ffcc00;
+    display: inline-block; 
+    animation: move-left 1.5s infinite alternate ease-in-out;
+  }
+  @keyframes move-left {
+    0% { transform: translateX(0); opacity: 0.8; }
+    100% { transform: translateX(-5px); opacity: 1; }
+  }
+
+
+.reg::after {
+  content: "Extra latency register inserted";
+  position: absolute;
+  bottom: 100%; 
+  left: 50%;
+  transform: translateX(-50%); 
+  width: max-content; 
+  padding: 4px 8px;
+  background-color: #333; 
+  color: #fff; 
+  border-radius: 4px; 
+  font-size: 12px;
+  font-family: monospace; 
+  text-align: center;
+  white-space: nowrap; 
+  opacity: 0; 
+  visibility: hidden; 
+  transition: opacity 0.3s ease, visibility 0.3s ease; 
+  z-index: 10; 
+}
+
+.reg:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+.signal {
+  position: relative;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+  color: #ffffff; 
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.8); 
+  animation: glow 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes glow {
+  0% { text-shadow: 0 0 3px rgba(255, 255, 255, 0.5); }
+  100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.804); }
+}
+
+.signal::after {
+  content: attr(data-info);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  padding: 4px 8px;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: monospace;
+  text-align: center;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 10;
+}
+
+
+.signal:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.example-editor.small,
 .example-description.small {
   min-height: 200px;
 }
 
 
 
-.code-container.large,
+
+.example-editor.large,
 .example-description.large {
   min-height: 700px;
 }
 
-.code-container.xtra-large,
+.example-editor.xtra-large,
 .example-description.xtra-large {
   flex: 1.5;
   min-height: 1000px;
 }
+
+
+
 
 
 
