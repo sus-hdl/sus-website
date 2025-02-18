@@ -16,7 +16,7 @@
     <div class="example-container">
       <p class="example-description">
         Simply add the reg keyword to any critical path and any paths running parallel to it will get latency added to compensate. 
-        <br><br>This is accomplished by adding a 'latency' field to every path.
+        <br>This is accomplished by adding a 'latency' field to every path.
         
 
         <img src= "{{ get_url(path="images/insertRegs.png") }}" width="500" height="100" alt="Logo" />
@@ -24,12 +24,12 @@
       <div class="example-editor small">
         <pre>
           <span class="keyword">module</span> <span class="hdl-module">pow17</span> {<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pow17</span> : <span class="type">int</span> <span class="signal" data-info="Input signal, initial latency: 0 ">i</span> -> <span class="type">int</span> <span class="in-out-variable">o</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pow17</span> : <span class="type">int</span> <span class="signal" data-info="Input signal, initial latency: 0 ">i</span> -> <span class="type">int</span> <span class="signal" data-info="Final output, total latency: 2 ">o</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="in-out-variable">i2</span>  = <span class="in-out-variable">i</span>   * <span class="in-out-variable">i</span><br>
           &nbsp;&nbsp;&nbsp;<span class="reg">reg</span> <span class="type">int</span> <span class="in-out-variable">i4</span>  = <span class="in-out-variable">i2</span>  * <span class="in-out-variable">i2</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="in-out-variable">i8</span>  = <span class="in-out-variable">i4</span>  * <span class="in-out-variable">i4</span><br>
           &nbsp;&nbsp;&nbsp;<span class="reg">reg</span> <span class="type">int</span> <span class="in-out-variable">i16</span> = <span class="in-out-variable">i8</span>  * <span class="in-out-variable">i8</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <span class="signal" data-info="Final output, total latency: 2 ">o</span> = <span class="in-out-variable">i16</span> * <span class="in-out-variable">i</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">0</span> = <span class="in-out-variable">i16</span> * <span class="in-out-variable">i</span><br>
           }
         </pre>
       </div>
