@@ -23,7 +23,7 @@ module Adder {
 ### Product Types (Structs)
 Bundle multiple signals into a single type:
 
-```rust
+```Verilog
 struct Pixel {
   int red
   int green
@@ -31,7 +31,7 @@ struct Pixel {
 }
 ```
 ### Example
-```rust
+```Verilog
 
 module ColorMixer {
   interface ColorMixer : Pixel p1, Pixel p2 -> Pixel out
@@ -44,7 +44,7 @@ module ColorMixer {
 
 Explicit control over encoding (one-hot, binary):
 
-```rust
+```Verilog
 enum State #[onehot] {
   Idle
   Processing
@@ -55,7 +55,7 @@ enum State #[onehot] {
 
 Templates use named parameters for clarity:
 
-```rust
+```Verilog
 module Memory#(type T, int DEPTH) {
   interface Write : T data, int addr -> {}
   interface Read : int addr -> T data
@@ -75,7 +75,7 @@ Critical for module behavior.
 ### Latency registers
 
 Added automatically for timing.
-```rust
+```Verilog
 
 module Counter {
   interface Counter : bool reset -> int count
@@ -96,7 +96,7 @@ module Counter {
 
 Define valid input/output patterns:
 
-```rust
+```Verilog
 
 module Unpacker {
   interface Unpacker #[pattern="(X -> /){4}"] : int[4] packed -> int out
@@ -106,7 +106,7 @@ module Unpacker {
 ### Clock Domain Rhythms
 
 Safe 3:5 clock crossing:
-```rust
+```Verilog
 rhythmGenerator(clk_slow, clk_fast) cdc
 cross cdc.left() -> cdc.right()  // Compiler enforces rhythm
 
@@ -115,7 +115,7 @@ cross cdc.left() -> cdc.right()  // Compiler enforces rhythm
 
 ### FIFO with Explicit Latency
 
-```rust
+```Verilog
 
 FIFO#(DEPTH: 32, DATA_TYPE: int) my_fifo
 if my_fifo.push_ready {
@@ -123,7 +123,7 @@ if my_fifo.push_ready {
 }
 ```
 ### Multi-Clock Memory
-```rust
+```Verilog
 MultiClockMemory#(
   CLK_A: clk_100MHz,
   CLK_B: clk_200MHz
@@ -134,7 +134,7 @@ MultiClockMemory#(
 ### Generative for Loops
 
 Create parallel hardware:
-```rust
+```Verilog
 module VectorAdd {
   interface VectorAdd : int[8] a, int[8] b -> int[8] out
   for int i in 0..8 {
@@ -143,7 +143,7 @@ module VectorAdd {
 }
 ```
 ### Priority Encoding with first
-```rust
+```Verilog
 
 module PriorityEncoder {
   interface PriorityEncoder : bool[8] req -> int idx
@@ -157,7 +157,7 @@ module PriorityEncoder {
 ```
 ## 8. Best Practices
 Always bind integers:
-```rust
+```Verilog
 int#[0:100] sensor_value  // Compiler rejects values >100
 
 ```
