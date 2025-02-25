@@ -42,8 +42,22 @@
     <h2>Compile-Time Generation of Look-Up Tables</h2>
     <div class="example-container">
       <p class="example-description">
-        This module generates a lookup table at compile time, demonstrating
-        efficient use of compile-time constants.
+        This generative code constructs a lookup table to efficiently solve the Fizz-Buzz problem. Instead of evaluating conditions at runtime, the table is fully computed during code generation.
+        <br><br>
+        FIZZ (888) represents numbers divisible by 3.<br>
+        BUZZ (555) represents numbers divisible by 5.<br>
+        FIZZ_BUZZ (888555) is used for numbers divisible by both 3 and 5.<br>
+        TABLE_SIZE (256) defines the number of precomputed entries in the lookup table.<br>
+        <br> <br>
+        The array lut stores a precomputed value for each i from 0 to TABLE_SIZE - 1.<br>
+        If i is divisible by both 3 and 5, FIZZ_BUZZ (888555) is stored.<br>
+        If only by 3, FIZZ (888) is stored.<br>
+        If only by 5, BUZZ (555) is stored.<br>
+        Otherwise, i itself is stored.<br>
+        <br><br>
+        After generation, lut contains all results. <br>
+        At runtime, fb = lut[v] provides an instant lookup, avoiding conditionals and divisions. <br>
+        <br><br>
       </p>
       <div class="example-editor">
         <pre>
@@ -74,7 +88,7 @@
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="variable">lut</span>[<span class="variable">i</span>] = <span class="variable">tbl_fb</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
       
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">fb</span> = <span class="variable">lut</span>[<span class="in-out-variable">v</span>]<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">fb</span> = <span class="lut">lut</span>[<span class="in-out-variable">v</span>]<br>
           }
         </pre>
       </div>

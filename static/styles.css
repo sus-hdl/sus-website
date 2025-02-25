@@ -800,6 +800,72 @@ pre {
 }
 
 
+.lut {
+  position: relative; 
+  color: rgb(102, 153, 207);
+  font-weight: bold;
+  cursor: pointer; 
+}
+
+
+.lut::before {
+  content: "→";
+  font-size: 14px;
+  color: #ffcc00;
+  display: inline-block; 
+  animation: move-left 1.5s infinite alternate ease-in-out;
+}
+@keyframes move-left {
+  0% { transform: translateX(0); opacity: 0.8; }
+  100% { transform: translateX(-5px); opacity: 1; }
+}
+
+
+.lut::after {
+content:" = [888555, 1, 2, 888, 4, 555, 888, 7, 8, 888, 555, 11, 888, 13, 14, 888555,\A"
+" 16, 17, 888, 19, 555, 888, 22, 23, 888, 555, 26, 888, 28, 29, 888555,\A"
+" 31, 32, 888, 34, 555, 888, 37, 38, 888, 555, 41, 888, 43, 44, 888555,\A"
+" 46, 47, 888, 49, 555, 888, 52, 53, 888, 555, 56, 888, 58, 59, 888555,\A"
+" 61, 62, 888, 64, 555, 888, 67, 68, 888, 555, 71, 888, 73, 74, 888555,\A"
+" 76, 77, 888, 79, 555, 888, 82, 83, 888, 555, 86, 888, 88, 89, 888555,\A"
+" 91, 92, 888, 94, 555, 888, 97, 98, 888, 555, 101, 888, 103, 104, 888555,\A"
+" 106, 107, 888, 109, 555, 888, 112, 113, 888, 555, 116, 888, 118, 119, 888555,\A"
+" 121, 122, 888, 124, 555, 888, 127, 128, 888, 555, 131, 888, 133, 134, 888555,\A"
+" 136, 137, 888, 139, 555, 888, 142, 143, 888, 555, 146, 888, 148, 149, 888555,\A"
+" 151, 152, 888, 154, 555, 888, 157, 158, 888, 555, 161, 888, 163, 164, 888555,\A"
+" 166, 167, 888, 169, 555, 888, 172, 173, 888, 555, 176, 888, 178, 179, 888555,\A"
+" 181, 182, 888, 184, 555, 888, 187, 188, 888, 555, 191, 888, 193, 194, 888555,\A"
+" 196, 197, 888, 199, 555, 888, 202, 203, 888, 555, 206, 888, 208, 209, 888555,\A"
+" 211, 212, 888, 214, 555, 888, 217, 218, 888, 555, 221, 888, 223, 224, 888555,\A"
+" 226, 227, 888, 229, 555, 888, 232, 233, 888, 555, 236, 888, 238, 239, 888555,\A"
+" 241, 242, 888, 244, 555, 888, 247, 248, 888, 555, 251, 888, 253, 254, 888555 ]";
+position: absolute;
+bottom: 100%; 
+left: 50%;
+transform: translateX(-30%); 
+width: max-content; 
+padding: 4px 8px;
+background-color: #333; 
+color: #fff; 
+border-radius: 4px; 
+font-size: 10px;
+line-height: 1.5;
+font-family: monospace; 
+text-align: center;
+white-space: pre-wrap;
+display: block;
+opacity: 0; 
+visibility: hidden; 
+transition: opacity 0.3s ease, visibility 0.3s ease; 
+z-index: 10; 
+}
+
+.lut:hover::after {
+opacity: 1;
+visibility: visible;
+}
+
+
 .example-editor.small,
 .example-description.small {
   min-height: 200px;
