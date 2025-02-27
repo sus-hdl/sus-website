@@ -26,7 +26,7 @@ Then open `http://127.0.0.1:1111/` in your browser.
 
 
 ## License
-The source code for the website is licensed under **GPL-3.0**.
+The source code for the website is licensed under the [MIT License](LICENSE).
 
 ## 🤝 Contributing
 We welcome improvements! Feel free to submit issues or pull requests.
