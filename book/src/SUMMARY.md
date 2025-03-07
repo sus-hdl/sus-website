@@ -9,7 +9,7 @@
 - [Learning SUS](learningsus.md)
   - [Changelog since Talk](changelog-since-talk.md)
 - [Tutorial](tutorial.md)
-- [Tutorial1](tutorial1.md)
+
 
 # philosophy
   - [Compiletime and Runtime](compiletime_and_runtime.md)
