@@ -4,10 +4,6 @@
 
 # User Guide
 
-- [Installation](installation.md)
-
-- [Learning SUS](learningsus.md)
-  - [Changelog since Talk](changelog-since-talk.md)
 - [Tutorial](tutorial.md)
 
 

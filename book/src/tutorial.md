@@ -6,6 +6,33 @@ SUS (Synchronous Ultra-Structured) is a new language for hardware design (RTL) s
 # What is the main purpose of SUS ?
 The main purpose of SUS is that, as the programmer, you are in the driver's seat. This means you're responsible for designing the hardware and ensuring every component is built to your specifications. While this places the responsibility on you, it also gives you immense power to ensure the hardware functions and is built exactly as you intend.
 
+
+# Installation
+Installation is done through [Rust](https://www.rust-lang.org/)'s package manager cargo ([cargo installation info](https://doc.rust-lang.org/cargo/getting-started/installation.html)). 
+```bash
+cargo install sus_compiler
+```
+
+To use the accompanying VSCode Extension for Syntax Highlighting and Code Suggestions ([sus-lsp](https://github.com/pc2/sus-lsp)), install [SUS Hardware Design Language](https://marketplace.visualstudio.com/items?itemName=LennartVanHirtum.sus-lsp) through the VSCode Extension Explorer, or use the F1 installation command:
+```
+ext install LennartVanHirtum.sus-lsp
+```
+
+# Learning SUS
+
+Start with [this introductory talk](https://www.youtube.com/watch?v=jJvtZvcimyM) for an overview of SUS features.
+
+## Changelog
+Check the changelog for updates:
+- Template syntax updated to `#(NameA: 3, TypeB: type int[3], ValueC: true)`.
+- Standard Library included with SUS.
+- Concrete typing using Hindley-Milner.
+
+### Changelog since Talk
+- Template syntax has changed to `#(NameA: 3, TypeB: type int[3], ValueC: true)`
+- Standard Library is delivered with SUS Compiler
+- Hindley-Milner for Concrete Typing
+
 # Direct Translation and Feedback for Hardware Design
 SUS provides tools that help manage hardware complexity, allowing you to design any hardware while making it easier to handle intrinsic challenges. It acts as a direct translation to the netlist, which you can input into synthesis tools like Vivado or Quartus for feedback. This feedback highlights areas to improve your hardware, such as routing conflicts, and helps you address issues. SUS also offers immediate in-editor feedback, notifying you of errors like bad feedback loops, and guides you in improving your code to ensure it works correctly.
 
@@ -117,3 +144,5 @@ outVal = myArr [value]
 ```
 To use it, you would wrap it in an array of values, set up output values, and instantiate an iterator. You can then start iterating from a specific point and use a callback function. 
 
+# Long Term Strategy
+["The Economics of Programming Languages" by Evan Czaplicki (Strange Loop 2023)](https://www.youtube.com/watch?v=XZ3w_jec1v8)
