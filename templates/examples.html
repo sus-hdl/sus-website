@@ -100,8 +100,45 @@
     <h2>Multiple Interfaces and Clock Domain Separation</h2>
     <div class="example-container">
       <p class="example-description">
-        This example showcases the use of multiple interfaces and visual
-        separation of clock domains in an IDE setting.
+        
+      This FIFO module is structured around multiple interfaces that define distinct operational domains. <br>
+      Interfaces serve as the only means to transfer data between latency and clock domains while maintaining synchronization.<br>
+      <br> <br>
+      <strong>Interfaces in the FIFO Module</strong>
+      Push Interface – Handles incoming data and writes it to memory.<br>
+      Pop Interface – Reads data from memory when available.<br>
+      Each interface consists of input and output ports and operates within its own clock and latency domain.<br>
+      Wires belonging to the same latency counting group are placed in the same interface, ensuring that they experience delays consistently.<br>
+      <br> <br>
+      <strong>Clock Domain Separation and Cross Mechanism</strong>
+      Since the push and pop domains operate independently, they cannot directly share wires. <br>
+      Instead, domain crossing primitives (CrossDomain) are used to safely transfer data while preserving synchronization:<br>
+      <br>
+      write_to_pop transfers the write pointer to the pop domain.<br>
+      read_to_push transfers the read pointer to the push domain.<br>
+      mem_to_pop allows the pop domain to access memory contents.<br>
+      To maintain signal synchronization across interfaces, multiple wires can be transferred together using the cross keyword:<br><br>
+      <br>
+     
+      <code>cross wire_a, wire_b, wire_c;</code><br>
+
+      <br>
+
+      This ensures that all three signals arrive with their relative latencies preserved.<br>
+       However, separate cross statements do not maintain synchronization between signals.<br>
+      <br> <br>
+      <strong> How Interfaces and Domains Work Together in the FIFO</strong> 
+      The push interface writes data into the FIFO and updates the write address.<br>
+      The pop interface reads data and checks the write pointer from the push domain.<br>
+      Cross-domain mechanisms synchronize read and write pointers across interfaces.<br>
+      Wires never directly cross domains without explicit synchronization.<br>
+      Flow control logic ensures safe data transfer by preventing overflows and underflows.<br>
+      By using explicitly defined interfaces and strict clock domain separation,<br>
+      this FIFO design guarantees reliable data exchange between independent timing domains while maintaining latency correctness.<br>
+
+
+
+
       </p>
       <div class="example-editor xtra-large">
         <pre>
