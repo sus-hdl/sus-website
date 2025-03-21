@@ -2,9 +2,14 @@
 
 [Introduction](sus-language.md)
 
-# User Guide
-
-- [Tutorial](tutorial.md)
+# Tutorial
+- [Installation](installation.md)
+- [Typing](typing.md)
+- [Data Types](dataTypes.md)
+- [Examples](examples.md)
+- [Generative Code](generative_Code.md)
+- [Registers](registers.md)
+- [Learning SUS](learningsus.md)
 
 
 # philosophy
@@ -60,7 +65,7 @@
 
 - [Architecture](architecture.md)
 
-[Long Term Strategy](long-term-strategy.md)
+- [Long Term Strategy](long-term-strategy.md)
 
 
 
