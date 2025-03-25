@@ -3,6 +3,7 @@
 [Introduction](sus-language.md)
 
 # Tutorial
+
 - [Installation](installation.md)
 - [Typing](typing.md)
 - [Data Types](dataTypes.md)
