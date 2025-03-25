@@ -6,6 +6,7 @@
 - [Installation](installation.md)
 - [Typing](typing.md)
 - [Data Types](dataTypes.md)
+- [Module](module.md)
 - [Examples](examples.md)
 - [Generative Code](generative_Code.md)
 - [Registers](registers.md)

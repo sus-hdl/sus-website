@@ -28,3 +28,5 @@ Example Sus code with Latency Registers:
 In a module that raises a value to the 17th power, multiple multipliers are chained together. If the critical path between input and output is too long, latency registers can be added using the reg keyword to improve timing.
 
 The compiler automatically detects parallel branches and inserts extra latency registers to keep all computations synchronized. This is managed through latency counting, where each wire stores an offset value. If one signal has a latency of 0 and another latency of 2, the compiler inserts two latency registers to align them.
+
+
