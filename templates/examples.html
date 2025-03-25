@@ -19,10 +19,16 @@
         <br>This is accomplished by adding a 'latency' field to every path.
         
 
-        <img src= "{{ get_url(path="images/insertRegs.png") }}" width="500" height="100" alt="Logo" />
+        <img src="{{ get_url(path='images/insertRegisters.png') }}" 
+        width="500" 
+        height="100" 
+        alt="Logo"
+        style="border: 5px solid white; border-radius: 8px;">
+
       </p>
-      <div class="example-editor small">
-        <pre>
+      
+      <div class="example-editor">
+        <pre><code> 
           <span class="keyword">module</span> <span class="hdl-module">pow17</span> {<br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">interface</span> <span class="hdl-module">pow17</span> : <span class="type">int</span> <span class="signal" data-info="Input signal, initial latency: 0 ">i</span> -> <span class="type">int</span> <span class="signal" data-info="Final output, total latency: 2 ">o</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="in-out-variable">i2</span>  = <span class="in-out-variable">i</span>   * <span class="in-out-variable">i</span><br>
@@ -31,7 +37,7 @@
           &nbsp;&nbsp;&nbsp;<span class="reg">reg</span> <span class="type">int</span> <span class="in-out-variable">i16</span> = <span class="in-out-variable">i8</span>  * <span class="in-out-variable">i8</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="in-out-variable">o</span> = <span class="in-out-variable">i16</span> * <span class="in-out-variable">i</span><br>
           }
-        </pre>
+        </code> </pre>
       </div>
   
       </div>
@@ -140,7 +146,7 @@
 
 
       </p>
-      <div class="example-editor xtra-large">
+      <div class="example-editor">
         <pre>
           <span class="keyword">module</span> <span class="hdl-module">FIFO</span> <span class="operator">#(</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">T</span>,<br>

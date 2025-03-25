@@ -609,6 +609,7 @@ pre {
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
+  align-items: flex-start; 
   gap: 80px;
   padding: 20px;
   max-width: 1200px;
@@ -616,6 +617,8 @@ pre {
   background-color: var(--secondarycolor);
   border: none;
 }
+
+
 
 .example {
   display: flex;
@@ -637,10 +640,11 @@ pre {
 .example-container {
   display: flex;
   gap: 20px;
-  
   padding: 0;
-  justify-content: space-between;
   align-items: stretch;
+  align-items: flex-start; 
+  
+  
 }
 
 
@@ -655,6 +659,7 @@ pre {
   flex-direction: column;
   justify-content: space-between;
   word-wrap: break-word;
+  
 }
 
 .example-container img {
@@ -675,39 +680,24 @@ pre {
   background-color: #1e1e1e;
   color: #d4d4d4;
   overflow: auto;
+
   font-family: monospace;
   font-size: 14px;
   line-height: 0.75;
   text-align: left;
   position: relative;
   display: flex;
-  padding: 15px;
-  margin: 0px auto;
-  
+  padding: 15px; 
+
 }
 
 .example-editor pre {
-  margin: 0;
-  padding: 0;
-  text-align: left; 
+  text-align: left !important; 
+  margin: 0,0;
+  transform: translateX(-80px); 
+  width: calc(100% + 80px); 
 
- 
-}
-
-.example-editor {
-  position: relative;
-  background: #1e1e1e;
-  padding: 10px;
-  border-radius: 5px;
-  font-family: monospace;
-  color: #d4d4d4;
-  overflow: auto;
-  width: 600px;
-  border: 1px solid #333;
-  white-space: pre-wrap;
-}
-
-
+ }
 
 
    .reg {
@@ -736,7 +726,7 @@ pre {
   position: absolute;
   bottom: 100%; 
   left: 50%;
-  transform: translateX(-50%); 
+  transform: translateX(-20%); 
   width: max-content; 
   padding: 4px 8px;
   background-color: #333; 
@@ -1118,6 +1108,7 @@ visibility: visible;
   /* Example Section */
   .examples-wrapper {
     gap: 40px;
+    
   }
 
   .example-container {
@@ -1127,6 +1118,12 @@ visibility: visible;
   .example-editor, .example-description {
     flex: 1;
     min-height: 300px; 
+    max-width: 100%;
+    width: 100%;
+    min-height: 300px;
+    padding: 20 16px;
+    box-sizing: border-box;
+    font-size: 12px;
   }
 
   /* Community & Getting Started Sections */
