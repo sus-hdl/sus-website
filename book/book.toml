@@ -1,0 +1,9 @@
+[book]
+title = "SUS Documentation"
+language = "en"
+
+
+
+[output.html]
+
+git-repository-url = "https://github.com/pc2/sus-compiler"

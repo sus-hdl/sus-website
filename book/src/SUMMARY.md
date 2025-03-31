@@ -11,6 +11,8 @@
 - [Examples](examples.md)
 - [Generative Code](generative_Code.md)
 - [Registers](registers.md)
+- [FIFO](fifo.md)
+- [BitSerialMatrix](bitSerialMatrix.md)
 - [Learning SUS](learningsus.md)
 
 

@@ -17,55 +17,75 @@ In this FIFO design, the latency counting idea doesn’t fully apply because the
 
 To handle domain crossing, explicit constructs are used to ensure correct data transfer between the domains. The FIFO includes registers for read and write addresses across the latency boundary. Additionally, extra latency registers, like for the subtraction and comparison operations, help manage performance.
 
-![FIFO module](FIFOModule1.png)
-![FIFO module](FIFOModule2.png)
+![FIFO module](/images/FIFOModule.png)
 
 
-# 3. Iteration in SUS
+# 3. JoinDomains
+
+ Synchronizes two signals across different clock domains with an adjustable offset.
+
+![JoinDomains](JoinDomains.png)
+
+
+# 4. Iteration in SUS
 
 The iterator module provides a simple counting loop. It is a state machine for sequential iteration, flexible for various counting ranges. 
 
 ![Iterator module](/images/iterator.png)
 
 
-## 4. FixedSizeIterator 
+## 5. FixedSizeIterator 
 
 ![FixedSizeIterator](/images/FixedFixedSizeIterator.png)
 
 FixedSizeIterator module is a simple hardware iterator that counts from 0 to UP_TO - 1, based on a start signal. 
 
 
-# 5. SlowClockGenerator
+# 6. SlowClockGenerator
 
  SlowClockGenerator: Generates a slower clock by counting up to a given period.
 
-![SlowClockGenerator](/images/SlowClockGenerator
-.png)
+![SlowClockGenerator](/images/SlowClockGenerator.png)
 
-# 6. SplitAt
+
+# 7. SplitAt
 
  SplitAt: Splits an array into two parts at a specified index.
 
  ![SplitAt](/images/SplitAt.png)
 
-# 7. Abs
+# 8. Abs
 
 Computes the absolute value of an integer.
 
 
+![absoluteCode](absCode.png)
 
 
-
-# 8. Slice
+# 9. Slice
 
 Extracts a sub-array (slice) from a given array.
 
 ![Slice](/images/slice.png)
 
 
-# 9. BitSelect
+# 10. BitSelect
 
 Outputs a one-hot encoded signal based on a selected index.
 
 ![BitSelect](/images/bitSelect.png)
+
+
+# 11. PopCount
+
+![popCountCode](PopCount.png)
+
+ Counts the number of 1s in a binary array using a recursive approach.
+
+
+# 12. TreeAdd
+
+![treeAddCode](TreeAdd.png)
+
+ Recursively sums an array of integers using a tree-based approach for efficient computation.
 
