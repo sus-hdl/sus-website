@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Design Decisions - SUS Documentation</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="favicon.svg">
+                        <link rel="shortcut icon" href="favicon.png">
+                <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+                <link rel="stylesheet" href="css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="sus-language.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="typing.html"><strong aria-hidden="true">2.</strong> Typing</a></li><li class="chapter-item expanded "><a href="dataTypes.html"><strong aria-hidden="true">3.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="module.html"><strong aria-hidden="true">4.</strong> Module</a></li><li class="chapter-item expanded "><a href="examples.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li class="chapter-item expanded "><a href="generative_Code.html"><strong aria-hidden="true">6.</strong> Generative Code</a></li><li class="chapter-item expanded "><a href="registers.html"><strong aria-hidden="true">7.</strong> Registers</a></li><li class="chapter-item expanded "><a href="fifo.html"><strong aria-hidden="true">8.</strong> FIFO</a></li><li class="chapter-item expanded "><a href="bitSerialMatrix.html"><strong aria-hidden="true">9.</strong> BitSerialMatrix</a></li><li class="chapter-item expanded "><a href="learningsus.html"><strong aria-hidden="true">10.</strong> Learning SUS</a></li><li class="chapter-item expanded affix "><li class="part-title">philosophy</li><li class="chapter-item expanded "><a href="compiletime_and_runtime.html"><strong aria-hidden="true">11.</strong> Compiletime and Runtime</a></li><li class="chapter-item expanded "><a href="control_flow.html"><strong aria-hidden="true">12.</strong> Control Flow</a></li><li class="chapter-item expanded "><a href="design_decisions.html" class="active"><strong aria-hidden="true">13.</strong> Design Decisions</a></li><li class="chapter-item expanded "><a href="instantiation.html"><strong aria-hidden="true">14.</strong> Instantiation</a></li><li class="chapter-item expanded "><a href="interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li class="chapter-item expanded "><a href="latency.html"><strong aria-hidden="true">16.</strong> Latency</a></li><li class="chapter-item expanded "><a href="library.html"><strong aria-hidden="true">17.</strong> Library</a></li><li class="chapter-item expanded "><a href="optimization.html"><strong aria-hidden="true">18.</strong> Optimization</a></li><li class="chapter-item expanded "><a href="state.html"><strong aria-hidden="true">19.</strong> State</a></li><li class="chapter-item expanded "><a href="state_v_latency.html"><strong aria-hidden="true">20.</strong> State vs Latency</a></li><li class="chapter-item expanded "><a href="template_troubles.html"><strong aria-hidden="true">21.</strong> The Trouble with Parsing Templates</a></li><li class="chapter-item expanded "><a href="tensions.html"><strong aria-hidden="true">22.</strong> Tensions</a></li><li class="chapter-item expanded "><a href="tree_sitter.html"><strong aria-hidden="true">23.</strong> Tree Sitter</a></li><li class="chapter-item expanded "><a href="types.html"><strong aria-hidden="true">24.</strong> Types</a></li><li class="chapter-item expanded "><a href="core-philosophy.html"><strong aria-hidden="true">25.</strong> Core Philosophy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="what-sus-gives-you.html"><strong aria-hidden="true">25.1.</strong> What SUS gives you</a></li><li class="chapter-item expanded "><a href="planned.html"><strong aria-hidden="true">25.2.</strong> Planned</a></li><li class="chapter-item expanded "><a href="what-sus-does-not-do.html"><strong aria-hidden="true">25.3.</strong> What SUS does not do</a></li><li class="chapter-item expanded "><a href="example-of-some-sus-code-in-the-sus-vscode-language-server.html"><strong aria-hidden="true">25.4.</strong> SUS Code Examples</a></li></ol></li><li class="chapter-item expanded "><a href="main-features-through-examples.html"><strong aria-hidden="true">26.</strong> Main Features through examples</a></li><li class="chapter-item expanded affix "><li class="part-title">Roadmap</li><li class="chapter-item expanded "><a href="major-milestones.html"><strong aria-hidden="true">27.</strong> Major Milestones</a></li><li class="chapter-item expanded "><a href="language-features.html"><strong aria-hidden="true">28.</strong> Language Features</a></li><li class="chapter-item expanded "><a href="performance-linking-and-name-resolution.html"><strong aria-hidden="true">29.</strong> Performance, Linking and Name Resolution</a></li><li class="chapter-item expanded "><a href="safety.html"><strong aria-hidden="true">30.</strong> Safety</a></li><li class="chapter-item expanded "><a href="typing-&-inference.html"><strong aria-hidden="true">31.</strong> Typing &amp; Inference</a></li><li class="chapter-item expanded "><a href="latency-counting.html"><strong aria-hidden="true">32.</strong> Latency Counting</a></li><li class="chapter-item expanded "><a href="lsp.html"><strong aria-hidden="true">33.</strong> LSP</a></li><li class="chapter-item expanded "><a href="code-generation.html"><strong aria-hidden="true">34.</strong> Code Generation</a></li><li class="chapter-item expanded "><a href="fun-projects-to-do-in-sus.html"><strong aria-hidden="true">35.</strong> Fun projects to do in SUS</a></li><li class="chapter-item expanded "><a href="safety-through-interface-asserts-pdl-style-asserts.html"><strong aria-hidden="true">36.</strong> Safety through Interface Asserts (PDL-style asserts)</a></li><li class="chapter-item expanded "><a href="simulation.html"><strong aria-hidden="true">37.</strong> Simulation</a></li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">38.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="long-term-strategy.html"><strong aria-hidden="true">39.</strong> Long Term Strategy</a></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">SUS Documentation</h1>
+
+                    <div class="right-buttons">
+                                                <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="design-decisions"><a class="header" href="#design-decisions">Design Decisions</a></h1>
+<h3 id="why-only-allow-reg-on-assignments-and-not-in-the-middle-of-expressions"><a class="header" href="#why-only-allow-reg-on-assignments-and-not-in-the-middle-of-expressions">Why only allow <code>reg</code> on assignments, and not in the middle of expressions?</a></h3>
+<p>Because Hardware synthesis tools will report timing violations from register to register. 
+Because temporaries generate unreadable register names, having registers on temporaries would make for incomprehensible timing reports. 
+By forcing the programmer to only add registers (both <code>state</code> and <code>reg</code>) that are explicitly named, we ensure that timing reports will
+always have proper names to point to. </p>
+<h3 id="why-c-style-declarations-instead-of-the-more-modern-rustscala-like-type-annotations"><a class="header" href="#why-c-style-declarations-instead-of-the-more-modern-rustscala-like-type-annotations">Why C-style declarations instead of the more modern Rust/Scala-like type annotations?</a></h3>
+<p>In other words: Why <code>int x = 5</code> instead of <code>let x : int = 5</code>?</p>
+<p>There's two reasons for this:</p>
+<ul>
+<li>In hardware design, the types of wires should always be visible. Especially with SUS' &quot;you-get-what-you-see&quot; philosophy, the type of a variable tells you how many wires it is comprised of. This has real impacts on the considerations designers make when designing hardware. </li>
+<li>Hardware types tend to be simple, therefore small, and therefore it's not a huge cost to force the programmer to write them out, always. </li>
+</ul>
+<h3 id="why-bounded-integers-instead-of-bitvectors"><a class="header" href="#why-bounded-integers-instead-of-bitvectors">Why bounded integers instead of bitvectors?</a></h3>
+<h3 id="why-use-tree-sitter-as-the-compiler-frontend"><a class="header" href="#why-use-tree-sitter-as-the-compiler-frontend">Why use tree-sitter as the compiler frontend?</a></h3>
+<p>In fact, several people within the <a href="https://tree-sitter.github.io/tree-sitter/">tree-sitter</a> ecosystem <a href="https://github.com/tree-sitter/tree-sitter/discussions/831">advise against using it  as a parser frontend</a>. The arguments given are that while tree-sitter has the fault tolerance one would desire for a compiler frontend, getting information on how to resolve these errors such as an expected token list is not yet implemented. Another argument given is that using TreeCursor is incredibly cumbersome. </p>
+<p>I had originally written my own tokenizer, bracket matcher, and parser from scratch, and this got me through most of the major syntax I needed for a basic language. 
+However, editing the language syntax became cumbersome, and bugs kept sneaking into the parsing phase. 
+While this allowed me to be very informative in reporting the types of syntax error recovery I explicitly implemented, the slow development cycle, and my certain future inability to implement some of the more tricky parsing situations, such as templates, drove me to seek a prebuilt parsing library. </p>
+<p>I tried the mainstream parsing libraries. <a href="https://github.com/rust-bakery/nom">nom</a>, <a href="https://github.com/pest-parser/pest">PEST</a> and <a href="https://github.com/zesterer/chumsky">chumsky</a>. These were often recommended to people seeking parser libraries for programming languages. But as I explored them, I ran into various issues. nom didn't support error recovery, PEST had weird issues in getting its grammar to accept whitespace, and chumsky's approach of encoding the whole grammar within the type system made for ridiculous compile times and impossible to debug typing errors. </p>
+<p>A big thing all of these issues stem from is all of these libraries' insistence on a typed syntax tree. While this seems like a good idea, it makes it difficult to properly embed error nodes in the syntax tree. tree-sitter's barebones interface to its untyped syntax tree with error nodes is fine in this case, and it gives tree-sitter the benefit of much simplified memory allocation strategy. </p>
+<p>Speaking of performance, tree-sitter's performance is absolutely unmatched. Especially because SUS intends to provide instantaneous feedback to the user, as they write their code, speed is essential. Tree-sitter's incremental updates feature is then icing on the cake. </p>
+<p>Of course, dealing with tree-sitter's stateful <code>TreeCursor</code> object to traverse the syntax tree is difficult, especially in a language like Rust that doesn't like mutable objects. I was able to build a nice abstraction, called <code>Cursor</code> that abstracts away the mutable bookkeeping of TreeCursor, and presents a 'monad-like' interface for decending down syntax tree branches easily. It is defined in <a href="https://github.com/pc2/sus-compiler/blob/6bffb4d0987a01e86354e591cd1e9023878601ba/src/parser.rs#L261-L490">parser.rs</a>. </p>
+<h3 id="how-should-function-like-modules-be-written"><a class="header" href="#how-should-function-like-modules-be-written">How should 'function-like' modules be written?</a></h3>
+<p>So in software design, the idea of a function is straight-forward. It is a block of code, that receives some input, and then produces some output. The moment the function is called, it is brought into existence, does its task, and then once it completes it and returns the output, ceases to exist again. </p>
+<p>In hardware however, modules are persistent. They are continuously receiving inputs, and continuously delivering outputs. Modules may even have multiple interfaces that are in operation simultaneously. This is why in many HDLs modules are instantiated, and then connected to the outside world by explicitly connecting wires to all their ports. Of course many modules people write will be quite 'function-like', and so we want to allow a shorthand notation for this. As an added bonus, 'function-like' modules may be able to be run in compile-time contexts. </p>
+<h3 id="why-co-develop-compiler-and-lsp-in-the-same-project"><a class="header" href="#why-co-develop-compiler-and-lsp-in-the-same-project">Why co-develop Compiler and LSP in the same project?</a></h3>
+<p>A big factor in SUS' design is the incredibly tight design loop for the programmer. The LSP is an integral part of the experience SUS aims to deliver. </p>
+<p>In fact, an important litmus test for new language features is how they affect the LSP for the compiler. For instance function/module overloading is a bad feature, because it reduces the LSPs ability to provide documentation on hover and completions in template contexts. </p>
+<h3 id="how-to-ensure-good-lsp-suggestions-even-in-the-context-of-templates"><a class="header" href="#how-to-ensure-good-lsp-suggestions-even-in-the-context-of-templates">How to ensure good LSP suggestions, even in the context of templates?</a></h3>
+<h3 id="how-to-allow-optional-ports-on-module-determined-by-compile-time-parameters"><a class="header" href="#how-to-allow-optional-ports-on-module-determined-by-compile-time-parameters">How to allow optional ports on module, determined by compile-time parameters?</a></h3>
+<h3 id="how-should-multi-clock-designs-be-represented"><a class="header" href="#how-should-multi-clock-designs-be-represented">How should multi-clock designs be represented?</a></h3>
+<h3 id="multi-dimensional-array-indexing-does-not-use-reference-semantics"><a class="header" href="#multi-dimensional-array-indexing-does-not-use-reference-semantics">Multi-Dimensional array indexing does not use reference semantics.</a></h3>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="control_flow.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="instantiation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="control_flow.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="instantiation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+        
+    </body>
+</html>

@@ -1,0 +1,1437 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SUS Documentation</title>
+                <meta name="robots" content="noindex" />
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="favicon.svg">
+                        <link rel="shortcut icon" href="favicon.png">
+                <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+                <link rel="stylesheet" href="css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="sus-language.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Tutorial</li><li class="chapter-item expanded "><a href="installation.html"><strong aria-hidden="true">1.</strong> Installation</a></li><li class="chapter-item expanded "><a href="typing.html"><strong aria-hidden="true">2.</strong> Typing</a></li><li class="chapter-item expanded "><a href="dataTypes.html"><strong aria-hidden="true">3.</strong> Data Types</a></li><li class="chapter-item expanded "><a href="module.html"><strong aria-hidden="true">4.</strong> Module</a></li><li class="chapter-item expanded "><a href="examples.html"><strong aria-hidden="true">5.</strong> Examples</a></li><li class="chapter-item expanded "><a href="generative_Code.html"><strong aria-hidden="true">6.</strong> Generative Code</a></li><li class="chapter-item expanded "><a href="registers.html"><strong aria-hidden="true">7.</strong> Registers</a></li><li class="chapter-item expanded "><a href="fifo.html"><strong aria-hidden="true">8.</strong> FIFO</a></li><li class="chapter-item expanded "><a href="bitSerialMatrix.html"><strong aria-hidden="true">9.</strong> BitSerialMatrix</a></li><li class="chapter-item expanded "><a href="learningsus.html"><strong aria-hidden="true">10.</strong> Learning SUS</a></li><li class="chapter-item expanded affix "><li class="part-title">philosophy</li><li class="chapter-item expanded "><a href="compiletime_and_runtime.html"><strong aria-hidden="true">11.</strong> Compiletime and Runtime</a></li><li class="chapter-item expanded "><a href="control_flow.html"><strong aria-hidden="true">12.</strong> Control Flow</a></li><li class="chapter-item expanded "><a href="design_decisions.html"><strong aria-hidden="true">13.</strong> Design Decisions</a></li><li class="chapter-item expanded "><a href="instantiation.html"><strong aria-hidden="true">14.</strong> Instantiation</a></li><li class="chapter-item expanded "><a href="interfaces.html"><strong aria-hidden="true">15.</strong> Interfaces</a></li><li class="chapter-item expanded "><a href="latency.html"><strong aria-hidden="true">16.</strong> Latency</a></li><li class="chapter-item expanded "><a href="library.html"><strong aria-hidden="true">17.</strong> Library</a></li><li class="chapter-item expanded "><a href="optimization.html"><strong aria-hidden="true">18.</strong> Optimization</a></li><li class="chapter-item expanded "><a href="state.html"><strong aria-hidden="true">19.</strong> State</a></li><li class="chapter-item expanded "><a href="state_v_latency.html"><strong aria-hidden="true">20.</strong> State vs Latency</a></li><li class="chapter-item expanded "><a href="template_troubles.html"><strong aria-hidden="true">21.</strong> The Trouble with Parsing Templates</a></li><li class="chapter-item expanded "><a href="tensions.html"><strong aria-hidden="true">22.</strong> Tensions</a></li><li class="chapter-item expanded "><a href="tree_sitter.html"><strong aria-hidden="true">23.</strong> Tree Sitter</a></li><li class="chapter-item expanded "><a href="types.html"><strong aria-hidden="true">24.</strong> Types</a></li><li class="chapter-item expanded "><a href="core-philosophy.html"><strong aria-hidden="true">25.</strong> Core Philosophy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="what-sus-gives-you.html"><strong aria-hidden="true">25.1.</strong> What SUS gives you</a></li><li class="chapter-item expanded "><a href="planned.html"><strong aria-hidden="true">25.2.</strong> Planned</a></li><li class="chapter-item expanded "><a href="what-sus-does-not-do.html"><strong aria-hidden="true">25.3.</strong> What SUS does not do</a></li><li class="chapter-item expanded "><a href="example-of-some-sus-code-in-the-sus-vscode-language-server.html"><strong aria-hidden="true">25.4.</strong> SUS Code Examples</a></li></ol></li><li class="chapter-item expanded "><a href="main-features-through-examples.html"><strong aria-hidden="true">26.</strong> Main Features through examples</a></li><li class="chapter-item expanded affix "><li class="part-title">Roadmap</li><li class="chapter-item expanded "><a href="major-milestones.html"><strong aria-hidden="true">27.</strong> Major Milestones</a></li><li class="chapter-item expanded "><a href="language-features.html"><strong aria-hidden="true">28.</strong> Language Features</a></li><li class="chapter-item expanded "><a href="performance-linking-and-name-resolution.html"><strong aria-hidden="true">29.</strong> Performance, Linking and Name Resolution</a></li><li class="chapter-item expanded "><a href="safety.html"><strong aria-hidden="true">30.</strong> Safety</a></li><li class="chapter-item expanded "><a href="typing-&-inference.html"><strong aria-hidden="true">31.</strong> Typing &amp; Inference</a></li><li class="chapter-item expanded "><a href="latency-counting.html"><strong aria-hidden="true">32.</strong> Latency Counting</a></li><li class="chapter-item expanded "><a href="lsp.html"><strong aria-hidden="true">33.</strong> LSP</a></li><li class="chapter-item expanded "><a href="code-generation.html"><strong aria-hidden="true">34.</strong> Code Generation</a></li><li class="chapter-item expanded "><a href="fun-projects-to-do-in-sus.html"><strong aria-hidden="true">35.</strong> Fun projects to do in SUS</a></li><li class="chapter-item expanded "><a href="safety-through-interface-asserts-pdl-style-asserts.html"><strong aria-hidden="true">36.</strong> Safety through Interface Asserts (PDL-style asserts)</a></li><li class="chapter-item expanded "><a href="simulation.html"><strong aria-hidden="true">37.</strong> Simulation</a></li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">38.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="long-term-strategy.html"><strong aria-hidden="true">39.</strong> Long Term Strategy</a></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">SUS Documentation</h1>
+
+                    <div class="right-buttons">
+                                                <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction-to-the-sus-hardware-design-language"><a class="header" href="#introduction-to-the-sus-hardware-design-language">Introduction to the SUS Hardware Design Language</a></h1>
+<p>SUS (Synchronous Ultra-Structured) is a new language for hardware design (RTL) similar to Verilog and VHDL, but it focuses on simplifying the development of high-performance FPGA accelerators. Unlike other hardware description languages, SUS does not attempt to hide complexity; instead, it provides a clearer way to manage it.</p>
+<h1 id="what-is-the-main-purpose-of-sus-"><a class="header" href="#what-is-the-main-purpose-of-sus-">What is the main purpose of SUS ?</a></h1>
+<p>The main purpose of SUS is that, as the programmer, you are in the driver's seat. This means you're responsible for designing the hardware and ensuring every component is built to your specifications. While this places the responsibility on you, it also gives you immense power to ensure the hardware functions and is built exactly as you intend.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<p>Installation is done through <a href="https://www.rust-lang.org/">Rust</a>'s package manager cargo (<a href="https://doc.rust-lang.org/cargo/getting-started/installation.html">cargo installation info</a>). </p>
+<pre><code class="language-bash">cargo install sus_compiler
+</code></pre>
+<p>To use the accompanying VSCode Extension for Syntax Highlighting and Code Suggestions (<a href="https://github.com/pc2/sus-lsp">sus-lsp</a>), install <a href="https://marketplace.visualstudio.com/items?itemName=LennartVanHirtum.sus-lsp">SUS Hardware Design Language</a> through the VSCode Extension Explorer, or use the F1 installation command:</p>
+<pre><code>ext install LennartVanHirtum.sus-lsp
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="typing"><a class="header" href="#typing">Typing</a></h1>
+<h1 id="1-abstract-types"><a class="header" href="#1-abstract-types">1. Abstract Types</a></h1>
+<p><code> int[]</code></p>
+<ul>
+<li>
+<p>Typecheck at Flattening time</p>
+</li>
+<li>
+<p>Only type names and structure</p>
+</li>
+<li>
+<p>LSP Into &amp; suggestions</p>
+</li>
+<li>
+<p>trait bounds</p>
+</li>
+</ul>
+<h1 id="1--concrete-types"><a class="header" href="#1--concrete-types">1.  Concrete Types</a></h1>
+<p><code>int[256]</code></p>
+<ul>
+<li>
+<p>Typecheck at Instantiation time</p>
+</li>
+<li>
+<p>Type names and concrete values</p>
+</li>
+<li>
+<p>Actually defines wires</p>
+</li>
+</ul>
+<p><img src="/images/typings.png" alt="Typing" /></p>
+<p>In Sus, variables never appear within types, which affects how dependent types work. You can see this in the compiler by hovering over a value—this reveals its abstract type.</p>
+<p>For example, in a recursive module like <code> three_add</code>, initially instantiated with size 255, the compiler splits it repeatedly (e.g., <code> 255 → 127 → 63</code>, etc.), showing the concrete types of each instantiation.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="data-types"><a class="header" href="#data-types">Data Types</a></h1>
+<h2 id="1-primitive-types-built-in-types"><a class="header" href="#1-primitive-types-built-in-types">1. Primitive Types (Built-in Types)</a></h2>
+<p>These are the fundamental types in sus:</p>
+<ol>
+<li>
+<p><code>bool</code> → A single-bit value that can be <code>true</code> (1) or <code>false</code> (0).</p>
+</li>
+<li>
+<p><code>int</code> → A variable-sized integer (currently implemented as a 32-bit integer).</p>
+</li>
+<li>
+<p><code>float</code> → A single-precision IEEE 754 32-bit floating-point number.</p>
+</li>
+</ol>
+<h2 id="2constants"><a class="header" href="#2constants">2.Constants</a></h2>
+<p>The language defines several built-in constants:</p>
+<ol>
+<li><code>true</code> → Represents the boolean value 1.</li>
+<li><code>false</code> → Represents the boolean value 0.</li>
+<li><code>sizeof #(T)</code> →  Returns the size of the given type, in bits. </li>
+</ol>
+<p>// <code>sizeof #(T: type bool) = 1</code></p>
+<p>// <code>sizeof #(T: type bool[50]) = 50</code></p>
+<p>// <code>sizeof #(T: type int[10][10]) = 3200</code></p>
+<ol start="4">
+<li><code>clog2 #(int V)</code> → //  Typically used to find the size in bits that the address would need to be to address into a memory of size V. </li>
+</ol>
+<p>// <code> Requires V &gt; 0</code></p>
+<p>// <code>clog2 #(V: 15) = 4</code></p>
+<p>// <code>clog2 #(V: 16) = 4</code></p>
+<p>// <code>clog2 #(V: 17) = 5</code></p>
+<h2 id="3-interfaces--modules"><a class="header" href="#3-interfaces--modules">3. Interfaces &amp; Modules</a></h2>
+<p>The language includes built-in modules and interfaces to help with hardware design:</p>
+<h3 id="--latencyoffset-t-offset"><a class="header" href="#--latencyoffset-t-offset">.  LatencyOffset #(T, OFFSET)</a></h3>
+<p><img src="/images/latencyOffsetCode.png" alt="LatencyOffset" /></p>
+<p>Delays a signal T by OFFSET clock cycles.</p>
+<p>Example: A signal entering this module at cycle 0 will exit at cycle OFFSET.</p>
+<h3 id="-crossdomain-t"><a class="header" href="#-crossdomain-t">. CrossDomain #(T)</a></h3>
+<p><img src="/images/crossDomain.png" alt="CrossDomain" /></p>
+<p>Handles clock domain crossing by defining  <code>in_clk</code> and <code>out_clk</code>.</p>
+<p>Example: Used when transferring data between different clock frequencies.</p>
+<h3 id="--inttobits-bitstoint"><a class="header" href="#--inttobits-bitstoint">.  <code>IntToBits</code>/ <code>BitsToInt </code></a></h3>
+<p><img src="/images/intToBits.png" alt="IntToBits" /></p>
+<p><img src="/images/bitsToInt.png" alt="BitsToInt" /></p>
+<p>Converts <code>int</code> to<code>(bool[32])</code> and vice versa.</p>
+<h2 id="4-arrays--multi-dimensional-types"><a class="header" href="#4-arrays--multi-dimensional-types">4. Arrays &amp; Multi-dimensional Types</a></h2>
+<p>This language supports arrays, similar to traditional programming languages:</p>
+<p>. <code>bool[32]</code> → A bit vector of size <code>32</code>.</p>
+<p>.<code>int[10][10]</code>  → A <code>10×10 </code>array of integers (each <code>int</code>int is <code>32</code> bits).</p>
+<p>Total size: 10 * 10 * 32 = 3200 bits.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="1-dual-port-memory"><a class="header" href="#1-dual-port-memory">1. Dual-Port Memory</a></h1>
+<p>The DualPortMem module provides a simple memory with separate read and write clock domains.</p>
+<p>Example: A memory block with separate read and write ports, each in its own domain. Every wire belongs to a domain or remains anonymous. Signals can only cross domains via explicit crossing primitives.</p>
+<p><img src="/images/DualPortMemCode.png" alt="Dual-Port Memory" /></p>
+<h1 id="2-fifo"><a class="header" href="#2-fifo">2. FIFO</a></h1>
+<p>FIFO Memory with Multiple Domains</p>
+<p>In this FIFO design, the latency counting idea doesn’t fully apply because the ready signal on the push side doesn’t directly correlate with the request signal on the pop side. The FIFO operates with two domains: a push domain and a pop domain, each with related signals. It allows three cycles of pipelining slack for the input side and takes two cycles to produce data when requested.</p>
+<p>To handle domain crossing, explicit constructs are used to ensure correct data transfer between the domains. The FIFO includes registers for read and write addresses across the latency boundary. Additionally, extra latency registers, like for the subtraction and comparison operations, help manage performance.</p>
+<p><img src="/images/FIFOModule.png" alt="FIFO module" /></p>
+<h1 id="3-joindomains"><a class="header" href="#3-joindomains">3. JoinDomains</a></h1>
+<p>Synchronizes two signals across different clock domains with an adjustable offset.</p>
+<p><img src="JoinDomains.png" alt="JoinDomains" /></p>
+<h1 id="4-iteration-in-sus"><a class="header" href="#4-iteration-in-sus">4. Iteration in SUS</a></h1>
+<p>The iterator module provides a simple counting loop. It is a state machine for sequential iteration, flexible for various counting ranges. </p>
+<p><img src="/images/iterator.png" alt="Iterator module" /></p>
+<h2 id="5-fixedsizeiterator"><a class="header" href="#5-fixedsizeiterator">5. FixedSizeIterator</a></h2>
+<p><img src="/images/FixedFixedSizeIterator.png" alt="FixedSizeIterator" /></p>
+<p>FixedSizeIterator module is a simple hardware iterator that counts from 0 to UP_TO - 1, based on a start signal. </p>
+<h1 id="6-slowclockgenerator"><a class="header" href="#6-slowclockgenerator">6. SlowClockGenerator</a></h1>
+<p>SlowClockGenerator: Generates a slower clock by counting up to a given period.</p>
+<p><img src="/images/SlowClockGenerator.png" alt="SlowClockGenerator" /></p>
+<h1 id="7-splitat"><a class="header" href="#7-splitat">7. SplitAt</a></h1>
+<p>SplitAt: Splits an array into two parts at a specified index.</p>
+<p><img src="/images/SplitAt.png" alt="SplitAt" /></p>
+<h1 id="8-abs"><a class="header" href="#8-abs">8. Abs</a></h1>
+<p>Computes the absolute value of an integer.</p>
+<p><img src="absCode.png" alt="absoluteCode" /></p>
+<h1 id="9-slice"><a class="header" href="#9-slice">9. Slice</a></h1>
+<p>Extracts a sub-array (slice) from a given array.</p>
+<p><img src="/images/slice.png" alt="Slice" /></p>
+<h1 id="10-bitselect"><a class="header" href="#10-bitselect">10. BitSelect</a></h1>
+<p>Outputs a one-hot encoded signal based on a selected index.</p>
+<p><img src="/images/bitSelect.png" alt="BitSelect" /></p>
+<h1 id="11-popcount"><a class="header" href="#11-popcount">11. PopCount</a></h1>
+<p><img src="PopCount.png" alt="popCountCode" /></p>
+<p>Counts the number of 1s in a binary array using a recursive approach.</p>
+<h1 id="12-treeadd"><a class="header" href="#12-treeadd">12. TreeAdd</a></h1>
+<p><img src="TreeAdd.png" alt="treeAddCode" /></p>
+<p>Recursively sums an array of integers using a tree-based approach for efficient computation.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sus-through-examples"><a class="header" href="#sus-through-examples">SUS through Examples</a></h1>
+<p>The SUS language enables a direct translation to a netlist, which is crucial for hardware synthesis. To illustrate this, consider simple examples.</p>
+<h1 id="xor-gate"><a class="header" href="#xor-gate">XOR gate</a></h1>
+<p><img src="/images/xorCode.png" alt="XOR gate" /></p>
+<p>In the SUS language, this module would have two inputs, X1 and X2, and an output Y. In the middle, we may have several intermediary operators and variables that perform necessary computations, ultimately assigning the result to the output Y.</p>
+<p>Below the module definition, you'll see how such a module can be instantiated. The instantiation follows a function-call-like syntax, which, when synthesized, translates into corresponding hardware gates in the netlist.&quot;</p>
+<h1 id="conditions"><a class="header" href="#conditions">Conditions</a></h1>
+<p><img src="/images/abs.png" alt="conditionsCode" /></p>
+<p>In hardware design, it's important to understand that all hardware is always running on a chip; you can't just conditionally enable or disable hardware. The only thing that changes with conditions is whether certain assignments are made. For example, in the given scenario, inputs are checked to see if they are less than zero. If they are, a negation block is used, otherwise, the value is used as-is. However, any additional hardware in the middle will still execute regardless of the conditions, as it's always running at runtime. These are essentially runtime if statements.</p>
+<h1 id="multiple-interfaces"><a class="header" href="#multiple-interfaces">Multiple Interfaces</a></h1>
+<p><img src="/images/multipleInterfaces.drawio.png" alt="Multiple Interfaces" /></p>
+<p><img src="/images/Iterator.png" alt="Multiple Interfaces" /></p>
+<p>A module is presented here that implements a for-loop as a runtime iterator. This module has two interfaces: a 'start' interface, which initiates the iterator. A value is provided to define the range for iteration. Once the iteration begins, the module also features a 'trigger' interface, which acts like a callback within the hardware. This interface informs the hardware of the current values being iterated through. The implementation below demonstrates the module, including a condition and other necessary components</p>
+<h2 id="how-to-use-multiple-interfaces"><a class="header" href="#how-to-use-multiple-interfaces">How to use Multiple Interfaces?</a></h2>
+<p><img src="/images/useMultipleInterfaces.png" alt="use Multiple Interfaces" /></p>
+<p>To use it, you would wrap it in an array of values, set up output values, and instantiate an iterator. You can then start iterating from a specific point and use a callback function. </p>
+<h2 id="fizz-buzz-lookup-table-using-generative-code"><a class="header" href="#fizz-buzz-lookup-table-using-generative-code">FIZZ-BUZZ Lookup Table using Generative Code</a></h2>
+<p><img src="/images/FIZZ-BUZZ.png" alt="FIZZ-BUZZ Lookup Table" /></p>
+<p>In the end, the generative code is executed and all that results is a lookup table.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="generative-code"><a class="header" href="#generative-code">Generative Code</a></h1>
+<p>In sus, metaprogramming simplifies hardware design by generating repetitive structures efficiently. </p>
+<p><img src="/images/generativeCode.png" alt="Generative Code" /></p>
+<p>For loops don’t create runtime pipelines but directly instantiate hardware, like 600 multipliers and adders.</p>
+<p>Sus works on two levels:</p>
+<p>Metaprogramming generates hardware structures.
+Runtime statements define circuit behavior.
+Within modules, you can use loops, variables, and conditionals. For cross-module generation, templates are used.</p>
+<h1 id="templates"><a class="header" href="#templates">Templates</a></h1>
+<p>Sus supports templates to handle array slicing and other reusable structures.</p>
+<p><img src="/images/templates.png" alt="Templates" /></p>
+<p>At the top, we define type parameters, allowing the template to accept any array of any type (T), such as int, bool, or custom types. Below, we have value parameters, which are part of the module body. These can have default values or be conditionally included based on logic.</p>
+<p>To instantiate a template, Sus uses a syntax similar to Rust with ::
+First, provide value parameters.
+Then, specify type parameters at the end.</p>
+<p>Templates also enable recursive modules, which are essential for trees hardware structures.</p>
+<h1 id="recursive-modules"><a class="header" href="#recursive-modules">Recursive Modules</a></h1>
+<p><img src="/images/recursiveModules.png" alt="Recursive Modules" /></p>
+<p>We have a module tree that takes in a set of numbers and compresses them down to a single sum.</p>
+<p>There are two base cases: one where there are zero elements and one where there is a single element. We handle these explicitly.</p>
+<p>For the recursive cases, we split the array into two chunks, process each chunk individually (summing their elements), and then combine the results.</p>
+<p>Additionally, we can introduce a pipelining stage if needed. The compiler can automatically insert these stages without issues. While adding pipelining stages won’t break the code itself, they might cause build failures, in which case you’ll need to fix the errors flagged by the S compiler.</p>
+<p>One key advantage of this approach is that it makes it extremely easy to add pipelining stages wherever necessary.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="registers"><a class="header" href="#registers">Registers</a></h1>
+<p>In Sus, there are only two types of registers:</p>
+<p>State Registers – Essential for core functionality, such as accumulators.
+Latency Registers – Added only to meet timing constraints by shortening critical paths.
+Sus treats them separately for code clarity and because latency registers are handled differently.</p>
+<h2 id="state-registers"><a class="header" href="#state-registers">State Registers</a></h2>
+<p><img src="images/state.png" alt="State" /></p>
+<p>Example Sus code with State Registers:</p>
+<p><img src="images/stateRegisterExample.png" alt="stateRegisterExample" /></p>
+<p>This module computes the Fibonacci sequence using state registers. It stores the current and previous values, computes the next value, and shifts them forward. These registers are essential for the design's correct operation.</p>
+<h2 id="latency-registers"><a class="header" href="#latency-registers">Latency Registers</a></h2>
+<p><img src="/images/latency.png" alt="Latency" /></p>
+<p>Example Sus code with Latency Registers:</p>
+<p><img src="/images/latencyRegisterExample.png" alt="latencyRegisterExample" /></p>
+<p>In a module that raises a value to the 17th power, multiple multipliers are chained together. If the critical path between input and output is too long, latency registers can be added using the reg keyword to improve timing.</p>
+<p>The compiler automatically detects parallel branches and inserts extra latency registers to keep all computations synchronized. This is managed through latency counting, where each wire stores an offset value. If one signal has a latency of 0 and another latency of 2, the compiler inserts two latency registers to align them.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fifo"><a class="header" href="#fifo">FIFO</a></h1>
+<h1 id="multiple-domain"><a class="header" href="#multiple-domain">Multiple Domain</a></h1>
+<p><img src="/images/fifoExampleHighLevel.png" alt="fifoExampleHighLevel" /></p>
+<p>In a FIFO with multiple clock domains, latency counting doesn’t fully apply because there’s no direct one-to-one mapping between push and pop signals. The FIFO operates with separate push and pop domains, each with internally related signals. Here, the push side allows three cycles of pipelining slack, while the FIFO itself takes two cycles to produce data when requested. This separation means that tracking data as it moves through the pipeline requires a different approach than simple latency counting.</p>
+<h1 id="latency-cuts"><a class="header" href="#latency-cuts">Latency cuts</a></h1>
+<p><img src="/images/fifoImpl.png" alt="fifoImpl.png" /></p>
+<p>In this FIFO, a domain boundary separates the push and pop sides, requiring explicit domain-crossing constructs to ensure correct latency handling. The FIFO uses a large memory block for storage, with write and read address registers on opposite sides of the boundary. Additional latency registers may be introduced, such as for expensive operations like subtraction and comparison. A latency offset mechanism allows treating signals as if they have an adjusted latency, enabling long-latency feedback loops that would otherwise be impossible.</p>
+<p><img src="/images/structureFIFO.png" alt="structureFIFO.png" /></p>
+<p>In the dedin project, domain boundaries frequently occur around FIFOs, making them natural points for handling latency and synchronization. The design follows a hierarchical structure: a small internal loop in the dant kernel, repeated 30 times, with data distributed across these instances, and this entire structure replicated 10 times. While FIFOs are the typical boundary elements, a dual-port memory is used instead of a FIFO in the innermost block, showing that other memory structures can also serve this purpose.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="bitserialmatrix"><a class="header" href="#bitserialmatrix">BitSerialMatrix</a></h1>
+<p>The bit-serial matrix multiplication is an example where SUS truly shines.</p>
+<p>The bit-serial matrix multiplication essentially takes a compile-time matrix, ideally a sparse one, and processes the input data bit by bit for each input vector element. This approach ensures that the multiplications within the matrix involve only multiplications by one or zero, which is far cheaper to implement than full-size multipliers.</p>
+<h2 id="datapath"><a class="header" href="#datapath">Datapath</a></h2>
+<p><img src="Datapath.png" alt="Datapath" /></p>
+<p>When designing a new SUS architecture, it's important to start by drawing out how you want the data flow to look. In this case, I've outlined the bit-serial multiplication process. At the top, we have bit shifters that store the input vector and sequentially output bits over 32 cycles, starting from the most significant bit. These bits are then fed into the matrix rows, where multiplications by one or zero take place. The summed results are accumulated and shifted left every cycle, producing the final result after 32 cycles.</p>
+<h2 id="bit-serial-row"><a class="header" href="#bit-serial-row">Bit Serial Row</a></h2>
+<p>n one of these bit-serial rows, we've passed a vector of specific values. Some of these values are zero, and we want to filter them out first. This way, we only sum the values that were not multiplied by zero. Essentially, our goal is to implement this filtering step so that, in the end, we only add the relevant three values together. Here's how it should work.</p>
+<p><img src="BitSerialRow.png" alt="Bit SerialRow" /></p>
+<h1 id="bit-serialrow-code"><a class="header" href="#bit-serialrow-code">Bit SerialRow Code</a></h1>
+<p><img src="BitSerialRowCode.png" alt="Bit SerialRow" /></p>
+<p>At the top, a Ro block defines the size and weight list as template parameters. The interface is purely combinatorial. The first step is counting all nonzero elements, which is necessary for now since SUS doesn’t support resizable vectors. Once that feature is available, this step will no longer be needed.</p>
+<p>A special case occurs when all values are zero, in which case the output is simply zero. Otherwise, the nonzero elements are filtered, keeping only those where the corresponding bit is set to one. This process happens at compile time.</p>
+<p>Once the relevant values are gathered, they are passed to a three-add module, which sums them up to produce the final output.</p>
+<p>A quick note on the three-add module: it is pipelined, with a pipeline depth that adjusts dynamically based on the number of values. The compiler efficiently handles this variation—some instances may take two cycles, others four cycles, but everything runs smoothly.</p>
+<h1 id="bitserialmatrixmultiplystate"><a class="header" href="#bitserialmatrixmultiplystate">BitSerialMatrixMultiplyState</a></h1>
+<p><img src="BitSerialMatrixMultiplyState.png" alt="BitSerialMatrixMultiplyState" /></p>
+<p>Now, we have the accumulators for the bit-serial matrix multiplication.</p>
+<p>Once again, we define the width, height, and weight matrix as parameters. The design includes some state, specifically the cumulative sum. All row submodules—which are the individual matrix multipliers—are instantiated within this structure.</p>
+<p>There are two interfaces:</p>
+<p>Start interface – Initializes the entire system when called.
+Feed interface – Adds the current bit and shifts the result left.
+This is how it would be written in SUS.</p>
+<h1 id="bitshifter"><a class="header" href="#bitshifter">BitShifter</a></h1>
+<p>Next, we have the bit shifter.</p>
+<p><img src="BitShifter.png" alt="BitShifter" /></p>
+<p>Once again, we define parameters such as width and input bit width (set to 32, as this is the size of our inputs). The design includes a start input and a shift input, along with a state shift register that holds the values being shifted.</p>
+<p>During initialization, all integer values are converted into bit vectors and stored in the shifter. With each shift operation, the values are shifted left, and the most significant bit is pushed out.</p>
+<p>Proper state management is crucial here. The start signal takes priority over shift when assigning initial values. However, for the actual output, there is no priority on start, since the state remains valid during the final cycle before being overwritten.</p>
+<h1 id="bitserialmatrixmultiply"><a class="header" href="#bitserialmatrixmultiply">BitSerialMatrixMultiply</a></h1>
+<p><img src="BitSerialMatrixMultiply.png" alt="BitSerialMatrixMultiply" /></p>
+<p>At the top level, we have the bit-serial matrix multiplication module. It takes in all necessary parameters and features a simple combinatorial interface.</p>
+<p>The interface includes:</p>
+<p>A start signal
+Input values
+Output values
+All submodules are instantiated within this module. When start is triggered, they are initialized. During each iteration, as generated by the iterator, the shift and feed methods are called on the submodules.</p>
+<p>A latency offset is introduced here, which is more of a conceptual decision. The goal is to ensure that the latency count correctly reflects the relationship between input and output values. Specifically, a start signal and its corresponding input values should map to a well-defined result value.</p>
+<p>Since the module takes 33 cycles to complete computation, a latency offset of 33 is applied to synchronize the results with the input values.</p>
+<h2 id="bit-serial-matrix-multiply-specific"><a class="header" href="#bit-serial-matrix-multiply-specific">Bit Serial Matrix Multiply Specific</a></h2>
+<p><img src="BitSerialMatrixMultiplySpecific.png" alt="BitSerialMatrixMultiplySpecific" />
+To test the design, a random sparse matrix is generated, and the module is instantiated.</p>
+<p>An additional wire, finish, has been introduced as a helper signal. This was useful for analyzing the wave plots, making it easier to determine when to focus on specific values and when the result becomes valid.</p>
+<p>The reason finish stays in sync with the result is that both signals have been explicitly annotated with an absolute latency count. This allows the compiler to automatically insert compensating registers, ensuring that finish is correctly aligned with the result in time.</p>
+<p>This demonstrates the power of latency counting—for the most part, it eliminates the need to manually track timing relationships. Only in specific edge cases does manual adjustment become necessary, and even then, the required modifications are minimal.</p>
+<h1 id="testbench"><a class="header" href="#testbench">Testbench</a></h1>
+<p>Since this is an RTL design, the testbench is written in SystemVerilog.</p>
+<p><img src="BitSerialMatrixMultiply_tb.png" alt="BitSerialMatrixMultiply_tb" /></p>
+<p>On the left, the wire declarations and submodule instantiation are defined.
+On the right, the test logic is implemented.
+The testbench operates as follows:</p>
+<p>A 100 MHz clock is generated.
+Initial values are assigned:
+After 20 ns, start is set to zero to verify that the module correctly handles invalid inputs.
+A few nanoseconds later, the matrix is set up, and a start pulse is given to initiate computation.
+After a set duration, the simulation is completed.</p>
+<h1 id="simulation"><a class="header" href="#simulation">Simulation</a></h1>
+<p>This is what the wave plot looks like:</p>
+<p><img src="wavePlot.png" alt="Simulation" /></p>
+<p>At the top, signals such as the clock, start signal, input values, and results are displayed.
+The finish signal, which aligns with a specific point in the result, is also shown.
+In the middle section, the bit shifters stream bits through the system, with the iterator indicating the current bit position.
+Further down, the staggered result sums are visible.
+The staggering occurs because the three-adders (3ERs) have varying latencies—some complete in one cycle, while others take three cycles. As a result, the summed values appear at different time points.</p>
+<h1 id="synthesis"><a class="header" href="#synthesis">Synthesis</a></h1>
+<p>Simulation and synthesis are both key in hardware design. A small FPGA from Xilinx’s free catalog was used for synthesis with Vivado. Afterward, logic blocks were color-coded for clarity:</p>
+<p>Yellow for the 32-cycle iterator
+Purple for the accumulator state
+Blue for row adders
+Green for the shift module
+The sparsity of the row adders in the matrix multiplication design is likely due to Vivado grouping adder logic with the state module, rather than its original module.</p>
+<p><img src="synthesis.png" alt="Synthesis" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="learning-sus"><a class="header" href="#learning-sus">Learning SUS</a></h1>
+<p>Start with <a href="https://www.youtube.com/watch?v=jJvtZvcimyM">this introductory talk</a> for an overview of SUS features.</p>
+<p>For an example project to tinker with, see <a href="https://github.com/VonTum/BitSerialMatrixMultiply">VonTum/BitSerialMatrixMultiply</a>. </p>
+<h2 id="changelog"><a class="header" href="#changelog">Changelog</a></h2>
+<p>Check the changelog for updates:</p>
+<ul>
+<li>Template syntax updated to <code>#(NameA: 3, TypeB: type int[3], ValueC: true)</code>.</li>
+<li>Standard Library included with SUS.</li>
+<li>Concrete typing using Hindley-Milner.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="separating-compiletime-and-runtime"><a class="header" href="#separating-compiletime-and-runtime">Separating Compiletime and Runtime</a></h1>
+<p>Requirements: </p>
+<ul>
+<li>Code that describes plain hardware should be minimal to write. One shouldn't have to 'break out' of the generative environment to write plain hardware code. </li>
+<li>It should be easy to write generative code mixed with plain hardware. </li>
+</ul>
+<h2 id="differences"><a class="header" href="#differences">Differences</a></h2>
+<h3 id="compile-time"><a class="header" href="#compile-time">Compile Time</a></h3>
+<p>Arrays need not be bounded. Integers need not be bounded. </p>
+<h3 id="runtime"><a class="header" href="#runtime">Runtime</a></h3>
+<p>Arrays that have dynamic indices must have a fixed size. 
+Integers must be bounded. </p>
+<h2 id="multiplexer-inference"><a class="header" href="#multiplexer-inference">Multiplexer inference</a></h2>
+<p>There is quite a significant difference between an array access with a constant, and one which should infer a multiplexer, but in both cases the syntax in other languages is exactly the same: <code>my_arr[idx]</code></p>
+<p>The constant index should infer to just a wire connection which costs nothing. In this case the different wires that are part of an array don't have any relation to each other in hardware. This allows us to bestow other properties as well. For example constant indices don't conflict with each other if they don't point to the same element. Runtime indices do. Array wires with constant indices don't enforce any latency requirements upon each other. 'dynamically sized' arrays can only be indexed with compile time indices. Etc. </p>
+<p>With a runtime index (based on an integer wire in the design) should infer to a multiplexer. And then of course the array wires do have a relation. </p>
+<p>An initial thought to distinguish the two was to just check for constant-ness of the array argument, which can be done at flattening time. But that wouldn't make the distinction clear enough. </p>
+<p>Proposal: Require <code>mux</code> keyword for any runtime array index which should infer to a multiplexer. </p>
+<p>Examples: </p>
+<ul>
+<li><code>a[5] = 1</code> constant index write</li>
+<li><code>a[mux b] = 1</code> multiplexed write</li>
+<li><code>x = a[5]</code> constant index read</li>
+<li><code>x = a[mux b]</code> multiplexed index write</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="control-flow"><a class="header" href="#control-flow">Control Flow</a></h1>
+<p>While hardware doesn't actually have control flow, it is often useful to have <em>generative</em> control flow for repeating hardware structures. </p>
+<h2 id="if"><a class="header" href="#if"><code>if</code></a></h2>
+<p>The humble if statement is the most basic form of control flow. It comes in two flavors: generation time, and runtime. </p>
+<h3 id="generation-time-if"><a class="header" href="#generation-time-if">Generation time if</a></h3>
+<p>If its condition is met, then the code in its block is executed. It can optionally have an <code>else</code> block, which then also allows chaining <code>else if</code> statements. </p>
+<h4 id="example"><a class="header" href="#example">Example</a></h4>
+<pre><code class="language-verilog">gen int a
+gen bool b
+if a == 5 {
+    // Do the first thing
+} else if b {
+    // otherwise do something here
+} else {
+    // etc
+}
+</code></pre>
+<h3 id="runtime-if"><a class="header" href="#runtime-if">Runtime if</a></h3>
+<p>In practice, the biggest difference between these variants is that the code within both branches of the runtime if is executed regardless of the condition. Only assignments are performed conditionally. This means any assignments within the block will have a combinatorial dependency on the condition wire. To avoid confusion, it is not allowed to assign to generative variables within a runtime if. </p>
+<h4 id="example-1"><a class="header" href="#example-1">Example</a></h4>
+<pre><code class="language-verilog">module m {
+    interface m : int a, bool b -&gt; int c 
+    if a == 5 {
+        c = 4
+    } else if b {
+        c = 2
+    } else {
+        c = 1
+    }
+}
+</code></pre>
+<h3 id="conditional-bindings"><a class="header" href="#conditional-bindings">Conditional bindings</a></h3>
+<p>In hardware design, pretty much all data signals will be coupled with <code>valid</code> signals. Having dedicated syntactic sugar for this is thus valuable to lift some mental load for the hardware designer. </p>
+<p>As an example, take the <code>pop</code> interface of a FIFO. </p>
+<pre><code class="language-verilog">interface pop : bool do_pop -&gt; bool pop_valid, T data
+</code></pre>
+<p>This is both an action (setting the <code>do_pop</code> signal), but also may fail (<code>pop_valid</code>). Both control signals can be hidden with this syntactic sugar. Furthermore, the output data of the FIFO is only available when the pop was successful. This adds nice implicit semantics that for example the formal verifier could then check. </p>
+<pre><code class="language-verilog">FIFO myFifo
+if myFifo.pop() : T data {
+    ...
+}
+</code></pre>
+<p>Which is equivalent to this:</p>
+<pre><code class="language-verilog">FIFO myFifo
+myFifo.do_pop = true
+if myFifo.pop_valid {
+    T data = myFifo.data_out
+    ...
+}
+</code></pre>
+<p>This syntax can also be used to approximate imperative control flow. We would want something in hardware <em>like</em> the lambda functions in software, but what semantics should they have? As a first approximation, we can have the submodule 'trigger' some of our hardware using this validity logic. In this example we use a submodule that generates an index stream of valid matrix indices, and calls our code with that:</p>
+<pre><code class="language-verilog">MatrixIterator mit
+
+state bool start
+initial start = true
+
+if start {
+    mit.start(40, 40)
+    start = false
+}
+
+if mit.next() : int x, int y {
+    ...
+}
+</code></pre>
+<p>Finally, this might be a good syntax alternative for implementing Sum Types. Sum types map weirdly to hardware, as their mere existence may or may not introduce wire dependencies on the variants, depending on how the wires were reused. Instead, we could use these conditional bindings to make a bootleg match:</p>
+<pre><code class="language-verilog">if my_instruction.is_jump() : int target_addr {
+    ...
+}
+if my_instruction.is_add() : int reg_a, int reg_b, int reg_target {
+    ...
+}
+</code></pre>
+<h2 id="for"><a class="header" href="#for"><code>for</code></a></h2>
+<p>The <code>for</code> statement only comes in its generative form. It's used to generate repetitive hardware. </p>
+<h4 id="example-2"><a class="header" href="#example-2">Example</a></h4>
+<pre><code class="language-verilog">module add_stuff_to_indices {
+    interface add_stuff_to_indices : int[10] values -&gt; int[10] added_values 
+	int[5] arr
+	for int i in 0..10 {
+		int t = values[i]
+		added_values[i] = t + i
+
+		int tt = arr[i] + values[0]
+	}
+}
+</code></pre>
+<h2 id="while"><a class="header" href="#while"><code>while</code></a></h2>
+<p>Similar to the <code>for</code> loop. Also generation only. <strong>Not yet implemented.</strong></p>
+<h2 id="chain-and-first"><a class="header" href="#chain-and-first"><code>chain</code> and <code>first</code></a></h2>
+<p>the <code>chain</code> construct is one of SUS' unique features. <strong>Not yet implemented.</strong></p>
+<p>Often it is needed to have some kind of priority encoding in hardware. It only fires the first time it is valid. </p>
+<p>As a bit of syntactic sugar, the <code>first</code> statement uses a chain to check if it's the first time the condition was valid. </p>
+<p>It comes in two variants: standalone <code>first</code> and <code>if first</code>. </p>
+<h4 id="examples"><a class="header" href="#examples">Examples</a></h4>
+<pre><code class="language-verilog">module first_enabled_bit {
+    interface first_enabled_bit : bool[10] values -&gt; bool[10] is_first_bit 
+    chain bool found = false
+	for int i in 0..10 {
+        if values[i] {
+            first in found {
+                // First i for which values[i]==true
+                is_first_bit[i] = true
+            } else {
+                // values[i]==true but not the first
+                is_first_bit[i] = false
+            }
+        } else {
+            // values[i]!=true
+            is_first_bit[i] = false
+        }
+	}
+}
+</code></pre>
+<p>With <code>if first</code> we can merge both <code>else</code> blocks. </p>
+<pre><code class="language-verilog">module first_enabled_bit {
+    interface first_enabled_bit : bool[10] values -&gt; bool[10] is_first_bit 
+    chain bool found = false
+	for int i in 0..10 {
+        if first values[i] in found {
+            // First i for which values[i]==true
+            is_first_bit[i] = true
+        } else {
+            // values[i]!=true or not first values[i]==true
+            is_first_bit[i] = false
+        }
+	}
+}
+</code></pre>
+<p>Often with uses of <code>first</code> one also wants to have a case where the condition never was valid. </p>
+<pre><code class="language-verilog">module first_enabled_bit_index {
+    interface first_enabled_bit_index : bool[10] values -&gt; int first_bit, bool all_zero 
+    chain bool found = false
+	for int i in 0..10 {
+		if first values[i] in found {
+            first_bit = i
+            all_zero = false
+        }
+	}
+    if !found {
+        all_zero = true
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="design-decisions"><a class="header" href="#design-decisions">Design Decisions</a></h1>
+<h3 id="why-only-allow-reg-on-assignments-and-not-in-the-middle-of-expressions"><a class="header" href="#why-only-allow-reg-on-assignments-and-not-in-the-middle-of-expressions">Why only allow <code>reg</code> on assignments, and not in the middle of expressions?</a></h3>
+<p>Because Hardware synthesis tools will report timing violations from register to register. 
+Because temporaries generate unreadable register names, having registers on temporaries would make for incomprehensible timing reports. 
+By forcing the programmer to only add registers (both <code>state</code> and <code>reg</code>) that are explicitly named, we ensure that timing reports will
+always have proper names to point to. </p>
+<h3 id="why-c-style-declarations-instead-of-the-more-modern-rustscala-like-type-annotations"><a class="header" href="#why-c-style-declarations-instead-of-the-more-modern-rustscala-like-type-annotations">Why C-style declarations instead of the more modern Rust/Scala-like type annotations?</a></h3>
+<p>In other words: Why <code>int x = 5</code> instead of <code>let x : int = 5</code>?</p>
+<p>There's two reasons for this:</p>
+<ul>
+<li>In hardware design, the types of wires should always be visible. Especially with SUS' &quot;you-get-what-you-see&quot; philosophy, the type of a variable tells you how many wires it is comprised of. This has real impacts on the considerations designers make when designing hardware. </li>
+<li>Hardware types tend to be simple, therefore small, and therefore it's not a huge cost to force the programmer to write them out, always. </li>
+</ul>
+<h3 id="why-bounded-integers-instead-of-bitvectors"><a class="header" href="#why-bounded-integers-instead-of-bitvectors">Why bounded integers instead of bitvectors?</a></h3>
+<h3 id="why-use-tree-sitter-as-the-compiler-frontend"><a class="header" href="#why-use-tree-sitter-as-the-compiler-frontend">Why use tree-sitter as the compiler frontend?</a></h3>
+<p>In fact, several people within the <a href="https://tree-sitter.github.io/tree-sitter/">tree-sitter</a> ecosystem <a href="https://github.com/tree-sitter/tree-sitter/discussions/831">advise against using it  as a parser frontend</a>. The arguments given are that while tree-sitter has the fault tolerance one would desire for a compiler frontend, getting information on how to resolve these errors such as an expected token list is not yet implemented. Another argument given is that using TreeCursor is incredibly cumbersome. </p>
+<p>I had originally written my own tokenizer, bracket matcher, and parser from scratch, and this got me through most of the major syntax I needed for a basic language. 
+However, editing the language syntax became cumbersome, and bugs kept sneaking into the parsing phase. 
+While this allowed me to be very informative in reporting the types of syntax error recovery I explicitly implemented, the slow development cycle, and my certain future inability to implement some of the more tricky parsing situations, such as templates, drove me to seek a prebuilt parsing library. </p>
+<p>I tried the mainstream parsing libraries. <a href="https://github.com/rust-bakery/nom">nom</a>, <a href="https://github.com/pest-parser/pest">PEST</a> and <a href="https://github.com/zesterer/chumsky">chumsky</a>. These were often recommended to people seeking parser libraries for programming languages. But as I explored them, I ran into various issues. nom didn't support error recovery, PEST had weird issues in getting its grammar to accept whitespace, and chumsky's approach of encoding the whole grammar within the type system made for ridiculous compile times and impossible to debug typing errors. </p>
+<p>A big thing all of these issues stem from is all of these libraries' insistence on a typed syntax tree. While this seems like a good idea, it makes it difficult to properly embed error nodes in the syntax tree. tree-sitter's barebones interface to its untyped syntax tree with error nodes is fine in this case, and it gives tree-sitter the benefit of much simplified memory allocation strategy. </p>
+<p>Speaking of performance, tree-sitter's performance is absolutely unmatched. Especially because SUS intends to provide instantaneous feedback to the user, as they write their code, speed is essential. Tree-sitter's incremental updates feature is then icing on the cake. </p>
+<p>Of course, dealing with tree-sitter's stateful <code>TreeCursor</code> object to traverse the syntax tree is difficult, especially in a language like Rust that doesn't like mutable objects. I was able to build a nice abstraction, called <code>Cursor</code> that abstracts away the mutable bookkeeping of TreeCursor, and presents a 'monad-like' interface for decending down syntax tree branches easily. It is defined in <a href="https://github.com/pc2/sus-compiler/blob/6bffb4d0987a01e86354e591cd1e9023878601ba/src/parser.rs#L261-L490">parser.rs</a>. </p>
+<h3 id="how-should-function-like-modules-be-written"><a class="header" href="#how-should-function-like-modules-be-written">How should 'function-like' modules be written?</a></h3>
+<p>So in software design, the idea of a function is straight-forward. It is a block of code, that receives some input, and then produces some output. The moment the function is called, it is brought into existence, does its task, and then once it completes it and returns the output, ceases to exist again. </p>
+<p>In hardware however, modules are persistent. They are continuously receiving inputs, and continuously delivering outputs. Modules may even have multiple interfaces that are in operation simultaneously. This is why in many HDLs modules are instantiated, and then connected to the outside world by explicitly connecting wires to all their ports. Of course many modules people write will be quite 'function-like', and so we want to allow a shorthand notation for this. As an added bonus, 'function-like' modules may be able to be run in compile-time contexts. </p>
+<h3 id="why-co-develop-compiler-and-lsp-in-the-same-project"><a class="header" href="#why-co-develop-compiler-and-lsp-in-the-same-project">Why co-develop Compiler and LSP in the same project?</a></h3>
+<p>A big factor in SUS' design is the incredibly tight design loop for the programmer. The LSP is an integral part of the experience SUS aims to deliver. </p>
+<p>In fact, an important litmus test for new language features is how they affect the LSP for the compiler. For instance function/module overloading is a bad feature, because it reduces the LSPs ability to provide documentation on hover and completions in template contexts. </p>
+<h3 id="how-to-ensure-good-lsp-suggestions-even-in-the-context-of-templates"><a class="header" href="#how-to-ensure-good-lsp-suggestions-even-in-the-context-of-templates">How to ensure good LSP suggestions, even in the context of templates?</a></h3>
+<h3 id="how-to-allow-optional-ports-on-module-determined-by-compile-time-parameters"><a class="header" href="#how-to-allow-optional-ports-on-module-determined-by-compile-time-parameters">How to allow optional ports on module, determined by compile-time parameters?</a></h3>
+<h3 id="how-should-multi-clock-designs-be-represented"><a class="header" href="#how-should-multi-clock-designs-be-represented">How should multi-clock designs be represented?</a></h3>
+<h3 id="multi-dimensional-array-indexing-does-not-use-reference-semantics"><a class="header" href="#multi-dimensional-array-indexing-does-not-use-reference-semantics">Multi-Dimensional array indexing does not use reference semantics.</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="instantiation-modifiers"><a class="header" href="#instantiation-modifiers">Instantiation Modifiers</a></h1>
+<p>Because we have a broader vocabulary describing our modules, it becomes possible to modify instantiations of modules to add functionality. </p>
+<ul>
+<li>Continuous (default): The module behaves like a freestanding module, inputs and outputs are expected on each clock pulse</li>
+<li>Push: The module only advances when instructed by the parent module. This only affects <code>state</code> registers. Latency is unaffected. </li>
+</ul>
+<p>Additional modifiers</p>
+<ul>
+<li>Latency-free: All latency registers are removed</li>
+<li>Set latency: sets the latency between two connectors (ports, locals, fields etc), adding or removing latency registers as needed. Mustly used to override latency for tight feedback loops. </li>
+</ul>
+<h1 id="structs-and-modules-and-constants"><a class="header" href="#structs-and-modules-and-constants">Structs and Modules and Constants</a></h1>
+<p>So structs, modules and constants all very much look alike in a certain sense. But modules must be distinct from structs and constants. Because Modules <em>cannot</em> be freely copied or moved around. But, one would want it possible to instantiate modules in arrays. </p>
+<h2 id="templates-1"><a class="header" href="#templates-1">Templates</a></h2>
+<h2 id="template---flow---lifetime-dichotomy"><a class="header" href="#template---flow---lifetime-dichotomy">Template - Flow - Lifetime dichotomy</a></h2>
+<p>When instantiating </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="interfaces"><a class="header" href="#interfaces">Interfaces</a></h1>
+<p>A module can have one or more interfaces, each of which consists of multiple input and output ports. </p>
+<p>Interfaces form the only method by which one can cross latency and clock domains. Each interface has with it its associated hardware, that operates within the same clock and latency counting domain. Wires which belong to the same latency counting group should be placed in the same interface. </p>
+<p>The code in one interface can read wires from other interfaces, provided the proper clock domain crossing method is used, in case of a clock domain crossing. Writes however, can naturally only be done by the interface that owns that wire. </p>
+<p>To transfer data from one interface to another, use the <code>cross</code> keyword. To ensure that multiple wires stay in sync when needed, you can cross multiple wires together: <code>cross wire_a, wire_b, wire_c</code>. This ensures that any relative latencies are maintained in the target interface. Latencies are not kept in sync for wires in separate <code>cross</code> statements. </p>
+<h2 id="examples-1"><a class="header" href="#examples-1">Examples</a></h2>
+<p>Example implementation of <code>memory_block</code>:</p>
+<pre><code class="language-Verilog">module memory_block&lt;gen int DEPTH, T&gt; {
+    interface write : T data, int addr, bool wr {
+        T[DEPTH] memory
+
+        if wr {
+            memory[addr] = data
+        }
+    }
+    interface read : int addr -&gt; T data {
+        cross memory
+
+        data = memory[addr]
+    }
+}
+</code></pre>
+<p>Actually, we can implement <code>rebase_latency</code> from <a href="latency.html">latency.md</a>. </p>
+<p>Example implementation of <code>rebase_latency</code>:</p>
+<pre><code class="language-Verilog">// This module rebases the latency by an offset DELTA without adding registers. 
+module rebase_latency&lt;gen int DELTA, T&gt; : T data_in'0 -&gt; T data_out'DELTA {
+    cross cross_o
+    data_out = cross_o
+
+    // Create an anonymous interface, such that we can break the latency dependency. 
+    interface _ {
+        cross data_in
+
+        T cross_o = a
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="latency-counting"><a class="header" href="#latency-counting">Latency Counting</a></h1>
+<p>For state see <a href="state.html">state</a></p>
+<p>A short video on how Latency Counting is used is here:<a href="https://www.youtube.com/watch?v=7P0BvXSHLpY">Latency Counting in the SUS Compiler [LATTE24]</a></p>
+<h2 id="theory"><a class="header" href="#theory">Theory</a></h2>
+<p>Inserting latency registers on every path that requires them is an incredibly tedious job. Especicially if one has many signals that have to be kept in sync for every latency register added. This is why I propose a terse pipelining notation. Simply add the <code>reg</code> keyword to any critical path and any paths running parallel to it will get latency added to compensate. This is accomplished by adding a 'latency' field to every path. Starting from an arbitrary starting point, all locals connected to it can then get an 'absolute' latency value, where locals dependent on multiple paths take the maximum latency of their source paths. From this we can then recompute the path latencies to be exact latencies, and add the necessary registers. </p>
+<h3 id="examples-2"><a class="header" href="#examples-2">Examples</a></h3>
+<h4 id="inference-of-latencies-on-ports"><a class="header" href="#inference-of-latencies-on-ports">Inference of latencies on ports</a></h4>
+<pre><code class="language-Verilog">module example_md {
+    interface example_md :
+        int[4] factors,
+        int add_to -&gt;
+        int product, 
+        int total
+
+	reg int mul0 = factors[0] * factors[1]
+	reg int mul1 = factors[2] * factors[3]
+
+	reg product = mul0 * mul1
+	reg total = product + add_to
+}
+</code></pre>
+<p><img src="/images/latencyCountingExample.png" alt="Latency Counting Example" /></p>
+<h4 id="automatic-insertion-of-registers"><a class="header" href="#automatic-insertion-of-registers">Automatic insertion of registers</a></h4>
+<pre><code class="language-Verilog">module pow17 {
+    interface pow17 : int i -&gt; int o 
+	    int i2  = i * i
+	reg int i4  = i2 * i2
+	    int i8  = i4 * i4
+	reg int i16 = i8 * i8
+	        o   = i16 * i
+}
+</code></pre>
+<p><img src="/images/latencyCountingExample.png" alt="Registers can be inserted" /></p>
+<h4 id="latency-specifiers"><a class="header" href="#latency-specifiers">Latency Specifiers</a></h4>
+<pre><code class="language-Verilog">module module_taking_time {
+	interface module_taking_time : int i'0 -&gt; int o'5
+	o = i
+}
+</code></pre>
+<p><img src="/images/latencySpecifiers.png" alt="Latency Specifiers" /></p>
+<h3 id="combinatorial-loops-with-latency-are-still-combinatorial-loops"><a class="header" href="#combinatorial-loops-with-latency-are-still-combinatorial-loops">Combinatorial loops with latency are still combinatorial loops</a></h3>
+<p>This is in my opinion a big benefit to making the distinction. When inserting latency registers, we are saying in effect &quot;If we could perform these computations instantaneously, we would&quot;, and thus, a loop containing latency registers would still be a combinatorial loop. Sadly, this does break down a little when explicitly building a pipelined loop. Also combinatorial dependencies could show up across interfaces as well. Perhaps we should rethink this feature. </p>
+<h3 id="latency-counting-with-state"><a class="header" href="#latency-counting-with-state">Latency counting with state</a></h3>
+<p>Of course, state registers are also moved around by latency. This means that while it appears like (and we want the programmer's mental model to say that) two state registers get updated at the same time, they may actually be offset from one another in time. </p>
+<p>However, state registers do not count towards the latency count. So specifying <code>reg</code> increases the latency count by 1, but specifying <code>state</code> does not. This makes sense, because state registers are meant to carry data across cycles, whereas latency registers are only meant for meeting timing closure, and don't allow sequential data packets to interact. </p>
+<h3 id="maximum-latency-requirements"><a class="header" href="#maximum-latency-requirements">Maximum Latency Requirements</a></h3>
+<p>It's the intention of the language to hide fixed-size latency as much as possible, making it easy to create pipelined designs. </p>
+<p>Often however, there are limits to how long latency is allowed to be. The most common case is a <code>state</code> to itself feedback loop. If a state register must be updated every cycle, and it depends on itself, the loopback computation path may not include any latency. </p>
+<p>For example, a FIFO with an almost_full threshold of <em>N</em>, may have at most a <code>ready_out -&gt; valid_in</code> latency of <em>N</em>. </p>
+<p>For state to state paths, this could be relaxed in several ways:</p>
+<ul>
+<li>If it is proven the register won't be read for some cycles, then the latency can be hidden in these cycles. (Requires complex validity checking)</li>
+<li>Slow the rate of state updating to the maximum latency, possibly allow automatic C-Slowing. </li>
+</ul>
+<h4 id="breaking-out-of-latency-counting"><a class="header" href="#breaking-out-of-latency-counting">Breaking out of latency counting</a></h4>
+<p>Feed-forward pipelines are an important and useful construct. But feed forward pipelines can't describe all hardware. We need to be able to break out of the latency counting system, and tell the latency counting system that there exists a latency differential between two nodes, without instantiating registers between them. In the case of making a dependent latency earlier than the source one, we call this edge a 'negative backedge'. This should be provided as a template module in the standard library:</p>
+<pre><code class="language-Verilog">module rebase_latency&lt;T, gen int delta&gt; : T i'0 -&gt; T o'delta {/*...*/}
+</code></pre>
+<p>As an example, we can have a module with an internal negative backedge of -3, which itself contains some state that the backedge can originate from. The module wraps the backedge this way, and proves all of the safety requirements that come with using it. The user then is free to connect the output of this module combinatorially with the input, and with at most 3 cycles of latency. </p>
+<p><img src="/images/negativeBackedgeConcept.png" alt="Negative Backedge Concept" /></p>
+<p>As a more concrete example, consider the write side of a FIFO. 
+<img src="/images/fifoExample.png" alt="FIFO Negative Backedge" /></p>
+<h3 id="latency-specification"><a class="header" href="#latency-specification">Latency specification</a></h3>
+<p>Specifying latencies on every single input and output is a bit cumbersome, so we wish to infer latencies as much as possible. Sometims however specific constructions with indeterminable latencies require the user to explicitly specify the latencies. We will explore such cases in later chapters. </p>
+<p>When the user specifies latencies on multiple nodes, they are in effect stating that they know what the exact latencies between the given nodes are. Theorethically we should include this into the algorithm as extra edges between each pair of nodes <code>a</code> and <code>b</code>, of latency <code>lb-la</code> and <code>-(lb-la)</code> backwards. This fixes the latency differential to be as the user specifies it. In practice in the Latency Counting Algorithm, we don't actually do this in this way, but instead handle specified latencies in a dedicated part of the algorithm, to provide the user with more readable error messages. In any case, the latencies assigned by the algorithm should be equivalent to doing it with the extra edges. </p>
+<p>If the user provides not a single latency annotation, then we allow the compiler to set an arbitrary node's latency to 0, as a seed for the algorithm. Because input and output nodes have to be fully constrained, the compiler picks one of these if possible. </p>
+<h2 id="requirements-for-the-latency-counting-system"><a class="header" href="#requirements-for-the-latency-counting-system">Requirements for the latency counting system</a></h2>
+<ul>
+<li>Addition or Removal of any latency registers that do not violate a constraint must not affect the operation of the design.</li>
+<li>Feedback loops containing only latency are considered combinatorial feedback loops, and are therefore forbidden. Feedback loops must therefore have at least one state register in them. </li>
+<li>When the user specifies a latency of 1 somewhere using the <code>reg</code> keyword, this instructs the compiler that the <em>minimum</em> latency between these points is now 1. The compiler is allowed to insert additional latency registers between any two nodes as it sees fit. </li>
+<li>State registers to not impact the latency counting. They count as 0 latency. </li>
+<li>Any loop (which must contain at least one state register) must have a roundtrip latency ≤ 0. Negative values are permitted, and are simply attributed to the use of negative back edges. </li>
+<li>Specified latencies must be matched exactly. </li>
+</ul>
+<h3 id="extra-requirements-to-allow-latency-inference"><a class="header" href="#extra-requirements-to-allow-latency-inference">Extra requirements to allow latency inference</a></h3>
+<ul>
+<li>The latency between input and output nodes that have a combinatorial connection must be <em>minimal</em>. In other words, if an output <code>o'lo</code> is reachable from an input <code>i'li</code> by only following forward dependencies, then <code>|lo|-|li|</code> is exactly the latency of the longest path between them. </li>
+<li>Nodes that are not an input or output, don't have a latency specified, and have multiple options for their latency are set to the earliest possible latency. </li>
+</ul>
+<h2 id="latency-counting-graph-algorithm"><a class="header" href="#latency-counting-graph-algorithm">Latency Counting Graph Algorithm</a></h2>
+<p>We are given a directed graph of all wires and how they combinatorially depend on each other. Each edge can have a number of latency registers placed on it. </p>
+<p>Example: </p>
+<pre><code class="language-Verilog">// timeline is omitted here, not important
+module Accumulator {
+    interface Accumulator : int term, bool done -&gt; int total_out 
+    state int total
+
+    int new_total = total + term
+
+    if done {
+        reg total_out = new_total
+        total = 0
+    } else {
+        total = new_total
+    }
+}
+</code></pre>
+<p>Which results in the following graph: 
+<img src="/images/example.png" alt="Example" /></p>
+<p>Nodes are coloured by role. Blue nodes are inputs, green nodes are outputs, orange nodes are state registers, and white nodes are combinatorial. </p>
+<p>On the edges are noted the minimum latency offsets in black. These are given. The goal of the algorithm is to compute a set of 'absolute latencies', which are all relative to an arbitrary node. These are given with the red nodes on the picture. Because these absolute latencies are relative to an arbitrary reference point, we accept any constant shift applied to all absolute latencies as equivalent. </p>
+<h3 id="non-determinable-inference-of-input-and-output-absolute-latencies"><a class="header" href="#non-determinable-inference-of-input-and-output-absolute-latencies">Non Determinable inference of Input and Output absolute latencies</a></h3>
+<p>Sadly, while it appears reasonable to think it's possible to assign a determinable latency. Observe this contrived example:</p>
+<pre><code class="language-Verilog">module NonDeterminableLatency {
+    interface NonDeterminableLatency : int a, int b -&gt; int x, int y 
+    reg int a_d = a
+    int t = a_d + b
+    reg reg reg int a_dd = a
+    reg int t_d = t
+    x = t_d + a_dd
+    y = t
+}
+</code></pre>
+<p>Simplified latency graph:
+<img src="/images/nonDeterminable.png" alt="Non Uniquely Determinable Example" /></p>
+<p>The issue starts when the inputs and outputs don't have predefined absolute latency. We are tempted to add maximization and minimization to the input and output absolute latencies, to force the module's latency span to be as compact as possible, and therefore maximize how free the user of this module is in using it. But sadly, we cannot make a uniquely determinable latency assignment for our inputs and outputs, as in this example b and y press against each other, permitting two possible implementations. </p>
+<p>One may think the solution would simply be to prefer inputs over outputs or something, just to get a unique latency assignment. Just move b to be the earliest of the available latencies, but even in this case, if we instead looked at the possibilities of a, and fixed b, we would again make b later by making a earlier. And since there's no way to distinguish meaningfully between inputs, there's no uniquely determinable solution either. </p>
+<p>To this problem I only really see three options:</p>
+<ul>
+<li>Still perform full latency computation when compiling each module separately. In the case of non-determinable latency assignment, reject the code and require the programmer to add explicit latency annotations. The benefit is better encapsulation, the programmer requires only the module itself to know what latencies are. The downside is of course less flexible modules. Though is this flexibility <em>really</em> needed?</li>
+<li><del>Infer absolute latencies on the inputs and outputs of submodules using templates which can be inferred. This would be really handy to allow latency information to flow back into the templating system, thus allowing a FIFO that alters its almostFull threshold based on its input latency. Of course, this makes absolute latency information flow from top-down instead of bottom up, so now getting the latency information back from the module would be impossible. The issue is that templates can't be instantiated partially. Either the submodule takes all of its port latencies from the calling module, or it determines its latencies itself</del></li>
+<li><del>Perform latency computation at integration level, we don't define the absolute latencies on the ports of a module, unless the programmer explicitly does so. For simlpicity, this requires that every single module instantiation now compiles to its own Verilog module though, which is less than ideal for debugging</del></li>
+</ul>
+<p>Simply solve the above module by explicitly specifying latencies to the two inputs:</p>
+<pre><code class="language-Verilog">module LatencySpecified {
+    interface LatencySpecified : int a'0, int b'1 -&gt; int x, int y 
+    reg int a_d = a
+    int t = a_d + b
+    reg reg reg int a_dd = a
+    reg int t_d = t
+    x = t_d + a_dd
+    y = t
+}
+</code></pre>
+<h3 id="latency-graph-cycles-are-the-key"><a class="header" href="#latency-graph-cycles-are-the-key">Latency Graph Cycles are the key</a></h3>
+<p>So assigning absolute latencies is difficult, and no good solution can be found in isolated cases. Perhaps another approach would work better. </p>
+<p>In essense, what are the reasons for which we want to count out latencies? The initial one of course was keeping signals in sync. In the vast majority of cases when you pipeline a design, you don't want to cross signals from different time steps. But of course, after pipelining a design, you need to <em>deal</em> with the effect that this module now takes several cycles, and has a certain capacity to store in progress data. </p>
+<p>Maybe instead of trying to infer the latencies from the pipeline with inputs and outputs, we focussed our attention purely on the cycles. These are already nice and constrained. </p>
+<h3 id="should-compound-types-latency-be-kept-in-sync"><a class="header" href="#should-compound-types-latency-be-kept-in-sync">Should Compound Types' latency be kept in sync?</a></h3>
+<p>Arrays, structs, tuples, etc. Should the absolute latencies of these be kept in sync? On the one hand, it's easier on the programmer if they do stay in sync. It's easier to reason about. A problem is though, that strictly keeping all latencies of an array in sync could introduce unnecessary dependencies, and therefore make the pipeline deeper than it needed to be. Also, if we forcibly keep array and struct elements in sync, then we can't express certain generic construct, such as a latency shift register, or allowing us to pipeline a sequence of similar steps where intermediary results are all stored in the same array. </p>
+<p>If you go all the way to the opposite end of the spectrum however, splitting up every struct, every array, and every tuple into their component wires, then the development experience suffers. For Arrays or structs with differing latencies the compiler can't give nice diagnostics. Also from a simulation perspective, simulators know the concepts of arrays and structs. Should SUS outputs only be simulable on a wire-by-wire basis? Or should we keep the structures intact but have internally different latencies? None of these options are really appealing. </p>
+<p>Of course, we could mostly mitigate this by re-merging structs and arrays that happen to all have the same latency. But then again, it feels like it would be brittle and cause unexpected errors for the programmer. </p>
+<p>In the end, I think that having the programmer explicitly state when to split a latency is best. And we do this with the <code>'split</code> latency specifier. This explicitly splits the underlying wire into separate 'real' wires. This allows the programmer to make the tradeoff, for explicit latency flexibility, and accepting the cost that this structure will be less nice in the resulting verilog. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-sus-standard-library"><a class="header" href="#the-sus-standard-library">The SUS Standard Library</a></h1>
+<p>By making cycle-latency mostly transparent to the programmer, we enable the use of more generic building blocks. These should be grouped into a standard library built specifically for the language. </p>
+<h2 id="common-interfaces"><a class="header" href="#common-interfaces">Common interfaces</a></h2>
+<p>The STL should provide standardized names for common interface types, such as memory read and write ports and AXI ports. This helps standardise the interfaces of distinct libraries, allowing for easier integration. </p>
+<h2 id="memory-blocks-and-fifos"><a class="header" href="#memory-blocks-and-fifos">Memory blocks and FIFOs</a></h2>
+<p>Configurable Memory primitives and FIFOs should certainly be part of the standard library. These are so fundamental to any hardware design, and appear to be uniquitous across FPGA vendors. These Memory primitives should however not be fully fixed. Attributes such as read latency and read-write conflict resolution vary substantially between vendors, so this should be left up to the target platform. However of course it should always be possible to properly fix these values in situations where the programmer needs them. Such as when one needs a 0-cycle memory read, even if that would mean it would reach terrible timing, or not synthesize at all on some platforms. </p>
+<p>This is also the reason why I believe the 'inference' doctrine of defining memory blocks is fundamentally flawed. An inference implementation will always make implicit assumptions about the read latency and read-write conflict, meaning the code isn't properly portable across devices. </p>
+<h3 id="multi-clock-memories-and-fifos"><a class="header" href="#multi-clock-memories-and-fifos">Multi-Clock Memories and FIFOs</a></h3>
+<p>It is still up for debate whether multi-clock variants should be implicit from the use, or explicit different types. There are arguments to be made for both approaches. Certainly this gets blurry when making the distinction between synchronous and asynchronous clocks. In any case, multi-clock modules should be available in the STL in some form. </p>
+<h2 id="shift-registers-skid-buffers-packers-unpackers"><a class="header" href="#shift-registers-skid-buffers-packers-unpackers">Shift registers, skid buffers, packers, unpackers</a></h2>
+<p>These are quite natural utilities that any project could use. </p>
+<h2 id="clock-domain-crossings"><a class="header" href="#clock-domain-crossings">Clock Domain Crossings</a></h2>
+<p>Clock Domain Crossings are a famously difficult problem in hardware design, and are a source of many sporadic and difficult to find bugs. The way one does a clock domain crossing also very much depends on the circumstances. Thus again, no all-encompassing generic solution can really be given. However, various common CDC implementations should be offered in the STL, which can then prove connecting code safe using <em>rythms</em>. </p>
+<h1 id="implementation-of-the-stl"><a class="header" href="#implementation-of-the-stl">Implementation of the STL</a></h1>
+<p>Generally, a generic implementation can be given for all STL types. But these won't work well on most platforms. For each platform, there should be platform-specific implementations of each of these. </p>
+<h1 id="stl-extensions"><a class="header" href="#stl-extensions">STL extensions</a></h1>
+<p>In fields like HPC, certain interfaces are ubiquitous, such as DDR memory interfaces, HBM, PCIE and Ethernet. In general these don't fit in the standard library itself, as these features are not available on the majority of platforms, but instead could be offered as separate libraries. These could (like with the STL) provide differing implementations over a generic interface, to again enable more cross-platform code. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="optimization"><a class="header" href="#optimization">Optimization</a></h1>
+<p>One important observation I recently made was on Optimization. I had been quite proud of my unusual stance on &quot;Optimization is a Non-Goal&quot;. But as I add more and more abstractions to the language, I come around to a different conclusion. Being a hardware designer in the lowest abstraction layer - Verilog, I believed that hardware itself was fundamentally unoptimizable when written out in this lowest abstraction layer, because any optimization the compiler could do could go against the intention of the programmer, undoing for example place-and-route considerations the programmer had made. As I introduced new abstractions however, I kept bumping into the problem of &quot;what if I don't need this abstraction?&quot;. </p>
+<p>Making the abstractions always optional seemed to run counter to the safety promises I wanted to make, instead what would we ideal was if the programmer can specify their interface within the bounds of the abstraction, and somehow prove that the compiler will recognise the situation and remove the abstraction's overhead. In essense, this is what it means to do optimization. </p>
+<p>This more nuanced view is summarized as follows:</p>
+<blockquote>
+<p>Optimization should be a goal insofar as it is the un-doing of abstractions. </p>
+<p>Likewise, abstractions are only permissible if there is some all-encompassing optimization the compiler can perform to undo the abstraction if needed.</p>
+</blockquote>
+<p>I still believe hardware is still broadly unoptimizeable. In contrast to software design, where the primary optimization target is Speed, in hardware there are multiple targets that are mutually at odds with each other. Clock speed, Cycle latency, logic, memory and DLS utilization, and routing congestion. No 'optimal' HW solution exists, and so it is up to the programmer to make this tradeoff. </p>
+<p>This is why I consider HLS to be misguided in their &quot;Just write it as software code and we'll do the optimization for you&quot; approach. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="on-state"><a class="header" href="#on-state">On State</a></h1>
+<p>For latency see <a href="latency.html">latency</a></p>
+<p>State goes hand-in-hand with the flow descriptors on the ports of modules. Without state all a module could represent is a simple flow-through pipeline. </p>
+<p>But once we introduce state, suddenly modules can have a wide range of output patterns and required input patterns. A simple example would be a data packer or unpacker. An unpacker receives a data packet, and outputs its contents in parts over the next N cycles. How should this unpacker behave when it receives another data packet before it finishes? It can either discard what it's currently working on, or discard the incoming data. Either way, data is lost. So the packer's interface must prohibit incoming data for N-1 cycles after a valid packet. </p>
+<p>The language we choose for the interfaces is that of the regex. This is a natural choice, since in effect any module the user writes is a state machine, and regexes can be converted to state machines. State machines have a nice property, that operators for working with state machines are polynomial and easy to understand.</p>
+<h2 id="structural-and-data-state"><a class="header" href="#structural-and-data-state">Structural and Data State</a></h2>
+<p>We have to check the state machine that is each module against the state machines of the modules it uses of course. Sadly, this checking can only really be done in a generic way by generating the full module state machine, and checking its behavior against the state machine from its dependents' interfaces, as well as its own. </p>
+<p>Generating the whole state machine is a combinatorial endeavour however, and a too wide state vector quickly leads to an unmanageable number of states. This encourages us to differentiate between two types of state. Structural State (namely state whose instances are incorporated into the module STM), and Data State, which (aside from its validity) is not. We wouldn't care about every possible bitpattern of a floating point number we happened to include in our state right?</p>
+<h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
+<h3 id="summing-module"><a class="header" href="#summing-module">Summing module</a></h3>
+<pre><code class="language-Verilog">timeline (X, false -&gt; /)* .. (X, true -&gt; T)
+module Accumulator {
+    interface Accumulator : int term, bool done -&gt; int total 
+    state int tot := 0 // Initial value, not a real assignment
+
+    int new_tot = tot + term
+    if done {
+        total = new_tot
+        tot = 0
+        finish // packet is hereby finished. 
+    } else {
+        tot = new_tot
+    }
+}
+</code></pre>
+<p>In this case the compiler would generate a state machine with two states. One state for when the module is active, and one is generated implicitly for the inactive case. The regex is mapped to a 3-state state machine. Represented below:</p>
+<ul>
+<li>A: <code>inactive</code></li>
+<li>B: <code>(X, false - /)</code></li>
+<li>C: <code>(X, true - T)</code> </li>
+</ul>
+<p>The regex produces the following NFA: (-&gt; is a consuming transition, =&gt; is not)</p>
+<ul>
+<li>A -&gt; A when !valid</li>
+<li>A =&gt; B when valid</li>
+<li>B -&gt; B when !done</li>
+<li>B =&gt; C when done</li>
+<li>C -&gt; A</li>
+</ul>
+<p>Compiled to a DFA this gives:</p>
+<ul>
+<li>A -&gt; A when !valid</li>
+<li>A -&gt; B when valid &amp; !done</li>
+<li>A -&gt; C when valid &amp; done</li>
+<li>B -&gt; B when !done</li>
+<li>B -&gt; C when done</li>
+<li>C -&gt; A when !valid</li>
+<li>C -&gt; B when valid &amp; !done</li>
+<li>C -&gt; C when valid &amp; done</li>
+</ul>
+<p>The code's state machine must be proven equivalent to the regex state machine. This is done by simulating the code STM based on the regex. The code must properly request inputs at regex states where inputs are provided, and may not when not. It's inputs must be valid for <em>any</em> path in the regex STM, while it's outputs must conform to <em>some</em> path of the regex. </p>
+<p>Any module working on finite packet sizes must also specify the <code>finish</code> keyword when the module is finished sending a packet. 
+At this point the initial conditions must be reestablished explicitly. After this, the module goes back into the inactive state. </p>
+<p>In this example, the code simulation starts right in its initial state. Then the different paths of the regex STM are all simulated. For the case of infinite loops, we save any distinct (regex, code-STM) pair we come across, and skip combinations we've already come across. </p>
+<p>Since in this example the only active state for the code corresponds to both active states of the regex, the code must abide by the constraints of both regex paths. And it does, in the case <code>done == false</code> the module may not output <code>total</code> Likewise, in the case <code>done == true</code>, the module <em>must</em> output <code>total</code>. And in the case of <code>done == true</code>, the code has to go back to the initial state through the <code>finish</code> keyword. </p>
+<p>The caller is then responsible for providing a stream of the form of the regex. </p>
+<h2 id="unpacker"><a class="header" href="#unpacker">Unpacker</a></h2>
+<p>The previous example was quite simple though, with the code's active state machine containing only one state. In this example we explore a module that does have structural state. </p>
+<pre><code class="language-Verilog">timeline (X -&gt; X) .. (/ -&gt; X) .. (/ -&gt; X) .. (/ -&gt; X)
+module Unpack4&lt;T&gt; {
+    interface Unpack4 : T[4] packed -&gt; T out_stream 
+    state int st := 0 // Initial value, not a real assignment
+    state T[3] stored_packed
+
+    if st == 0 {
+        out_stream = packed[0]
+        stored_packed[0] = packed[1] // Shorthand notation is possible here &quot;stored_packed[0:2] = packed[1:3]&quot;
+        stored_packed[1] = packed[2]
+        stored_packed[2] = packed[3]
+        st = 1
+    } else if st == 1 {
+        out_stream = stored_packed[0]
+        st = 2
+    } else if st == 2 {
+        out_stream = stored_packed[1]
+        st = 3
+    } else if st == 3 {
+        out_stream = stored_packed[2]
+        st = 0
+        finish // packet is hereby finished. 
+    }
+}
+</code></pre>
+<p>In this case, the regex has 4 states, but we don't know what number of states the code has. One could bound the integer <code>st</code> of course, and for the number of states multiply together the counts of all structural state objects we find. But we don't need to. We can simply simulate the code, only explicitly saving the structural state fields. </p>
+<p>In this case, we know the starting value of <code>st</code>, and we just need to simulate the hardware with this. So in the first cycle, we are obligated to read from <code>packed</code>, and write to <code>out_stream</code>. Following the code that is the case, as we execute the first branch: <code>st == 0</code>. We know the next state <code>st = 1</code>, so we continue going along. This continues for the remaining states of the regex, ending at <code>st == 3</code> where we also call <code>finish</code>. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="on-registers"><a class="header" href="#on-registers">On Registers</a></h1>
+<h2 id="state-vs-latency"><a class="header" href="#state-vs-latency">State vs Latency</a></h2>
+<p>In my experience, the use of registers usually boils down to two use cases: </p>
+<ul>
+<li>Representing a current working state, which gets updated across clock cycles</li>
+<li>Improving timing closure by introducing registers on tight paths. </li>
+</ul>
+<p>While this distinction exists in the programmer's mind, it isn't in the vocabulary of common compilers. Verilog and VHDL just call both 'reg' (And non-registers too, but that's another can of worms.) </p>
+<p>Philosophically, the difference is quite important though. Registers that are part of the state are critical, and they directly direct the functioning of the device. While latency registers should not affect the functioning of the design at all, aside from trivially affecting the latency of the whole design. Some would argue that worrying about latency registers is a solved problem, with retiming tools that can automatically migrate latency registers across a design to place them wherever more timing slack is required. In practice though, this capability is limited, usually by explicitly marking specific paths as latency insensitive, or in a limited way by synthesizing a block of registers somewhere, which should then be migrated across the design. Still, this practice is always limited by the first design register it comes across along the path. Explicitly differentiating between state and latency registers could make this automatic retiming much more powerful. </p>
+<p>While indeed generally latency can't affect the actual operation of the device, it can be disallowed in certain circumstances. Certain paths are latency sensitive, and would no longer produce correct results if latency were introduced. A trivial example is any kind of feedback loop. In this case, no latency can be introduced within the feedback loop itself, as the result for the current feedback loop cycle wouldn't arrive in time. In this case the latency should either be forbidden, or reincorporated in a different way, such as interpreting the state loop as a <a href="https://en.wikipedia.org/wiki/C-slowing">C-Slowed</a> state loop. </p>
+<h2 id="on-state-1"><a class="header" href="#on-state-1">On State</a></h2>
+<p>See <a href="state.html">state</a></p>
+<h2 id="on-latency"><a class="header" href="#on-latency">On Latency</a></h2>
+<p>See <a href="latency.html">latency</a></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-trouble-with-parsing-templates"><a class="header" href="#the-trouble-with-parsing-templates">The Trouble with Parsing Templates</a></h1>
+<p>Templates in the modern style of C++ or Java are incredibly hard to parse, and seemingly manage to conflict with just about every other syntax in common use. 
+They can occur in many circumstances. Most commonly in types, but also in function calls and constants. 
+Their ubiquity compounds the issues described below. </p>
+<pre><code class="language-cpp">void myFunc() {
+  vector&lt;int&gt; myVec;
+}
+</code></pre>
+<p>All languages that choose to adopt this standard employ limitations around their use. In Java it's not possible to pass values as template arguments, in C++ often the <a href="https://stackoverflow.com/questions/610245/where-and-why-do-i-have-to-put-the-template-and-typename-keywords"><code>template</code> keyword must be inserted for the parser to understand</a>. </p>
+<p>Take the fully ambiguous case of this function call:</p>
+<pre><code>myFunc&lt;beep&gt;(3)
+</code></pre>
+<p>This can be parsed in two ways: </p>
+<ul>
+<li>The way we as the programmer intend, IE it to be a template instantiation</li>
+<li>Two comparison operators with a value between parentheses: <code>(myfunc&lt;beep) &gt; (3)</code></li>
+</ul>
+<p>This is a proper grammatical ambiguity. </p>
+<h2 id="template-troubles-for-sus"><a class="header" href="#template-troubles-for-sus">Template troubles for SUS</a></h2>
+<p>In SUS there's quite a few things that come together that make this notation of templates difficult. For starters, SUS also has the <code>&lt;</code> <code>&gt;</code> comparison operators, which provides an immediate conflict, just like in the above example. </p>
+<p>Another less well known conflict from this notation comes from the commas. Take calling: </p>
+<pre><code class="language-cpp">myFunc(choice&lt;3, 6&gt;(5), x, y, z);
+</code></pre>
+<p>If the parser interprets the <code>&lt;</code> as a comparison, then the commas separate function arguments, but if it were to interpret them as a template then the first comma separates template arguments. </p>
+<p>What's more, SUS has a few extra notations that also conflict with this idea, namely multiple value declarations, which are used for functions that return multiple values. </p>
+<p>To illustrate:</p>
+<pre><code class="language-cpp">int b;
+int[5] c;
+int a, b, c[0], myType&lt;int, bool&gt; d = myFuncReturningFourResults();
+</code></pre>
+<p>Where the intent is to assign to a newly declared <code>a</code>, an existing variable <code>b</code>, indexing into array <code>c</code>, and a new variable <code>d</code>. </p>
+<p>This notation combines declarations with assignable expressions. 
+The issue is that if the compiler can accept both declarations and arbitrary expressions, then there's two perfectly valid parses for <code>d</code>. Either the one we intend, or it becomes two expressions <code>myType&lt;int</code> and <code>bool&gt; d</code>. 
+While it may seem a bit dumb to assign to the output of a comparison operator to the parser it's all <code>_expression</code>. </p>
+<h2 id="solutions"><a class="header" href="#solutions">Solutions</a></h2>
+<p>There's two solution archetypes I see: The Rust solution, and the Verilog solution. I've chosen a mix of the two. </p>
+<h3 id="rust"><a class="header" href="#rust">Rust</a></h3>
+<p>In so-called &quot;type contexts&quot;, where the only this that's allowed to be written is a type, types are simple: <code>Option&lt;i32&gt;</code>, <code>Result&lt;Vec&lt;i32&gt;, String&gt;</code>, etc. 
+Rust solves it with adding <code>::&lt;</code> in cases where it would otherwise be a parsing ambiguity, like <code>my_func::&lt;3&gt;(5)</code>. This disambiguates it from the comparison operators. But here still, a comparison expression inside the arguments list breaks it again: <code>my_func::&lt;3 &gt; 1&gt;</code>. 
+Luckily, Rust sidesteps this by banning expressions in template all-together, as allowing that itself would also introduce a whole lot of dependent types mess that <a href="https://hackmd.io/OZG_XiLFRs2Xmw5s39jRzA?view">turns pre-monomorphization into an undecidable problem</a>. </p>
+<h3 id="verilog"><a class="header" href="#verilog">Verilog</a></h3>
+<p>The Verilog solution is to simply move away from the angle bracket notation, and use a different one that doesn't conflict so heavily. In verilog's case, that's the <code>#(.varA(x), .varB(y), ...)</code> notation. The advantage here is explicitness, which is important in HW design, since otherwise you'd be instantiating modules like <code>FIFO #(32, 6, 2)</code> and you wouldn't know what the numbers mean. </p>
+<p>This is not the only way to use templates in Verilog though, but in my opinion the <code>defparam</code> syntax is so verbose I'll leave it out of consideration. </p>
+<h3 id="sus"><a class="header" href="#sus">SUS</a></h3>
+<p>In Hardware Design, as opposed to software design, the vast majority of template instantiations do not depend on types, but rather on values. While software is full of things like <code>Result&lt;Vec&lt;i32&gt;, ErrorObject&gt;</code>, in hardware the sizes and parameters are numbers. 
+The typical example is instantiating a library Memory block: <code>Memory #(int DATA_WIDTH, int DEPTH, bool USE_OUTPUT_PIPELINE_STAGE, bool READ_PIPELINE_STAGE, etc)</code>. Using an unambiguous syntax may just be the solution here. 
+And yes, while Verilog's solution may not be familiar to software programmers, hardware designers are used to it. </p>
+<p>I will, however, make one change to Verilog's notation. Taking inspiration from Rust, and in accordance with Hardware programmers' desire for explicitness, I'll change the template instantiation syntax to use named arguments with short form syntax:</p>
+<pre><code class="language-sus">module FIFO#(T, int SIZE, int LATENCY) {...}
+
+module use_FIFO {
+  gen int LATENCY = 3
+  FIFO#(SIZE: 32, LATENCY, type T: int[3]) myFIFO
+
+  myFIFO.push(...)
+}
+</code></pre>
+<p>So in this example, <code>SIZE</code> is set to the result of the expression <code>32</code>, <code>LATENCY</code> happens to be named identically to the variable we assign to it, thus Rust's short form. And the type we pass in requires a special <code>type</code> keyword so the parser can distinguish it. Perhaps that could still be changed, since grammatically types appear to be a proper subset of expressions, but it also seems dangerous from an IDE perspective, as now it's not clear from the parse tree what it's supposed to be. Regardless, in many of those cases, types are easier to infer than values so the <code>type</code> fallback syntax should be a rare occurence. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="implementation-tensions"><a class="header" href="#implementation-tensions">Implementation Tensions</a></h1>
+<h2 id="hw-design-wants-as-much-templating-as-possible-----turing-complete-code-generation-cant-be-generically-checked"><a class="header" href="#hw-design-wants-as-much-templating-as-possible-----turing-complete-code-generation-cant-be-generically-checked">HW Design wants as much templating as possible --- Turing-Complete code generation can't be generically checked</a></h2>
+<h3 id="solutions-1"><a class="header" href="#solutions-1">Solutions</a></h3>
+<ul>
+<li>Don't analyze Templated Code before instantiation (C++ way)</li>
+<li>Default Args required, do user-facing compile based on these. </li>
+<li>Limit Code Generation to a limited subset that can be analyzed generically. (Lot of work, will eliminate otherwise valid code)</li>
+</ul>
+<h2 id="compilation-ordering-code-generation-----flow-analysis-----latency-counting"><a class="header" href="#compilation-ordering-code-generation-----flow-analysis-----latency-counting">Compilation Ordering: Code Generation --- Flow Analysis --- Latency Counting</a></h2>
+<p>Most of the time, Latency Counting is dependent on Template Instantiation. For example, a larger Memory may incur more latency overhead for reads and writes. </p>
+<p>On the other hand, one could want a measured latency count to be usable at compile time, to generate hardware that can specifically deal with this latency. For example, a FIFO's almostFull threshold. </p>
+<p>Another important case: Automatic Generation of compact latency using BRAM shift registers. The compiler could instantiate a user-provided module with as template argument the latency between the bridging wires, but the module may then add vary in its latency depending on the memory block size, requiring the compiler to again fiddle with the template argument. </p>
+<h3 id="solutions-2"><a class="header" href="#solutions-2">Solutions</a></h3>
+<ul>
+<li>Always compile in order Template Instantiation -&gt; Flow Analysis &amp; Latency Counting. Explicitly state template args. Add asserts for latencies that are too high and reject designs that violate this. </li>
+<li>For each nested module separately, perform Template Instantiation &amp; Latency Counting first, and allow use of measured latency of higher modules</li>
+<li>Add latency template arguments, allowing higher modules to set the latency of lower modules. Reject lower modules that violate this latency. </li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="to-use-or-not-to-use-tree-sitter"><a class="header" href="#to-use-or-not-to-use-tree-sitter">To use, or not to use Tree Sitter</a></h1>
+<p>Should the SUS compiler use tree-sitter as its parser? Of all the parsers I've looked at, tree sitter is the most promising, combining both strong error tolerance with incredibly efficient parser generation. But switching may be a big task. </p>
+<h2 id="arguments"><a class="header" href="#arguments">Arguments</a></h2>
+<h3 id="for-custom-parser"><a class="header" href="#for-custom-parser">For custom parser</a></h3>
+<ul>
+<li>Possibly easier to report errors, even though tree sitter is error tolerant, it can't produce diagnostics such as &quot;Expected token such and such here&quot;</li>
+<li>Already have a big parser built out</li>
+<li>Custom parser produces nicely typed syntax tree</li>
+</ul>
+<h3 id="against-custom-parser"><a class="header" href="#against-custom-parser">Against custom parser</a></h3>
+<ul>
+<li>Probably I'm not skilled enough to build a proper recursive descent parser for more complex cases, like templates</li>
+<li>Still lots of work, also possibility of many panics in custom parser, tree sitter is quite reliable error wise</li>
+</ul>
+<h3 id="for-tree-sitter"><a class="header" href="#for-tree-sitter">For Tree Sitter</a></h3>
+<ul>
+<li>Really efficient parser, using a direct state machine is something I could never beat myself. </li>
+<li>Incremental updates. Speed of development is a big selling point for SUS</li>
+<li>Actually can parse the stuff I need to parse</li>
+<li>More reliable error recovery. </li>
+</ul>
+<h3 id="against-tree-sitter"><a class="header" href="#against-tree-sitter">Against Tree Sitter</a></h3>
+<ul>
+<li>Cumbersome interface, lots of Node::kind calls etc</li>
+<li>Don't know when tree sitter produces ERROR nodes and when not, when can I assume I can <code>unwrap()</code> stuff?</li>
+<li>Don't like deeply adhering myself to a parser library, because it makes future changes more difficult, like with Ariadne</li>
+<li><a href="https://github.com/tree-sitter/tree-sitter/discussions/831">People online say it's unsuitable for compiler frontend development. </a></li>
+</ul>
+<h2 id="verdict"><a class="header" href="#verdict">Verdict</a></h2>
+<p>Having gone through the effort of switching to tree-sitter, I can say I'm very content with the change. </p>
+<p>I'll now again go through the advantages and disadvantages I listed above, and show new perspectives. </p>
+<h3 id="post-use-for-tree-sitter"><a class="header" href="#post-use-for-tree-sitter">Post-use For Tree Sitter</a></h3>
+<ul>
+<li>Tree-sitter has proven an incredibly performant parser</li>
+<li>The incremental updates are still a big selling point for the future</li>
+<li>While I have found tree-sitter poorly documented, and difficult to debug, it has managed the things I needed it for</li>
+<li>Error recovery</li>
+</ul>
+<h3 id="post-use-against-tree-sitter"><a class="header" href="#post-use-against-tree-sitter">Post-use Against Tree Sitter</a></h3>
+<ul>
+<li>The interface turned out far nicer than expected, once I built a <a href="https://github.com/pc2/sus-compiler/blob/5314928aaf9aa95ff4328be95bc4aed4f09d11b5/src/parser.rs#L81-L322">wrapper</a> for it. Also some proc-macros to request the node kinds at compile time was a godsent.</li>
+<li>So ERROR node production is still a mystery in many cases, but with a decently unambiguous grammar where it fails to parse is pretty much always obvious</li>
+<li>Welp, I've adhered myself now, and I'm happy I did.</li>
+<li>I've placed a comment on this thread explaining my experience.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="product-types"><a class="header" href="#product-types">Product Types</a></h1>
+<p>Product types or structs are quite natural to express in hardware and should be supported by the language. A product type is represented as a bundle of the field data lines that together form the whole struct. </p>
+<h1 id="sum-types"><a class="header" href="#sum-types">Sum Types</a></h1>
+<p>Sum types, are the natural companion of Product Types. Though they are far less commonly supported in Software Languages, they have been gaining ground in recent years due to the popularity of the Rust Language. For software compilers, their implementation is quite natural. Since we only ever use one variant of a sum type at a time, we can share the memory that each of them would take up. This has many benefits: reduced struct size, possibility for shared field access optimization, and no real downsides. </p>
+<p>The same however, cannot be said for hardware design. In hardware design, there are two main ways one could implement a sum type. Either sharing the wires for the variants, or having each variant have their own separate set. Which implemenation is most efficient depends on how the sum type is used. In the case of sharing the wires, we incur the cost of the multiplexers to put the signals on the same wire, as well as the additional routing and timing cross dependencies it introduces between the variants. On the other hand, in the case of separating out the variants into their own wires does not incur this cost, but storing and moving the sum type around takes far more wires and registers. </p>
+<p>No natural implementation choice exists for Sum Types, and thus they shouldn't be supported at the language level. </p>
+<p>One exception however, is quite natural in hardware, and that is the Maybe (or Option) type. Sum types in general actually fit nicely with the flow descriptors system, where the developer can specify which level of wire sharing they want, and which ports should describe separate variants. </p>
+<p>Finally, there should be a type-safe implementation for a full wire-sharing sum type. That should be supported by the standard library, using something like a Union type, for those cases where the reduction in bus width is worth the additional multiplexers and routing constraints. </p>
+<h1 id="enums"><a class="header" href="#enums">Enums</a></h1>
+<p>Enums are lovely. It's important that the programmer can specify what the exact representation is, such that the compiler can optimize their use. Be it as a one-hot vector, binary encoding, or a combination of the two. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="core-philosophy"><a class="header" href="#core-philosophy">Core Philosophy</a></h1>
+<p>SUS is meant to be a direct competitor to Synthesizeable Verilog and VHDL. Its main goal is to be an intuitive and thin syntax for building netlists, such that traditional synthesis tools can still be used to analyze the resulting hardware. SUS shall impose no paradigm on the hardware designer, such as requiring specific communication protocols or iteration constructs. In other words, SUS is not there to abstract away complexity, but rather to make the inherent complexity of hardware design more manageable.</p>
+<p>The one restriction SUS does impose over Verilog and VHDL is that it requires the hardware to be <em>synchronous</em> over one or more clocks. Asynchronous hardware is therefore <em>unrepresentable</em> making SUS less suitable for ASIC development. </p>
+<p>There are three main features that set SUS apart from the rest: </p>
+<ul>
+<li>Generative Variables and Types can be freely combined. Any &quot;Dependent Types&quot; headaches that are caused by this are sidestepped by doing the main type checking after instantiation. </li>
+<li>Easy Pipelining through an orthogonal language construct called &quot;Latency Counting&quot;. 'Orthogonal' means that adding pipeline registers does not interfere with other language features such as generative or conditional code. </li>
+<li>Separation of pipelines with interfaces. This keeps the user from accidentally crossing signals that have no logical relationship. At this level Clock Domain Crossings are implemented.</li>
+</ul>
+<p>Finally, an important consideration of SUS is the user interface. SUS comes with a VSCode IDE plugin that allows the copiler to be used fully in-IDE. Compiling, typechecking and instantiation is done as the user writes code, leading to a very tight development feedback loop. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="what-sus-gives-you"><a class="header" href="#what-sus-gives-you">What SUS gives you</a></h1>
+<ul>
+<li>A direct 1-to-1 mapping from code to netlist</li>
+<li>Hardware domain separation with explicit crossing primitives</li>
+<li>A built-in syntax for pipelining that does not impose structural constraints</li>
+<li>In-IDE compilation errors &amp; warnings</li>
+<li>Metaprogramming for hardware generation</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="planned"><a class="header" href="#planned">Planned</a></h1>
+<ul>
+<li>Type safety with Bounded Integers</li>
+<li>Multi-Clock modules</li>
+<li>Formal Verification Integration</li>
+<li>Syntactic sugar for common constructs like valid signals, resets and submodule communication</li>
+<li>Moving some<sup class="footnote-reference"><a href="#timing">1</a></sup> timing constraints to the source file</li>
+</ul>
+<div class="footnote-definition" id="timing"><sup class="footnote-definition-label">1</sup>
+<p>Some timing constraints affect the cycle-by-cycle functioning of the design, such as the relative speeds of synchronous clocks and False/Multi-Cycle Path constraints. Because they affect the cycle-wise behaviour of the design, they should be provided as part of the language and incorporated in simulation. Of course, timing constraints like real clock speeds, edge patterns and external component timings still rightfully belong in the Timing Constraints file. It should not be possible to express SUS code that behaves differently between Simulation and Synthesis. </p>
+</div>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="what-sus-does-not-do"><a class="header" href="#what-sus-does-not-do">What SUS does not do</a></h1>
+<ul>
+<li>Provide abstractions for handshake protocols (Like AXI)</li>
+<li>Runtime Iteration Constructs</li>
+<li>Automatic Pipelining &amp; Retiming</li>
+</ul>
+<p>Of course, while the language does not support such protocols directly in the syntax, as this would put unneccesary extra constraints on the output hardware, modules for handling them will be provided in the standard library. </p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sus-code-examples"><a class="header" href="#sus-code-examples">SUS Code Examples</a></h1>
+<p><img src="/images/susLSPExample.png" alt="SUS LSP Example" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="main-features-through-examples"><a class="header" href="#main-features-through-examples">Main Features through examples</a></h2>
+<h3 id="pipelining-through-a-hreflatencyhtmllatency-countinga"><a class="header" href="#pipelining-through-a-hreflatencyhtmllatency-countinga">Pipelining through <a href="latency.html">Latency Counting</a></a></h3>
+<pre><code class="language-Verilog">module pow17 {
+    interface pow17 : int i -&gt; int o 
+        int i2  = i * i
+    reg int i4  = i2 * i2
+        int i8  = i4 * i4
+    reg int i16 = i8 * i8
+            o   = i16 * i
+}
+</code></pre>
+<p><img src="/images/insertRegisters.png" alt="Registers can be inserted" /></p>
+<h3 id="fizz-buzz-lookup-table-using-generative-code-1"><a class="header" href="#fizz-buzz-lookup-table-using-generative-code-1">FIZZ-BUZZ Lookup Table using Generative Code</a></h3>
+<pre><code class="language-Verilog">module fizz_buzz_gen {
+    interface fizz_buzz_gen : int v -&gt; int fb 
+    gen int FIZZ = 15
+    gen int BUZZ = 11
+    gen int FIZZ_BUZZ = 1511
+    gen int TABLE_SIZE = 256
+
+    gen int[TABLE_SIZE] lut
+    
+    for int i in 0..TABLE_SIZE {
+        gen bool fizz = i % 3 == 0
+        gen bool buzz = i % 5 == 0
+        
+        gen int tbl_fb
+        if fizz &amp; buzz {
+            tbl_fb = FIZZ_BUZZ
+        } else if fizz {
+            tbl_fb = FIZZ
+        } else if buzz {
+            tbl_fb = BUZZ
+        } else {
+            tbl_fb = i
+        }
+
+        lut[i] = tbl_fb
+    }
+
+    fb = lut[v]
+}
+</code></pre>
+<p>In the end, the generative code is executed and all that results is a lookup table. </p>
+<h3 id="clock--domains-for-separating-out-logically-distinct-pipelines"><a class="header" href="#clock--domains-for-separating-out-logically-distinct-pipelines">(Clock-) Domains for separating out logically distinct pipelines</a></h3>
+<p>For this feature to be useable you really must use the LSP. The semantic analysis of the compiler gives important visual feedback while programming that makes this much easier to understand. </p>
+<p>In this example, we create a memory block with a read port and a write port. This module has two domains: The read interface domain and write interface domain. Every wire in the design is part of one of these domains (or an anonymous domain if it's not connected to either interface). Signals are not allowed to cross from one domain to another unless explicitly passed through a domain crossing primitive. </p>
+<p><img src="/images/dualPortMem.png" alt="Dual Port Memory" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="major-milestones"><a class="header" href="#major-milestones">Major Milestones</a></h1>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+Tree Sitter as parsing frontend</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Arbitrary pipelined full flow</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Arbitrary single-clock full flow</li>
+<li><input disabled="" type="checkbox"/>
+Arbitrary multi-clock full flow</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Generative Code</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Generative Parameters</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Type Templates</li>
+<li><input disabled="" type="checkbox"/>
+Full Template Inference</li>
+<li><input disabled="" type="checkbox"/>
+Actions, Triggers and Queries</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="language-features"><a class="header" href="#language-features">Language Features</a></h1>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+Basic Tokenizer</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Basic Syntax Error Reporting</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Syntax error reporting with infos</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Basic Token Highlighting in Terminal</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Local Variable and Type Name highlighting</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Array Syntax</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Function Call Syntax</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Unary and Binary Operators</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Can Parse Multiply-Add pipeline</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Can Parse Blur2 filter</li>
+<li><input disabled="" type="checkbox" checked=""/>
+If Statements</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Latency Specifiers</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Get rid of semicolons</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Access module inputs / outputs through field names</li>
+<li><input disabled="" type="checkbox"/>
+Array Slices</li>
+<li><input disabled="" type="checkbox"/>
+Bound Specifiers</li>
+<li><input disabled="" type="checkbox"/>
+Structs</li>
+<li><input disabled="" type="checkbox"/>
+Conditional Bindings</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Generative variables and assignments</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Generative Conditions</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Generative For Loops</li>
+<li><input disabled="" type="checkbox"/>
+Generative While Loops</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Generative Parameters</li>
+<li><input disabled="" type="checkbox"/>
+Generative Parameter Default Arguments</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Type Parameters</li>
+<li><input disabled="" type="checkbox"/>
+Generative Asserts</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Multi-Interface Syntax</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Native Module integration syntax</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Intrinsic Modules</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Can Parse FIFO implementation</li>
+<li><input disabled="" type="checkbox"/>
+Clock Domain Crossings</li>
+<li><input disabled="" type="checkbox"/>
+Submodule Generators</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Standard Library Bundled with compiler</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="performance-linking-and-name-resolution"><a class="header" href="#performance-linking-and-name-resolution">Performance, Linking and Name Resolution</a></h1>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Namespaces</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Single File Name Resolution</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Multi File Name Resolution</li>
+<li><input disabled="" type="checkbox"/>
+Incremental Parsing</li>
+<li><input disabled="" type="checkbox"/>
+Incremental Compilation</li>
+<li><input disabled="" type="checkbox"/>
+Multi-Threaded Parsing</li>
+<li><input disabled="" type="checkbox"/>
+Multi-Threaded Compilation</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="safety"><a class="header" href="#safety">Safety</a></h1>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+Basic Type Checking (bools, ints, arrays, etc)</li>
+<li><input disabled="" type="checkbox"/>
+Integer and Array Bounds Checking</li>
+<li><input disabled="" type="checkbox"/>
+Conflicting assignments (such as calling the same module twice in a single cycle, multiple assignments to a single variable)</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="typing--inference"><a class="header" href="#typing--inference">Typing &amp; Inference</a></h1>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+Hindley-Milner typing for Abstract Types</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Hindley-Milner typing for Domain Types</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Hindley-Milner typing for Concrete Types</li>
+<li><input disabled="" type="checkbox"/>
+Template Type Inference</li>
+<li><input disabled="" type="checkbox"/>
+Generative Parameter Inference</li>
+<li><input disabled="" type="checkbox"/>
+Latency Count Inference</li>
+<li><input disabled="" type="checkbox"/>
+Let-syntax</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="latency-counting-1"><a class="header" href="#latency-counting-1">Latency Counting</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="lsp"><a class="header" href="#lsp">LSP</a></h1>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+Basic LSP for VSCode integration</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Syntax Highlighting</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Coloring of domain wires</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Error and Warning Reporting</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Hover type information</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Hover documentation</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Go to definition</li>
+<li><input disabled="" type="checkbox" checked=""/>
+File Creation/Deletion/Rename</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Show last generation value</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Find all references</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Highlighting</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Renaming</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Basic code completion</li>
+<li><input disabled="" type="checkbox"/>
+Port code completion</li>
+<li><input disabled="" type="checkbox"/>
+Struct field code completion</li>
+<li><input disabled="" type="checkbox"/>
+Per-Line Resource Utilization Reporting</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="code-generation"><a class="header" href="#code-generation">Code Generation</a></h1>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+Expression Flattening</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Can Generate Verilog for Multiply-Add pipeline</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Can Generate Verilog for Blur2 filter</li>
+<li><input disabled="" type="checkbox" checked=""/>
+Can Generate Verilog for FIFO</li>
+<li><input disabled="" type="checkbox"/>
+Multi-Clock Modules</li>
+<li><input disabled="" type="checkbox"/>
+Clock Tracking for SubModules</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fun-projects-to-do-in-sus"><a class="header" href="#fun-projects-to-do-in-sus">Fun projects to do in SUS</a></h1>
+<ul>
+<li><input disabled="" type="checkbox" checked=""/>
+Bit-Serial Matrix Multiply</li>
+<li><input disabled="" type="checkbox"/>
+Dedekind Kernel Port</li>
+<li><input disabled="" type="checkbox"/>
+Sparse Matrix Multiply</li>
+<li><input disabled="" type="checkbox"/>
+RISC-V CPU</li>
+<li><input disabled="" type="checkbox"/>
+Enigma Machine</li>
+<li><input disabled="" type="checkbox"/>
+Enigma Code Breaking</li>
+<li><input disabled="" type="checkbox"/>
+Bitwise dedekind D10 estimation accelerator</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="safety-through-interface-asserts-pdl-style-asserts"><a class="header" href="#safety-through-interface-asserts-pdl-style-asserts">Safety through Interface Asserts (PDL-style asserts)</a></h1>
+<ul>
+<li><input disabled="" type="checkbox"/>
+btor2?</li>
+<li><input disabled="" type="checkbox"/>
+Language syntax</li>
+<li><input disabled="" type="checkbox"/>
+How powerful is it? </li>
+<li><input disabled="" type="checkbox"/>
+Timing Failure extraction from vendor tools</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="simulation-1"><a class="header" href="#simulation-1">Simulation</a></h1>
+<ul>
+<li><input disabled="" type="checkbox"/>
+Basic testbench</li>
+<li><input disabled="" type="checkbox"/>
+&quot;Visualization&quot;</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<p><img src="/images/susArchitecture.png" alt="Architecture of the SUS Compiler" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="long-term-strategy"><a class="header" href="#long-term-strategy">Long Term Strategy</a></h1>
+<p><a href="https://www.youtube.com/watch?v=XZ3w_jec1v8">&quot;The Economics of Programming Languages&quot; by Evan Czaplicki (Strange Loop 2023)</a></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+                        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+                
+    </body>
+</html>
