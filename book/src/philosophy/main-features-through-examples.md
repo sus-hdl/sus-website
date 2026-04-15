@@ -10,7 +10,7 @@ module pow17 {
             o   = i16 * i
 }
 ```
-![Registers can be inserted](/images/insertRegisters.png)
+![Registers can be inserted](insertRegisters.png)
 
 ### FIZZ-BUZZ Lookup Table using Generative Code
 ```Verilog
@@ -51,4 +51,4 @@ For this feature to be useable you really must use the LSP. The semantic analysi
 
 In this example, we create a memory block with a read port and a write port. This module has two domains: The read interface domain and write interface domain. Every wire in the design is part of one of these domains (or an anonymous domain if it's not connected to either interface). Signals are not allowed to cross from one domain to another unless explicitly passed through a domain crossing primitive. 
 
-![Dual Port Memory](/images/dualPortMem.png)
+![Dual Port Memory](dualPortMem.png)
