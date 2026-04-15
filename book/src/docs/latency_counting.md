@@ -1,3 +1,0 @@
-# Latency Counting
-
-TODO

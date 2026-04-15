@@ -14,8 +14,10 @@
   - [Triggers and Conditional Bindings](docs/triggers_and_conditional_bindings.md)
 - [Module Parameters](docs/module_parameters.md)
   - [Module Parameter Inference](docs/inference.md)
-- [Latency Counting](docs/latency_counting.md)
-- [Latency Inference](docs/latency_inference.md)
+- [Latency Counting](docs/latency_counting/latency_counting.md)
+  - [Latency Inference](docs/latency_counting/latency_inference.md)
+  - [Resolving Latency Counting Errors](docs/latency_counting/latency_counting_errors.md)
+  - [Splits](docs/latency_counting/splits.md)
 - [How SUS is compiled](docs/how_sus_is_compiled.md)
 
 # Compiler Details
