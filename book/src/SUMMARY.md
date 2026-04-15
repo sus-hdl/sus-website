@@ -2,19 +2,24 @@
 
 [Introduction](sus-language.md)
 
-# Tutorial
+# Intro To SUS
 
-- [Installation](tutorial_reem/installation.md)
-- [Typing](tutorial_reem/typing.md)
-- [Data Types](tutorial_reem/dataTypes.md)
-- [Module](tutorial_reem/module.md)
-- [Examples](tutorial_reem/examples.md)
-- [Generative Code](tutorial_reem/generative_Code.md)
-- [Registers](tutorial_reem/registers.md)
-- [FIFO](tutorial_reem/fifo.md)
-- [BitSerialMatrix](tutorial_reem/bitSerialMatrix.md)
-- [Learning SUS](tutorial_reem/learningsus.md)
+- [Installing SUS](docs/installation.md)
+- [Your First Module](docs/first_module.md)
+- [Conditionals](docs/conditionals.md)
+- [Loops & Control Flow](docs/loops.md)
+- [How Integers Work](docs/integers.md)
+- [Ports and Interfaces](docs/ports_and_interfaces.md)
+  - [Actions](docs/actions.md)
+  - [Triggers and Conditional Bindings](docs/triggers_and_conditional_bindings.md)
+- [Module Parameters](docs/module_parameters.md)
+  - [Module Parameter Inference](docs/inference.md)
+- [Latency Counting](docs/latency_counting.md)
+- [Latency Inference](docs/latency_inference.md)
+- [How SUS is compiled](docs/how_sus_is_compiled.md)
 
+# Compiler Details
+- [Debug Flags](compiler/debug.md)
 
 # philosophy
   - [Compiletime and Runtime](philosophy/compiletime_and_runtime.md)
