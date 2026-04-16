@@ -7,12 +7,14 @@ hljs.registerLanguage("sus", function(hljs) {
   return {
     name: "SUS",
     keywords: {
-      keyword:
+      interface_keyword:
         "module struct const interface input output action query " +
         "trigger domain clock extern __builtin__",
-      built_in:
-        "gen if when else while for in reg state initial assume split mod type",
-      type: "int bool float double string"
+      keyword:
+        "gen if when else while for in reg state initial assume split type",
+      literal: "false true",
+      type: "int bool float double string T T1 T2 T3 T4 ElemT",
+      operator: "mod",
     },
     contains: [
       hljs.C_LINE_COMMENT_MODE,
