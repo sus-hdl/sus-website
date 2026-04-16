@@ -1,4 +1,4 @@
-# Control Flow
+# Compile-Time Code
 
 To make metaprogramming easier, SUS comes with some control flow constructs that make building repetitive structures easier. Critically, these are executed at *instantiation time* (See [How SUS is compiled](how_sus_is_compiled.md)), and are not in any way present in the generated hardware. Especially for the loops this may seem confusing at first. One should think of `if` statements as the hardware either exists or it doesn't, and of `for` and `while` loops as if their contents have been replicated. 
 
@@ -49,3 +49,60 @@ module CumulativeSums {
 
 ## `while`
 **Not yet implemented.**
+
+## Larger example
+
+```sus
+module fizz_buzz {
+    input int#(FROM: 0, TO: TABLE_SIZE) v
+    output int fb
+    
+    gen int FIZZ = 888
+	gen int BUZZ = 555
+	gen int FIZZ_BUZZ = 888555
+
+	bool is_fizz = v mod 3 == 0
+	bool is_buzz = v mod 5 == 0
+
+	when is_fizz & is_buzz {
+		fb = FIZZ_BUZZ
+	} else when is_fizz {
+		fb = FIZZ
+	} else when is_buzz {
+		fb = BUZZ
+	} else {
+		fb = v
+	}
+}
+```
+
+```sus
+module fizz_buzz_gen #(int TABLE_SIZE) {
+    input int#(FROM: 0, TO: TABLE_SIZE) v
+    output int fb
+
+	gen int FIZZ = 888
+	gen int BUZZ = 555
+	gen int FIZZ_BUZZ = 888555
+
+	gen int[TABLE_SIZE] LUT
+
+	for int I in 0..TABLE_SIZE {
+		gen bool IS_FIZZ = I mod 3 == 0
+		gen bool IS_BUZZ = I mod 5 == 0
+
+		if IS_FIZZ & IS_BUZZ {
+			LUT[I] = FIZZ_BUZZ
+		} else if IS_FIZZ {
+			LUT[I] = FIZZ
+		} else if IS_BUZZ {
+			LUT[I] = BUZZ
+		} else {
+			LUT[I] = I
+		}
+	}
+
+    // The only line that actually generates hardware
+	fb = LUT[v]
+}
+```
