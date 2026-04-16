@@ -8,9 +8,6 @@ compile_sass = true
 build_search_index = true
 
 [markdown]
-highlight_code = true
-highlight_theme = "base16-ocean-dark"
-extra_syntaxes_and_themes = ["syntaxes"]
 
 [extra]
 # Put all your custom variables here

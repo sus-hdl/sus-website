@@ -1,3 +1,6 @@
 [book]
 title = "SUS Documentation"
 language = "en"
+
+[output.html]
+additional-js = ["sus-highlight.js"]

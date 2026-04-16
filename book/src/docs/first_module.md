@@ -18,7 +18,7 @@ module hello_hardware {
 You can then compile this file with `sus_compiler hello_hardware.sus --top hello_hardware -o codegen.sv`. It will compile `hello_hardware` as top module, and the resulting code is stored in `codegen.sv`. 
 
 It'll look something like this:
-```sv
+```verilog
 // THIS IS A GENERATED FILE (Generated at 2026-02-14T16:36:01+01:00)
 // This file was generated with SUS Compiler 0.3.7
 // hello_hardware #()
