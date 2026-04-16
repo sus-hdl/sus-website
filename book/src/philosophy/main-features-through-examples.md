@@ -10,7 +10,7 @@ module pow17 {
             o   = i16 * i
 }
 ```
-![Registers can be inserted](insertRegisters.png)
+![Registers can be inserted](latencyInsertRegisters.png)
 
 ### FIZZ-BUZZ Lookup Table using Generative Code
 ```Verilog
