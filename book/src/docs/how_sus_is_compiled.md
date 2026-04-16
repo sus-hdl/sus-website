@@ -19,7 +19,7 @@ module ToOneHot#(int SIZE) {
 ```
 
 ## Execution
-After the `ToOneHot` has been abstract-typechecked, it may be instantiated with some concrete arguments. In this case we chose `ToOneHot#(SIZE: 5)`. The SUS compiler acts much like a simple imperative interpreter. Using loops and `if` statements as control flow, altering compile-time variables as written. When `when` statements, or other runtime statements like assigns and submodule instantiations are encountered, they are converted to wires/submodules to be included in the final design. Importantly, the types of these wires & submodules must not be fully known at execution time. Full resolution of these types and the instantiation of submodules only happens during Concrete Typechecking. 
+After the `ToOneHot` has been abstract-typechecked, it may be instantiated with some concrete arguments. In this case we chose `ToOneHot#(SIZE: 5)`. The SUS compiler acts much like a simple imperative interpreter. Using loops and `if` statements as control flow, altering compile-time variables as written. When `when` statements, or other runtime statements like assigns and submodule instantiations are encountered, they are converted to wires/submodules to be included in the final design. Importantly, the types of these wires & submodules does not have to be fully known at execution time. Full resolution of these types and the instantiation of submodules only happens during Concrete Typechecking. 
 
 After executing all the compile-time code, we are left with a module that effectively looks like:
 ```sus
@@ -39,7 +39,7 @@ module ToOneHot_SIZE_5 {
 
 During execution, errors may crop up, such as array index out of bounds errors, divide by zero, etc. These immediately halt execution. 
 
-**Note: Since you can execute arbitrary code at compiletime, compilation times may be arbitrarily long or even hang if an infinite loop is created.**
+**Note: Since you can execute arbitrary code at compiletime, compilation may take arbitrarily long or even hang forever if an infinite loop is created.**
 
 ## Concrete Typechecking
 If after execution no errors came up, the instantiated module proceeds to the final stage. Here, any concrete values that cannot be generically checked from the abstract representation are checked or inferred. The bounds of integers, array sizes, and parameters of submodules are checked or inferred. When all of a submodule's parameters become known, it is instantiated recursively. 

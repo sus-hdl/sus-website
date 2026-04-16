@@ -1,3 +1,3 @@
-# How Integers Work
+# Bounded Integers
 
 TODO
