@@ -7,7 +7,7 @@
 - [Installing SUS](docs/installation.md)
 - [Your First Module](docs/your_first_module.md)
 - [Conditionals](docs/conditionals.md)
-- [Compile-Time Code](docs/compile_time_code.md)
+- [Compile-Time Code](docs/compile_time_code/compile_time_code.md)
 - [Bounded Integers](docs/integers.md)
 - [Clocks](docs/clocks.md)
 - [Ports and Interfaces](docs/ports_and_interfaces.md)
