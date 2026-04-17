@@ -17,7 +17,7 @@ module hello_hardware {
 
 You can then compile this file with `sus_compiler hello_hardware.sus --top hello_hardware -o codegen.sv`. It will compile `hello_hardware` as top module, and the resulting code is stored in `codegen.sv`. 
 
-It'll look something like this:
+The generated systemverilog:
 ```verilog
 // THIS IS A GENERATED FILE (Generated at 2026-02-14T16:36:01+01:00)
 // This file was generated with SUS Compiler 0.3.7
@@ -32,7 +32,8 @@ module hello_hardware(
 wire _3;
 assign _3 = a | b;
 always_comb begin // combinatorial c
-	// Combinatorial wires are not defined when not valid. This is just so that the synthesis tool doesn't generate latches
+	// Combinatorial wires are not defined when not valid.
+	// This is just so that the synthesis tool doesn't generate latches
 	c = 1'bx;
 	c = _3;
 	// PATCH Vivado 23.1 Simulator Bug: 1-bit Conditional Assigns become don't care
@@ -41,4 +42,4 @@ end
 endmodule
 ```
 
-The generated code can then be synthesized or simulated using a tool of your choice. Since at PC2 we're using the u280 and v80 FPGAs, we tend to use Vivado's [TODO xsim](xsim).
+This generated code can then be synthesized or simulated using a tool of your choice. Since at PC2 we're using the u280 and v80 FPGAs, we tend to use Vivado's [TODO xsim](xsim).

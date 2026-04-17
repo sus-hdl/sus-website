@@ -1,6 +1,6 @@
 # Summary
 
-[Introduction](sus-language.md)
+[Introduction](introduction.md)
 
 # Intro To SUS
 
