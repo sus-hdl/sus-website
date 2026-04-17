@@ -13,7 +13,7 @@ module hello_hardware {
 }
 ```
 
-![TODO images/or_gate.png](images/or_gate.png)
+![orGate.png](orGate.png)
 
 You can then compile this file with `sus_compiler hello_hardware.sus --top hello_hardware -o codegen.sv`. It will compile `hello_hardware` as top module, and the resulting code is stored in `codegen.sv`. 
 
