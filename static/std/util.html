@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>util — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a href="control_flow.html">control_flow</a></li>
+<li><a href="core.html">core</a></li>
+<li><a href="memory.html">memory</a></li>
+<li><a href="util.html" class="sidebar-current">util</a></li>
+</ul>
+<p class="sidebar-title">Modules</p>
+<ul>
+<li><a href="#JoinDomains">JoinDomains</a></li>
+<li><a href="#SlowClockGenerator">SlowClockGenerator</a></li>
+<li><a href="#Abs">Abs</a></li>
+<li><a href="#Repeat">Repeat</a></li>
+<li><a href="#Reverse">Reverse</a></li>
+<li><a href="#Concat">Concat</a></li>
+<li><a href="#BitSelect">BitSelect</a></li>
+<li><a href="#PopCount">PopCount</a></li>
+<li><a href="#TreeAdd">TreeAdd</a></li>
+<li><a href="#BitwiseIntSplit">BitwiseIntSplit</a></li>
+<li><a href="#BitwiseIntConcat">BitwiseIntConcat</a></li>
+<li><a href="#AlignToPow2">AlignToPow2</a></li>
+<li><a href="#IntToBool">IntToBool</a></li>
+<li><a href="#BoolToInt">BoolToInt</a></li>
+<li><a href="#Ternary">Ternary</a></li>
+<li><a href="#RotateLeft">RotateLeft</a></li>
+<li><a href="#RotateRight">RotateRight</a></li>
+<li><a href="#Tuple2">Tuple2</a></li>
+<li><a href="#Tuple3">Tuple3</a></li>
+<li><a href="#Tuple4">Tuple4</a></li>
+<li><a href="#Tuple5">Tuple5</a></li>
+<li><a href="#RippleFIFO">RippleFIFO</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">util</h1>
+<section class="module" id="JoinDomains">
+<div class="module-heading"><h2>JoinDomains #(T1, T2, int OFFSET)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module JoinDomains #(T1, T2, int OFFSET) {
+    interface identity1 : T1 i1'0 -&gt; T1 o1'0
+    interface identity2 : T2 i2'OFFSET -&gt; T2 o2'OFFSET
+}</code></pre></div>
+</section>
+<section class="module" id="SlowClockGenerator">
+<div class="module-heading"><h2>SlowClockGenerator #(int PERIOD)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module SlowClockGenerator #(int PERIOD) {
+    interface SlowClockGenerator : -&gt; int cur_value
+}</code></pre></div>
+</section>
+<section class="module" id="Abs">
+<div class="module-heading"><h2>Abs #(int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Abs #(int TO) {
+    interface Abs : int #(FROM: -TO+1, TO) a -&gt; int #(FROM: 0, TO) o
+}</code></pre></div>
+</section>
+<section class="module" id="Repeat">
+<div class="module-heading"><h2>Repeat #(T, int SIZE)</h2></div>
+<div class="doc-prose">
+<p>Returns an array of SIZE copies of v - should not consume any hardware Runtime version of <a href="#RepeatGen">RepeatGen</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Repeat #(T, int SIZE) {
+    interface Repeat : T v'0 -&gt; T[SIZE] result'0
+}</code></pre></div>
+</section>
+<section class="module" id="Reverse">
+<div class="module-heading"><h2>Reverse #(T, int SIZE)</h2></div>
+<div class="doc-prose">
+<p>Reverse an array - should not consume any hardware Runtime version of <a href="#ReverseGen">ReverseGen</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Reverse #(T, int SIZE) {
+    interface Reverse : T[SIZE] v'0 -&gt; T[SIZE] result'0
+}</code></pre></div>
+</section>
+<section class="module" id="Concat">
+<div class="module-heading"><h2>Concat #(T, int SIZE_A, int SIZE_B)</h2></div>
+<div class="doc-prose">
+<p>Concatenate two arrays, such that the elements of b come after the elements of a - should not consume any hardware Runtime version of <a href="#ConcatGen">ConcatGen</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Concat #(T, int SIZE_A, int SIZE_B) {
+    interface Concat : T[SIZE_A] a'0, T[SIZE_B] b'0 -&gt; T[SIZE_A + SIZE_B] result'0
+}</code></pre></div>
+</section>
+<section class="module" id="BitSelect">
+<div class="module-heading"><h2>BitSelect #(int SIZE)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module BitSelect #(int SIZE) {
+    interface BitSelect : int#(FROM: 0, TO: SIZE - 1) selection'0 -&gt; bool[SIZE] bits'0
+}</code></pre></div>
+</section>
+<section class="module" id="PopCount">
+<div class="module-heading"><h2>PopCount #(int WIDTH)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module PopCount #(int WIDTH) {
+    interface PopCount : bool[WIDTH] bits'0 -&gt; int#(FROM: 0, TO: WIDTH+1) popcount
+}</code></pre></div>
+</section>
+<section class="module" id="TreeAdd">
+<div class="module-heading"><h2>TreeAdd #(int WIDTH, int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module TreeAdd #(int WIDTH, int FROM, int TO) {
+    interface TreeAdd : int#(FROM, TO)[WIDTH] values'0 -&gt; int#(FROM: FROM*WIDTH, TO: (TO - 1)*WIDTH + 1) total
+}</code></pre></div>
+</section>
+<section class="module" id="BitwiseIntSplit">
+<div class="module-heading"><h2>BitwiseIntSplit #(int TO, int LOWER_BITS)</h2></div>
+<div class="doc-prose">
+<p>Splits the given integer. The upper <a href="#LOWER_BITS:">LOWER_BITS:</a> bits are returned as upper, the lower <a href="#:LOWER_BITS">:LOWER_BITS</a> bits are returned in lower See also <a href="#BitwiseIntConcat">BitwiseIntConcat</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module BitwiseIntSplit #(int TO, int LOWER_BITS) {
+    interface BitwiseIntSplit : int#(FROM: 0, TO) v'0 -&gt; int#(FROM: 0, TO: UPPER_TO) upper'0, int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0
+}</code></pre></div>
+</section>
+<section class="module" id="BitwiseIntConcat">
+<div class="module-heading"><h2>BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS)</h2></div>
+<div class="doc-prose">
+<p>Recombines a lower and upper integer parts. See also <a href="#BitwiseIntSplit">BitwiseIntSplit</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS) {
+    interface BitwiseIntConcat : int#(FROM: 0, TO: UPPER_TO) upper'0, int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0 -&gt; int#(FROM: 0, TO: UPPER_TO * pow2#(E: LOWER_BITS)) v'0
+}</code></pre></div>
+</section>
+<section class="module" id="AlignToPow2">
+<div class="module-heading"><h2>AlignToPow2 #(int FROM, int TO, int LOWER_BITS)</h2></div>
+<div class="doc-prose">
+<p>Sets the lower <a href="#:LOWER_BITS">:LOWER_BITS</a> bits to false, thus aligning the value Works for unsigned and signed integers alike</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module AlignToPow2 #(int FROM, int TO, int LOWER_BITS) {
+    interface AlignToPow2 : int#(FROM, TO) i'0 -&gt; int#(FROM: ALIGNED_FROM, TO: ALIGNED_TO) o'0
+}</code></pre></div>
+</section>
+<section class="module" id="IntToBool">
+<div class="module-heading"><h2>IntToBool</h2></div>
+<div class="doc-prose">
+<p>Converts a '0' or '1' into the equivalent boolean 'false' or 'true' respectively</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module IntToBool {
+    interface IntToBool : int#(FROM: 0, TO: 2) i'0 -&gt; bool o'0
+}</code></pre></div>
+</section>
+<section class="module" id="BoolToInt">
+<div class="module-heading"><h2>BoolToInt</h2></div>
+<div class="doc-prose">
+<p>Converts a 'false' or 'true' into the equivalent integer '0' or '1' respectively</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module BoolToInt {
+    interface BoolToInt : bool i'0 -&gt; int#(FROM: 0, TO: 2) o'0
+}</code></pre></div>
+</section>
+<section class="module" id="Ternary">
+<div class="module-heading"><h2>Ternary #(T)</h2></div>
+<div class="doc-prose">
+<p>Equivalent to the C/Verilog <code>cond ? a : b</code> ternary operator. When <code>cond</code> is <code>true</code> it returns <code>a</code>, otherwise it returns <code>b</code></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Ternary #(T) {
+    interface Ternary : bool cond'0, T a'0, T b'0 -&gt; T o'0
+}</code></pre></div>
+</section>
+<section class="module" id="RotateLeft">
+<div class="module-heading"><h2>RotateLeft #(T, int ARRAY_LEN)</h2></div>
+<div class="doc-prose">
+<p>Rotates towards lower indexes by the provided offset. Implemented as a Barrel Shifter</p>
+<p>Example: <code>RotateLeft([1, 2, 3, 4], 1) == [2, 3, 4, 1]</code></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module RotateLeft #(T, int ARRAY_LEN) {
+    interface RotateLeft : T[ARRAY_LEN] data'0, int#(FROM: 0, TO: ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
+}</code></pre></div>
+</section>
+<section class="module" id="RotateRight">
+<div class="module-heading"><h2>RotateRight #(T, int ARRAY_LEN)</h2></div>
+<div class="doc-prose">
+<p>Rotates towards higher indexes by the provided offset. Implemented as a Barrel Shifter</p>
+<p>Example: <code>RotateRight([1, 2, 3, 4], 1) == [4, 1, 2, 3]</code></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module RotateRight #(T, int ARRAY_LEN) {
+    interface RotateRight : T[ARRAY_LEN] data'0, int#(FROM: 0, TO: ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
+}</code></pre></div>
+</section>
+<section class="module" id="Tuple2">
+<div class="module-heading"><h2>Tuple2 #(T1, T2)</h2></div>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple2 #(T1, T2) {
+    clock clk
+    interface pack : T1 v1_i'0, T2 v2_i'0 -&gt; bool[TO2] packed_o'0
+    interface unpack : bool[TO2] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0
+}</code></pre></div>
+</section>
+<section class="module" id="Tuple3">
+<div class="module-heading"><h2>Tuple3 #(T1, T2, T3)</h2></div>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple3 #(T1, T2, T3) {
+    clock clk
+    interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0 -&gt; bool[TO3] packed_o'0
+    interface unpack : bool[TO3] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0
+}</code></pre></div>
+</section>
+<section class="module" id="Tuple4">
+<div class="module-heading"><h2>Tuple4 #(T1, T2, T3, T4)</h2></div>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple4 #(T1, T2, T3, T4) {
+    clock clk
+    interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0, T4 v4_i'0 -&gt; bool[TO4] packed_o'0
+    interface unpack : bool[TO4] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0
+}</code></pre></div>
+</section>
+<section class="module" id="Tuple5">
+<div class="module-heading"><h2>Tuple5 #(T1, T2, T3, T4, T5)</h2></div>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple5 #(T1, T2, T3, T4, T5) {
+    clock clk
+    interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0, T4 v4_i'0, T5 v5_i'0 -&gt; bool[TO5] packed_o'0
+    interface unpack : bool[TO5] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0, T5 v5_o'0
+}</code></pre></div>
+</section>
+<section class="module" id="RippleFIFO">
+<div class="module-heading"><h2>RippleFIFO #(T, int DEPTH)</h2></div>
+<div class="doc-prose">
+<p>A FIFO implemented as a sequence of registers with a accompanying valid bit.</p>
+<p>Bandwidth limited to 1 element every 2 cycles.</p>
+<p>Use for very small FIFOs, in bandwidth-limited circumstances.</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module RippleFIFO #(T, int DEPTH) {
+    clock clk
+    output bool may_push'0
+    action push'0 : T push_data'0
+    output bool may_pop'0
+    action pop'0 : -&gt; T pop_data'0
+    action rst
+}</code></pre></div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>

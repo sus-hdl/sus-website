@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>core — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a href="control_flow.html">control_flow</a></li>
+<li><a href="core.html" class="sidebar-current">core</a></li>
+<li><a href="memory.html">memory</a></li>
+<li><a href="util.html">util</a></li>
+</ul>
+<p class="sidebar-title">Modules</p>
+<ul>
+<li><a href="#LatencyOffset">LatencyOffset</a></li>
+<li><a href="#CrossDomain">CrossDomain</a></li>
+<li><a href="#LatencyOffsetAction">LatencyOffsetAction</a></li>
+<li><a href="#LatencyOffsetActionNoData">LatencyOffsetActionNoData</a></li>
+<li><a href="#IntToBits">IntToBits</a></li>
+<li><a href="#UIntToBits">UIntToBits</a></li>
+<li><a href="#BitsToInt">BitsToInt</a></li>
+<li><a href="#BitsToUInt">BitsToUInt</a></li>
+<li><a href="#ToBits">ToBits</a></li>
+<li><a href="#FromBits">FromBits</a></li>
+<li><a href="#Transmute">Transmute</a></li>
+<li><a href="#IntNarrow">IntNarrow</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">core</h1>
+<section class="module" id="LatencyOffset">
+<div class="module-heading"><h2>LatencyOffset #(T, int OFFSET)</h2></div>
+<div class="doc-prose">
+<p>Unsafe builtin to circumvent the Latency Counting System. Connects <code>dout</code> to <code>din</code> without adding the requisite latency Or: used for negative latencies, for instance to implement Almost-Full FIFOs, stateful for loops, etc.</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module LatencyOffset #(T, int OFFSET) {
+    interface LatencyOffset : T din'0 -&gt; T dout'OFFSET
+}</code></pre></div>
+</section>
+<section class="module" id="CrossDomain">
+<div class="module-heading"><h2>CrossDomain #(T)</h2></div>
+<div class="doc-prose">
+<p>Unsafe builtin to connect wires from different clock domains. Important: This is a plain connection from a wire in one clock domain to a wire in another. This performs no synchronization or other data integrity measures!</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module CrossDomain #(T) {
+    clock in_clk
+    input T din'0
+    clock out_clk
+    output T dout'0
+}</code></pre></div>
+</section>
+<section class="module" id="LatencyOffsetAction">
+<div class="module-heading"><h2>LatencyOffsetAction #(T, int OFFSET, int DATA_DELAY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module LatencyOffsetAction #(T, int OFFSET, int DATA_DELAY) {
+    action din'0 : T data_i'DATA_DELAY
+    trigger dout'OFFSET : T data_o'OFFSET+DATA_DELAY
+}</code></pre></div>
+</section>
+<section class="module" id="LatencyOffsetActionNoData">
+<div class="module-heading"><h2>LatencyOffsetActionNoData #(int OFFSET)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module LatencyOffsetActionNoData #(int OFFSET) {
+    action din'0
+    trigger dout'OFFSET
+}</code></pre></div>
+</section>
+<section class="module" id="IntToBits">
+<div class="module-heading"><h2>IntToBits #(int NUM_BITS)</h2></div>
+<div class="doc-prose">
+<p>Convert signed int to 2s complement bits. (<code>bits[0]</code> is <code>value</code>'s Least Significant Bit)</p>
+<p>Requires <code>-pow2 #(E: NUM_BITS - 1) &lt;= value &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Runtime equivalent of <a href="#IntToBitsGen">IntToBitsGen</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module IntToBits #(int NUM_BITS) {
+    interface IntToBits : int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0 -&gt; bool[NUM_BITS] bits'0
+}</code></pre></div>
+</section>
+<section class="module" id="UIntToBits">
+<div class="module-heading"><h2>UIntToBits #(int NUM_BITS)</h2></div>
+<div class="doc-prose">
+<p>Convert int to unsigned bits. (<code>bits[0]</code> is <code>value</code>'s Least Significant Bit)</p>
+<p>Requires <code>0 &lt;= value &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Runtime equivalent of <a href="#UIntToBitsGen">UIntToBitsGen</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module UIntToBits #(int NUM_BITS) {
+    interface UIntToBits : int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0 -&gt; bool[NUM_BITS] bits'0
+}</code></pre></div>
+</section>
+<section class="module" id="BitsToInt">
+<div class="module-heading"><h2>BitsToInt #(int NUM_BITS)</h2></div>
+<div class="doc-prose">
+<p>Convert 2s complement bits to a signed int. (<code>bits[0]</code> is <code>value</code>'s Least Significant Bit)</p>
+<p>Creates an int in the range <code>-pow2 #(E: NUM_BITS - 1) &lt;= value &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Runtime equivalent of <a href="#BitsToIntGen">BitsToIntGen</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module BitsToInt #(int NUM_BITS) {
+    interface BitsToInt : bool[NUM_BITS] bits'0 -&gt; int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0
+}</code></pre></div>
+</section>
+<section class="module" id="BitsToUInt">
+<div class="module-heading"><h2>BitsToUInt #(int NUM_BITS)</h2></div>
+<div class="doc-prose">
+<p>Convert unsigned bits to an unsigned int. (<code>bits[0]</code> is <code>value</code>'s Least Significant Bit)</p>
+<p>Creates an int in the range <code>0 &lt;= value &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Runtime equivalent of <a href="#BitsToUIntGen">BitsToUIntGen</a></p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module BitsToUInt #(int NUM_BITS) {
+    interface BitsToUInt : bool[NUM_BITS] bits'0 -&gt; int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0
+}</code></pre></div>
+</section>
+<section class="module" id="ToBits">
+<div class="module-heading"><h2>ToBits #(T)</h2></div>
+<div class="doc-prose">
+<p>Bitwise conversion of type T to a sizeof#(T)-bit bitset.</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module ToBits #(T) {
+    interface ToBits : T value'0 -&gt; bool[sizeof #(T)] bits'0
+}</code></pre></div>
+</section>
+<section class="module" id="FromBits">
+<div class="module-heading"><h2>FromBits #(T)</h2></div>
+<div class="doc-prose">
+<p>Bitwise conversion of a sizeof#(T)-bit bitset to type T.</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module FromBits #(T) {
+    interface FromBits : bool[sizeof #(T)] bits'0 -&gt; T value'0
+}</code></pre></div>
+</section>
+<section class="module" id="Transmute">
+<div class="module-heading"><h2>Transmute #(T1, T2)</h2></div>
+<div class="doc-prose">
+<p>Bitwise conversion of T1 into T2. sizeof#(T: type T1) == sizeof#(T: type T2)</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module Transmute #(T1, T2) {
+    interface Transmute : T1 a'0 -&gt; T2 b'0
+}</code></pre></div>
+</section>
+<section class="module" id="IntNarrow">
+<div class="module-heading"><h2>IntNarrow #(int FROM_I, int TO_I, int FROM, int TO)</h2></div>
+<div class="doc-prose">
+<p>Unsafely shrinks the bounds of an integer. The result is not defined if the value lies outside the FROM:TO range. For folding behavior choose the <code>mod</code> operator instead.</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module IntNarrow #(int FROM_I, int TO_I, int FROM, int TO) {
+    interface IntNarrow : int#(FROM: FROM_I, TO: TO_I) din'0 -&gt; int#(FROM, TO) dout'0
+}</code></pre></div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>

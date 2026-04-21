@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>memory — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a href="control_flow.html">control_flow</a></li>
+<li><a href="core.html">core</a></li>
+<li><a href="memory.html" class="sidebar-current">memory</a></li>
+<li><a href="util.html">util</a></li>
+</ul>
+<p class="sidebar-title">Modules</p>
+<ul>
+<li><a href="#ROM">ROM</a></li>
+<li><a href="#RAM">RAM</a></li>
+<li><a href="#RAM_Unbalanced">RAM_Unbalanced</a></li>
+<li><a href="#ShiftReg">ShiftReg</a></li>
+<li><a href="#FIFO">FIFO</a></li>
+<li><a href="#FWFT">FWFT</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">memory</h1>
+<section class="module" id="ROM">
+<div class="module-heading"><h2>ROM #(T, int DEPTH, T[DEPTH] DATA)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module ROM #(T, int DEPTH, T[DEPTH] DATA) {
+    action read : int #(FROM: 0, TO: DEPTH) index'0 -&gt; T output_data'1
+}</code></pre></div>
+</section>
+<section class="module" id="RAM">
+<div class="module-heading"><h2>RAM #(T, int DEPTH)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RAM #(T, int DEPTH) {
+    action write'0 : int#(FROM: 0, TO: DEPTH) write_addr'0, T write_data'0
+    action read'0 : int#(FROM: 0, TO: DEPTH) read_addr'0 -&gt; T read_data'1
+}</code></pre></div>
+</section>
+<section class="module" id="RAM_Unbalanced">
+<div class="module-heading"><h2>RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE) {
+    action write'0 : int#(FROM: 0, TO: DEPTH / WRITE_SIZE) write_addr'0, ElemT[WRITE_SIZE] write_data'0
+    action read'0 : int#(FROM: 0, TO: DEPTH / READ_SIZE) read_addr'0 -&gt; ElemT[READ_SIZE] read_data'1
+}</code></pre></div>
+</section>
+<section class="module" id="ShiftReg">
+<div class="module-heading"><h2>ShiftReg #(T, int LATENCY)</h2></div>
+<div class="doc-prose">
+<p>This shift register is implemented as a memory block with a rotating index.</p>
+<p>It is meant to bridge a long latency difference.</p>
+<p>We keep one latency register on the inflow, and one on the outflow, as they tend to slot into the primitives we synthesize to.</p>
+</div>
+<div class="interface-block"><pre><code class="language-sus">module ShiftReg #(T, int LATENCY) {
+    interface ShiftReg : T din'0 -&gt; T dout'LATENCY
+}</code></pre></div>
+</section>
+<section class="module" id="FIFO">
+<div class="module-heading"><h2>FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
+    clock clk
+    action rst
+    output bool may_push'-MAY_PUSH_LATENCY
+    action push'0 : T push_data'0
+    output bool may_pop'0
+    action pop'0 : -&gt; T pop_data'1
+}</code></pre></div>
+</section>
+<section class="module" id="FWFT">
+<div class="module-heading"><h2>FWFT #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module FWFT #(T, int DEPTH, int MAY_PUSH_LATENCY) {
+    clock clk
+    action rst
+    output bool may_push'-MAY_PUSH_LATENCY
+    action push'0 : T push_data'0
+    trigger pop_available'0 : T pop_data'0
+    action pop'0
+}</code></pre></div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>
