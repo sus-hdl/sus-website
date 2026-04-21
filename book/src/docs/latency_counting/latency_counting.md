@@ -24,7 +24,7 @@ module pow17 {
 ![Registers can be inserted](latencyInsertRegisters.png)
 
 ## Inference of latencies on ports
-Some languages that support pipelining constructs similar to this have the restriction that all inputs must be provided at the same time, and all outputs are produced at the same time, some number of clock cycles later. SUS does not have this restriction. The ports in a module will be assigned absolute latencies such that the inputs come in as late as possible, and the outputs are produced as early as possible, thereby packing the module together as compactly as possible. Using a module with such skewed port latencies may seem daunting and error-prone at first, but you'll notice that where this module is instantiated, the compiler will automatically adjust for its port latencies, so in effect, you as the user don't have to worry about it. 
+Some languages that support pipelining constructs similar to this have the restriction that all inputs must be provided at the same time, and all outputs are produced at the same time, some number of clock cycles later. SUS does not have this restriction. The ports in a module will be assigned absolute latencies such that the inputs come in as late as possible, and the outputs are produced as early as possible, thereby packing the module together as compactly as possible. Using a module with such skewed port latencies may seem daunting and error-prone at first, but you'll notice that where this module is instantiated, the compiler will automatically adjust for its port latencies so you as the user don't have to worry about it. 
 ```sus
 module wonky_port_latencies {
     input int#(FROM: 0, TO: 16)[4] factors
@@ -54,3 +54,15 @@ module module_taking_time {
 ![Latency Specifiers](latencySpecifiers.png)
 
 Specifying latencies on ports is also the gateway to using [Latency Inference](latency_inference.md). 
+
+## Deterministic Implementation
+A promise of SUS is that it's still an RTL language.
+This means that the code you write should have exactly one realization as a netlist.
+Of course, by "deterministic" we don't mean that there's some "randomness" aspect, but rather that a purely syntactic change - such as swapping two statements in your codebase - should not affect the resulting hardware. 
+What is also allowed is to shift all absolute latencies upwards or downwards by a fixed offset. Since this does not change any of the differences between the ports, we only consider determinism of the absolute latencies up to a constant offset. 
+Latency Counting has been engineered with this Deterministim in mind, and can promise deterministic synthesis behavior in *almost* all cases:
+- Module ports are **always** at a minimal distance from one another. If the compiler notices that it is not a deterministic choice, it will throw an [Indeterminable Port Latency Error](resolving_errors.md#indeterminable-port-latency). 
+- The [Interence of Submodule Parameters](../inference.md) is fully deterministic. 
+- The placement of latency registers in wires that are in the fanin of output ports, and the fanout of input ports is deterministic. They are always placed as early in the pipeline as possible, or for the case where a wire is only in the fanin of an output, as late as possible.
+
+However, what is not deterministic is the exact placement of latency registers in structures not directly in the fanin or fanout of the module ports. 

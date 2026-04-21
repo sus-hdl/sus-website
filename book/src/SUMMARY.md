@@ -14,11 +14,13 @@
   - [Actions and Triggers](docs/actions.md)
 - [Module Parameters](docs/module_parameters.md)
   - [Parameter Inference](docs/inference.md)
+  - [Extern Modules](docs/extern_modules.md)
 - [Latency Counting](docs/latency_counting/latency_counting.md)
   - [Latency Inference](docs/latency_counting/latency_inference.md)
   - [Domains](docs/latency_counting/domains.md)
-  - [Resolving Errors](docs/latency_counting/latency_counting_errors.md)
+  - [Resolving Errors](docs/latency_counting/resolving_errors.md)
   - [Splits](docs/latency_counting/splits.md)
+  - [Latency Counting Algorithm](docs/latency_counting/algorithm.md)
 - [How SUS is compiled](docs/how_sus_is_compiled.md)
 
 # Compiler Details
