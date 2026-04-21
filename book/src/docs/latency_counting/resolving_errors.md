@@ -1,5 +1,5 @@
 # Resolving Latency Counting Errors
-When working with the Latency Counting system, errors may crop up that may at first seem rather cryptic. Usually they stem from Latency Counting's rather stringent [Deterministic Resolution](latency_counting.md#deterministic-implementation) requirement, and are therefore fairly trivial to resolve. Still, this article covers what causes each Latency Counting Error and provides strategies to resolve it. 
+When working with the Latency Counting system, errors may crop up that may at first seem rather cryptic. Usually they stem from Latency Counting's rather stringent [Solution Uniqueness](latency_counting.md#solution-uniqueness) requirement, and are therefore fairly trivial to resolve. Still, this article covers what causes each Latency Counting Error and provides strategies to resolve it. 
 
 ## Net Positive Latency Cycle
 This is perhaps the most straight-forward of them all. You've created a loop in the pipeline, which makes it impossible to assign absolute latencies to your wires without violating the latency requirement of one of your submodules, or ignoring one of your `reg` requirements. 
@@ -8,7 +8,9 @@ This is perhaps the most straight-forward of them all. You've created a loop in 
 ```sus
 module Accumulator {
     input float value
-    output state float total = 0.0
+    output state float total
+
+    initial total = 0.0
 
     // Latency of +11
     total = fp32_add(total, value)
@@ -137,7 +139,28 @@ module OnlyOutputs {
 }
 ```
 
-In this case, you might naturally say "Well clearly they should be at the same absolute latency", but in the general case it is not deterministically decidable. Extending the cases where Latency Counting can automatically make reasonable choices for such latencies is subject to ongoing research. 
+In this case, you might naturally say "Well clearly they should be at the same absolute latency", but in the general case it may not be unique. Extending the cases where Latency Counting can automatically make reasonable choices for such latencies is subject to ongoing research. 
 
-## Indeterminable Port Latency
+## No Unique Port Latencies
+This error comes back to the [uniqueness](latency_counting.md#solution-uniqueness) issue. While the compiler could assign *a* set of absolute latencies to the ports, it notices that it is not the only possibility. 
 
+### Example
+```sus
+module undeteriminable_input_latency {
+    input bool a
+    input bool b
+    output bool x
+    output bool y
+
+	reg bool a_d = a
+	bool t = a_d + b
+    reg reg reg bool a_dd = a
+	reg bool t_d = t
+    x = t_d + a_dd
+    y = t
+}
+```
+
+
+
+#### Resolution

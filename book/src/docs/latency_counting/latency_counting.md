@@ -55,14 +55,28 @@ module module_taking_time {
 
 Specifying latencies on ports is also the gateway to using [Latency Inference](latency_inference.md). 
 
-## Deterministic Implementation
+## Solution Uniqueness
 A promise of SUS is that it's still an RTL language.
-This means that the code you write should have exactly one realization as a netlist.
-Of course, by "deterministic" we don't mean that there's some "randomness" aspect, but rather that a purely syntactic change - such as swapping two statements in your codebase - should not affect the resulting hardware. 
-What is also allowed is to shift all absolute latencies upwards or downwards by a fixed offset. Since this does not change any of the differences between the ports, we only consider determinism of the absolute latencies up to a constant offset. 
-Latency Counting has been engineered with this Deterministim in mind, and can promise deterministic synthesis behavior in *almost* all cases:
-- Module ports are **always** at a minimal distance from one another. If the compiler notices that it is not a deterministic choice, it will throw an [Indeterminable Port Latency Error](resolving_errors.md#indeterminable-port-latency). 
-- The [Interence of Submodule Parameters](../inference.md) is fully deterministic. 
-- The placement of latency registers in wires that are in the fanin of output ports, and the fanout of input ports is deterministic. They are always placed as early in the pipeline as possible, or for the case where a wire is only in the fanin of an output, as late as possible.
+This means that the code you write should have exactly one well-specified realization as a netlist.
+Remember the basic rules of Latency Counting:
 
-However, what is not deterministic is the exact placement of latency registers in structures not directly in the fanin or fanout of the module ports. 
+<center><b>Rule 1: <code>reg</code> and submodules require a minimum latency between their endpoints, but adding latency more registers is always allowed</b></center>
+
+<center><b>Rule 2: Latency Registers must be inserted to delay faster paths, to stay in sync with slower parallel paths</b></center>
+
+These two rules still allow for an infinite number of valid solutions. (Simply push inputs backward and outputs forward.) To counteract this freedom, we can add the requirement: "inputs must be taken as late as possible, outputs must be provided as early as possible". This seems promising, but what "late" and "early" precisely mean is still a little vague. We can make it more concrete by reformulating it as:
+
+<center><b>Rule 3: The latency distance between any pair of strongly connected input/output ports is minimal</b></center>
+
+With this requirement, the vast space of possible latency assignments is already mostly constrained, though we still have a little wiggle-room in where exactly we insert Latency Registers for balancing according to Rule 2. Finally, we constrain these too with:
+
+<center><b>Rule 4: If a wire is in the fanout of an input port, it must be pushed as early as possible. If it is not in the fanout of an input, but it <i>is</i> in the fanin of an output, then it must be pushed as late as possible.</b></center>
+
+Rule 4 did quite conspicuously leave out what to do with wires that are neither in the fanout of an input wire, nor in the fanin of an output wire. Sadly, I've not yet found a good rule to constrain such wires. Luckily it turns out that wires that are neither connected to an input, nor to an output have little practical use. Since they do not interfere with the important downstream benefits of Solution Uniqueness, it is seen as acceptable to simply leave their absolute latencies up to the implementation details of Latency Counting. 
+
+**Note: It is allowed to shift all absolute latencies upwards or downwards by a fixed offset, since this does not change any of the differences between the ports. We only consider uniqueness of the absolute latencies up to a constant offset.**
+
+### The benefits of Uniqueness
+- The interface of a module is always deterministic. Module ports are **always** at a minimal distance from one another. If the compiler notices that the choice is not deterministic, it will throw an [No Unique Port Latencies Error](resolving_errors.md#no-unique-port-latencies). 
+- The [Interence of Submodule Parameters](../inference.md) is fully deterministic. 
+- The placement of latency registers in wires that are in the fanin of output ports, and the fanout of input ports is intuitive and predictable, even if sometimes a little surprising. 

@@ -1,6 +1,6 @@
 # Splits
 
-TODO```sus
+```sus
 module AddFloatPairs#(int SIZE) {
     interface AddFloatPairs : float[SIZE] INS'0 -> float[SIZE / 2] outs'3
 }
