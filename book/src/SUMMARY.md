@@ -13,11 +13,11 @@
 - [Ports and Interfaces](docs/ports_and_interfaces.md)
   - [Actions and Triggers](docs/actions.md)
 - [Module Parameters](docs/module_parameters.md)
-  - [Module Parameter Inference](docs/inference.md)
+  - [Parameter Inference](docs/inference.md)
 - [Latency Counting](docs/latency_counting/latency_counting.md)
   - [Latency Inference](docs/latency_counting/latency_inference.md)
   - [Domains](docs/latency_counting/domains.md)
-  - [Resolving Latency Counting Errors](docs/latency_counting/latency_counting_errors.md)
+  - [Resolving Errors](docs/latency_counting/latency_counting_errors.md)
   - [Splits](docs/latency_counting/splits.md)
 - [How SUS is compiled](docs/how_sus_is_compiled.md)
 
