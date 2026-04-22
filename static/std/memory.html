@@ -35,6 +35,18 @@
 <div class="interface-block"><pre><code class="language-sus">module ROM #(T, int DEPTH, T[DEPTH] DATA) {
     action read : int #(FROM: 0, TO: DEPTH) index'0 -&gt; T output_data'1
 }</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ROM</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">index</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">output_data</text>
+</svg></figure>
 </section>
 <section class="module" id="RAM">
 <div class="module-heading"><h2>RAM #(T, int DEPTH)</h2></div>
@@ -42,6 +54,26 @@
     action write'0 : int#(FROM: 0, TO: DEPTH) write_addr'0, T write_data'0
     action read'0 : int#(FROM: 0, TO: DEPTH) read_addr'0 -&gt; T read_data'1
 }</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="198" font-family="'Fira Code',monospace" font-size="11">
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RAM</text>
+<rect x="140" y="36" width="140" height="150" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="129" x2="280" y2="129" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">w_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="185" text-anchor="end" fill="#9b96aa" font-size="10">r_dom</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_addr</text>
+<line x1="112" y1="110" x2="140" y2="110" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="110" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_data</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read</text>
+<line x1="112" y1="171" x2="140" y2="171" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="171" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_addr</text>
+<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">read_data</text>
+</svg></figure>
 </section>
 <section class="module" id="RAM_Unbalanced">
 <div class="module-heading"><h2>RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE)</h2></div>
@@ -49,17 +81,49 @@
     action write'0 : int#(FROM: 0, TO: DEPTH / WRITE_SIZE) write_addr'0, ElemT[WRITE_SIZE] write_data'0
     action read'0 : int#(FROM: 0, TO: DEPTH / READ_SIZE) read_addr'0 -&gt; ElemT[READ_SIZE] read_data'1
 }</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="198" font-family="'Fira Code',monospace" font-size="11">
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RAM_Unbalanced</text>
+<rect x="140" y="36" width="140" height="150" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="129" x2="280" y2="129" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">w_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="185" text-anchor="end" fill="#9b96aa" font-size="10">r_dom</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_addr</text>
+<line x1="112" y1="110" x2="140" y2="110" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="110" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_data</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read</text>
+<line x1="112" y1="171" x2="140" y2="171" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="171" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_addr</text>
+<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">read_data</text>
+</svg></figure>
 </section>
 <section class="module" id="ShiftReg">
 <div class="module-heading"><h2>ShiftReg #(T, int LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module ShiftReg #(T, int LATENCY) {
+    interface ShiftReg : T din'0 -&gt; T dout'LATENCY
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ShiftReg</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
+</svg></figure>
 <div class="doc-prose">
 <p>This shift register is implemented as a memory block with a rotating index.</p>
 <p>It is meant to bridge a long latency difference.</p>
 <p>We keep one latency register on the inflow, and one on the outflow, as they tend to slot into the primitives we synthesize to.</p>
 </div>
-<div class="interface-block"><pre><code class="language-sus">module ShiftReg #(T, int LATENCY) {
-    interface ShiftReg : T din'0 -&gt; T dout'LATENCY
-}</code></pre></div>
 </section>
 <section class="module" id="FIFO">
 <div class="module-heading"><h2>FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
@@ -71,6 +135,34 @@
     output bool may_pop'0
     action pop'0 : -&gt; T pop_data'1
 }</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="216" font-family="'Fira Code',monospace" font-size="11">
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FIFO</text>
+<rect x="140" y="36" width="140" height="168" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="146" x2="280" y2="146" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="141" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
+<text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
+<path d="M 140,127 C 210,127 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
+<text x="210" y="113" text-anchor="middle" font-size="10" fill="#22a85a">-MAY_PUSH_LATENCY</text>
+<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
+<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">-MAY_PUSH_LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+<line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="105" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
+<line x1="280" y1="105" x2="308" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="105" dominant-baseline="middle" fill="#1a1227">may_push</text>
+<line x1="112" y1="162" x2="140" y2="162" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="162" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
+<line x1="280" y1="162" x2="308" y2="162" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="162" dominant-baseline="middle" fill="#1a1227">may_pop</text>
+<line x1="280" y1="189" x2="308" y2="189" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="189" dominant-baseline="middle" fill="#1a1227">pop_data</text>
+</svg></figure>
 </section>
 <section class="module" id="FWFT">
 <div class="module-heading"><h2>FWFT #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
@@ -82,6 +174,34 @@
     trigger pop_available'0 : T pop_data'0
     action pop'0
 }</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="211" font-family="'Fira Code',monospace" font-size="11">
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FWFT</text>
+<rect x="140" y="36" width="140" height="163" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="146" x2="280" y2="146" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="141" text-anchor="end" fill="#9b96aa" font-size="10">write</text>
+<text x="276" y="198" text-anchor="end" fill="#9b96aa" font-size="10">read</text>
+<path d="M 140,127 C 210,127 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
+<text x="210" y="113" text-anchor="middle" font-size="10" fill="#22a85a">-MAY_PUSH_LATENCY</text>
+<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
+<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">-MAY_PUSH_LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+<line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="105" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
+<line x1="280" y1="105" x2="308" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="105" dominant-baseline="middle" fill="#1a1227">may_push</text>
+<line x1="112" y1="162" x2="140" y2="162" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="162" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
+<line x1="280" y1="162" x2="308" y2="162" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="162" dominant-baseline="middle" fill="#1a1227">pop_available</text>
+<line x1="280" y1="184" x2="308" y2="184" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="184" dominant-baseline="middle" fill="#1a1227">pop_data</text>
+</svg></figure>
 </section>
 </div>
 </div>

@@ -148,18 +148,20 @@ body {
   font-size: 0.95rem;
   color: var(--text-muted);
   line-height: 1.75;
-  max-width: 680px;
+  /* max-width: 680px; */
   margin: 0 0 1.1rem 0;
 }
 
 .doc-prose p { margin: 0; }
 .doc-prose p + p { margin-top: 0.6em; }
 
-.doc-prose code {
+.doc-prose code.language-sus {
   font-family: 'Fira Code', monospace;
   font-size: 0.875em;
   background: var(--bg-code);
-  color: var(--brand);
+  color: var(--text);
+  display: block;
+  margin: 1rem 1.25rem;
   padding: 1px 5px;
   border-radius: 3px;
 }
@@ -201,25 +203,12 @@ body {
   margin: 0 0 0.35rem 0;
 }
 
-.example-section {
-  margin-bottom: 1.1rem;
-}
-
-.example-block {
-  background: var(--bg-code);
-  border-radius: 6px;
+/* ── Port diagram ── */
+.port-diagram {
+  margin: 0 0 1.4rem 0;
   overflow-x: auto;
 }
 
-.example-block pre {
-  margin: 0;
-  padding: 1rem 1.25rem;
-  line-height: 1.65;
-}
-
-.example-block code {
-  font-family: 'Fira Code', 'Consolas', monospace !important;
-  font-size: 0.875rem !important;
-  background: transparent !important;
-  color: #cdd6f4; /* keep examples on dark bg for contrast */
+.port-diagram svg {
+  display: block;
 }
