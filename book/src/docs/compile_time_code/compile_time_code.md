@@ -2,7 +2,7 @@
 
 To make metaprogramming easier, SUS comes with some control flow constructs that make building repetitive structures easier. 
 
-The way it works is that when a module is *instantiated* (IE, concrete values for its parameters are known), the statements in the module body are executed one by one. Control flow constructs like `if`, `for` and `while` affect the control flow during instantiation, but are no longer present in the generated hardware. When execution passes over compile-time (called "generative" (`gen`) code), it updates the current state. This usually is setting the variable of a `gen` variable. When a non-generative statement is executed, the compiler instead instantiates the wire, register, or submodule. For more information see [How SUS is compiled](how_sus_is_compiled.md). 
+The way it works is that when a module is *instantiated* (IE, concrete values for its parameters are known), the statements in the module body are executed one by one. Control flow constructs like `if`, `for` and `while` affect the control flow during instantiation, but are no longer present in the generated hardware. When execution passes over compile-time (called "generative" (`gen`) code), it updates the current state. This usually is setting the variable of a `gen` variable. When a non-generative statement is executed, the compiler instead instantiates the wire, register, or submodule. For more information see [How SUS is compiled](compiler/how_sus_is_compiled.md). 
 
 ## `if`
 (For the comparison to the runtime equivalent `when`, see [Conditionals](conditionals.md)).

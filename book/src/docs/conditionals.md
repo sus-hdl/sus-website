@@ -1,7 +1,7 @@
 # Conditionals
 SUS includes two kinds of conditionals: Compiletime conditionals, denoted by `if`, and Runtime conditionals, denoted by `when`. 
 
-Compiletime (`if`) conditionals are executed at instantiation time. The SUS interpreter takes either branch depending on the value of the condition. (See [How SUS is Compiled](how_sus_is_compiled.md) and [Control Flow](control_flow.md))
+Compiletime (`if`) conditionals are executed at instantiation time. The SUS interpreter takes either branch depending on the value of the condition. (See [How SUS is Compiled](compiler/how_sus_is_compiled.md) and [Compile-Time Code](compile_time_code/compile_time_code.md))
 Runtime (`when`) conditionals synthesize to "guards" on any runtime assignments within them.
 
 If Example:

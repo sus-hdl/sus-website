@@ -1,11 +1,18 @@
 # How SUS code is compiled
 
-![TODO Architecture of the SUS Compiler](philosophy/images/susArchitecture.png)
+![Architecture of the SUS Compiler](susArchitecture.png)
 
-There are three major "stages" in the SUS compiler:
+There are five major "stages" in the SUS compiler:
 
-## Abstract Typechecking
-Through the first stage (The *abstract* typing stage), all declared modules go exactly once. During this stage, global names are resolved, module ports and struct fields are resolved, it is checked that rumtime values aren't passed to compiletime contexts, clock domains are assigned, and light typechecking (integer is passed to integer, but bounds aren't checked yet). Its main task is to catch as many errors as possible before instantiation. 
+## Parsing
+
+Parsing is done using [tree-sitter](https://tree-sitter.github.io/tree-sitter/). Tree-Sitter was chosen due to its fast parse times and error tolerance. It generates an untyped syntax tree, with `ERROR` nodes representing invalid syntax. These error nodes are converted to diagnostics to let the programmer know what's up. 
+
+## Flattening
+
+The untyped syntax tree is then converted to a "flattened" variant. This is basically a sequence of instructions for compile-time execution. This list of instructions is still untuy
+
+In this example, we'll look at a `ToOneHot` module, shown below. 
 
 ```sus
 module ToOneHot#(int SIZE) {
@@ -17,6 +24,29 @@ module ToOneHot#(int SIZE) {
   }
 }
 ```
+
+During parsing and flattening, the above module is turned into a sequence of instructions. Something roughly like:
+```
+$0: Declaration("SIZE", GenerativeParameter, "int", ...)
+$2: Expression(IntConstant(0, ...))
+$1: Expression(VarRead("SIZE", ...))
+$3: Declaration("idx", Wire, "int#(FROM: $1, TO: $2)", ...)
+$4: Expression(VarRead("SIZE", ...))
+$5: Expression(IntConstant(0, ...))
+$6: Expression(IntConstant(5, ...))
+$7: Declaration("i", Generative, "int", ...)
+$8: ForLoop(in: $7, from: $7, to: $8, body: $9-$13)
+$9: Expression(VarRead("i", ...))
+$10: Expression(VarRead("idx", ...))
+$11: Expression(VarRead("i", ...))
+$12: Expression(Operator($10, "==", $11, ...))
+$13: Assign("bits[$9]", $12, ...)
+```
+
+## Abstract Typechecking
+All declared modules, structs, consts go through the *abstract* typing stage exactly once. During abstract typechecking stage, global names are resolved, module ports and struct fields are resolved, it is checked that rumtime values aren't passed to compiletime contexts, clock domains are assigned and checked for conflicts, and light typechecking (ensures `int` is not passed to a function requiring a `bool` for instance, but bounds aren't checked yet). Its main task is to catch all errors that can be caught, before concrete values are known for the object's [Parameters](../docs/module_parameters.md). 
+
+In the `ToOneHot` module, the compiler finds no abstract typing errors, so we it is now ready for execution. 
 
 ## Execution
 After the `ToOneHot` has been abstract-typechecked, it may be instantiated with some concrete arguments. In this case we chose `ToOneHot#(SIZE: 5)`. The SUS compiler acts much like a simple imperative interpreter. Using loops and `if` statements as control flow, altering compile-time variables as written. When `when` statements, or other runtime statements like assigns and submodule instantiations are encountered, they are converted to wires/submodules to be included in the final design. Importantly, the types of these wires & submodules does not have to be fully known at execution time. Full resolution of these types and the instantiation of submodules only happens during Concrete Typechecking. 

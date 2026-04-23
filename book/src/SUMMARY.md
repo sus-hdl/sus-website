@@ -21,10 +21,10 @@
   - [Resolving Errors](docs/latency_counting/resolving_errors.md)
   - [Splits](docs/latency_counting/splits.md)
   - [Latency Counting Algorithm](docs/latency_counting/algorithm.md)
-- [How SUS is compiled](docs/how_sus_is_compiled.md)
 
 # Compiler Details
 - [Debug Flags](compiler/debug.md)
+- [How SUS is compiled](compiler/how_sus_is_compiled.md)
 
 # philosophy
   - [Compiletime and Runtime](philosophy/compiletime_and_runtime.md)
