@@ -7,20 +7,92 @@ This is perhaps the most straight-forward of them all. You've created a loop in 
 ### Example 1
 ```sus
 module Accumulator {
-    input float value
-    output state float total
+    state float cur_total
 
-    initial total = 0.0
+    action accumulate : float value -> float total {
+        // Latency of +11
+        total = cur_total
+        cur_total = fp32_add(cur_total, value)
+    }
 
-    // Latency of +11
-    total = fp32_add(total, value)
+    action rst {
+        cur_total = 0.0
+    }
 }
 ```
 
 In this example, we wish to accumulate floating point values as they come in, but we forgot to account for the 11 cycles of latency [fp32_add](https://github.com/pc2/sus-float) takes. The compiler rightfully complains that there isn't enough time to compute the sum before it is required for the next addition. 
 
-#### Resolution
-Some operations have a fundamental latency that cannot be reduced without degrading our clock frequency. In this case we can either use a more appropriate primitive [fp32_acc](https://github.com/pc2/sus-float) which does support single-cycle accumulation, or we must use multiple accumulators multiplexed over the input stream using [ParallelWhile](/std/control_flow.html#ParallelWhile). 
+#### Resolution 1: Use a better primitive
+If it is available we can use a more appropriate primitive [fp32_acc](https://github.com/pc2/sus-float) which does support single-cycle accumulation.
+
+```sus
+module Accumulator {
+    fp32_acc accumulator
+
+    action accumulate : float value -> float total {
+        // Latency of +11
+        total = accumulator.acc(value)
+    }
+
+    action rst {
+        accumulator.rst()
+    }
+}
+```
+
+#### Resolution 2: Slow down the input stream
+If our platform doesn't support `fp32_acc`, or our operation is so complicated that it cannot be reduced to a single clock cycle without degrading our clock frequency, we must find some other alternative.
+
+If it turns out that this part of the computation isn't critical for the speed of our design, we can consider by lowering the "Initiation Interval" using [SlowState](https://sus-lang.org/std/control_flow.html#SlowState), [SlowPipelineBegin](https://sus-lang.org/std/control_flow.html#SlowPipelineBegin) or [SlowPipelineEnd](https://sus-lang.org/std/control_flow.html#SlowPipelineEnd). 
+
+```sus
+module Accumulator {
+    SlowState#(T: type float, RESET_TO: 0.0) cur_total
+
+    trigger may_accumulate
+    action accumulate : float value -> float total {
+        float next_sum = fp32_add(cur_total.old, value) // Takes 11 cycles
+        cur_total.update(next_sum)
+        total = next_sum
+    }
+
+    when cur_total.may_update {
+        may_accumulate()
+    }
+
+    action rst {
+        cur_total.rst()
+    }
+}
+```
+
+#### Resolution 3: Multiplex multiple parallel executions
+Perhaps we don't just want to accumulate one stream of values, but we actually want to accumulate many different streams of values. We can multiplex these different streams together, using only a single instance of the feedback loop. With this, the iteration time of a single stream is not improved, but we're still using all the throughput this pipeline can provide. 
+
+```sus
+module Accumulator {
+    // Choose 16 because it's a nice power of 2 above the 11 cycles of fp_add latency
+    gen int NUM_PARALLEL_ACCUMULATORS = 16
+    RAM#(T: type float, DEPTH: NUM_PARALLEL_ACCUMULATORS) cur_totals
+
+    trigger may_accumulate
+    action accumulate : float value, int#(FROM: 0, TO: NUM_PARALLEL_ACCUMULATORS) stream_id -> float total {
+        float cur_total = cur_totals.read(stream_id)
+        float next_sum = fp32_add(cur_total, value) // Takes 11 cycles
+        cur_totals.write(stream_id, next_sum)
+        total = next_sum
+    }
+
+    action rst {
+        cur_total.rst()
+    }
+}
+```
+
+With this approach, we must make sure that the input does not touch the same `stream_id` twice within 13 cycles. (2 extra for the RAM). 
+
+For more other problems like iterative algoritms, you may be interested in [ParallelWhile](https://sus-lang.org/std/control_flow.html#ParallelWhile) instead.
 
 ### Example 2
 ```sus
@@ -142,15 +214,15 @@ module OnlyOutputs {
 In this case, you might naturally say "Well clearly they should be at the same absolute latency", but in the general case it may not be unique. Extending the cases where Latency Counting can automatically make reasonable choices for such latencies is subject to ongoing research. 
 
 ## No Unique Port Latencies
-This error comes back to the [uniqueness](latency_counting.md#solution-uniqueness) issue. While the compiler could assign *a* set of absolute latencies to the ports, it notices that it is not the only possibility. 
+This error comes back to the [uniqueness](latency_counting.md#solution-uniqueness) issue. While the compiler could assign *a* set of absolute latencies to the ports, it notices that it is not the only possibility. That is because it cannot make the distances between all ports minimal *at the same time*. 
 
 ### Example
 ```sus
-module undeteriminable_input_latency {
+module ConfusingPorts {
     input bool a
     input bool b
     output bool x
-    output bool y
+    output bool y // <<<=== The error is reported on one of the ports
 
 	reg bool a_d = a
 	bool t = a_d + b
@@ -161,6 +233,15 @@ module undeteriminable_input_latency {
 }
 ```
 
+![No Unique Port Latencies](noUniquePortLatencies.png)
 
+Have a look at the example above. Let's say an arbitrary absolute latency starting point of `a'0` is chosen, then because the distance from it to `x` and `y` must be minimized, hence forcing `x'3` and `y'1`. Counting back from `x` then would require `b'2`, but counting back from `y` would require `b'1`. If instead we chose to start at `b'0`, we would get a similar set of conflicts, requiring `a'-2` from `x'1`, and `a'-1` from `y'0`. 
+
+We cannot make a unique assignment of the absolute latencies for the ports, so we must request input from the programmer. 
 
 #### Resolution
+Note that removing any of the ports resolves the issue. Removing `b` results in `a'0`, `x'3`, `y'1`, removing `y` gives `a'0`, `x'3`, `b'2`, etc. 
+
+Since straight-up removing ports is likely not an option for you, instead you can resolve the conflict by manually marking some ports with absolute latencies, such as `a'0`, `b'1` resolves the conflict. 
+
+Luckily, undecidable structures such as we encountered here are rare in real designs. 
