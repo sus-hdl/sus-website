@@ -54,9 +54,9 @@
     action write'0 : int#(FROM: 0, TO: DEPTH) write_addr'0, T write_data'0
     action read'0 : int#(FROM: 0, TO: DEPTH) read_addr'0 -&gt; T read_data'1
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="198" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="202" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RAM</text>
-<rect x="140" y="36" width="140" height="150" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="154" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="129" x2="280" y2="129" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">w_dom</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
@@ -81,9 +81,9 @@
     action write'0 : int#(FROM: 0, TO: DEPTH / WRITE_SIZE) write_addr'0, ElemT[WRITE_SIZE] write_data'0
     action read'0 : int#(FROM: 0, TO: DEPTH / READ_SIZE) read_addr'0 -&gt; ElemT[READ_SIZE] read_data'1
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="198" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="202" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RAM_Unbalanced</text>
-<rect x="140" y="36" width="140" height="150" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="154" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="129" x2="280" y2="129" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">w_dom</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
@@ -135,9 +135,9 @@
     output bool may_pop'0
     action pop'0 : -&gt; T pop_data'1
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="216" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FIFO</text>
-<rect x="140" y="36" width="140" height="168" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
 <line x1="140" y1="146" x2="280" y2="146" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
@@ -174,9 +174,9 @@
     trigger pop_available'0 : T pop_data'0
     action pop'0
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="211" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="215" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FWFT</text>
-<rect x="140" y="36" width="140" height="163" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="167" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
 <line x1="140" y1="146" x2="280" y2="146" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>

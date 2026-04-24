@@ -91,9 +91,9 @@
     output bool may_update'0
     action update'0 : T new'NEW_DELAY
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="159" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowState</text>
-<rect x="140" y="36" width="140" height="111" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="115" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
@@ -126,9 +126,9 @@ update() may only be called if may_update, upon which may_update goes low for UP
     trigger pipeline_stable'0 : T dout'0
     action rst
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="159" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowPipelineEnd</text>
-<rect x="140" y="36" width="140" height="111" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="115" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="112" x2="280" y2="112" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="107" text-anchor="end" fill="#9b96aa" font-size="10">main</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
@@ -173,9 +173,9 @@ when manage_adder.pipeline_stable : float new_sum {
     trigger pipeline_stable'0
     action rst
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="159" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowPipelineBegin</text>
-<rect x="140" y="36" width="140" height="111" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="115" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="112" x2="280" y2="112" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="107" text-anchor="end" fill="#9b96aa" font-size="10">main</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
@@ -221,9 +221,9 @@ when manage_adder.pipeline_stable {
     action start'0
     action rst
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="216" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ParallelWhile</text>
-<rect x="140" y="36" width="140" height="168" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
 <line x1="140" y1="173" x2="280" y2="173" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
