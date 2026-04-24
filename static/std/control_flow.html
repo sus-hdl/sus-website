@@ -40,6 +40,7 @@
     action next'0 : -&gt; int #(FROM: 0, TO: MAX + 1) value'0, bool last'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="146" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Iterator</text>
 <rect x="140" y="36" width="140" height="98" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="129" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -66,6 +67,7 @@
     action next'0 : -&gt; int #(FROM: 0, TO) value'0, bool last'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="146" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FixedSizeIterator</text>
 <rect x="140" y="36" width="140" height="98" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="129" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -92,16 +94,17 @@
     action update'0 : T new'NEW_DELAY
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowState</text>
 <rect x="140" y="36" width="140" height="115" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
 <text x="276" y="146" text-anchor="end" fill="#9b96aa" font-size="10">data</text>
-<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">-OLD_DELAY</text>
-<path d="M 140,127 C 210,127 210,132 280,132" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="126" text-anchor="middle" font-size="10" fill="#22a85a">-NEW_DELAY</text>
+<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">OLD_DELAY</text>
+<path d="M 140,127 C 210,127 210,132 280,132" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="126" text-anchor="middle" font-size="10" fill="#22a85a">NEW_DELAY</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
 <line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
@@ -127,16 +130,17 @@ update() may only be called if may_update, upon which may_update goes low for UP
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowPipelineEnd</text>
 <rect x="140" y="36" width="140" height="115" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="112" x2="280" y2="112" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="107" text-anchor="end" fill="#9b96aa" font-size="10">main</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
 <text x="276" y="146" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
-<path d="M 140,66 C 210,66 210,88 280,88" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">-PIPELINE_DEPTH</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-PIPELINE_DEPTH</text>
+<path d="M 140,66 C 210,66 210,88 280,88" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">PIPELINE_DEPTH</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">PIPELINE_DEPTH</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
 <line x1="112" y1="93" x2="140" y2="93" stroke="#555" stroke-width="1.5"/>
@@ -174,16 +178,17 @@ when manage_adder.pipeline_stable : float new_sum {
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowPipelineBegin</text>
 <rect x="140" y="36" width="140" height="115" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="112" x2="280" y2="112" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="107" text-anchor="end" fill="#9b96aa" font-size="10">main</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
 <text x="276" y="146" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
-<path d="M 140,93 C 210,93 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="76" text-anchor="middle" font-size="10" fill="#22a85a">-PIPELINE_DEPTH</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-PIPELINE_DEPTH</text>
+<path d="M 140,93 C 210,93 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="76" text-anchor="middle" font-size="10" fill="#22a85a">PIPELINE_DEPTH</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">PIPELINE_DEPTH</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
 <line x1="112" y1="93" x2="140" y2="93" stroke="#555" stroke-width="1.5"/>
@@ -222,6 +227,7 @@ when manage_adder.pipeline_stable {
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ParallelWhile</text>
 <rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
@@ -230,12 +236,12 @@ when manage_adder.pipeline_stable {
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
 <text x="276" y="168" text-anchor="end" fill="#9b96aa" font-size="10">iter_domain</text>
 <text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
-<path d="M 140,105 C 210,105 210,127 280,127" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="113" text-anchor="middle" font-size="10" fill="#22a85a">-COMPUTATION_LATENCY</text>
-<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">-COMPUTATION_LATENCY</text>
-<path d="M 140,132 C 210,132 210,154 280,154" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="140" text-anchor="middle" font-size="10" fill="#22a85a">-REQUEST_DATA_LATENCY</text>
+<path d="M 140,105 C 210,105 210,127 280,127" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="113" text-anchor="middle" font-size="10" fill="#22a85a">COMPUTATION_LATENCY</text>
+<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">COMPUTATION_LATENCY</text>
+<path d="M 140,132 C 210,132 210,154 280,154" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="140" text-anchor="middle" font-size="10" fill="#22a85a">REQUEST_DATA_LATENCY</text>
 <line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="105" text-anchor="end" dominant-baseline="middle" fill="#1a1227">continue</text>
 <line x1="112" y1="132" x2="140" y2="132" stroke="#555" stroke-width="1.5"/>
@@ -292,12 +298,13 @@ when pw.iter : int iteration {
     input T new'LATENCY
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="195" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ParallelState</text>
 <rect x="140" y="36" width="140" height="147" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="178" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<path d="M 140,164 C 210,164 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="112" text-anchor="middle" font-size="10" fill="#22a85a">-LATENCY + 2</text>
+<path d="M 140,164 C 210,164 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="112" text-anchor="middle" font-size="10" fill="#22a85a">LATENCY - 2</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">link</text>
 <line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
@@ -327,6 +334,7 @@ Data must be updated through <a href="#ParallelState">ParallelState::new</a> eve
     action init'0 : T initial_data'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="168" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ParallelStore</text>
 <rect x="140" y="36" width="140" height="120" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="151" text-anchor="end" fill="#9b96aa" font-size="10">default</text>

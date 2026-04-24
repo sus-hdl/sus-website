@@ -53,14 +53,15 @@
     interface identity2 : T2 i2'OFFSET -&gt; T2 o2'OFFSET
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="124" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">JoinDomains</text>
 <rect x="140" y="36" width="140" height="76" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="107" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<path d="M 140,93 C 210,93 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="76" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
-<path d="M 140,66 C 210,66 210,93 280,93" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
+<path d="M 140,93 C 210,93 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
 <text x="210" y="76" text-anchor="middle" font-size="10" fill="#22a85a">OFFSET</text>
+<path d="M 140,66 C 210,66 210,93 280,93" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="76" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">i1</text>
 <line x1="112" y1="93" x2="140" y2="93" stroke="#555" stroke-width="1.5"/>
@@ -77,6 +78,7 @@
     interface SlowClockGenerator : -&gt; int cur_value
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowClockGenerator</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -91,6 +93,7 @@
     interface Abs : int #(FROM: -TO+1, TO) a -&gt; int #(FROM: 0, TO) o
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Abs</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -107,6 +110,7 @@
     interface Repeat : T v'0 -&gt; T[SIZE] result'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Repeat</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -127,6 +131,7 @@ Runtime version of <a href="#RepeatGen">RepeatGen</a></p>
     interface Reverse : T[SIZE] v'0 -&gt; T[SIZE] result'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Reverse</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -147,6 +152,7 @@ Runtime version of <a href="#ReverseGen">ReverseGen</a></p>
     interface Concat : T[SIZE_A] a'0, T[SIZE_B] b'0 -&gt; T[SIZE_A + SIZE_B] result'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Concat</text>
 <rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -169,6 +175,7 @@ Runtime version of <a href="#ConcatGen">ConcatGen</a></p>
     interface BitSelect : int#(FROM: 0, TO: SIZE - 1) selection'0 -&gt; bool[SIZE] bits'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">BitSelect</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -185,6 +192,7 @@ Runtime version of <a href="#ConcatGen">ConcatGen</a></p>
     interface PopCount : bool[WIDTH] bits'0 -&gt; int#(FROM: 0, TO: WIDTH+1) popcount
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">PopCount</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -201,6 +209,7 @@ Runtime version of <a href="#ConcatGen">ConcatGen</a></p>
     interface TreeAdd : int#(FROM, TO)[WIDTH] values'0 -&gt; int#(FROM: FROM*WIDTH, TO: (TO - 1)*WIDTH + 1) total
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">TreeAdd</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -217,6 +226,7 @@ Runtime version of <a href="#ConcatGen">ConcatGen</a></p>
     interface BitwiseIntSplit : int#(FROM: 0, TO) v'0 -&gt; int#(FROM: 0, TO: UPPER_TO) upper'0, int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">BitwiseIntSplit</text>
 <rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -239,6 +249,7 @@ See also <a href="#BitwiseIntConcat">BitwiseIntConcat</a></p>
     interface BitwiseIntConcat : int#(FROM: 0, TO: UPPER_TO) upper'0, int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0 -&gt; int#(FROM: 0, TO: UPPER_TO * pow2#(E: LOWER_BITS)) v'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">BitwiseIntConcat</text>
 <rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -261,6 +272,7 @@ See also <a href="#BitwiseIntSplit">BitwiseIntSplit</a></p>
     interface AlignToPow2 : int#(FROM, TO) i'0 -&gt; int#(FROM: ALIGNED_FROM, TO: ALIGNED_TO) o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">AlignToPow2</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -281,6 +293,7 @@ Works for unsigned and signed integers alike</p>
     interface IntToBool : int#(FROM: 0, TO: 2) i'0 -&gt; bool o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">IntToBool</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -300,6 +313,7 @@ Works for unsigned and signed integers alike</p>
     interface BoolToInt : bool i'0 -&gt; int#(FROM: 0, TO: 2) o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">BoolToInt</text>
 <rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -319,6 +333,7 @@ Works for unsigned and signed integers alike</p>
     interface Ternary : bool cond'0, T a'0, T b'0 -&gt; T o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="141" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Ternary</text>
 <rect x="140" y="36" width="140" height="93" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -342,6 +357,7 @@ Works for unsigned and signed integers alike</p>
     interface RotateLeft : T[ARRAY_LEN] data'0, int#(FROM: 0, TO: ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RotateLeft</text>
 <rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -364,6 +380,7 @@ Works for unsigned and signed integers alike</p>
     interface RotateRight : T[ARRAY_LEN] data'0, int#(FROM: 0, TO: ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RotateRight</text>
 <rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
@@ -388,6 +405,7 @@ Works for unsigned and signed integers alike</p>
     interface unpack : bool[TO2] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="215" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple2</text>
 <rect x="140" y="36" width="140" height="167" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
@@ -421,6 +439,7 @@ Works for unsigned and signed integers alike</p>
     interface unpack : bool[TO3] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="259" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple3</text>
 <rect x="140" y="36" width="140" height="211" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
@@ -458,6 +477,7 @@ Works for unsigned and signed integers alike</p>
     interface unpack : bool[TO4] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="303" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple4</text>
 <rect x="140" y="36" width="140" height="255" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
@@ -499,6 +519,7 @@ Works for unsigned and signed integers alike</p>
     interface unpack : bool[TO5] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0, T5 v5_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="347" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple5</text>
 <rect x="140" y="36" width="140" height="299" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
@@ -547,6 +568,7 @@ Works for unsigned and signed integers alike</p>
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="255" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RippleFIFO</text>
 <rect x="140" y="36" width="140" height="207" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>

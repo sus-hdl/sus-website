@@ -15,19 +15,20 @@ module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
 }
 ```
 
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="216" font-family="'Fira Code',monospace" font-size="11">
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FIFO</text>
-<rect x="140" y="36" width="140" height="168" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
 <line x1="140" y1="146" x2="280" y2="146" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
 <text x="276" y="141" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
 <text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
-<path d="M 140,127 C 210,127 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="113" text-anchor="middle" font-size="10" fill="#22a85a">-MAY_PUSH_LATENCY</text>
-<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8"/>
-<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">-MAY_PUSH_LATENCY</text>
+<path d="M 140,127 C 210,127 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="113" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
+<path d="M 140,105 C 210,105 210,105 280,105" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="102" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
 <line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
@@ -42,7 +43,7 @@ module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
 <text x="312" y="162" dominant-baseline="middle" fill="#1a1227">may_pop</text>
 <line x1="280" y1="189" x2="308" y2="189" stroke="#555" stroke-width="1.5"/>
 <text x="312" y="189" dominant-baseline="middle" fill="#1a1227">pop_data</text>
-</svg></figure>
+</svg>
 
 As can be seen on FIFO's inference diagram. The green lines show that `MAY_PUSH_LATENCY` can be inferred from the paths from `may_push` to `push`, and `may_push` to `push_data`. Now, how precisely is this inference done? 
 
