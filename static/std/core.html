@@ -13,29 +13,104 @@
 <aside class="doc-sidebar">
 <p class="sidebar-title">Files</p>
 <ul>
-<li><a href="control_flow.html">control_flow</a></li>
-<li><a href="core.html" class="sidebar-current">core</a></li>
-<li><a href="memory.html">memory</a></li>
-<li><a href="util.html">util</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
+<li><a class="language-item-ref sidebar-current" href="core.html">core</a></li>
+<li><a class="language-item-ref" href="memory.html">memory</a></li>
+<li><a class="language-item-ref" href="util.html">util</a></li>
 </ul>
-<p class="sidebar-title">Modules</p>
+<a href="#Types" class="sidebar-title">Types</a>
 <ul>
-<li><a href="#LatencyOffset">LatencyOffset</a></li>
-<li><a href="#CrossDomain">CrossDomain</a></li>
-<li><a href="#LatencyOffsetAction">LatencyOffsetAction</a></li>
-<li><a href="#LatencyOffsetActionNoData">LatencyOffsetActionNoData</a></li>
-<li><a href="#IntToBits">IntToBits</a></li>
-<li><a href="#UIntToBits">UIntToBits</a></li>
-<li><a href="#BitsToInt">BitsToInt</a></li>
-<li><a href="#BitsToUInt">BitsToUInt</a></li>
-<li><a href="#ToBits">ToBits</a></li>
-<li><a href="#FromBits">FromBits</a></li>
-<li><a href="#Transmute">Transmute</a></li>
-<li><a href="#IntNarrow">IntNarrow</a></li>
+<li><a class="language-item-ref" href="#bool">bool</a></li>
+<li><a class="language-item-ref" href="#int">int</a></li>
+<li><a class="language-item-ref" href="#float">float</a></li>
+<li><a class="language-item-ref" href="#double">double</a></li>
+<li><a class="language-item-ref" href="#string">string</a></li>
+</ul>
+<a href="#Modules" class="sidebar-title">Modules</a>
+<ul>
+<li><a class="language-item-ref" href="#LatencyOffset">LatencyOffset</a></li>
+<li><a class="language-item-ref" href="#CrossDomain">CrossDomain</a></li>
+<li><a class="language-item-ref" href="#LatencyOffsetAction">LatencyOffsetAction</a></li>
+<li><a class="language-item-ref" href="#LatencyOffsetActionNoData">LatencyOffsetActionNoData</a></li>
+<li><a class="language-item-ref" href="#IntToBits">IntToBits</a></li>
+<li><a class="language-item-ref" href="#UIntToBits">UIntToBits</a></li>
+<li><a class="language-item-ref" href="#BitsToInt">BitsToInt</a></li>
+<li><a class="language-item-ref" href="#BitsToUInt">BitsToUInt</a></li>
+<li><a class="language-item-ref" href="#ToBits">ToBits</a></li>
+<li><a class="language-item-ref" href="#FromBits">FromBits</a></li>
+<li><a class="language-item-ref" href="#Transmute">Transmute</a></li>
+<li><a class="language-item-ref" href="#IntNarrow">IntNarrow</a></li>
+</ul>
+<a href="#CompileTimeFunctions" class="sidebar-title">Compile-Time Functions</a>
+<ul>
+<li><a class="language-item-ref" href="#__crash_compiler">__crash_compiler</a></li>
+<li><a class="language-item-ref" href="#true">true</a></li>
+<li><a class="language-item-ref" href="#false">false</a></li>
+<li><a class="language-item-ref" href="#assert">assert</a></li>
+<li><a class="language-item-ref" href="#sizeof">sizeof</a></li>
+<li><a class="language-item-ref" href="#clog2">clog2</a></li>
+<li><a class="language-item-ref" href="#pow2">pow2</a></li>
+<li><a class="language-item-ref" href="#pow">pow</a></li>
+<li><a class="language-item-ref" href="#nextPow2">nextPow2</a></li>
+<li><a class="language-item-ref" href="#factorial">factorial</a></li>
+<li><a class="language-item-ref" href="#falling_factorial">falling_factorial</a></li>
+<li><a class="language-item-ref" href="#comb">comb</a></li>
+<li><a class="language-item-ref" href="#min">min</a></li>
+<li><a class="language-item-ref" href="#max">max</a></li>
+<li><a class="language-item-ref" href="#noinfer">noinfer</a></li>
+<li><a class="language-item-ref" href="#RepeatGen">RepeatGen</a></li>
+<li><a class="language-item-ref" href="#ReverseGen">ReverseGen</a></li>
+<li><a class="language-item-ref" href="#ConcatGen">ConcatGen</a></li>
+<li><a class="language-item-ref" href="#IntToBitsGen">IntToBitsGen</a></li>
+<li><a class="language-item-ref" href="#UIntToBitsGen">UIntToBitsGen</a></li>
+<li><a class="language-item-ref" href="#BitsToIntGen">BitsToIntGen</a></li>
+<li><a class="language-item-ref" href="#BitsToUIntGen">BitsToUIntGen</a></li>
 </ul>
 </aside>
 <div class="doc-main">
 <h1 class="page-title">core</h1>
+<h2 class="doc-section" id="Types">Types</h2>
+<section class="module" id="bool">
+<div class="module-heading"><h2>bool</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct bool</code></pre></div>
+<div class="doc-prose">
+<p>Boolean values. Can take on <code>true</code> or <code>false</code>.</p>
+<p>Synthesizes to <code>logic</code>. Takes on the values <code>1'b1</code> for <code>true</code>, and <code>1'b0</code> for <code>false</code></p>
+</div>
+</section>
+<section class="module" id="int">
+<div class="module-heading"><h2>int #(int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct int #(int FROM, int TO)</code></pre></div>
+<div class="doc-prose">
+<p>Integers are bounded. From an inclusive <code>FROM</code> value, to an exclusive <code>TO</code> value. For more information, see <a href="https://sus-lang.org/docs/docs/integers.html">Bounded Integers</a></p>
+<p>Synthesizes to <code>logic[sizeof#(T: type int#(FROM, TO)) - 1:0](#sizeof#(T: type int#(FROM, TO)) - 1:0)</code>. Encoded as unsigned 2s complement for <code>FROM &gt;= 0</code>, and as signed 2s complement for <code>FROM &lt; 0</code>.</p>
+<p>Generative integers are unbounded of arbitrary size.</p>
+</div>
+</section>
+<section class="module" id="float">
+<div class="module-heading"><h2>float</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct float</code></pre></div>
+<div class="doc-prose">
+<p>Single precision IEEE 32-bit float. Operators are provided by external libraries, but it’s defined here for convenience.</p>
+<p>Synthesizes to <code>logic[31:0](#31:0)</code></p>
+</div>
+</section>
+<section class="module" id="double">
+<div class="module-heading"><h2>double</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct double</code></pre></div>
+<div class="doc-prose">
+<p>Single precision IEEE 64-bit double-precision float. Operators are provided by external libraries, but it’s defined here for convenience.</p>
+<p>Synthesizes to <code>logic[63:0](#63:0)</code></p>
+</div>
+</section>
+<section class="module" id="string">
+<div class="module-heading"><h2>string</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct string</code></pre></div>
+<div class="doc-prose">
+<p>Gen-only type for strings. Only used to pass strings to Verilog submodules - like data files for ROMs.</p>
+</div>
+</section>
+<h2 class="doc-section" id="Modules">Modules</h2>
 <section class="module" id="LatencyOffset">
 <div class="module-heading"><h2>LatencyOffset #(T, int OFFSET)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module LatencyOffset #(T, int OFFSET) {
@@ -303,6 +378,177 @@ sizeof#(T: type T1) == sizeof#(T: type T2)</p>
 <p>Unsafely shrinks the bounds of an integer.
 The result is not defined if the value lies outside the FROM:TO range.
 For folding behavior choose the <code>mod</code> operator instead.</p>
+</div>
+</section>
+<h2 class="doc-section" id="CompileTimeFunctions">Compile-Time Functions</h2>
+<section class="module" id="__crash_compiler">
+<div class="module-heading"><h2>__crash_compiler</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool __crash_compiler</code></pre></div>
+<div class="doc-prose">
+<p>For intentionally triggering an ICE for debugging. It is a constant that crashes the compiler when it is evaluated</p>
+</div>
+</section>
+<section class="module" id="true">
+<div class="module-heading"><h2>true</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool true</code></pre></div>
+<div class="doc-prose">
+<p>True, as in ‘1’</p>
+</div>
+</section>
+<section class="module" id="false">
+<div class="module-heading"><h2>false</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool false</code></pre></div>
+<div class="doc-prose">
+<p>False, as in ‘0’</p>
+</div>
+</section>
+<section class="module" id="assert">
+<div class="module-heading"><h2>assert #(bool C)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool assert #(bool C)</code></pre></div>
+<div class="doc-prose">
+<p>Fails to execute iff <code>C == false</code></p>
+</div>
+</section>
+<section class="module" id="sizeof">
+<div class="module-heading"><h2>sizeof #(T)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int sizeof #(T)</code></pre></div>
+<div class="doc-prose">
+<p>Returns the size of the given type, in bits.</p>
+<p><code>sizeof #(T: type bool) = 1</code>
+<code>sizeof #(T: type bool[50](#50)) = 50</code>
+<code>sizeof #(T: type int[10](#10)[10](#10)) = 3200</code></p>
+</div>
+</section>
+<section class="module" id="clog2">
+<div class="module-heading"><h2>clog2 #(int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int clog2 #(int V)</code></pre></div>
+<div class="doc-prose">
+<p>Computes the Log2 of a value, rounded up.</p>
+<p>Typically used to find the size in bits that the address would need to be to address into a memory of size V.</p>
+<p>Requires V &gt; 0</p>
+<p><code>clog2 #(V: 15) = 4</code>
+<code>clog2 #(V: 16) = 4</code>
+<code>clog2 #(V: 17) = 5</code></p>
+</div>
+</section>
+<section class="module" id="pow2">
+<div class="module-heading"><h2>pow2 #(int E)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int pow2 #(int E)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>2^E</code> at compile-time</p>
+</div>
+</section>
+<section class="module" id="pow">
+<div class="module-heading"><h2>pow #(int B, int E)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int pow #(int B, int E)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>B^E</code> at compile-time</p>
+</div>
+</section>
+<section class="module" id="nextPow2">
+<div class="module-heading"><h2>nextPow2 #(int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int nextPow2 #(int V)</code></pre></div>
+<div class="doc-prose">
+<p>Returns the smallest power of two greater or equal to the input value. <code>nextPow2#(V) &gt;= V</code>.</p>
+</div>
+</section>
+<section class="module" id="factorial">
+<div class="module-heading"><h2>factorial #(int N)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int factorial #(int N)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>N!</code></p>
+</div>
+</section>
+<section class="module" id="falling_factorial">
+<div class="module-heading"><h2>falling_factorial #(int N, int K)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int falling_factorial #(int N, int K)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>N! / (N - K)!</code>. for <code>0 &lt;= K &lt;= N</code></p>
+</div>
+</section>
+<section class="module" id="comb">
+<div class="module-heading"><h2>comb #(int N, int K)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int comb #(int N, int K)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>N! / (K! * (N - K)!)</code>. for <code>0 &lt;= K &lt;= N</code></p>
+</div>
+</section>
+<section class="module" id="min">
+<div class="module-heading"><h2>min #(int A, int B)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int min #(int A, int B)</code></pre></div>
+<div class="doc-prose">
+<p>Compute the minimum of <code>A</code> and <code>B</code></p>
+</div>
+</section>
+<section class="module" id="max">
+<div class="module-heading"><h2>max #(int A, int B)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int max #(int A, int B)</code></pre></div>
+<div class="doc-prose">
+<p>Compute the maximum of <code>A</code> and <code>B</code></p>
+</div>
+</section>
+<section class="module" id="noinfer">
+<div class="module-heading"><h2>noinfer #(int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int noinfer #(int V)</code></pre></div>
+<div class="doc-prose">
+<p><code>Result == V</code>, but this prevents this from being included in the inference parameters.</p>
+</div>
+</section>
+<section class="module" id="RepeatGen">
+<div class="module-heading"><h2>RepeatGen #(T, int SIZE, T V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const T[SIZE] RepeatGen #(T, int SIZE, T V)</code></pre></div>
+<div class="doc-prose">
+<p>Generative version of <a href="util.html#Repeat">Repeat</a></p>
+</div>
+</section>
+<section class="module" id="ReverseGen">
+<div class="module-heading"><h2>ReverseGen #(T, int SIZE, T[SIZE] V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const T[SIZE] ReverseGen #(T, int SIZE, T[SIZE] V)</code></pre></div>
+<div class="doc-prose">
+<p>Generative version of <a href="util.html#Reverse">Reverse</a></p>
+</div>
+</section>
+<section class="module" id="ConcatGen">
+<div class="module-heading"><h2>ConcatGen #(T, int SIZE_A, int SIZE_B, T[SIZE_A] V_A, T[SIZE_B] V_B)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const T[SIZE_A + SIZE_B] ConcatGen #(T, int SIZE_A, int SIZE_B, T[SIZE_A] V_A, T[SIZE_B] V_B)</code></pre></div>
+<div class="doc-prose">
+<p>Generative version of <a href="util.html#Concat">Concat</a></p>
+</div>
+</section>
+<section class="module" id="IntToBitsGen">
+<div class="module-heading"><h2>IntToBitsGen #(int NUM_BITS, int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool[NUM_BITS] IntToBitsGen #(int NUM_BITS, int V)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen int to 2s complement bits. (<code>RESULT[0](#0)</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Requires <code>-pow2 #(E: NUM_BITS - 1) &lt;= V &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Generative equivalent of <a href="#IntToBits">IntToBits</a></p>
+</div>
+</section>
+<section class="module" id="UIntToBitsGen">
+<div class="module-heading"><h2>UIntToBitsGen #(int NUM_BITS, int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool[NUM_BITS] UIntToBitsGen #(int NUM_BITS, int V)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen int to unsigned bits. (<code>RESULT[0](#0)</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Requires <code>0 &lt;= V &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Generative equivalent of <a href="#UIntToBits">UIntToBits</a></p>
+</div>
+</section>
+<section class="module" id="BitsToIntGen">
+<div class="module-heading"><h2>BitsToIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int BitsToIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen 2s complement bits to a gen signed int. (<code>BITS[0](#0)</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Creates an int in the range <code>-pow2 #(E: NUM_BITS - 1) &lt;= value &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Generative equivalent of <a href="#BitsToInt">BitsToInt</a></p>
+</div>
+</section>
+<section class="module" id="BitsToUIntGen">
+<div class="module-heading"><h2>BitsToUIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int BitsToUIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen unsigned bits to a gen unsigned int. (<code>BITS[0](#0)</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Creates an int in the range <code>0 &lt;= value &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Generative equivalent of <a href="#BitsToUInt">BitsToUInt</a></p>
 </div>
 </section>
 </div>

@@ -16,6 +16,7 @@
   --border:       #e0dcea;
   --link:         #412173;
   --link-hover:   #6b3fa0;
+  --heading-line: #bbbbbb;
 }
 
 /* ── Reset main area to bright theme ── */
@@ -53,6 +54,7 @@ body {
   letter-spacing: 0.13em;
   color: var(--text-faint);
   margin: 0.6rem 0 0.6rem 0;
+  text-decoration: none;
 }
 
 .sidebar-title:first-child {
@@ -69,7 +71,7 @@ body {
   margin-bottom: 0.1rem;
 }
 
-.doc-sidebar a {
+.doc-sidebar a.language-item-ref {
   font-family: 'Fira Code', 'Consolas', monospace;
   font-size: 0.83rem;
   color: var(--text-muted);
@@ -80,10 +82,10 @@ body {
   transition: color 0.12s, background 0.12s;
 }
 
-.doc-sidebar a:hover,
-.doc-sidebar a.sidebar-current {
-  color: var(--brand);
-  background: var(--brand-light);
+.doc-sidebar a.language-item-ref:hover,
+.doc-sidebar a.language-item-ref.sidebar-current {
+  color: var(--brand) !important;
+  background: var(--brand-light) !important;
 }
 
 /* ── Main content ── */
@@ -119,6 +121,15 @@ body {
   font-size: 0.9rem;
   color: var(--text-muted);
   margin: 0 0 2.5rem 0;
+}
+
+.doc-section {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.35rem;
+  color: var(--text);
+  margin: 0.8rem 0 1.8rem 0;
+  padding: 0.5rem 0.0rem 1.0rem 0.0rem;
+  border-bottom: 1px solid var(--heading-line);
 }
 
 /* ── Per-module section ── */
