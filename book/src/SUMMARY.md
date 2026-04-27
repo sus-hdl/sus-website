@@ -21,6 +21,10 @@
   - [Resolving Errors](docs/latency_counting/resolving_errors.md)
   - [Splits](docs/latency_counting/splits.md)
   - [Latency Counting Algorithm](docs/latency_counting/algorithm.md)
+- [Syntax](docs/syntax/syntax.md)
+  - [Operators](docs/syntax/operators.md)
+- [Tensors](docs/tensors/tensors.md)
+  - [Reduction Operators](docs/tensors/reductions.md)
 
 # Compiler Details
 - [Debug Flags](compiler/debug.md)

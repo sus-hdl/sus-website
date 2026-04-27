@@ -32,7 +32,7 @@ sizeof#(T: type int#(FROM: 0, TO: INT_TO)) == clog2#(V: INT_TO)
 ```
 
 ## Operators
-Integers support the following operators:
+Integers support the following [operators](syntax/operators.md):
 - `+` signed/unsigned addition
 - `-` signed/unsigned subtraction
 - `*` signed/unsigned multiply
@@ -43,71 +43,56 @@ Integers support the following operators:
 - `>>` arithmetic or logical right shift, depending on signedness
 - `unary -` signed/unsigned negation
 
+The `mod` operator is recommended for [integer modulos](https://en.wikipedia.org/wiki/Modular_arithmetic), since it has a more widely useful behavior over negative integers compared to `%`. Also, to support the common pattern of implicit 2s complement modular overflow, `mod` has a prescedence below the common arithmetic operators:
+
+```sus
+gen int SIZE = 200
+state int#(FROM: 0, TO: 200) cur_index
+
+input bool up
+
+when up {
+    // Note, no parentheses are needed
+    cur_index = cur_index + 1 mod SIZE
+} else {
+    cur_index = cur_index - 1 mod SIZE
+}
+```
+
 ### Guaranteed optimizations
 
+The SUS code generator will take care to convert `mod` operators to more efficient bit masking or conditional assigns, if powers of two are involved, or if modulo-ing over small differences. 
+
+#### For each `v`, `v mod N` optimizations
+- `int#(FROM: 0, TO: N+1) v`: optimizes to conditional assign to 0
+- `int#(FROM: -1, TO: N) v`: optimizes to conditional assign to `N`
+- `int#(FROM: 0, TO: 2*N) v`: optimizes to conditional assign to `v - N`
+- `int#(FROM: -N, TO: N) v`: optimizes to conditional assign to `v + N`
+- `any v` with `N` a positive power of 2: optimizes to a bitmask
 
 ### What about bitwise operators?
 Since there is no natural way to compute the bounds of an `&` or `|` operation on integers, the `int` type doesn't support these. For the most common operations one would want to use these for, IE masking out the lower N bits, or concatenating bits, SUS instead provides:
 
-```sus
-module BitwiseIntSplit #(int TO, int LOWER_BITS) :
-    int#(FROM: 0, TO) v'0 ->
-    int#(FROM: 0, TO: (TO-1) / pow2#(E: LOWER_BITS) + 1) upper'0,
-    int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0
-```
+- [BitwiseIntSplit](https://sus-lang.org/std/util.html#BitwiseIntSplit)
+- [BitwiseIntConcat](https://sus-lang.org/std/util.html#BitwiseIntConcat)
+- [AlignToPow2](https://sus-lang.org/std/util.html#AlignToPow2)
 
-```sus
-module BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS) :
-    int#(FROM: 0, TO: UPPER_TO) upper'0,
-    int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0 ->
-    int#(FROM: 0, TO: UPPER_TO * pow2#(E: LOWER_BITS)) v'0
-```
+However, if you *do* need to apply boolean operators to your integers not covered by the above, or 
+- [IntToBool](https://sus-lang.org/std/util.html#IntToBool)
+- [BoolToInt](https://sus-lang.org/std/util.html#BoolToInt)
+- [IntToBits](https://sus-lang.org/std/core.html#IntToBits)
+- [UIntToBits](https://sus-lang.org/std/core.html#UIntToBits)
+- [BitsToInt](https://sus-lang.org/std/core.html#BitsToInt)
+- [BitsToUInt](https://sus-lang.org/std/core.html#BitsToUInt)
+It is recommended to use these instead of [ToBits](https://sus-lang.org/std/util.html#ToBits) and [FromBits](https://sus-lang.org/std/util.html#FromBits), as they display the intent more clearly. 
 
-```sus
-module AlignToPow2 #(int FROM, int TO, int LOWER_BITS) {
-    gen int ALIGNED_FROM = FROM - (FROM mod clog2#(V: LOWER_BITS))
-    gen int ALIGNED_TO = TO - (TO + 1 mod clog2#(V: LOWER_BITS))
-    interface AlignToPow2 :
-        int#(FROM, TO) i'0 ->
-        int#(FROM: ALIGNED_FROM, TO: ALIGNED_TO) o'0
-```
+The compile-time equivalents of those:
+[IntToBitsGen](https://sus-lang.org/std/core.html#IntToBitsGen)
+[UIntToBitsGen](https://sus-lang.org/std/core.html#UIntToBitsGen)
+[BitsToIntGen](https://sus-lang.org/std/core.html#BitsToIntGen)
+[BitsToUIntGen](https://sus-lang.org/std/core.html#BitsToUIntGen)
 
+### Integer Narrowing
+In most cases, the recommended way to *narrow* the bounds of an integer is to use `mod` with a power of 2. This mimics the rollover behavior seen in Verilog or VHDL. However, if you need narrowing to ranges that are not powers of 2, you can use [IntNarrow](https://sus-lang.org/std/core.html#IntNarrow) as a fallback. 
 
-
-```sus
-module IntToBits#(int NUM_BITS) : int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0 -> bool[NUM_BITS] bits'0
-```
-
-```sus
-module UIntToBits #(int NUM_BITS) : int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0 -> bool[NUM_BITS] bits'0
-```
-```sus
-module BitsToInt #(int NUM_BITS) : bool[NUM_BITS] bits'0 -> int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0
-```
-```sus
-module BitsToUInt #(int NUM_BITS) : bool[NUM_BITS] bits'0 -> int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0
-```
-
-```sus
-const bool[NUM_BITS] IntToBitsGen #(int NUM_BITS, int V) {}
-```
-
-```sus
-const bool[NUM_BITS] UIntToBitsGen #(int NUM_BITS, int V) {}
-```
-
-```sus
-const int BitsToIntGen #(int NUM_BITS, bool[NUM_BITS] BITS) {}
-```
-
-```sus
-const int BitsToUIntGen #(int NUM_BITS, bool[NUM_BITS] BITS) {}
-```
-
-```sus
-module IntToBool : int#(FROM: 0, TO: 2) i'0 -> bool o'0
-```
-
-```sus
-module BoolToInt : bool i'0 -> int#(FROM: 0, TO: 2) o'0
-```
+There are [plans for introducing flow-sensitive integer narrowing](https://github.com/pc2/sus-compiler/issues/102), which should alleviate most of the circumstances where `IntNarrow` is needed, but at this time this isn't implementated yet. 
