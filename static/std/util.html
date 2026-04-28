@@ -401,8 +401,11 @@ Works for unsigned and signed integers alike</p>
 <section class="module" id="Tuple2">
 <div class="module-heading"><h2>Tuple2 #(T1, T2)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module Tuple2 #(T1, T2) {
-    clock clk
+  clock clk
+   domain clk
+   domain pack_dom
     interface pack : T1 v1_i'0, T2 v2_i'0 -&gt; bool[TO2] packed_o'0
+   domain unpack_dom
     interface unpack : bool[TO2] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="215" font-family="'Fira Code',monospace" font-size="11">
@@ -435,8 +438,11 @@ Works for unsigned and signed integers alike</p>
 <section class="module" id="Tuple3">
 <div class="module-heading"><h2>Tuple3 #(T1, T2, T3)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module Tuple3 #(T1, T2, T3) {
-    clock clk
+  clock clk
+   domain clk
+   domain pack_dom
     interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0 -&gt; bool[TO3] packed_o'0
+   domain unpack_dom
     interface unpack : bool[TO3] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="259" font-family="'Fira Code',monospace" font-size="11">
@@ -473,8 +479,11 @@ Works for unsigned and signed integers alike</p>
 <section class="module" id="Tuple4">
 <div class="module-heading"><h2>Tuple4 #(T1, T2, T3, T4)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module Tuple4 #(T1, T2, T3, T4) {
-    clock clk
+  clock clk
+   domain clk
+   domain pack_dom
     interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0, T4 v4_i'0 -&gt; bool[TO4] packed_o'0
+   domain unpack_dom
     interface unpack : bool[TO4] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="303" font-family="'Fira Code',monospace" font-size="11">
@@ -515,8 +524,11 @@ Works for unsigned and signed integers alike</p>
 <section class="module" id="Tuple5">
 <div class="module-heading"><h2>Tuple5 #(T1, T2, T3, T4, T5)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module Tuple5 #(T1, T2, T3, T4, T5) {
-    clock clk
+  clock clk
+   domain clk
+   domain pack_dom
     interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0, T4 v4_i'0, T5 v5_i'0 -&gt; bool[TO5] packed_o'0
+   domain unpack_dom
     interface unpack : bool[TO5] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0, T5 v5_o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="347" font-family="'Fira Code',monospace" font-size="11">
@@ -561,11 +573,15 @@ Works for unsigned and signed integers alike</p>
 <section class="module" id="RippleFIFO">
 <div class="module-heading"><h2>RippleFIFO #(T, int DEPTH)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module RippleFIFO #(T, int DEPTH) {
-    clock clk
+  clock clk
+   domain clk
+   domain push_dom
     output bool may_push'0
     action push'0 : T push_data'0
+   domain pop_dom
     output bool may_pop'0
     action pop'0 : -&gt; T pop_data'0
+   domain reset
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="255" font-family="'Fira Code',monospace" font-size="11">

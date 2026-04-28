@@ -88,8 +88,10 @@
 <section class="module" id="SlowState">
 <div class="module-heading"><h2>SlowState #(T, T RESET_TO, int OLD_DELAY, int NEW_DELAY)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module SlowState #(T, T RESET_TO, int OLD_DELAY, int NEW_DELAY) {
-    clock clk
+  clock clk
+   domain clk
     action rst
+   domain data
     output state T old'-OLD_DELAY
     output bool may_update'0
     action update'0 : T new'NEW_DELAY
@@ -125,9 +127,11 @@ update() may only be called if may_update, upon which may_update goes low for UP
 <section class="module" id="SlowPipelineEnd">
 <div class="module-heading"><h2>SlowPipelineEnd #(T, int PIPELINE_DEPTH)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module SlowPipelineEnd #(T, int PIPELINE_DEPTH) {
+   domain main
     input T din'PIPELINE_DEPTH
     action input_changed'0
     trigger pipeline_stable'0 : T dout'0
+   domain reset
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
@@ -172,10 +176,12 @@ when manage_adder.pipeline_stable : float new_sum {
 <section class="module" id="SlowPipelineBegin">
 <div class="module-heading"><h2>SlowPipelineBegin #(T, int PIPELINE_DEPTH)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module SlowPipelineBegin #(T, int PIPELINE_DEPTH) {
+   domain main
     input T din'0
     action input_changed'0
     output T dout'-PIPELINE_DEPTH
     trigger pipeline_stable'0
+   domain reset
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
@@ -220,11 +226,14 @@ when manage_adder.pipeline_stable {
 <section class="module" id="ParallelWhile">
 <div class="module-heading"><h2>ParallelWhile #(int COMPUTATION_LATENCY, int REQUEST_DATA_LATENCY)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module ParallelWhile #(int COMPUTATION_LATENCY, int REQUEST_DATA_LATENCY) {
-    clock clk
+  clock clk
+   domain clk
+   domain iter_domain
     trigger iter'0 : int #(FROM: 0, TO: TOTAL_CYCLES) cur_iter'0
     action continue'COMPUTATION_LATENCY
     trigger may_start'-REQUEST_DATA_LATENCY
     action start'0
+   domain reset
     action rst
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">

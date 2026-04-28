@@ -137,9 +137,11 @@ Or: used for negative latencies, for instance to implement Almost-Full FIFOs, st
 <section class="module" id="CrossDomain">
 <div class="module-heading"><h2>CrossDomain #(T)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module CrossDomain #(T) {
-    clock in_clk
+  clock in_clk
+   domain in_clk
     input T din'0
-    clock out_clk
+  clock out_clk
+   domain out_clk
     output T dout'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="150" font-family="'Fira Code',monospace" font-size="11">
