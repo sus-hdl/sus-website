@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>array — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a class="language-item-ref" href="core.html">core</a></li>
+<li><a class="language-item-ref sidebar-current" href="array.html">array</a></li>
+<li><a class="language-item-ref" href="math.html">math</a></li>
+<li><a class="language-item-ref" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
+<li><a class="language-item-ref" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="memory.html">memory</a></li>
+</ul>
+<a href="#Modules" class="sidebar-title">Modules</a>
+<ul>
+<li><a class="language-item-ref" href="#Repeat">Repeat</a></li>
+<li><a class="language-item-ref" href="#Reverse">Reverse</a></li>
+<li><a class="language-item-ref" href="#Concat">Concat</a></li>
+<li><a class="language-item-ref" href="#RotateLeft">RotateLeft</a></li>
+<li><a class="language-item-ref" href="#RotateRight">RotateRight</a></li>
+</ul>
+<a href="#CompileTimeFunctions" class="sidebar-title">Compile-Time Functions</a>
+<ul>
+<li><a class="language-item-ref" href="#RepeatGen">RepeatGen</a></li>
+<li><a class="language-item-ref" href="#ReverseGen">ReverseGen</a></li>
+<li><a class="language-item-ref" href="#ConcatGen">ConcatGen</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">array</h1>
+<h2 class="doc-section" id="Modules">Modules</h2>
+<section class="module" id="Repeat">
+<div class="module-heading"><h2>Repeat #(T, int SIZE)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Repeat #(T, int SIZE) {
+    interface Repeat : T v'0 -&gt; T[SIZE] result'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Repeat</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">result</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Returns an array of SIZE copies of v - should not consume any hardware
+Runtime version of <a href="array.html#RepeatGen" title="array.html#RepeatGen">RepeatGen</a></p>
+</div>
+</section>
+<section class="module" id="Reverse">
+<div class="module-heading"><h2>Reverse #(T, int SIZE)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Reverse #(T, int SIZE) {
+    interface Reverse : T[SIZE] v'0 -&gt; T[SIZE] result'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Reverse</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">result</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Reverse an array - should not consume any hardware
+Runtime version of <a href="array.html#ReverseGen" title="array.html#ReverseGen">ReverseGen</a></p>
+</div>
+</section>
+<section class="module" id="Concat">
+<div class="module-heading"><h2>Concat #(T, int SIZE_A, int SIZE_B)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Concat #(T, int SIZE_A, int SIZE_B) {
+    interface Concat : T[SIZE_A] a'0, T[SIZE_B] b'0 -&gt; T[SIZE_A + SIZE_B] result'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Concat</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">a</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">b</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">result</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Concatenate two arrays, such that the elements of b come after the elements of a - should not consume any hardware
+Runtime version of <a href="array.html#ConcatGen" title="array.html#ConcatGen">ConcatGen</a></p>
+</div>
+</section>
+<section class="module" id="RotateLeft">
+<div class="module-heading"><h2>RotateLeft #(T, int ARRAY_LEN)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RotateLeft #(T, int ARRAY_LEN) {
+    interface RotateLeft : T[ARRAY_LEN] data'0, int#(FROM: 0, TO: ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RotateLeft</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">data</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">offset</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">rotated_data</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Rotates towards lower indexes by the provided offset. Implemented as a Barrel Shifter</p>
+<p>Example: <code>RotateLeft([1, 2, 3, 4], 1) == [2, 3, 4, 1]</code></p>
+</div>
+</section>
+<section class="module" id="RotateRight">
+<div class="module-heading"><h2>RotateRight #(T, int ARRAY_LEN)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RotateRight #(T, int ARRAY_LEN) {
+    interface RotateRight : T[ARRAY_LEN] data'0, int#(FROM: 0, TO: ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RotateRight</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">data</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">offset</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">rotated_data</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Rotates towards higher indexes by the provided offset. Implemented as a Barrel Shifter</p>
+<p>Example: <code>RotateRight([1, 2, 3, 4], 1) == [4, 1, 2, 3]</code></p>
+</div>
+</section>
+<h2 class="doc-section" id="CompileTimeFunctions">Compile-Time Functions</h2>
+<section class="module" id="RepeatGen">
+<div class="module-heading"><h2>RepeatGen #(T, int SIZE, T V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const T[SIZE] RepeatGen #(T, int SIZE, T V)</code></pre></div>
+<div class="doc-prose">
+<p>Generative version of <a href="array.html#Repeat" title="array.html#Repeat">Repeat</a></p>
+</div>
+</section>
+<section class="module" id="ReverseGen">
+<div class="module-heading"><h2>ReverseGen #(T, int SIZE, T[SIZE] V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const T[SIZE] ReverseGen #(T, int SIZE, T[SIZE] V)</code></pre></div>
+<div class="doc-prose">
+<p>Generative version of <a href="array.html#Reverse" title="array.html#Reverse">Reverse</a></p>
+</div>
+</section>
+<section class="module" id="ConcatGen">
+<div class="module-heading"><h2>ConcatGen #(T, int SIZE_A, int SIZE_B, T[SIZE_A] V_A, T[SIZE_B] V_B)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const T[SIZE_A + SIZE_B] ConcatGen #(T, int SIZE_A, int SIZE_B, T[SIZE_A] V_A, T[SIZE_B] V_B)</code></pre></div>
+<div class="doc-prose">
+<p>Generative version of <a href="array.html#Concat" title="array.html#Concat">Concat</a></p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>

@@ -13,10 +13,13 @@
 <aside class="doc-sidebar">
 <p class="sidebar-title">Files</p>
 <ul>
-<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
 <li><a class="language-item-ref" href="core.html">core</a></li>
-<li><a class="language-item-ref sidebar-current" href="memory.html">memory</a></li>
+<li><a class="language-item-ref" href="array.html">array</a></li>
+<li><a class="language-item-ref" href="math.html">math</a></li>
+<li><a class="language-item-ref" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
 <li><a class="language-item-ref" href="util.html">util</a></li>
+<li><a class="language-item-ref sidebar-current" href="memory.html">memory</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -26,6 +29,7 @@
 <li><a class="language-item-ref" href="#ShiftReg">ShiftReg</a></li>
 <li><a class="language-item-ref" href="#FIFO">FIFO</a></li>
 <li><a class="language-item-ref" href="#FWFT">FWFT</a></li>
+<li><a class="language-item-ref" href="#RippleFIFO">RippleFIFO</a></li>
 </ul>
 </aside>
 <div class="doc-main">
@@ -183,7 +187,7 @@ This is because <code>MAY_PUSH_LATENCY</code> translates to the ALMOST_FULL tres
 In the most common case, <code>may_push</code> has a 1-to-1 correspondence with <code>push</code>, hence</p>
 <p>Pop data using the <code>may_pop</code> and <code>pop</code> connections. <code>pop</code> may only be called when <code>may_pop</code> is high.
 After <code>pop</code> is called, the data is returned, one or more cycles later.
-You should not depend on <code>pop_data</code> for your decision to <code>pop</code>. If you need to do that, opt for <a href="#FWFT">FWFT</a> instead.</p>
+You should not depend on <code>pop_data</code> for your decision to <code>pop</code>. If you need to do that, opt for <a href="memory.html#FWFT" title="memory.html#FWFT">FWFT</a> instead.</p>
 <p>Example where we’re moving data from <code>from_fifo</code>, adding one to it with wrap around, and pushing to <code>to_fifo</code>:</p>
 <pre><code class="language-sus">module TwoFIFOs {
     FIFO#(T: type int#(FROM: 0, TO: 256), DEPTH: 128) from_fifo
@@ -244,13 +248,13 @@ You should not depend on <code>pop_data</code> for your decision to <code>pop</c
 <text x="108" y="184" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
 </svg></figure>
 <div class="doc-prose">
-<p>A First-Word-Fall-Through FIFO. Similar to the regular <a href="#FIFO">FIFO</a>,
+<p>A First-Word-Fall-Through FIFO. Similar to the regular <a href="memory.html#FIFO" title="memory.html#FIFO">FIFO</a>,
 but this one allows for inspection of the data that is ready to be popped before popping it.</p>
 <p>Push data in through the <code>may_push</code>, and <code>push</code> connections.
 If <code>may_push</code> is high, then you’re allowed to perform at most <code>MAY_PUSH_LATENCY</code> more pushes before you must stop.
 This is because <code>MAY_PUSH_LATENCY</code> translates to the ALMOST_FULL treshold on the FIFO’s internals.
 In the most common case, <code>may_push</code> has a 1-to-1 correspondence with <code>push</code>, hence</p>
-<p>Instead of <a href="#FIFO">FIFO</a>’s <code>may_pop</code> interface, <code>FWFT</code> comes with a <code>pop_available</code> trigger, which presents you with the data that you can then <code>pop()</code>.</p>
+<p>Instead of <a href="memory.html#FIFO" title="memory.html#FIFO">FIFO</a>’s <code>may_pop</code> interface, <code>FWFT</code> comes with a <code>pop_available</code> trigger, which presents you with the data that you can then <code>pop()</code>.</p>
 <p>The main usecase of <code>FWFT</code> is for situations where you need a 0-cycle response time to a <code>pop</code> signal.</p>
 <p>Below is an of a scenario where we need such a 0-cycle pop latency.
 The goal is to produce an <code>is_last</code> signal, based on the sequence lengths stored in <code>segment_sizes_fifo</code>
@@ -283,6 +287,49 @@ Let’s say it will not happen that <code>data_stream</code> is called when no s
     // not shown here is pushing data into segment_sizes_fifo
 }
 </code></pre>
+</div>
+</section>
+<section class="module" id="RippleFIFO">
+<div class="module-heading"><h2>RippleFIFO #(T, int DEPTH)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RippleFIFO #(T, int DEPTH) {
+   domain push_dom
+    output bool may_push'0
+    action push'0 : T push_data'0
+   domain pop_dom
+    output bool may_pop'0
+    action pop'0 : -&gt; T pop_data'0
+   domain reset
+    action rst
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RippleFIFO</text>
+<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="173" x2="280" y2="173" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="168" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
+<text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_push</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
+<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">may_pop</text>
+<line x1="280" y1="154" x2="308" y2="154" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="154" dominant-baseline="middle" fill="#1a1227">pop_data</text>
+<line x1="112" y1="189" x2="140" y2="189" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="189" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+</svg></figure>
+<div class="doc-prose">
+<p>A FIFO implemented as a sequence of registers with a accompanying valid bit.</p>
+<p>Bandwidth limited to 1 element every 2 cycles.</p>
+<p>Use for very small FIFOs, in bandwidth-limited circumstances.</p>
 </div>
 </section>
 </div>

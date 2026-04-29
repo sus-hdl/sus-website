@@ -73,26 +73,26 @@ The SUS code generator will take care to convert `mod` operators to more efficie
 ### What about bitwise operators?
 Since there is no natural way to compute the bounds of an `&` or `|` operation on integers, the `int` type doesn't support these. For the most common operations one would want to use these for, IE masking out the lower N bits, or concatenating bits, SUS instead provides:
 
-- [BitwiseIntSplit](https://sus-lang.org/std/util.html#BitwiseIntSplit)
-- [BitwiseIntConcat](https://sus-lang.org/std/util.html#BitwiseIntConcat)
-- [AlignToPow2](https://sus-lang.org/std/util.html#AlignToPow2)
+- [BitwiseIntSplit](https://sus-lang.org/std/math.html#BitwiseIntSplit)
+- [BitwiseIntConcat](https://sus-lang.org/std/math.html#BitwiseIntConcat)
+- [AlignToPow2](https://sus-lang.org/std/math.html#AlignToPow2)
 
 However, if you *do* need to apply boolean operators to your integers not covered by the above, or 
-- [IntToBool](https://sus-lang.org/std/util.html#IntToBool)
-- [BoolToInt](https://sus-lang.org/std/util.html#BoolToInt)
-- [IntToBits](https://sus-lang.org/std/core.html#IntToBits)
-- [UIntToBits](https://sus-lang.org/std/core.html#UIntToBits)
-- [BitsToInt](https://sus-lang.org/std/core.html#BitsToInt)
-- [BitsToUInt](https://sus-lang.org/std/core.html#BitsToUInt)
-It is recommended to use these instead of [ToBits](https://sus-lang.org/std/util.html#ToBits) and [FromBits](https://sus-lang.org/std/util.html#FromBits), as they display the intent more clearly. 
+- [IntToBool](https://sus-lang.org/std/conversion.html#IntToBool)
+- [BoolToInt](https://sus-lang.org/std/conversion.html#BoolToInt)
+- [IntToBits](https://sus-lang.org/std/conversion.html#IntToBits)
+- [UIntToBits](https://sus-lang.org/std/conversion.html#UIntToBits)
+- [BitsToInt](https://sus-lang.org/std/conversion.html#BitsToInt)
+- [BitsToUInt](https://sus-lang.org/std/conversion.html#BitsToUInt)
+It is recommended to use these instead of [ToBits](https://sus-lang.org/std/conversion.html#ToBits) and [FromBits](https://sus-lang.org/std/conversion.html#FromBits), as they display the intent more clearly. 
 
 The compile-time equivalents of those:
-[IntToBitsGen](https://sus-lang.org/std/core.html#IntToBitsGen)
-[UIntToBitsGen](https://sus-lang.org/std/core.html#UIntToBitsGen)
-[BitsToIntGen](https://sus-lang.org/std/core.html#BitsToIntGen)
-[BitsToUIntGen](https://sus-lang.org/std/core.html#BitsToUIntGen)
+[IntToBitsGen](https://sus-lang.org/std/conversion.html#IntToBitsGen)
+[UIntToBitsGen](https://sus-lang.org/std/conversion.html#UIntToBitsGen)
+[BitsToIntGen](https://sus-lang.org/std/conversion.html#BitsToIntGen)
+[BitsToUIntGen](https://sus-lang.org/std/conversion.html#BitsToUIntGen)
 
 ### Integer Narrowing
-In most cases, the recommended way to *narrow* the bounds of an integer is to use `mod` with a power of 2. This mimics the rollover behavior seen in Verilog or VHDL. However, if you need narrowing to ranges that are not powers of 2, you can use [IntNarrow](https://sus-lang.org/std/core.html#IntNarrow) as a fallback. 
+In most cases, the recommended way to *narrow* the bounds of an integer is to use `mod` with a power of 2. This mimics the rollover behavior seen in Verilog or VHDL. However, if you need narrowing to ranges that are not powers of 2, you can use [IntNarrow](https://sus-lang.org/std/math.html#IntNarrow) as a fallback. 
 
 There are [plans for introducing flow-sensitive integer narrowing](https://github.com/pc2/sus-compiler/issues/102), which should alleviate most of the circumstances where `IntNarrow` is needed, but at this time this isn't implementated yet. 

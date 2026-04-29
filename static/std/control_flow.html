@@ -13,10 +13,13 @@
 <aside class="doc-sidebar">
 <p class="sidebar-title">Files</p>
 <ul>
-<li><a class="language-item-ref sidebar-current" href="control_flow.html">control_flow</a></li>
 <li><a class="language-item-ref" href="core.html">core</a></li>
-<li><a class="language-item-ref" href="memory.html">memory</a></li>
+<li><a class="language-item-ref" href="array.html">array</a></li>
+<li><a class="language-item-ref" href="math.html">math</a></li>
+<li><a class="language-item-ref" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref sidebar-current" href="control_flow.html">control_flow</a></li>
 <li><a class="language-item-ref" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="memory.html">memory</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -159,7 +162,7 @@ update() may only be called if may_update, upon which may_update goes low for UP
 </svg></figure>
 <div class="doc-prose">
 <p>This module lets you wait until all values within a pipeline have stabilized, and use the results as if the pipeline completed instantaneously.</p>
-<p>As opposed to <a href="#SlowPipelineBegin">SlowPipelineBegin</a>, this module is meant to go at the end of your pipeline</p>
+<p>As opposed to <a href="control_flow.html#SlowPipelineBegin" title="control_flow.html#SlowPipelineBegin">SlowPipelineBegin</a>, this module is meant to go at the end of your pipeline</p>
 <p>Usage:</p>
 <pre><code class="language-sus">state float cur_sum'0
 SlowPipelineEnd manage_adder
@@ -209,7 +212,7 @@ when manage_adder.pipeline_stable : float new_sum {
 </svg></figure>
 <div class="doc-prose">
 <p>This module lets you wait until all values within a pipeline have stabilized, and use the results as if the pipeline completed instantaneously.</p>
-<p>As opposed to <a href="#SlowPipelineEnd">SlowPipelineEnd</a>, this module is meant to go at the beginning of your pipeline</p>
+<p>As opposed to <a href="control_flow.html#SlowPipelineEnd" title="control_flow.html#SlowPipelineEnd">SlowPipelineEnd</a>, this module is meant to go at the beginning of your pipeline</p>
 <p>Usage:</p>
 <pre><code class="language-sus">state float cur_sum'0
 SlowPipeline manage_adder
@@ -329,11 +332,11 @@ when pw.iter : int iteration {
 <text x="312" y="66" dominant-baseline="middle" fill="#1a1227">old</text>
 </svg></figure>
 <div class="doc-prose">
-<p>See <a href="#ParallelWhile">ParallelWhile</a></p>
-<p>Similar to <a href="#ParallelStore">ParallelStore</a></p>
-<p>Must be initialized simultaneously with <a href="#ParallelWhile">ParallelWhile::start</a> (with <a href="#ParallelState">ParallelState::init</a>).
-Old data can be read from <a href="#ParallelState">ParallelState::old</a>
-Data must be updated through <a href="#ParallelState">ParallelState::new</a> every cycle</p>
+<p>See <a href="control_flow.html#ParallelWhile" title="control_flow.html#ParallelWhile">ParallelWhile</a></p>
+<p>Similar to <a href="control_flow.html#ParallelStore" title="control_flow.html#ParallelStore">ParallelStore</a></p>
+<p>Must be initialized simultaneously with [ParallelWhile::start] (with [ParallelState::init]).
+Old data can be read from [ParallelState::old]
+Data must be updated through [ParallelState::new] every cycle</p>
 </div>
 </section>
 <section class="module" id="ParallelStore">
@@ -361,10 +364,10 @@ Data must be updated through <a href="#ParallelState">ParallelState::new</a> eve
 <text x="312" y="66" dominant-baseline="middle" fill="#1a1227">old</text>
 </svg></figure>
 <div class="doc-prose">
-<p>See <a href="#ParallelWhile">ParallelWhile</a></p>
-<p>Similar to <a href="#ParallelState">ParallelState</a>, but only initialized once, simultaneously with <a href="#ParallelWhile">ParallelWhile::start</a>.
-Data is returned every cycle on <a href="#ParallelStore">ParallelStore::old</a>.
-Old data can be read from <a href="#ParallelState">ParallelState::old</a></p>
+<p>See <a href="control_flow.html#ParallelWhile" title="control_flow.html#ParallelWhile">ParallelWhile</a></p>
+<p>Similar to <a href="control_flow.html#ParallelState" title="control_flow.html#ParallelState">ParallelState</a>, but only initialized once, simultaneously with [ParallelWhile::start].
+Data is returned every cycle on [ParallelStore::old].
+Old data can be read from [ParallelState::old]</p>
 </div>
 </section>
 </div>
