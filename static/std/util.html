@@ -19,14 +19,11 @@
 <li><a class="language-item-ref" href="conversion.html">conversion</a></li>
 <li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
 <li><a class="language-item-ref sidebar-current" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
-<li><a class="language-item-ref" href="#Abs">Abs</a></li>
-<li><a class="language-item-ref" href="#ToOneHot">ToOneHot</a></li>
-<li><a class="language-item-ref" href="#PopCount">PopCount</a></li>
-<li><a class="language-item-ref" href="#TreeAdd">TreeAdd</a></li>
 <li><a class="language-item-ref" href="#Ternary">Ternary</a></li>
 <li><a class="language-item-ref" href="#Tuple2">Tuple2</a></li>
 <li><a class="language-item-ref" href="#Tuple3">Tuple3</a></li>
@@ -37,74 +34,6 @@
 <div class="doc-main">
 <h1 class="page-title">util</h1>
 <h2 class="doc-section" id="Modules">Modules</h2>
-<section class="module" id="Abs">
-<div class="module-heading"><h2>Abs #(int TO)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module Abs #(int TO) {
-    interface Abs : int #(FROM: -TO+1, TO) a -&gt; int #(FROM: 0, TO) o
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Abs</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">a</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
-</svg></figure>
-</section>
-<section class="module" id="ToOneHot">
-<div class="module-heading"><h2>ToOneHot #(int SIZE)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module ToOneHot #(int SIZE) {
-    interface ToOneHot : int#(FROM: 0, TO: SIZE - 1) selection'0 -&gt; bool[SIZE] bits'0
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ToOneHot</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">selection</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">bits</text>
-</svg></figure>
-</section>
-<section class="module" id="PopCount">
-<div class="module-heading"><h2>PopCount #(int WIDTH)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module PopCount #(int WIDTH) {
-    interface PopCount : bool[WIDTH] bits'0 -&gt; int#(FROM: 0, TO: WIDTH+1) popcount
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">PopCount</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">bits</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">popcount</text>
-</svg></figure>
-</section>
-<section class="module" id="TreeAdd">
-<div class="module-heading"><h2>TreeAdd #(int WIDTH, int FROM, int TO)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module TreeAdd #(int WIDTH, int FROM, int TO) {
-    interface TreeAdd : int#(FROM, TO)[WIDTH] values'0 -&gt; int#(FROM: FROM*WIDTH, TO: (TO - 1)*WIDTH + 1) total
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">TreeAdd</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">values</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">total</text>
-</svg></figure>
-</section>
 <section class="module" id="Ternary">
 <div class="module-heading"><h2>Ternary #(T)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module Ternary #(T) {
