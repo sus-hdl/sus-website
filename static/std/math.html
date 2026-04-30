@@ -60,6 +60,12 @@
 <line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
 </svg></figure>
+<div class="doc-prose">
+<p>Compute the Absolute Value of the given integer.</p>
+<p>Examples:</p>
+<p><code>Abs(3) == 3</code></p>
+<p><code>Abs(-7) == 7</code></p>
+</div>
 </section>
 <section class="module" id="TreeAdd">
 <div class="module-heading"><h2>TreeAdd #(int WIDTH, int FROM, int TO)</h2></div>
@@ -108,9 +114,10 @@ For folding behavior choose the <code>mod</code> operator instead.</p>
 <p>Computes the Log2 of a value, rounded up.</p>
 <p>Typically used to find the size in bits that the address would need to be to address into a memory of size V.</p>
 <p>Requires V &gt; 0</p>
-<p><code>clog2 #(V: 15) = 4</code>
-<code>clog2 #(V: 16) = 4</code>
-<code>clog2 #(V: 17) = 5</code></p>
+<p>Examples:</p>
+<p><code>clog2 #(V: 15) = 4</code></p>
+<p><code>clog2 #(V: 16) = 4</code></p>
+<p><code>clog2 #(V: 17) = 5</code></p>
 </div>
 </section>
 <section class="module" id="pow2">

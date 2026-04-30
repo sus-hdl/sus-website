@@ -53,9 +53,9 @@
 </svg></figure>
 <div class="doc-prose">
 <p>Creates a One-Hot encoding of the given integer.</p>
-<p>Examples:
-<code>ToOneHot#(SIZE: 5)(3) == [false, false, false, true, false]</code>
-<code>ToOneHot#(SIZE: 2)(0) == [true, false]</code></p>
+<p>Examples:</p>
+<p><code>ToOneHot#(SIZE: 5)(3) == [false, false, false, true, false]</code></p>
+<p><code>ToOneHot#(SIZE: 2)(0) == [true, false]</code></p>
 </div>
 </section>
 <section class="module" id="FindFirst">
@@ -83,14 +83,13 @@
 <p>This module returns the index of the first <code>true</code> bit in the given bitstring.
 If the whole bitstring is <code>false</code>, then <code>is_nonzero</code> is not fired.
 If there is at least one set (‘1’) bit, <code>is_nonzero</code> triggers with the index of the first ‘1’ bit.</p>
-<p>Usage:
-´´´sus
-FindFirst find_first_bit
+<p>Usage:</p>
+<pre><code class="language-sus">FindFirst find_first_bit
 find_first_bit.find([false, false, true, false, true])
 when find_first_bit.is_nonzero : int first_nonzero {
-// Fires with <code>2</code>
+    // Fires with `2`
 }
-´´´</p>
+</code></pre>
 </div>
 </section>
 <section class="module" id="PopCount">
@@ -111,9 +110,9 @@ when find_first_bit.is_nonzero : int first_nonzero {
 </svg></figure>
 <div class="doc-prose">
 <p>Counts the number of set (‘1’) bits in the bitstring.</p>
-<p>Example:
-<code>PopCount([true, false, true, true, true]) == 4</code>
-<code>PopCount(8'b00111011) == 5</code></p>
+<p>Examples:</p>
+<p><code>PopCount([true, false, true, true, true]) == 4</code></p>
+<p><code>PopCount(8'b00111011) == 5</code></p>
 </div>
 </section>
 <section class="module" id="BitwiseIntSplit">
@@ -135,7 +134,7 @@ when find_first_bit.is_nonzero : int first_nonzero {
 <text x="312" y="88" dominant-baseline="middle" fill="#1a1227">lower</text>
 </svg></figure>
 <div class="doc-prose">
-<p>Splits the given integer. The upper [LOWER_BITS:] bits are returned as upper, the lower [:LOWER_BITS] bits are returned in lower
+<p>Splits the given integer. The upper <code>[LOWER_BITS:]</code> bits are returned as upper, the lower <code>[:LOWER_BITS]</code> bits are returned in lower
 See also <a href="bitwise.html#BitwiseIntConcat" title="bitwise.html#BitwiseIntConcat">BitwiseIntConcat</a></p>
 </div>
 </section>
@@ -179,7 +178,7 @@ See also <a href="bitwise.html#BitwiseIntSplit" title="bitwise.html#BitwiseIntSp
 <text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
 </svg></figure>
 <div class="doc-prose">
-<p>Sets the lower [:LOWER_BITS] bits to false, thus aligning the value
+<p>Sets the lower <code>[:LOWER_BITS]</code> bits to false, thus aligning the value
 Works for unsigned and signed integers alike</p>
 </div>
 </section>
