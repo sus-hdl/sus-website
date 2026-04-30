@@ -25,7 +25,7 @@
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
 <li><a class="language-item-ref" href="#ToOneHot">ToOneHot</a></li>
-<li><a class="language-item-ref" href="#FindFirst">FindFirst</a></li>
+<li><a class="language-item-ref" href="#FirstSetBit">FirstSetBit</a></li>
 <li><a class="language-item-ref" href="#PopCount">PopCount</a></li>
 <li><a class="language-item-ref" href="#BitwiseIntSplit">BitwiseIntSplit</a></li>
 <li><a class="language-item-ref" href="#BitwiseIntConcat">BitwiseIntConcat</a></li>
@@ -59,15 +59,15 @@ ToOneHot#(SIZE: 2)(0) == [true, false]
 </code></pre>
 </div>
 </section>
-<section class="module" id="FindFirst">
-<div class="module-heading"><h2>FindFirst #(int SIZE)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module FindFirst #(int SIZE) {
+<section class="module" id="FirstSetBit">
+<div class="module-heading"><h2>FirstSetBit #(int SIZE)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module FirstSetBit #(int SIZE) {
     trigger is_nonzero : int#(FROM: 0, TO: SIZE) first_nonzero'0
     action find : bool[SIZE] bits'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FindFirst</text>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FirstSetBit</text>
 <rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
@@ -85,7 +85,7 @@ ToOneHot#(SIZE: 2)(0) == [true, false]
 If the whole bitstring is <code>false</code>, then <code>is_nonzero</code> is not fired.
 If there is at least one set (‘1’) bit, <code>is_nonzero</code> triggers with the index of the first ‘1’ bit.</p>
 <p>Usage:</p>
-<pre><code class="language-sus">FindFirst find_first_bit
+<pre><code class="language-sus">FirstSetBit find_first_bit
 find_first_bit.find([false, false, true, false, true])
 when find_first_bit.is_nonzero : int first_nonzero {
     // Fires with `2`
