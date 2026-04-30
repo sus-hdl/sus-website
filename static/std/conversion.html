@@ -190,7 +190,7 @@
 <text x="312" y="66" dominant-baseline="middle" fill="#1a1227">bits</text>
 </svg></figure>
 <div class="doc-prose">
-<p>Bitwise conversion of type T to a sizeof#(T)-bit bitset.</p>
+<p>Bitwise conversion of type <code>T</code> to a <code>sizeof#(T)</code>-bit bitset.</p>
 </div>
 </section>
 <section class="module" id="FromBits">
@@ -210,7 +210,7 @@
 <text x="312" y="66" dominant-baseline="middle" fill="#1a1227">value</text>
 </svg></figure>
 <div class="doc-prose">
-<p>Bitwise conversion of a sizeof#(T)-bit bitset to type T.</p>
+<p>Bitwise conversion of a <code>sizeof#(T)</code>-bit bitset to type <code>T</code>.</p>
 </div>
 </section>
 <section class="module" id="Transmute">
@@ -231,7 +231,9 @@
 </svg></figure>
 <div class="doc-prose">
 <p>Bitwise conversion of T1 into T2.</p>
-<p>Requires <code>sizeof#(T: type T1) == sizeof#(T: type T2)</code></p>
+<p>Requires:</p>
+<pre><code class="language-sus">sizeof#(T: type T1) == sizeof#(T: type T2)
+</code></pre>
 </div>
 </section>
 <h2 class="doc-section" id="CompileTimeFunctions">Compile-Time Functions</h2>

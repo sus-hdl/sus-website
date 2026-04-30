@@ -63,8 +63,9 @@
 <div class="doc-prose">
 <p>Compute the Absolute Value of the given integer.</p>
 <p>Examples:</p>
-<p><code>Abs(3) == 3</code></p>
-<p><code>Abs(-7) == 7</code></p>
+<pre><code class="language-sus">Abs(3) == 3
+Abs(-7) == 7
+</code></pre>
 </div>
 </section>
 <section class="module" id="TreeAdd">
@@ -111,13 +112,14 @@ For folding behavior choose the <code>mod</code> operator instead.</p>
 <div class="module-heading"><h2>clog2 #(int V)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">const int clog2 #(int V)</code></pre></div>
 <div class="doc-prose">
-<p>Computes the Log2 of a value, rounded up.</p>
-<p>Typically used to find the size in bits that the address would need to be to address into a memory of size V.</p>
-<p>Requires V &gt; 0</p>
+<p>Computes the Base 2 logarithm of a value, rounded up.</p>
+<p>Typically used to find the size in bits that the address would need to be to address into a memory of size <code>V</code>.</p>
+<p>Requires <code>V &gt; 0</code></p>
 <p>Examples:</p>
-<p><code>clog2 #(V: 15) = 4</code></p>
-<p><code>clog2 #(V: 16) = 4</code></p>
-<p><code>clog2 #(V: 17) = 5</code></p>
+<pre><code class="language-sus">clog2 #(V: 15) == 4
+clog2 #(V: 16) == 4
+clog2 #(V: 17) == 5
+</code></pre>
 </div>
 </section>
 <section class="module" id="pow2">

@@ -226,9 +226,10 @@ This performs no synchronization or other data integrity measures!</p>
 <div class="doc-prose">
 <p>Returns the size of the given type, in bits.</p>
 <p>Examples:</p>
-<p><code>sizeof #(T: type bool) = 1</code></p>
-<p><code>sizeof #(T: type bool[50]) = 50</code></p>
-<p><code>sizeof #(T: type int[10][10]) = 3200</code></p>
+<pre><code class="language-sus">sizeof #(T: type bool) = 1
+sizeof #(T: type bool[50]) = 50
+sizeof #(T: type int[10][10]) = 3200
+</code></pre>
 </div>
 </section>
 <section class="module" id="noinfer">

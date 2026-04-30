@@ -54,8 +54,9 @@
 <div class="doc-prose">
 <p>Creates a One-Hot encoding of the given integer.</p>
 <p>Examples:</p>
-<p><code>ToOneHot#(SIZE: 5)(3) == [false, false, false, true, false]</code></p>
-<p><code>ToOneHot#(SIZE: 2)(0) == [true, false]</code></p>
+<pre><code class="language-sus">ToOneHot#(SIZE: 5)(3) == [false, false, false, true, false]
+ToOneHot#(SIZE: 2)(0) == [true, false]
+</code></pre>
 </div>
 </section>
 <section class="module" id="FindFirst">
@@ -111,8 +112,9 @@ when find_first_bit.is_nonzero : int first_nonzero {
 <div class="doc-prose">
 <p>Counts the number of set (‘1’) bits in the bitstring.</p>
 <p>Examples:</p>
-<p><code>PopCount([true, false, true, true, true]) == 4</code></p>
-<p><code>PopCount(8'b00111011) == 5</code></p>
+<pre><code class="language-sus">PopCount([true, false, true, true, true]) == 4
+PopCount(8'b00111011) == 5
+</code></pre>
 </div>
 </section>
 <section class="module" id="BitwiseIntSplit">
@@ -135,7 +137,7 @@ when find_first_bit.is_nonzero : int first_nonzero {
 </svg></figure>
 <div class="doc-prose">
 <p>Splits the given integer. The upper <code>[LOWER_BITS:]</code> bits are returned as upper, the lower <code>[:LOWER_BITS]</code> bits are returned in lower
-See also <a href="bitwise.html#BitwiseIntConcat" title="bitwise.html#BitwiseIntConcat">BitwiseIntConcat</a></p>
+See also <a href="bitwise.html#BitwiseIntConcat" title="bitwise.html#BitwiseIntConcat">BitwiseIntConcat</a>.</p>
 </div>
 </section>
 <section class="module" id="BitwiseIntConcat">
@@ -158,7 +160,7 @@ See also <a href="bitwise.html#BitwiseIntConcat" title="bitwise.html#BitwiseIntC
 </svg></figure>
 <div class="doc-prose">
 <p>Recombines a lower and upper integer parts.
-See also <a href="bitwise.html#BitwiseIntSplit" title="bitwise.html#BitwiseIntSplit">BitwiseIntSplit</a></p>
+See also <a href="bitwise.html#BitwiseIntSplit" title="bitwise.html#BitwiseIntSplit">BitwiseIntSplit</a>.</p>
 </div>
 </section>
 <section class="module" id="AlignToPow2">
@@ -179,7 +181,7 @@ See also <a href="bitwise.html#BitwiseIntSplit" title="bitwise.html#BitwiseIntSp
 </svg></figure>
 <div class="doc-prose">
 <p>Sets the lower <code>[:LOWER_BITS]</code> bits to false, thus aligning the value
-Works for unsigned and signed integers alike</p>
+Works for unsigned and signed integers alike.</p>
 </div>
 </section>
 </div>
