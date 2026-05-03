@@ -73,9 +73,9 @@ The SUS code generator will take care to convert `mod` operators to more efficie
 ### What about bitwise operators?
 Since there is no natural way to compute the bounds of an `&` or `|` operation on integers, the `int` type doesn't support these. For the most common operations one would want to use these for, IE masking out the lower N bits, or concatenating bits, SUS instead provides:
 
-- [BitwiseIntSplit](https://sus-lang.org/std/math.html#BitwiseIntSplit)
-- [BitwiseIntConcat](https://sus-lang.org/std/math.html#BitwiseIntConcat)
-- [AlignToPow2](https://sus-lang.org/std/math.html#AlignToPow2)
+- [BitwiseIntSplit](https://sus-lang.org/std/bitwise.html#BitwiseIntSplit)
+- [BitwiseIntConcat](https://sus-lang.org/std/bitwise.html#BitwiseIntConcat)
+- [AlignToPow2](https://sus-lang.org/std/bitwise.html#AlignToPow2)
 
 However, if you *do* need to apply boolean operators to your integers not covered by the above, or 
 - [IntToBool](https://sus-lang.org/std/conversion.html#IntToBool)
