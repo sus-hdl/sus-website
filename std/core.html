@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>core — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a class="language-item-ref sidebar-current" href="core.html">core</a></li>
+<li><a class="language-item-ref" href="array.html">array</a></li>
+<li><a class="language-item-ref" href="math.html">math</a></li>
+<li><a class="language-item-ref" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
+<li><a class="language-item-ref" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
+<li><a class="language-item-ref" href="memory.html">memory</a></li>
+</ul>
+<a href="#Types" class="sidebar-title">Types</a>
+<ul>
+<li><a class="language-item-ref" href="#bool">bool</a></li>
+<li><a class="language-item-ref" href="#int">int</a></li>
+<li><a class="language-item-ref" href="#float">float</a></li>
+<li><a class="language-item-ref" href="#double">double</a></li>
+<li><a class="language-item-ref" href="#string">string</a></li>
+</ul>
+<a href="#Modules" class="sidebar-title">Modules</a>
+<ul>
+<li><a class="language-item-ref" href="#LatencyOffset">LatencyOffset</a></li>
+<li><a class="language-item-ref" href="#CrossDomain">CrossDomain</a></li>
+<li><a class="language-item-ref" href="#LatencyOffsetAction">LatencyOffsetAction</a></li>
+<li><a class="language-item-ref" href="#LatencyOffsetActionNoData">LatencyOffsetActionNoData</a></li>
+</ul>
+<a href="#CompileTimeFunctions" class="sidebar-title">Compile-Time Functions</a>
+<ul>
+<li><a class="language-item-ref" href="#__crash_compiler">__crash_compiler</a></li>
+<li><a class="language-item-ref" href="#true">true</a></li>
+<li><a class="language-item-ref" href="#false">false</a></li>
+<li><a class="language-item-ref" href="#assert">assert</a></li>
+<li><a class="language-item-ref" href="#sizeof">sizeof</a></li>
+<li><a class="language-item-ref" href="#noinfer">noinfer</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">core</h1>
+<h2 class="doc-section" id="Types">Types</h2>
+<section class="module" id="bool">
+<div class="module-heading"><h2>bool</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct bool</code></pre></div>
+<div class="doc-prose">
+<p>Boolean values. Can take on <code>true</code> or <code>false</code>.</p>
+<p>Synthesizes to <code>logic</code>. Takes on the values <code>1'b1</code> for <code>true</code>, and <code>1'b0</code> for <code>false</code></p>
+</div>
+</section>
+<section class="module" id="int">
+<div class="module-heading"><h2>int #(int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct int #(int FROM, int TO)</code></pre></div>
+<div class="doc-prose">
+<p>Integers are bounded. From an inclusive <code>FROM</code> value, to an exclusive <code>TO</code> value. For more information, see <a href="https://sus-lang.org/docs/docs/integers.html">Bounded Integers</a></p>
+<p>Synthesizes to <code>logic[sizeof#(T: type int#(FROM, TO)) - 1:0]</code>. Encoded as unsigned 2s complement for <code>FROM &gt;= 0</code>, and as signed 2s complement for <code>FROM &lt; 0</code>.</p>
+<p>Generative integers are unbounded of arbitrary size.</p>
+</div>
+</section>
+<section class="module" id="float">
+<div class="module-heading"><h2>float</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct float</code></pre></div>
+<div class="doc-prose">
+<p>Single precision IEEE 32-bit float. Operators are provided by external libraries, but it’s defined here for convenience.</p>
+<p>Synthesizes to <code>logic[31:0]</code></p>
+</div>
+</section>
+<section class="module" id="double">
+<div class="module-heading"><h2>double</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct double</code></pre></div>
+<div class="doc-prose">
+<p>Single precision IEEE 64-bit double-precision float. Operators are provided by external libraries, but it’s defined here for convenience.</p>
+<p>Synthesizes to <code>logic[63:0]</code></p>
+</div>
+</section>
+<section class="module" id="string">
+<div class="module-heading"><h2>string</h2></div>
+<div class="interface-block"><pre><code class="language-sus">__builtin__ struct string</code></pre></div>
+<div class="doc-prose">
+<p>Gen-only type for strings. Only used to pass strings to Verilog submodules - like data files for ROMs.</p>
+</div>
+</section>
+<h2 class="doc-section" id="Modules">Modules</h2>
+<section class="module" id="LatencyOffset">
+<div class="module-heading"><h2>LatencyOffset #(T, int OFFSET)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module LatencyOffset #(T, int OFFSET) {
+    interface LatencyOffset : T din'0 -&gt; T dout'OFFSET
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">LatencyOffset</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Unsafe builtin to circumvent the Latency Counting System. Connects <code>dout</code> to <code>din</code> without adding the requisite latency
+Or: used for negative latencies, for instance to implement Almost-Full FIFOs, stateful for loops, etc.</p>
+</div>
+</section>
+<section class="module" id="CrossDomain">
+<div class="module-heading"><h2>CrossDomain #(T)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module CrossDomain #(T) {
+  clock in_clk
+   domain in_clk
+    input T din'0
+  clock out_clk
+   domain out_clk
+    output T dout'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="150" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">CrossDomain</text>
+<rect x="140" y="36" width="140" height="102" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#a098bb" stroke-width="1.5"/>
+<line x1="140" y1="89" x2="280" y2="89" stroke="#a098bb" stroke-width="1.5"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">in_clk</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock in_clk</text>
+<text x="276" y="133" text-anchor="end" fill="#9b96aa" font-size="10">out_clk</text>
+<text x="144" y="103" fill="#5a5370" font-size="10">clock out_clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="280" y1="119" x2="308" y2="119" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="119" dominant-baseline="middle" fill="#1a1227">dout</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Unsafe builtin to connect wires from different clock domains.
+Important: This is a plain connection from a wire in one clock domain to a wire in another.
+This performs no synchronization or other data integrity measures!</p>
+</div>
+</section>
+<section class="module" id="LatencyOffsetAction">
+<div class="module-heading"><h2>LatencyOffsetAction #(T, int OFFSET, int DATA_DELAY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module LatencyOffsetAction #(T, int OFFSET, int DATA_DELAY) {
+    action din'0 : T data_i'DATA_DELAY
+    trigger dout'OFFSET : T data_o'OFFSET+DATA_DELAY
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">LatencyOffsetAction</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<path d="M 140,88 C 210,88 210,88 280,88" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="85" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">data_i</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
+<line x1="280" y1="88" x2="308" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="88" dominant-baseline="middle" fill="#1a1227">data_o</text>
+</svg></figure>
+</section>
+<section class="module" id="LatencyOffsetActionNoData">
+<div class="module-heading"><h2>LatencyOffsetActionNoData #(int OFFSET)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module LatencyOffsetActionNoData #(int OFFSET) {
+    action din'0
+    trigger dout'OFFSET
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">LatencyOffsetActionNoData</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
+</svg></figure>
+</section>
+<h2 class="doc-section" id="CompileTimeFunctions">Compile-Time Functions</h2>
+<section class="module" id="__crash_compiler">
+<div class="module-heading"><h2>__crash_compiler</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool __crash_compiler</code></pre></div>
+<div class="doc-prose">
+<p>For intentionally triggering an ICE for debugging. It is a constant that crashes the compiler when it is evaluated</p>
+</div>
+</section>
+<section class="module" id="true">
+<div class="module-heading"><h2>true</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool true</code></pre></div>
+<div class="doc-prose">
+<p>True, as in ‘1’</p>
+</div>
+</section>
+<section class="module" id="false">
+<div class="module-heading"><h2>false</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool false</code></pre></div>
+<div class="doc-prose">
+<p>False, as in ‘0’</p>
+</div>
+</section>
+<section class="module" id="assert">
+<div class="module-heading"><h2>assert #(bool C)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool assert #(bool C)</code></pre></div>
+<div class="doc-prose">
+<p>Throws an execution error if <code>C == false</code></p>
+</div>
+</section>
+<section class="module" id="sizeof">
+<div class="module-heading"><h2>sizeof #(T)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int sizeof #(T)</code></pre></div>
+<div class="doc-prose">
+<p>Returns the size of the given type, in bits.</p>
+<p>Examples:</p>
+<pre><code class="language-sus">sizeof #(T: type bool) = 1
+sizeof #(T: type bool[50]) = 50
+sizeof #(T: type int[10][10]) = 3200
+</code></pre>
+</div>
+</section>
+<section class="module" id="noinfer">
+<div class="module-heading"><h2>noinfer #(int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int noinfer #(int V)</code></pre></div>
+<div class="doc-prose">
+<p><code>Result == V</code>, but this prevents this from being included in the inference parameters.</p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>

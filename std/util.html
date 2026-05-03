@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>util — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a class="language-item-ref" href="core.html">core</a></li>
+<li><a class="language-item-ref" href="array.html">array</a></li>
+<li><a class="language-item-ref" href="math.html">math</a></li>
+<li><a class="language-item-ref" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
+<li><a class="language-item-ref sidebar-current" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
+<li><a class="language-item-ref" href="memory.html">memory</a></li>
+</ul>
+<a href="#Modules" class="sidebar-title">Modules</a>
+<ul>
+<li><a class="language-item-ref" href="#Ternary">Ternary</a></li>
+<li><a class="language-item-ref" href="#Tuple2">Tuple2</a></li>
+<li><a class="language-item-ref" href="#Tuple3">Tuple3</a></li>
+<li><a class="language-item-ref" href="#Tuple4">Tuple4</a></li>
+<li><a class="language-item-ref" href="#Tuple5">Tuple5</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">util</h1>
+<h2 class="doc-section" id="Modules">Modules</h2>
+<section class="module" id="Ternary">
+<div class="module-heading"><h2>Ternary #(T)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Ternary #(T) {
+    interface Ternary : bool cond'0, T a'0, T b'0 -&gt; T o'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="141" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Ternary</text>
+<rect x="140" y="36" width="140" height="93" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">cond</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">a</text>
+<line x1="112" y1="110" x2="140" y2="110" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="110" text-anchor="end" dominant-baseline="middle" fill="#1a1227">b</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Equivalent to the C/Verilog <code>cond ? a : b</code> ternary operator. When <code>cond</code> is <code>true</code> it returns <code>a</code>, otherwise it returns <code>b</code>.</p>
+</div>
+</section>
+<section class="module" id="Tuple2">
+<div class="module-heading"><h2>Tuple2 #(T1, T2)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple2 #(T1, T2) {
+  clock clk
+   domain clk
+   domain pack_dom
+    interface pack : T1 v1_i'0, T2 v2_i'0 -&gt; bool[TO2] packed_o'0
+   domain unpack_dom
+    interface unpack : bool[TO2] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="215" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple2</text>
+<rect x="140" y="36" width="140" height="167" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="146" x2="280" y2="146" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="141" text-anchor="end" fill="#9b96aa" font-size="10">pack_dom</text>
+<text x="276" y="198" text-anchor="end" fill="#9b96aa" font-size="10">unpack_dom</text>
+<line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="105" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v1_i</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v2_i</text>
+<line x1="280" y1="105" x2="308" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="105" dominant-baseline="middle" fill="#1a1227">packed_o</text>
+<line x1="112" y1="162" x2="140" y2="162" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="162" text-anchor="end" dominant-baseline="middle" fill="#1a1227">packed_i</text>
+<line x1="280" y1="162" x2="308" y2="162" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="162" dominant-baseline="middle" fill="#1a1227">v1_o</text>
+<line x1="280" y1="184" x2="308" y2="184" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="184" dominant-baseline="middle" fill="#1a1227">v2_o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+</section>
+<section class="module" id="Tuple3">
+<div class="module-heading"><h2>Tuple3 #(T1, T2, T3)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple3 #(T1, T2, T3) {
+  clock clk
+   domain clk
+   domain pack_dom
+    interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0 -&gt; bool[TO3] packed_o'0
+   domain unpack_dom
+    interface unpack : bool[TO3] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="259" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple3</text>
+<rect x="140" y="36" width="140" height="211" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="168" x2="280" y2="168" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="163" text-anchor="end" fill="#9b96aa" font-size="10">pack_dom</text>
+<text x="276" y="242" text-anchor="end" fill="#9b96aa" font-size="10">unpack_dom</text>
+<line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="105" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v1_i</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v2_i</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v3_i</text>
+<line x1="280" y1="105" x2="308" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="105" dominant-baseline="middle" fill="#1a1227">packed_o</text>
+<line x1="112" y1="184" x2="140" y2="184" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="184" text-anchor="end" dominant-baseline="middle" fill="#1a1227">packed_i</text>
+<line x1="280" y1="184" x2="308" y2="184" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="184" dominant-baseline="middle" fill="#1a1227">v1_o</text>
+<line x1="280" y1="206" x2="308" y2="206" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="206" dominant-baseline="middle" fill="#1a1227">v2_o</text>
+<line x1="280" y1="228" x2="308" y2="228" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="228" dominant-baseline="middle" fill="#1a1227">v3_o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+</section>
+<section class="module" id="Tuple4">
+<div class="module-heading"><h2>Tuple4 #(T1, T2, T3, T4)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple4 #(T1, T2, T3, T4) {
+  clock clk
+   domain clk
+   domain pack_dom
+    interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0, T4 v4_i'0 -&gt; bool[TO4] packed_o'0
+   domain unpack_dom
+    interface unpack : bool[TO4] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="303" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple4</text>
+<rect x="140" y="36" width="140" height="255" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="190" x2="280" y2="190" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="185" text-anchor="end" fill="#9b96aa" font-size="10">pack_dom</text>
+<text x="276" y="286" text-anchor="end" fill="#9b96aa" font-size="10">unpack_dom</text>
+<line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="105" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v1_i</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v2_i</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v3_i</text>
+<line x1="112" y1="171" x2="140" y2="171" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="171" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v4_i</text>
+<line x1="280" y1="105" x2="308" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="105" dominant-baseline="middle" fill="#1a1227">packed_o</text>
+<line x1="112" y1="206" x2="140" y2="206" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="206" text-anchor="end" dominant-baseline="middle" fill="#1a1227">packed_i</text>
+<line x1="280" y1="206" x2="308" y2="206" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="206" dominant-baseline="middle" fill="#1a1227">v1_o</text>
+<line x1="280" y1="228" x2="308" y2="228" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="228" dominant-baseline="middle" fill="#1a1227">v2_o</text>
+<line x1="280" y1="250" x2="308" y2="250" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="250" dominant-baseline="middle" fill="#1a1227">v3_o</text>
+<line x1="280" y1="272" x2="308" y2="272" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="272" dominant-baseline="middle" fill="#1a1227">v4_o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+</section>
+<section class="module" id="Tuple5">
+<div class="module-heading"><h2>Tuple5 #(T1, T2, T3, T4, T5)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Tuple5 #(T1, T2, T3, T4, T5) {
+  clock clk
+   domain clk
+   domain pack_dom
+    interface pack : T1 v1_i'0, T2 v2_i'0, T3 v3_i'0, T4 v4_i'0, T5 v5_i'0 -&gt; bool[TO5] packed_o'0
+   domain unpack_dom
+    interface unpack : bool[TO5] packed_i'0 -&gt; T1 v1_o'0, T2 v2_o'0, T3 v3_o'0, T4 v4_o'0, T5 v5_o'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="347" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Tuple5</text>
+<rect x="140" y="36" width="140" height="299" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="212" x2="280" y2="212" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="207" text-anchor="end" fill="#9b96aa" font-size="10">pack_dom</text>
+<text x="276" y="330" text-anchor="end" fill="#9b96aa" font-size="10">unpack_dom</text>
+<line x1="112" y1="105" x2="140" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="105" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v1_i</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v2_i</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v3_i</text>
+<line x1="112" y1="171" x2="140" y2="171" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="171" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v4_i</text>
+<line x1="112" y1="193" x2="140" y2="193" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="193" text-anchor="end" dominant-baseline="middle" fill="#1a1227">v5_i</text>
+<line x1="280" y1="105" x2="308" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="105" dominant-baseline="middle" fill="#1a1227">packed_o</text>
+<line x1="112" y1="228" x2="140" y2="228" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="228" text-anchor="end" dominant-baseline="middle" fill="#1a1227">packed_i</text>
+<line x1="280" y1="228" x2="308" y2="228" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="228" dominant-baseline="middle" fill="#1a1227">v1_o</text>
+<line x1="280" y1="250" x2="308" y2="250" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="250" dominant-baseline="middle" fill="#1a1227">v2_o</text>
+<line x1="280" y1="272" x2="308" y2="272" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="272" dominant-baseline="middle" fill="#1a1227">v3_o</text>
+<line x1="280" y1="294" x2="308" y2="294" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="294" dominant-baseline="middle" fill="#1a1227">v4_o</text>
+<line x1="280" y1="316" x2="308" y2="316" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="316" dominant-baseline="middle" fill="#1a1227">v5_o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Temporary module for creating and deconstructing tuples, until we have structs</p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>

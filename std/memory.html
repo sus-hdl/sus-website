@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>memory — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a class="language-item-ref" href="core.html">core</a></li>
+<li><a class="language-item-ref" href="array.html">array</a></li>
+<li><a class="language-item-ref" href="math.html">math</a></li>
+<li><a class="language-item-ref" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
+<li><a class="language-item-ref" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
+<li><a class="language-item-ref sidebar-current" href="memory.html">memory</a></li>
+</ul>
+<a href="#Modules" class="sidebar-title">Modules</a>
+<ul>
+<li><a class="language-item-ref" href="#ROM">ROM</a></li>
+<li><a class="language-item-ref" href="#RAM">RAM</a></li>
+<li><a class="language-item-ref" href="#RAM_Unbalanced">RAM_Unbalanced</a></li>
+<li><a class="language-item-ref" href="#ShiftReg">ShiftReg</a></li>
+<li><a class="language-item-ref" href="#FIFO">FIFO</a></li>
+<li><a class="language-item-ref" href="#FWFT">FWFT</a></li>
+<li><a class="language-item-ref" href="#RippleFIFO">RippleFIFO</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">memory</h1>
+<h2 class="doc-section" id="Modules">Modules</h2>
+<section class="module" id="ROM">
+<div class="module-heading"><h2>ROM #(T, int DEPTH, T[DEPTH] DATA)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module ROM #(T, int DEPTH, T[DEPTH] DATA) {
+    action read : int #(FROM: 0, TO: DEPTH) index'0 -&gt; T output_data'1
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ROM</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">index</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">output_data</text>
+</svg></figure>
+</section>
+<section class="module" id="RAM">
+<div class="module-heading"><h2>RAM #(T, int DEPTH)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RAM #(T, int DEPTH) {
+   domain w_dom
+    action write'0 : int#(FROM: 0, TO: DEPTH) write_addr'0, T write_data'0
+   domain r_dom
+    action read'0 : int#(FROM: 0, TO: DEPTH) read_addr'0 -&gt; T read_data'1
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="202" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RAM</text>
+<rect x="140" y="36" width="140" height="154" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="129" x2="280" y2="129" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">w_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="185" text-anchor="end" fill="#9b96aa" font-size="10">r_dom</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_addr</text>
+<line x1="112" y1="110" x2="140" y2="110" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="110" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_data</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read</text>
+<line x1="112" y1="171" x2="140" y2="171" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="171" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_addr</text>
+<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">read_data</text>
+</svg></figure>
+</section>
+<section class="module" id="RAM_Unbalanced">
+<div class="module-heading"><h2>RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE) {
+   domain w_dom
+    action write'0 : int#(FROM: 0, TO: DEPTH / WRITE_SIZE) write_addr'0, ElemT[WRITE_SIZE] write_data'0
+   domain r_dom
+    action read'0 : int#(FROM: 0, TO: DEPTH / READ_SIZE) read_addr'0 -&gt; ElemT[READ_SIZE] read_data'1
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="202" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RAM_Unbalanced</text>
+<rect x="140" y="36" width="140" height="154" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="129" x2="280" y2="129" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">w_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="185" text-anchor="end" fill="#9b96aa" font-size="10">r_dom</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_addr</text>
+<line x1="112" y1="110" x2="140" y2="110" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="110" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_data</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read</text>
+<line x1="112" y1="171" x2="140" y2="171" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="171" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_addr</text>
+<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">read_data</text>
+</svg></figure>
+</section>
+<section class="module" id="ShiftReg">
+<div class="module-heading"><h2>ShiftReg #(T, int LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module ShiftReg #(T, int LATENCY) {
+    interface ShiftReg : T din'0 -&gt; T dout'LATENCY
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ShiftReg</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
+</svg></figure>
+<div class="doc-prose">
+<p>This shift register is implemented as a memory block with a rotating index.</p>
+<p>It is meant to bridge a long latency difference.</p>
+<p>We keep one latency register on the inflow, and one on the outflow, as they tend to slot into the primitives we synthesize to.</p>
+</div>
+</section>
+<section class="module" id="FIFO">
+<div class="module-heading"><h2>FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
+   domain push_dom
+    output bool may_push'-MAY_PUSH_LATENCY
+    action push'0 : T push_data'0
+   domain pop_dom
+    output bool may_pop'0
+    action pop'0 : -&gt; T pop_data'1
+   domain reset
+    action rst
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FIFO</text>
+<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="173" x2="280" y2="173" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="168" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
+<text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<path d="M 140,88 C 210,88 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_push</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
+<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">may_pop</text>
+<line x1="280" y1="154" x2="308" y2="154" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="154" dominant-baseline="middle" fill="#1a1227">pop_data</text>
+<line x1="112" y1="189" x2="140" y2="189" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="189" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+</svg></figure>
+<div class="doc-prose">
+<p>A First-In-First-Out memory element.</p>
+<p>Push data in through the <code>may_push</code>, and <code>push</code> connections.
+If <code>may_push</code> is high, then you’re allowed to perform at most <code>MAY_PUSH_LATENCY</code> more pushes before you must stop.
+This is because <code>MAY_PUSH_LATENCY</code> translates to the ALMOST_FULL treshold on the FIFO’s internals.
+In the most common case, <code>may_push</code> has a 1-to-1 correspondence with <code>push</code>, hence</p>
+<p>Pop data using the <code>may_pop</code> and <code>pop</code> connections. <code>pop</code> may only be called when <code>may_pop</code> is high.
+After <code>pop</code> is called, the data is returned, one or more cycles later.
+You should not depend on <code>pop_data</code> for your decision to <code>pop</code>. If you need to do that, opt for <a href="memory.html#FWFT" title="memory.html#FWFT">FWFT</a> instead.</p>
+<p>Example where we’re moving data from <code>from_fifo</code>, adding one to it with wrap around, and pushing to <code>to_fifo</code>:</p>
+<pre><code class="language-sus">module TwoFIFOs {
+    FIFO#(T: type int#(FROM: 0, TO: 256), DEPTH: 128) from_fifo
+    FIFO#(T: type int#(FROM: 0, TO: 256), DEPTH: 128) to_fifo
+ 
+    when from_fifo.may_pop &amp; to_fifo.may_push {
+        int pop_data = from_fifo.pop()
+        reg int data_incr = pop_data + 1 mod 256
+        // to_fifo.MAY_PUSH_LATENCY is inferred to 2 here.
+        // 1 for from_fifo.pop(), and 1 for the `data_incr` reg. 
+        to_fifo.push(data_incr)
+    }
+ 
+    // not shown here is pushing data into from_fifo and popping it again from to_fifo
+}
+</code></pre>
+</div>
+</section>
+<section class="module" id="FWFT">
+<div class="module-heading"><h2>FWFT #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module FWFT #(T, int DEPTH, int MAY_PUSH_LATENCY) {
+   domain push_dom
+    output bool may_push'-MAY_PUSH_LATENCY
+    action push'0 : T push_data'0
+   domain pop_dom
+    trigger pop_available'0 : T pop_data'0
+    action pop'0
+   domain reset
+    action rst
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="215" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FWFT</text>
+<rect x="140" y="36" width="140" height="167" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="168" x2="280" y2="168" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="163" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
+<text x="276" y="198" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<path d="M 140,88 C 210,88 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_push</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
+<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">pop_available</text>
+<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">pop_data</text>
+<line x1="112" y1="184" x2="140" y2="184" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="184" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+</svg></figure>
+<div class="doc-prose">
+<p>A First-Word-Fall-Through FIFO. Similar to the regular <a href="memory.html#FIFO" title="memory.html#FIFO">FIFO</a>,
+but this one allows for inspection of the data that is ready to be popped before popping it.</p>
+<p>Push data in through the <code>may_push</code>, and <code>push</code> connections.
+If <code>may_push</code> is high, then you’re allowed to perform at most <code>MAY_PUSH_LATENCY</code> more pushes before you must stop.
+This is because <code>MAY_PUSH_LATENCY</code> translates to the ALMOST_FULL treshold on the FIFO’s internals.
+In the most common case, <code>may_push</code> has a 1-to-1 correspondence with <code>push</code>, hence</p>
+<p>Instead of <a href="memory.html#FIFO" title="memory.html#FIFO">FIFO</a>’s <code>may_pop</code> interface, <code>FWFT</code> comes with a <code>pop_available</code> trigger, which presents you with the data that you can then <code>pop()</code>.</p>
+<p>The main usecase of <code>FWFT</code> is for situations where you need a 0-cycle response time to a <code>pop</code> signal.</p>
+<p>Below is an of a scenario where we need such a 0-cycle pop latency.
+The goal is to produce an <code>is_last</code> signal, based on the sequence lengths stored in <code>segment_sizes_fifo</code>
+Since sequences can be back-to-back, num_left must be refresheable within a single cycle cycle, any number of cycles in a row.
+Let’s say it will not happen that <code>data_stream</code> is called when no segment is in the fifo for it.</p>
+<pre><code class="language-sus">module SplitIntoSegments {
+    FWFT#(T: type int#(FROM: 1, TO: 256), DEPTH: 128) segment_sizes_fifo
+ 
+    state int#(FROM: 0, TO: 256) num_left
+    bool need_new_num_left = false
+    when num_left == 0 {
+        need_new_num_left = true
+    }
+ 
+    action data_stream : float _data -&gt; bool is_last {
+        when num_left == 1 {
+            is_last = true
+            need_new_num_left = true
+        } else {
+            is_last = false
+        }
+        num_left = num_left - 1 mod 256
+    }
+    when need_new_num_left {
+        when segment_sizes_fifo.pop_available: int new_num_left {
+            num_left = new_num_left
+        }
+    }
+ 
+    // not shown here is pushing data into segment_sizes_fifo
+}
+</code></pre>
+</div>
+</section>
+<section class="module" id="RippleFIFO">
+<div class="module-heading"><h2>RippleFIFO #(T, int DEPTH)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RippleFIFO #(T, int DEPTH) {
+   domain push_dom
+    output bool may_push'0
+    action push'0 : T push_data'0
+   domain pop_dom
+    output bool may_pop'0
+    action pop'0 : -&gt; T pop_data'0
+   domain reset
+    action rst
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RippleFIFO</text>
+<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="173" x2="280" y2="173" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="168" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
+<text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_push</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
+<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">may_pop</text>
+<line x1="280" y1="154" x2="308" y2="154" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="154" dominant-baseline="middle" fill="#1a1227">pop_data</text>
+<line x1="112" y1="189" x2="140" y2="189" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="189" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+</svg></figure>
+<div class="doc-prose">
+<p>A FIFO implemented as a sequence of registers with a accompanying valid bit.</p>
+<p>Bandwidth limited to 1 element every 2 cycles.</p>
+<p>Use for very small FIFOs, in bandwidth-limited circumstances.</p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>

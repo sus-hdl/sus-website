@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>math — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a class="language-item-ref" href="core.html">core</a></li>
+<li><a class="language-item-ref" href="array.html">array</a></li>
+<li><a class="language-item-ref sidebar-current" href="math.html">math</a></li>
+<li><a class="language-item-ref" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
+<li><a class="language-item-ref" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
+<li><a class="language-item-ref" href="memory.html">memory</a></li>
+</ul>
+<a href="#Modules" class="sidebar-title">Modules</a>
+<ul>
+<li><a class="language-item-ref" href="#Abs">Abs</a></li>
+<li><a class="language-item-ref" href="#TreeAdd">TreeAdd</a></li>
+<li><a class="language-item-ref" href="#IntNarrow">IntNarrow</a></li>
+</ul>
+<a href="#CompileTimeFunctions" class="sidebar-title">Compile-Time Functions</a>
+<ul>
+<li><a class="language-item-ref" href="#clog2">clog2</a></li>
+<li><a class="language-item-ref" href="#pow2">pow2</a></li>
+<li><a class="language-item-ref" href="#pow">pow</a></li>
+<li><a class="language-item-ref" href="#nextPow2">nextPow2</a></li>
+<li><a class="language-item-ref" href="#factorial">factorial</a></li>
+<li><a class="language-item-ref" href="#falling_factorial">falling_factorial</a></li>
+<li><a class="language-item-ref" href="#comb">comb</a></li>
+<li><a class="language-item-ref" href="#min">min</a></li>
+<li><a class="language-item-ref" href="#max">max</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">math</h1>
+<h2 class="doc-section" id="Modules">Modules</h2>
+<section class="module" id="Abs">
+<div class="module-heading"><h2>Abs #(int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Abs #(int TO) {
+    interface Abs : int #(FROM: -TO+1, TO) a -&gt; int #(FROM: 0, TO) o
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Abs</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">a</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Compute the Absolute Value of the given integer.</p>
+<p>Examples:</p>
+<pre><code class="language-sus">Abs(3) == 3
+Abs(-7) == 7
+</code></pre>
+</div>
+</section>
+<section class="module" id="TreeAdd">
+<div class="module-heading"><h2>TreeAdd #(int WIDTH, int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module TreeAdd #(int WIDTH, int FROM, int TO) {
+    interface TreeAdd : int#(FROM, TO)[WIDTH] values'0 -&gt; int#(FROM: FROM*WIDTH, TO: (TO - 1)*WIDTH + 1) total
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">TreeAdd</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">values</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">total</text>
+</svg></figure>
+</section>
+<section class="module" id="IntNarrow">
+<div class="module-heading"><h2>IntNarrow #(int FROM_I, int TO_I, int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module IntNarrow #(int FROM_I, int TO_I, int FROM, int TO) {
+    interface IntNarrow : int#(FROM: FROM_I, TO: TO_I) din'0 -&gt; int#(FROM, TO) dout'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">IntNarrow</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Unsafely shrinks the bounds of an integer.
+The result is not defined if the value lies outside the FROM:TO range.
+For folding behavior choose the <code>mod</code> operator instead.</p>
+</div>
+</section>
+<h2 class="doc-section" id="CompileTimeFunctions">Compile-Time Functions</h2>
+<section class="module" id="clog2">
+<div class="module-heading"><h2>clog2 #(int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int clog2 #(int V)</code></pre></div>
+<div class="doc-prose">
+<p>Computes the Base 2 logarithm of a value, rounded up.</p>
+<p>Typically used to find the size in bits that the address would need to be to address into a memory of size <code>V</code>.</p>
+<p>Requires <code>V &gt; 0</code></p>
+<p>Examples:</p>
+<pre><code class="language-sus">clog2 #(V: 15) == 4
+clog2 #(V: 16) == 4
+clog2 #(V: 17) == 5
+</code></pre>
+</div>
+</section>
+<section class="module" id="pow2">
+<div class="module-heading"><h2>pow2 #(int E)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int pow2 #(int E)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>2^E</code> at compile-time</p>
+</div>
+</section>
+<section class="module" id="pow">
+<div class="module-heading"><h2>pow #(int B, int E)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int pow #(int B, int E)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>B^E</code> at compile-time</p>
+</div>
+</section>
+<section class="module" id="nextPow2">
+<div class="module-heading"><h2>nextPow2 #(int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int nextPow2 #(int V)</code></pre></div>
+<div class="doc-prose">
+<p>Returns the smallest power of two greater or equal to the input value. <code>nextPow2#(V) &gt;= V</code>.</p>
+</div>
+</section>
+<section class="module" id="factorial">
+<div class="module-heading"><h2>factorial #(int N)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int factorial #(int N)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>N!</code></p>
+</div>
+</section>
+<section class="module" id="falling_factorial">
+<div class="module-heading"><h2>falling_factorial #(int N, int K)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int falling_factorial #(int N, int K)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>N! / (N - K)!</code>. for <code>0 &lt;= K &lt;= N</code></p>
+</div>
+</section>
+<section class="module" id="comb">
+<div class="module-heading"><h2>comb #(int N, int K)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int comb #(int N, int K)</code></pre></div>
+<div class="doc-prose">
+<p>Computes <code>N! / (K! * (N - K)!)</code>. for <code>0 &lt;= K &lt;= N</code></p>
+</div>
+</section>
+<section class="module" id="min">
+<div class="module-heading"><h2>min #(int A, int B)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int min #(int A, int B)</code></pre></div>
+<div class="doc-prose">
+<p>Compute the minimum of <code>A</code> and <code>B</code></p>
+</div>
+</section>
+<section class="module" id="max">
+<div class="module-heading"><h2>max #(int A, int B)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int max #(int A, int B)</code></pre></div>
+<div class="doc-prose">
+<p>Compute the maximum of <code>A</code> and <code>B</code></p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>

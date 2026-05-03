@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>conversion — SUS Documentation</title>
+  <link rel="stylesheet" href="https://sus-lang.org/docs/highlight.css"/>
+  <link rel="stylesheet" href="https://sus-lang.org/susdoc.css"/>
+</head>
+<body>
+<main>
+<div class="doc-layout">
+<aside class="doc-sidebar">
+<p class="sidebar-title">Files</p>
+<ul>
+<li><a class="language-item-ref" href="core.html">core</a></li>
+<li><a class="language-item-ref" href="array.html">array</a></li>
+<li><a class="language-item-ref" href="math.html">math</a></li>
+<li><a class="language-item-ref sidebar-current" href="conversion.html">conversion</a></li>
+<li><a class="language-item-ref" href="control_flow.html">control_flow</a></li>
+<li><a class="language-item-ref" href="util.html">util</a></li>
+<li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
+<li><a class="language-item-ref" href="memory.html">memory</a></li>
+</ul>
+<a href="#Modules" class="sidebar-title">Modules</a>
+<ul>
+<li><a class="language-item-ref" href="#IntToBool">IntToBool</a></li>
+<li><a class="language-item-ref" href="#BoolToInt">BoolToInt</a></li>
+<li><a class="language-item-ref" href="#IntToBits">IntToBits</a></li>
+<li><a class="language-item-ref" href="#UIntToBits">UIntToBits</a></li>
+<li><a class="language-item-ref" href="#BitsToInt">BitsToInt</a></li>
+<li><a class="language-item-ref" href="#BitsToUInt">BitsToUInt</a></li>
+<li><a class="language-item-ref" href="#ToBits">ToBits</a></li>
+<li><a class="language-item-ref" href="#FromBits">FromBits</a></li>
+<li><a class="language-item-ref" href="#Transmute">Transmute</a></li>
+</ul>
+<a href="#CompileTimeFunctions" class="sidebar-title">Compile-Time Functions</a>
+<ul>
+<li><a class="language-item-ref" href="#IntToBitsGen">IntToBitsGen</a></li>
+<li><a class="language-item-ref" href="#UIntToBitsGen">UIntToBitsGen</a></li>
+<li><a class="language-item-ref" href="#BitsToIntGen">BitsToIntGen</a></li>
+<li><a class="language-item-ref" href="#BitsToUIntGen">BitsToUIntGen</a></li>
+</ul>
+</aside>
+<div class="doc-main">
+<h1 class="page-title">conversion</h1>
+<h2 class="doc-section" id="Modules">Modules</h2>
+<section class="module" id="IntToBool">
+<div class="module-heading"><h2>IntToBool</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module IntToBool {
+    interface IntToBool : int#(FROM: 0, TO: 2) i'0 -&gt; bool o'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">IntToBool</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">i</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Converts a ‘0’ or ‘1’ into the equivalent boolean ‘false’ or ‘true’ respectively</p>
+</div>
+</section>
+<section class="module" id="BoolToInt">
+<div class="module-heading"><h2>BoolToInt</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module BoolToInt {
+    interface BoolToInt : bool i'0 -&gt; int#(FROM: 0, TO: 2) o'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">BoolToInt</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">i</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Converts a ‘false’ or ‘true’ into the equivalent integer ‘0’ or ‘1’ respectively</p>
+</div>
+</section>
+<section class="module" id="IntToBits">
+<div class="module-heading"><h2>IntToBits #(int NUM_BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module IntToBits #(int NUM_BITS) {
+    interface IntToBits : int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0 -&gt; bool[NUM_BITS] bits'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">IntToBits</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">value</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">bits</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Convert signed int to 2s complement bits. (<code>bits[0]</code> is <code>value</code>’s Least Significant Bit)</p>
+<p>Requires <code>-pow2 #(E: NUM_BITS - 1) &lt;= value &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Runtime equivalent of <a href="conversion.html#IntToBitsGen" title="conversion.html#IntToBitsGen">IntToBitsGen</a></p>
+</div>
+</section>
+<section class="module" id="UIntToBits">
+<div class="module-heading"><h2>UIntToBits #(int NUM_BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module UIntToBits #(int NUM_BITS) {
+    interface UIntToBits : int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0 -&gt; bool[NUM_BITS] bits'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">UIntToBits</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">value</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">bits</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Convert int to unsigned bits. (<code>bits[0]</code> is <code>value</code>’s Least Significant Bit)</p>
+<p>Requires <code>0 &lt;= value &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Runtime equivalent of <a href="conversion.html#UIntToBitsGen" title="conversion.html#UIntToBitsGen">UIntToBitsGen</a></p>
+</div>
+</section>
+<section class="module" id="BitsToInt">
+<div class="module-heading"><h2>BitsToInt #(int NUM_BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module BitsToInt #(int NUM_BITS) {
+    interface BitsToInt : bool[NUM_BITS] bits'0 -&gt; int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">BitsToInt</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">bits</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">value</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Convert 2s complement bits to a signed int. (<code>bits[0]</code> is <code>value</code>’s Least Significant Bit)</p>
+<p>Creates an int in the range <code>-pow2 #(E: NUM_BITS - 1) &lt;= value &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Runtime equivalent of <a href="conversion.html#BitsToIntGen" title="conversion.html#BitsToIntGen">BitsToIntGen</a></p>
+</div>
+</section>
+<section class="module" id="BitsToUInt">
+<div class="module-heading"><h2>BitsToUInt #(int NUM_BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module BitsToUInt #(int NUM_BITS) {
+    interface BitsToUInt : bool[NUM_BITS] bits'0 -&gt; int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">BitsToUInt</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">bits</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">value</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Convert unsigned bits to an unsigned int. (<code>bits[0]</code> is <code>value</code>’s Least Significant Bit)</p>
+<p>Creates an int in the range <code>0 &lt;= value &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Runtime equivalent of <a href="conversion.html#BitsToUIntGen" title="conversion.html#BitsToUIntGen">BitsToUIntGen</a></p>
+</div>
+</section>
+<section class="module" id="ToBits">
+<div class="module-heading"><h2>ToBits #(T)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module ToBits #(T) {
+    interface ToBits : T value'0 -&gt; bool[sizeof #(T)] bits'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ToBits</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">value</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">bits</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Bitwise conversion of type <code>T</code> to a <code>sizeof#(T)</code>-bit bitset.</p>
+</div>
+</section>
+<section class="module" id="FromBits">
+<div class="module-heading"><h2>FromBits #(T)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module FromBits #(T) {
+    interface FromBits : bool[sizeof #(T)] bits'0 -&gt; T value'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FromBits</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">bits</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">value</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Bitwise conversion of a <code>sizeof#(T)</code>-bit bitset to type <code>T</code>.</p>
+</div>
+</section>
+<section class="module" id="Transmute">
+<div class="module-heading"><h2>Transmute #(T1, T2)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module Transmute #(T1, T2) {
+    interface Transmute : T1 a'0 -&gt; T2 b'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Transmute</text>
+<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">a</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">b</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Bitwise conversion of T1 into T2.</p>
+<p>Requires:</p>
+<pre><code class="language-sus">sizeof#(T: type T1) == sizeof#(T: type T2)
+</code></pre>
+</div>
+</section>
+<h2 class="doc-section" id="CompileTimeFunctions">Compile-Time Functions</h2>
+<section class="module" id="IntToBitsGen">
+<div class="module-heading"><h2>IntToBitsGen #(int NUM_BITS, int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool[NUM_BITS] IntToBitsGen #(int NUM_BITS, int V)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen int to 2s complement bits. (<code>RESULT[0]</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Requires <code>-pow2 #(E: NUM_BITS - 1) &lt;= V &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Generative equivalent of <a href="conversion.html#IntToBits" title="conversion.html#IntToBits">IntToBits</a></p>
+</div>
+</section>
+<section class="module" id="UIntToBitsGen">
+<div class="module-heading"><h2>UIntToBitsGen #(int NUM_BITS, int V)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const bool[NUM_BITS] UIntToBitsGen #(int NUM_BITS, int V)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen int to unsigned bits. (<code>RESULT[0]</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Requires <code>0 &lt;= V &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Generative equivalent of <a href="conversion.html#UIntToBits" title="conversion.html#UIntToBits">UIntToBits</a></p>
+</div>
+</section>
+<section class="module" id="BitsToIntGen">
+<div class="module-heading"><h2>BitsToIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int BitsToIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen 2s complement bits to a gen signed int. (<code>BITS[0]</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Creates an int in the range <code>-pow2 #(E: NUM_BITS - 1) &lt;= value &lt; pow2 #(E: NUM_BITS - 1)</code></p>
+<p>Generative equivalent of <a href="conversion.html#BitsToInt" title="conversion.html#BitsToInt">BitsToInt</a></p>
+</div>
+</section>
+<section class="module" id="BitsToUIntGen">
+<div class="module-heading"><h2>BitsToUIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">const int BitsToUIntGen #(int NUM_BITS, bool[NUM_BITS] BITS)</code></pre></div>
+<div class="doc-prose">
+<p>Convert gen unsigned bits to a gen unsigned int. (<code>BITS[0]</code> is <code>V</code>’s Least Significant Bit)</p>
+<p>Creates an int in the range <code>0 &lt;= value &lt; pow2 #(E: NUM_BITS)</code></p>
+<p>Generative equivalent of <a href="conversion.html#BitsToUInt" title="conversion.html#BitsToUInt">BitsToUInt</a></p>
+</div>
+</section>
+</div>
+</div>
+</main>
+<script src="https://sus-lang.org/docs/highlight.js"></script>
+<script src="https://sus-lang.org/susdoc.js"></script>
+</body>
+</html>
