@@ -24,9 +24,8 @@
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
-<li><a class="language-item-ref" href="#Iterator">Iterator</a></li>
-<li><a class="language-item-ref" href="#FixedSizeIterator">FixedSizeIterator</a></li>
 <li><a class="language-item-ref" href="#SlowState">SlowState</a></li>
+<li><a class="language-item-ref" href="#SlowStateAdvanced">SlowStateAdvanced</a></li>
 <li><a class="language-item-ref" href="#SlowPipelineEnd">SlowPipelineEnd</a></li>
 <li><a class="language-item-ref" href="#SlowPipelineBegin">SlowPipelineBegin</a></li>
 <li><a class="language-item-ref" href="#ParallelWhile">ParallelWhile</a></li>
@@ -37,61 +36,82 @@
 <div class="doc-main">
 <h1 class="page-title">control_flow</h1>
 <h2 class="doc-section" id="Modules">Modules</h2>
-<section class="module" id="Iterator">
-<div class="module-heading"><h2>Iterator #(int MAX)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module Iterator #(int MAX) {
-    output state bool may_next'0
-    action start'0 : int #(FROM: 0, TO: MAX + 2) up_to'0
-    action next'0 : -&gt; int #(FROM: 0, TO: MAX + 1) value'0, bool last'0
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="146" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">Iterator</text>
-<rect x="140" y="36" width="140" height="98" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="129" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">start</text>
-<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">up_to</text>
-<line x1="112" y1="115" x2="140" y2="115" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="115" text-anchor="end" dominant-baseline="middle" fill="#1a1227">next</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_next</text>
-<line x1="280" y1="93" x2="308" y2="93" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="93" dominant-baseline="middle" fill="#1a1227">value</text>
-<line x1="280" y1="115" x2="308" y2="115" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="115" dominant-baseline="middle" fill="#1a1227">last</text>
-</svg></figure>
-</section>
-<section class="module" id="FixedSizeIterator">
-<div class="module-heading"><h2>FixedSizeIterator #(int TO)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module FixedSizeIterator #(int TO) {
-    output state bool may_next'0
-    action start'0
-    action next'0 : -&gt; int #(FROM: 0, TO) value'0, bool last'0
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="146" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FixedSizeIterator</text>
-<rect x="140" y="36" width="140" height="98" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="129" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">start</text>
-<line x1="112" y1="93" x2="140" y2="93" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="93" text-anchor="end" dominant-baseline="middle" fill="#1a1227">next</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_next</text>
-<line x1="280" y1="93" x2="308" y2="93" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="93" dominant-baseline="middle" fill="#1a1227">value</text>
-<line x1="280" y1="115" x2="308" y2="115" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="115" dominant-baseline="middle" fill="#1a1227">last</text>
-</svg></figure>
-</section>
 <section class="module" id="SlowState">
-<div class="module-heading"><h2>SlowState #(T, T RESET_TO, int OLD_DELAY, int NEW_DELAY)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module SlowState #(T, T RESET_TO, int OLD_DELAY, int NEW_DELAY) {
+<div class="module-heading"><h2>SlowState #(T, int DELAY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module SlowState #(T, int DELAY) {
+   domain data
+    trigger is_stable'0 : T old'0
+    action set_slow'0 : T new_value_slow'DELAY
+    action set_fast'0 : T new_value_fast'0
+   domain reset
+    action rst
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="207" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowState</text>
+<rect x="140" y="36" width="140" height="159" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="156" x2="280" y2="156" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="151" text-anchor="end" fill="#9b96aa" font-size="10">data</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="190" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<path d="M 140,88 C 210,88 210,88 280,88" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="85" text-anchor="middle" font-size="10" fill="#22a85a">DELAY</text>
+<path d="M 140,88 C 210,88 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">DELAY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">set_slow</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">new_value_slow</text>
+<line x1="112" y1="115" x2="140" y2="115" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="115" text-anchor="end" dominant-baseline="middle" fill="#1a1227">set_fast</text>
+<line x1="112" y1="137" x2="140" y2="137" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="137" text-anchor="end" dominant-baseline="middle" fill="#1a1227">new_value_fast</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">is_stable</text>
+<line x1="280" y1="88" x2="308" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="88" dominant-baseline="middle" fill="#1a1227">old</text>
+<line x1="112" y1="176" x2="140" y2="176" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="176" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Allows us to update a blob of state with a pipelined update function.
+Because the new value for the register takes a few cycles to arrive,
+the throughput of this module is at best one per <code>DELAY+1</code> cycles.</p>
+<p>Check <code>slow_state.is_stable</code> to get the currently stored value.
+From this, you can update it with <code>slow_state.set_slow(new_value_slow)</code>.
+Note that <code>set_slow</code> itself must be known within the same cycle as <code>is_stable</code>.
+The <code>new_value_slow</code> may take as many cycles as desired.
+When you do, <code>is_stable</code> will disengage until <code>new_value_slow</code> is computed.</p>
+<p>You can also immediately set the state with <code>slow_state.set_fast(new_value_fast)</code>.
+In this case, the new value is visible on <code>is_stable</code> immediately.</p>
+<p>Example, taken from some batching memory reading code. In this code, the goal was
+to make sequential <code>double</code> (8 bytes) requests from memory, based on the counts passed via the <code>sizes_fifo</code>.
+In this example, the <code>SlowState</code> takes one pipeline stage for the <code>sizes_fifo.pop()</code>,
+and one for adding <code>(size * 8)</code> to the current address. This means it has a maximum rate of 1 update per 3 cycles.</p>
+<pre><code class="language-sus">SlowState#(T: type int#(FROM: 0, TO: 1 &lt;&lt; 64)) current_addr
+ 
+action set_new_addr : int#(FROM: 0, TO: 1 &lt;&lt; 64) new_addr {
+    current_addr.set_fast(new_addr)
+}
+ 
+FIFO sizes_fifo
+input bool may_request_read
+trigger request_read: int addr, int count
+when sizes_fifo.may_pop &amp; may_request_read {
+    when current_addr.is_stable : int cur_addr {
+        int size = sizes_fifo.pop() // pop()'s output may have some pipeline stages
+        push_addr(cur_addr, size)
+        // Add a pipeline stage for next_addr. 64-bit adds are *expensive*
+        reg int next_addr = cur_addr + (size * 8) mod 1 &lt;&lt; 64
+        current_addr.set_slow(next_addr)
+    }
+}
+</code></pre>
+</div>
+</section>
+<section class="module" id="SlowStateAdvanced">
+<div class="module-heading"><h2>SlowStateAdvanced #(T, T RESET_TO, int OLD_DELAY, int NEW_DELAY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module SlowStateAdvanced #(T, T RESET_TO, int OLD_DELAY, int NEW_DELAY) {
   clock clk
    domain clk
     action rst
@@ -102,7 +122,7 @@
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="163" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowState</text>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowStateAdvanced</text>
 <rect x="140" y="36" width="140" height="115" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
 <line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
 <text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">clk</text>
