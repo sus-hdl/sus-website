@@ -26,9 +26,10 @@
 - [Tensors](docs/tensors/tensors.md)
   - [Reduction Operators](docs/tensors/reductions.md)
 
-# Compiler Details
+# Misc
 - [Debug Flags](compiler/debug.md)
 - [How SUS is compiled](compiler/how_sus_is_compiled.md)
+- [Debugging with ILAs](docs/using_ilas/using_ilas.md)
 
 # philosophy
   - [Compiletime and Runtime](philosophy/compiletime_and_runtime.md)
