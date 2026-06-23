@@ -7,15 +7,17 @@ If your simulator has failed you, and you're pulling out your hair staring at a 
 ## Overview
 ### Part 1: Synthesizing a design with an Integrated Logic Analyzer
 - Wire up an "extern" ILA module, to all the signals you would like to view. 
-- Creating the `ila_crc_counter` IP core in `pack_kernel.tcl`. 
+- Creating the `my_cool_ila` IP core in `pack_kernel.tcl`. 
 - Synthesize your design. (Your kernel can be instantiated multiple times, Vivado automatically finds the ILA cores and connects them to it's debugging system)
 
 ### Part 2: Running your design and viewing the recorded ILA data
 - Open VNC on one of the FPGA nodes
-- Add a way to "pause" your host code after the bitstream loads (and before any kernel invocation you may want to inspect)
-- In VNC: Run your host code until it hits the pause block
-- In VNC: Start the Vivado Logic Analyzer
-- In VNC: Using the Logic Analyzer
+- Load the Bitstream
+- Open the vivado "Hardware Debugger"
+- Set up your triggers
+- Activate the ILA
+- Execute your program
+- Observe Waveforms
 
 ## Part 1: Synthesizing
 ### Wire up an "extern" ILA module, to all the signals you would like to view. 
@@ -24,7 +26,7 @@ In my case, I wanted to debug the AXI4 interface to memory for the Bursting Memo
 Start by creating an `extern module` for the ILA. In the next section we will instantiate the ILA IP core, but for now we'll declare it's interface, with all the probes we would want to view. They must be named `probeN` in ascending order. 
 (You can specify the widths of up to 1024 probes. By default they are 1-bit wide.)
 ```sus
-extern module ila_crc_counter{
+extern module my_cool_ila{
     domain clk
     input bool probe0'0
     input bool probe1'0
@@ -52,11 +54,11 @@ I put every signal into its own domain, such that no pipelining registers would 
 
 **Important: Note that the ports that aren't `bool` correspond to the wider integers**
 
-Once you have the `extern module ila_crc_counter`, instantiate it and wire it up:
+Once you have the `extern module my_cool_ila`, instantiate it and wire it up:
 ```sus
 module bench_burst_writer#(int AXI_WIDTH) {
     // ...
-    ila_crc_counter ila
+    my_cool_ila ila
 
     ila.probe0 = aresetn
     ila.probe1 = ila_start
@@ -114,7 +116,7 @@ create_ip \
         -vendor xilinx.com \
         -library ip \
         -version 6.2 \
-        -module_name ila_crc_counter \
+        -module_name my_cool_ila \
         -dir ./ip_creation
 
 set_property -dict [list \
@@ -132,7 +134,7 @@ set_property -dict [list \
   CONFIG.C_EN_STRG_QUAL {1} \
   CONFIG.C_ADV_TRIGGER {true} \
   CONFIG.ALL_PROBE_SAME_MU {true} \
-] [get_ips ila_crc_counter]
+] [get_ips my_cool_ila]
 
 # the rest of pack_kernel.tcl ....
 ipx::package_project -root_dir ./${KERNEL_NAME}_ip -vendor pc2 -library sus-designs -taxonomy /UserIP -import_files
@@ -143,6 +145,10 @@ You can configure `CONFIG.C_DATA_DEPTH` to a reasonable value for how much data 
 You can specify up to 1024 probes. By default they are 1-bit wide.
 
 For more configuration options, it is recommended to create the "ILA" IP core in Vivado, configure it in GUI, and copy over the generated TCL code from the TCL Console. 
+
+**Note: ILAs consume BRAMs to store their samples. You must have enough free BRAM resources to store all samples. You may need to be conservative with the amount of cycles you record as you may quickly run out of BRAMs.**
+
+**Note: ILAs cannot use URAMs**
 
 ### And synthesize!
 ![engage.gif](engage.gif)
@@ -195,11 +201,11 @@ Host n2cn* n2gpu* n2fpga*
     User lennartv
 ```
 
-### In VNC: Load the Bitstream
+### Load the Bitstream
 
 You should be on a node with your FPGA. First and foremost, load your program once, such that the bitstream has been loaded onto the FPGA. If you're working with a system such as [tapasco](github.com/esa-tu-darmstadt/tapasco) and you have a `.bit` bitstream file, you can also just flash the bitstream with `tapasco-load-bitstream bitstream.bit`. 
 
-#### In VNC: Optional: Add a way to "pause" your host code after the bitstream loads (and before any kernel invocation you may want to inspect)
+#### Optional: Add a way to "pause" your host code after the bitstream loads (and before any kernel invocation you may want to inspect)
 ```cpp
 void debug_pause() {
     std::cout << "Paused, press ENTER to continue..." << std::endl;
@@ -216,34 +222,48 @@ void main() {
     // start running kernels
 }
 ```
-##### In VNC: Run your host code until it hits the pause block
+##### Run your host code until it hits the pause block
 `./main.x`
 
-### In VNC: Open the vivado "Hardware Debugger"
+### Open the vivado "Hardware Debugger"
 
-Once the bitstream is on the device open "vivado", and from there open the Hardware Debugger. You'll see the "localhost" hardware server. Simply press "Open Target" then "Auto Connect". 
+Create a new terminal and run `debug_hw --vivado --ltx_file /path/to/file.ltx`. This should open the hardware manager with your LTX file opened. 
+
+![broken_hw_debugger](broken_debugger.png)
+
+It may open in a broken state, and in this case, refresh the "localhost" debug server. Then, connect to your card with "Auto Connect". 
 
 ![hardware_manager_auto_connect](hardware_manager_auto_connect.png)
 
-It should now show all your ILAs. It won't however, show you the probes yet. For this you have to load your `.ltx` file. Find it 
+It should now show all your ILAs. Select one of your ILAs.
 
-### In VNC: Set up your triggers
 ![ila_list.png](ila_list.png)
+
+If it doesn't show your probes yet, load your `.ltx` file by clicking "Specify the probes file and refresh the device". 
+
+![Specify the probes file and refresh the device](specify_probes_file.png)
 
 ![example_using_chipscope.png](example_using_chipscope.png)
 
-You can see the waveforms above, bottom left you see the current status of the selected ILA. Bottom right are the triggers. 
+You can see the waveforms in the main panel, bottom left you see the current status of the selected ILA. Bottom right are the triggers. 
 
-- First add a triger. In this instance I'm triggering on the `ctrl.start` signal. 
-- Then, "activate" the ILA on the bottom left.
-- Finally, continue execution of your executable. This should trigger the ILA and give you some waveforms.
+### Set up your triggers
+
+On the bottom right, add a trigger. A trigger is a condition that the ILA looks for to start recording samples. This is because the memory to store samples is limited, and you only want to record the time span you're actually interested in. 
+
+![trigger_example](trigger_example.png)
 
 A detailed documentation on using the hardware manager and setting the triggers can be found here:
 https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-the-Hardware-Target-and-Programming-the-Device?tocId=xP8mrtmlSr~QgWEr5ZpJWA
 
+### Activate the ILA. 
+"activate" the ILA on the bottom left. It will start collecting samples filling up half the buffer. Once the condition for your trigger is met, it will collect samples to fill the remainder of the buffer. You can configure where this midpoint is. 
+
+![activate_trigger](activate_trigger.png)
+
+### Continue execution of your executable. 
+
+Run your design. In doing this, your design should trigger the ILA you've activated. When you go back to the hardware manager, you should see some nice waveforms. 
+
 ### Bonus: Can you spot the AXI violation?
 ![32_bit_ddr_30x2e_broken.png](32_bit_ddr_30x2e_broken.png)
-
-# Misc:
-- Accelerator must have been active at least once to start the hardware debugger server. 
-- You can freely restart the accelerator with the server running & debugger open, 
