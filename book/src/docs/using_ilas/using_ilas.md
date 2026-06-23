@@ -149,6 +149,16 @@ For more configuration options, it is recommended to create the "ILA" IP core in
 
 This should be your normal way to build your bitstream. For this repository, that would be `make U280/overlay_hw.xclbin`
 
+#### When your flow doesn't generate a .ltx file
+
+The `.ltx` file contains information about your ILAs. Namely the names of the debug probes and their sizes. You need to load in this file to look at the waveforms. 
+
+**You don't need to follow this step if you're using XRT.**
+
+Normally, when you write the bitstream, a `.ltx` file should be generated automatically. If it is not, you can open up your implemented Vivado project, and execute the following TCL command:
+
+`write_debug_probes /path/to/file.ltx`
+
 ## Part 2: Analyzing
 
 ### Open VNC on one of the FPGA nodes
@@ -185,7 +195,11 @@ Host n2cn* n2gpu* n2fpga*
     User lennartv
 ```
 
-### Add a way to "pause" your host code after the bitstream loads (and before any kernel invocation you may want to inspect)
+### In VNC: Load the Bitstream
+
+You should be on a node with your FPGA. First and foremost, load your program once, such that the bitstream has been loaded onto the FPGA. If you're working with a system such as [tapasco](github.com/esa-tu-darmstadt/tapasco) and you have a `.bit` bitstream file, you can also just flash the bitstream with `tapasco-load-bitstream bitstream.bit`. 
+
+#### In VNC: Optional: Add a way to "pause" your host code after the bitstream loads (and before any kernel invocation you may want to inspect)
 ```cpp
 void debug_pause() {
     std::cout << "Paused, press ENTER to continue..." << std::endl;
@@ -202,33 +216,19 @@ void main() {
     // start running kernels
 }
 ```
-### In VNC: Run your host code until it hits the pause block
+##### In VNC: Run your host code until it hits the pause block
 `./main.x`
-### In VNC: Start the Vivado Logic Analyzer
-Start the server with:
-```
-debug_hw --xvc_pcie /dev/xfpga/xvc_pub.u41217.0 --hw_server
-```
-The driver ids for the cards on the Xilinx nodes of noctua2 are the following:
-`u257.0`
-`u33025.0`
-`u41217.0`
 
-The files are only available, when a bitstream is loaded, so when in doubt reset all cards and check which cards are there.
-When the debug server is launched you can connect to it with the following command:
+### In VNC: Open the vivado "Hardware Debugger"
 
-```
-debug_hw --vivado --host localhost --ltx_file U280/overlay_hw_prj/_x/link/vivado/vpl/prj/prj.runs/impl_1/debug_nets.ltx
-```
+Once the bitstream is on the device open "vivado", and from there open the Hardware Debugger. You'll see the "localhost" hardware server. Simply press "Open Target" then "Auto Connect". 
 
-Just copying the debug_nets.ltx is not enough, because vivado needs more files and also writes some during execution. Because of this, you should work in the original synthesis folder or copy it completely.
-A detailed documentation on using the hardware manager and setting the triggers can be found here:
-https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-the-Hardware-Target-and-Programming-the-Device?tocId=xP8mrtmlSr~QgWEr5ZpJWA
+![hardware_manager_auto_connect](hardware_manager_auto_connect.png)
 
-### In VNC: Using the Logic Analyzer
+It should now show all your ILAs. It won't however, show you the probes yet. For this you have to load your `.ltx` file. Find it 
+
+### In VNC: Set up your triggers
 ![ila_list.png](ila_list.png)
-
-Connect to the localhost server. This should be possible simply by using "Auto Connect". 
 
 ![example_using_chipscope.png](example_using_chipscope.png)
 
@@ -237,6 +237,9 @@ You can see the waveforms above, bottom left you see the current status of the s
 - First add a triger. In this instance I'm triggering on the `ctrl.start` signal. 
 - Then, "activate" the ILA on the bottom left.
 - Finally, continue execution of your executable. This should trigger the ILA and give you some waveforms.
+
+A detailed documentation on using the hardware manager and setting the triggers can be found here:
+https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-the-Hardware-Target-and-Programming-the-Device?tocId=xP8mrtmlSr~QgWEr5ZpJWA
 
 ### Bonus: Can you spot the AXI violation?
 ![32_bit_ddr_30x2e_broken.png](32_bit_ddr_30x2e_broken.png)
