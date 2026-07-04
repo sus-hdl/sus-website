@@ -1,6 +1,6 @@
 # Domains
 
-Latency Domains are a way of splitting up temporally unrelated wires. Take for instance the [FIFO](https://sus-lang.org/std/memory.html#FIFO):
+Latency Domains are a way of splitting up temporally unrelated wires. Take for instance the [FIFO](https://sus-lang.org/std/fifo.html#FIFO):
 ```sus
 module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
    domain push_dom

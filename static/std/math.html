@@ -21,11 +21,14 @@
 <li><a class="language-item-ref" href="util.html">util</a></li>
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
+<li><a class="language-item-ref" href="fifo.html">fifo</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
 <li><a class="language-item-ref" href="#Abs">Abs</a></li>
 <li><a class="language-item-ref" href="#TreeAdd">TreeAdd</a></li>
+<li><a class="language-item-ref" href="#TreeMax">TreeMax</a></li>
+<li><a class="language-item-ref" href="#TreeMin">TreeMin</a></li>
 <li><a class="language-item-ref" href="#IntNarrow">IntNarrow</a></li>
 </ul>
 <a href="#CompileTimeFunctions" class="sidebar-title">Compile-Time Functions</a>
@@ -69,21 +72,73 @@ Abs(-7) == 7
 </div>
 </section>
 <section class="module" id="TreeAdd">
-<div class="module-heading"><h2>TreeAdd #(int WIDTH, int FROM, int TO)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module TreeAdd #(int WIDTH, int FROM, int TO) {
-    interface TreeAdd : int#(FROM, TO)[WIDTH] values'0 -&gt; int#(FROM: FROM*WIDTH, TO: (TO - 1)*WIDTH + 1) total
+<div class="module-heading"><h2>TreeAdd #(int SIZE, int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module TreeAdd #(int SIZE, int FROM, int TO) {
+    action TreeAdd : int#(FROM, TO)[SIZE] values -&gt; int sum
 }</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
 <text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">TreeAdd</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">values</text>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">TreeAdd</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">values</text>
 <line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">total</text>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">sum</text>
 </svg></figure>
+<div class="doc-prose">
+<p>In a tree fashion, add up the given numbers.
+This will take clog2#(V: SIZE) stages, and each stage receives a pipeline stage.</p>
+</div>
+</section>
+<section class="module" id="TreeMax">
+<div class="module-heading"><h2>TreeMax #(int SIZE, int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module TreeMax #(int SIZE, int FROM, int TO) {
+    action TreeMax : int#(FROM, TO)[SIZE] values -&gt; int max
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">TreeMax</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">TreeMax</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">values</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">max</text>
+</svg></figure>
+<div class="doc-prose">
+<p>In a tree fashion, find the maximum of the given numbers.
+This will take clog2#(V: SIZE) stages, and each stage receives a pipeline stage.</p>
+</div>
+</section>
+<section class="module" id="TreeMin">
+<div class="module-heading"><h2>TreeMin #(int SIZE, int FROM, int TO)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module TreeMin #(int SIZE, int FROM, int TO) {
+    action TreeMin : int#(FROM, TO)[SIZE] values -&gt; int min
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">TreeMin</text>
+<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">TreeMin</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">values</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">min</text>
+</svg></figure>
+<div class="doc-prose">
+<p>In a tree fashion, find the minimum of the given numbers.
+This will take clog2#(V: SIZE) stages, and each stage receives a pipeline stage.</p>
+</div>
 </section>
 <section class="module" id="IntNarrow">
 <div class="module-heading"><h2>IntNarrow #(int FROM_I, int TO_I, int FROM, int TO)</h2></div>

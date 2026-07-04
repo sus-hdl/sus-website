@@ -2,7 +2,7 @@
 
 Besides computing the absolute latencies of all wires in a module based on the absolute latencies of all of its submodules ("Latency Counting"), it is also possible to infer the parameters of your submodules based on the latencies present on their ports, which we term "Latency Inference". For this, one or more parameters of your *Latency Sensitive* module must be inferrable. 
 
-Latency Inference starts at the declaration of your module. You must attach absolute latency annotations to at least an input and an output port of your module, and the difference between those absolute latencies must be linear in exactly one [integer parameter of this module](../module_parameters.md). Since this is a bit of a mouthful, let's look for example at [FIFO](https://sus-lang.org/std/memory.html#FIFO):
+Latency Inference starts at the declaration of your module. You must attach absolute latency annotations to at least an input and an output port of your module, and the difference between those absolute latencies must be linear in exactly one [integer parameter of this module](../module_parameters.md). Since this is a bit of a mouthful, let's look for example at [FIFO](https://sus-lang.org/std/fifo.html#FIFO):
 
 ```sus
 module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
@@ -47,7 +47,7 @@ module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
 
 As can be seen on FIFO's inference diagram. The green lines show that `MAY_PUSH_LATENCY` can be inferred from the paths from `may_push` to `push`, and `may_push` to `push_data`. Now, how precisely is this inference done? 
 
-For a very minimal example of inference, `InferFIFO` instantiates [FIFO](https://sus-lang.org/std/memory.html#FIFO) and a [fp32_mul](https://github.com/pc2/sus-float) operator. 
+For a very minimal example of inference, `InferFIFO` instantiates [FIFO](https://sus-lang.org/std/fifo.html#FIFO) and a [fp32_mul](https://github.com/pc2/sus-float) operator. 
 
 ```sus
 module InferFIFO {
@@ -102,4 +102,4 @@ For latency-sensitive modules, it is best to attach explicit latencies to *all* 
 For non-latency-sensitive modules usually don't need to have their port latencies specified explicitly, since they likely will be instantiated early, in which case exact latencies are known. 
 
 ### Tip: Be agressive in splitting latency-sensitive modules into separate domains [Domain](domains.md)
-Really, making latency sensitive modules is just an exercise in *avoiding any and all Poison Edges*. By splitting unrelated interfaces of the module into separate domains, no poison edges can be formed across the domain boundary. For an example of this, see [FIFO](https://sus-lang.org/std/memory.html#FIFO). 
+Really, making latency sensitive modules is just an exercise in *avoiding any and all Poison Edges*. By splitting unrelated interfaces of the module into separate domains, no poison edges can be formed across the domain boundary. For an example of this, see [FIFO](https://sus-lang.org/std/fifo.html#FIFO). 

@@ -21,6 +21,7 @@
 <li><a class="language-item-ref" href="util.html">util</a></li>
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
+<li><a class="language-item-ref" href="fifo.html">fifo</a></li>
 </ul>
 <a href="#Types" class="sidebar-title">Types</a>
 <ul>
@@ -33,6 +34,7 @@
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
 <li><a class="language-item-ref" href="#LatencyOffset">LatencyOffset</a></li>
+<li><a class="language-item-ref" href="#LatencyCut">LatencyCut</a></li>
 <li><a class="language-item-ref" href="#CrossDomain">CrossDomain</a></li>
 <li><a class="language-item-ref" href="#LatencyOffsetAction">LatencyOffsetAction</a></li>
 <li><a class="language-item-ref" href="#LatencyOffsetActionNoData">LatencyOffsetActionNoData</a></li>
@@ -112,6 +114,32 @@
 <div class="doc-prose">
 <p>Unsafe builtin to circumvent the Latency Counting System. Connects <code>dout</code> to <code>din</code> without adding the requisite latency
 Or: used for negative latencies, for instance to implement Almost-Full FIFOs, stateful for loops, etc.</p>
+</div>
+</section>
+<section class="module" id="LatencyCut">
+<div class="module-heading"><h2>LatencyCut #(T)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module LatencyCut #(T) {
+   domain a
+    input T din
+   domain b
+    output T dout
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="136" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">LatencyCut</text>
+<rect x="140" y="36" width="140" height="88" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="85" x2="280" y2="85" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">a</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="119" text-anchor="end" fill="#9b96aa" font-size="10">b</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
+<line x1="280" y1="105" x2="308" y2="105" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="105" dominant-baseline="middle" fill="#1a1227">dout</text>
+</svg></figure>
+<div class="doc-prose">
+<p>Cuts Latency Counting information between <code>din</code> and <code>dout</code>.
+Internally implemented as a simple wire.</p>
 </div>
 </section>
 <section class="module" id="CrossDomain">

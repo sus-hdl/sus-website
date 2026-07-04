@@ -21,16 +21,14 @@
 <li><a class="language-item-ref" href="util.html">util</a></li>
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref sidebar-current" href="memory.html">memory</a></li>
+<li><a class="language-item-ref" href="fifo.html">fifo</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
 <li><a class="language-item-ref" href="#ROM">ROM</a></li>
 <li><a class="language-item-ref" href="#RAM">RAM</a></li>
+<li><a class="language-item-ref" href="#DPRAM">DPRAM</a></li>
 <li><a class="language-item-ref" href="#RAM_Unbalanced">RAM_Unbalanced</a></li>
-<li><a class="language-item-ref" href="#ShiftReg">ShiftReg</a></li>
-<li><a class="language-item-ref" href="#FIFO">FIFO</a></li>
-<li><a class="language-item-ref" href="#FWFT">FWFT</a></li>
-<li><a class="language-item-ref" href="#RippleFIFO">RippleFIFO</a></li>
 </ul>
 </aside>
 <div class="doc-main">
@@ -84,6 +82,61 @@
 <line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
 <text x="312" y="149" dominant-baseline="middle" fill="#1a1227">read_data</text>
 </svg></figure>
+<div class="doc-prose">
+<p>Simple Dual Port RAM Module.</p>
+<p>The write port and read port are fully independent.
+The RAM has a write-after-read policy, so when writing and reading to the same address in the same cycle, the old value is returned.</p>
+</div>
+</section>
+<section class="module" id="DPRAM">
+<div class="module-heading"><h2>DPRAM #(T, int DEPTH)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module DPRAM #(T, int DEPTH) {
+   domain dom_a
+    action write_a'0 : int#(FROM: 0, TO: DEPTH) write_addr_a'0, T write_data_a'0
+    action read_a'0 : int#(FROM: 0, TO: DEPTH) read_addr_a'0 -&gt; T read_data_a'1
+   domain dom_b
+    action write_b'0 : int#(FROM: 0, TO: DEPTH) write_addr_b'0, T write_data_b'0
+    action read_b'0 : int#(FROM: 0, TO: DEPTH) read_addr_b'0 -&gt; T read_data_b'1
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="322" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">DPRAM</text>
+<rect x="140" y="36" width="140" height="274" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="178" x2="280" y2="178" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="173" text-anchor="end" fill="#9b96aa" font-size="10">dom_a</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="305" text-anchor="end" fill="#9b96aa" font-size="10">dom_b</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_a</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_addr_a</text>
+<line x1="112" y1="110" x2="140" y2="110" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="110" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_data_a</text>
+<line x1="112" y1="137" x2="140" y2="137" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="137" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_a</text>
+<line x1="112" y1="159" x2="140" y2="159" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="159" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_addr_a</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">read_data_a</text>
+<line x1="112" y1="198" x2="140" y2="198" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="198" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_b</text>
+<line x1="112" y1="220" x2="140" y2="220" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="220" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_addr_b</text>
+<line x1="112" y1="242" x2="140" y2="242" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="242" text-anchor="end" dominant-baseline="middle" fill="#1a1227">write_data_b</text>
+<line x1="112" y1="269" x2="140" y2="269" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="269" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_b</text>
+<line x1="112" y1="291" x2="140" y2="291" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="291" text-anchor="end" dominant-baseline="middle" fill="#1a1227">read_addr_b</text>
+<line x1="280" y1="198" x2="308" y2="198" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="198" dominant-baseline="middle" fill="#1a1227">read_data_b</text>
+</svg></figure>
+<div class="doc-prose">
+<p>True Dual Port RAM Module.</p>
+<p>Ports a and b are fully independent, and each can be used to perform either a read or a write each cycle.</p>
+<p>It is an error to call both <code>write_a</code> and <code>read_a</code> at the same time, as well as <code>write_b</code> and <code>read_b</code>.</p>
+<p>When writing with both <code>write_a</code> and <code>write_b</code> to the same address at the same time, <code>write_b</code> takes prescedence.</p>
+</div>
 </section>
 <section class="module" id="RAM_Unbalanced">
 <div class="module-heading"><h2>RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE)</h2></div>
@@ -114,224 +167,6 @@
 <line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
 <text x="312" y="149" dominant-baseline="middle" fill="#1a1227">read_data</text>
 </svg></figure>
-</section>
-<section class="module" id="ShiftReg">
-<div class="module-heading"><h2>ShiftReg #(T, int LATENCY)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module ShiftReg #(T, int LATENCY) {
-    interface ShiftReg : T din'0 -&gt; T dout'LATENCY
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">ShiftReg</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-LATENCY</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
-</svg></figure>
-<div class="doc-prose">
-<p>This shift register is implemented as a memory block with a rotating index.</p>
-<p>It is meant to bridge a long latency difference.</p>
-<p>We keep one latency register on the inflow, and one on the outflow, as they tend to slot into the primitives we synthesize to.</p>
-</div>
-</section>
-<section class="module" id="FIFO">
-<div class="module-heading"><h2>FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module FIFO #(T, int DEPTH, int MAY_PUSH_LATENCY) {
-   domain push_dom
-    output bool may_push'-MAY_PUSH_LATENCY
-    action push'0 : T push_data'0
-   domain pop_dom
-    output bool may_pop'0
-    action pop'0 : -&gt; T pop_data'1
-   domain reset
-    action rst
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FIFO</text>
-<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
-<line x1="140" y1="173" x2="280" y2="173" stroke="#c0b8d4" stroke-width="1"/>
-<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<text x="276" y="168" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
-<text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
-<path d="M 140,88 C 210,88 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
-<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_push</text>
-<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
-<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">may_pop</text>
-<line x1="280" y1="154" x2="308" y2="154" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="154" dominant-baseline="middle" fill="#1a1227">pop_data</text>
-<line x1="112" y1="189" x2="140" y2="189" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="189" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
-</svg></figure>
-<div class="doc-prose">
-<p>A First-In-First-Out memory element.</p>
-<p>Push data in through the <code>may_push</code>, and <code>push</code> connections.
-If <code>may_push</code> is high, then you’re allowed to perform at most <code>MAY_PUSH_LATENCY</code> more pushes before you must stop.
-This is because <code>MAY_PUSH_LATENCY</code> translates to the ALMOST_FULL treshold on the FIFO’s internals.
-In the most common case, <code>may_push</code> has a 1-to-1 correspondence with <code>push</code>, hence</p>
-<p>Pop data using the <code>may_pop</code> and <code>pop</code> connections. <code>pop</code> may only be called when <code>may_pop</code> is high.
-After <code>pop</code> is called, the data is returned, one or more cycles later.
-You should not depend on <code>pop_data</code> for your decision to <code>pop</code>. If you need to do that, opt for <a href="memory.html#FWFT" title="memory.html#FWFT">FWFT</a> instead.</p>
-<p>Example where we’re moving data from <code>from_fifo</code>, adding one to it with wrap around, and pushing to <code>to_fifo</code>:</p>
-<pre><code class="language-sus">module TwoFIFOs {
-    FIFO#(T: type int#(FROM: 0, TO: 256), DEPTH: 128) from_fifo
-    FIFO#(T: type int#(FROM: 0, TO: 256), DEPTH: 128) to_fifo
- 
-    when from_fifo.may_pop &amp; to_fifo.may_push {
-        int pop_data = from_fifo.pop()
-        reg int data_incr = pop_data + 1 mod 256
-        // to_fifo.MAY_PUSH_LATENCY is inferred to 2 here.
-        // 1 for from_fifo.pop(), and 1 for the `data_incr` reg. 
-        to_fifo.push(data_incr)
-    }
- 
-    // not shown here is pushing data into from_fifo and popping it again from to_fifo
-}
-</code></pre>
-</div>
-</section>
-<section class="module" id="FWFT">
-<div class="module-heading"><h2>FWFT #(T, int DEPTH, int MAY_PUSH_LATENCY)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module FWFT #(T, int DEPTH, int MAY_PUSH_LATENCY) {
-   domain push_dom
-    output bool may_push'-MAY_PUSH_LATENCY
-    action push'0 : T push_data'0
-   domain pop_dom
-    trigger pop_available'0 : T pop_data'0
-    action pop'0
-   domain reset
-    action rst
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="215" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">FWFT</text>
-<rect x="140" y="36" width="140" height="167" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
-<line x1="140" y1="168" x2="280" y2="168" stroke="#c0b8d4" stroke-width="1"/>
-<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<text x="276" y="163" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
-<text x="276" y="198" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
-<path d="M 140,88 C 210,88 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">MAY_PUSH_LATENCY</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
-<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_push</text>
-<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
-<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">pop_available</text>
-<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">pop_data</text>
-<line x1="112" y1="184" x2="140" y2="184" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="184" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
-</svg></figure>
-<div class="doc-prose">
-<p>A First-Word-Fall-Through FIFO. Similar to the regular <a href="memory.html#FIFO" title="memory.html#FIFO">FIFO</a>,
-but this one allows for inspection of the data that is ready to be popped before popping it.</p>
-<p>Push data in through the <code>may_push</code>, and <code>push</code> connections.
-If <code>may_push</code> is high, then you’re allowed to perform at most <code>MAY_PUSH_LATENCY</code> more pushes before you must stop.
-This is because <code>MAY_PUSH_LATENCY</code> translates to the ALMOST_FULL treshold on the FIFO’s internals.
-In the most common case, <code>may_push</code> has a 1-to-1 correspondence with <code>push</code>, hence</p>
-<p>Instead of <a href="memory.html#FIFO" title="memory.html#FIFO">FIFO</a>’s <code>may_pop</code> interface, <code>FWFT</code> comes with a <code>pop_available</code> trigger, which presents you with the data that you can then <code>pop()</code>.</p>
-<p>The main usecase of <code>FWFT</code> is for situations where you need a 0-cycle response time to a <code>pop</code> signal.</p>
-<p>Below is an of a scenario where we need such a 0-cycle pop latency.
-The goal is to produce an <code>is_last</code> signal, based on the sequence lengths stored in <code>segment_sizes_fifo</code>
-Since sequences can be back-to-back, num_left must be refresheable within a single cycle cycle, any number of cycles in a row.
-Let’s say it will not happen that <code>data_stream</code> is called when no segment is in the fifo for it.</p>
-<pre><code class="language-sus">module SplitIntoSegments {
-    FWFT#(T: type int#(FROM: 1, TO: 256), DEPTH: 128) segment_sizes_fifo
- 
-    state int#(FROM: 0, TO: 256) num_left
-    bool need_new_num_left = false
-    when num_left == 0 {
-        need_new_num_left = true
-    }
- 
-    action data_stream : float _data -&gt; bool is_last {
-        when num_left == 1 {
-            is_last = true
-            need_new_num_left = true
-        } else {
-            is_last = false
-        }
-        num_left = num_left - 1 mod 256
-    }
-    when need_new_num_left {
-        when segment_sizes_fifo.pop_available: int new_num_left {
-            num_left = new_num_left
-        }
-    }
- 
-    // not shown here is pushing data into segment_sizes_fifo
-}
-</code></pre>
-</div>
-</section>
-<section class="module" id="RippleFIFO">
-<div class="module-heading"><h2>RippleFIFO #(T, int DEPTH)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module RippleFIFO #(T, int DEPTH) {
-   domain push_dom
-    output bool may_push'0
-    action push'0 : T push_data'0
-   domain pop_dom
-    output bool may_pop'0
-    action pop'0 : -&gt; T pop_data'0
-   domain reset
-    action rst
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="220" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">RippleFIFO</text>
-<rect x="140" y="36" width="140" height="172" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
-<line x1="140" y1="173" x2="280" y2="173" stroke="#c0b8d4" stroke-width="1"/>
-<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<text x="276" y="168" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
-<text x="276" y="203" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
-<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push_data</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_push</text>
-<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">pop</text>
-<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">may_pop</text>
-<line x1="280" y1="154" x2="308" y2="154" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="154" dominant-baseline="middle" fill="#1a1227">pop_data</text>
-<line x1="112" y1="189" x2="140" y2="189" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="189" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
-</svg></figure>
-<div class="doc-prose">
-<p>A FIFO implemented as a sequence of registers with a accompanying valid bit.</p>
-<p>Bandwidth limited to 1 element every 2 cycles.</p>
-<p>Use for very small FIFOs, in bandwidth-limited circumstances.</p>
-</div>
 </section>
 </div>
 </div>
