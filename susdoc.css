@@ -1,0 +1,225 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Library documentation stylesheet — bright theme
+   Used by all pages under /docs/std/ and other generated library docs.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --brand:        #412173;
+  --brand-mid:    #6b3fa0;
+  --brand-light:  #ede8f5;
+  --bg:           #ffffff;
+  --bg-subtle:    #f7f6fb;
+  --bg-code:      #f3f1f9;
+  --text:         #1a1227;
+  --text-muted:   #5a5370;
+  --text-faint:   #9b96aa;
+  --border:       #e0dcea;
+  --link:         #412173;
+  --link-hover:   #6b3fa0;
+  --heading-line: #bbbbbb;
+}
+
+/* ── Reset main area to bright theme ── */
+body {
+  background-color: var(--bg);
+  color: var(--text);
+}
+
+/* The site header and footer stay dark — don't override those. */
+
+/* ── Two-column doc layout ── */
+.doc-layout {
+  display: flex;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ── Sidebar ── */
+.doc-sidebar {
+  width: 210px;
+  flex-shrink: 0;
+  padding: 1.25rem 1.25rem 1.25rem 1.25rem;
+  border-right: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  max-height: 100vh;
+  overflow-y: auto;
+  background: var(--bg-subtle);
+}
+
+.sidebar-title {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--text-faint);
+  margin: 0.6rem 0 0.6rem 0;
+  text-decoration: none;
+}
+
+.sidebar-title:first-child {
+  margin: 0.0rem 0 0.6rem 0;
+}
+
+.doc-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.doc-sidebar li {
+  margin-bottom: 0.1rem;
+}
+
+.doc-sidebar a.language-item-ref {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 0.83rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  display: block;
+  padding: 3px 7px;
+  border-radius: 4px;
+  transition: color 0.12s, background 0.12s;
+}
+
+.doc-sidebar a.language-item-ref:hover,
+.doc-sidebar a.language-item-ref.sidebar-current {
+  color: var(--brand) !important;
+  background: var(--brand-light) !important;
+}
+
+/* ── Main content ── */
+.doc-main {
+  flex: 1;
+  padding: 1.75rem 2.5rem 3rem;
+  min-width: 0;
+}
+
+/* ── Breadcrumb / page header ── */
+.module-path {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.78rem;
+  color: var(--text-faint);
+  margin: 0 0 0.2rem 0;
+}
+
+.module-path a {
+  color: var(--text-faint);
+  text-decoration: none;
+}
+
+.module-path a:hover { color: var(--link-hover); }
+
+.page-title {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.55rem;
+  color: var(--text);
+  margin: 0 0 0.3rem 0;
+}
+
+.page-subtitle {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0 0 2.5rem 0;
+}
+
+.doc-section {
+  font-family: 'Fira Code', monospace;
+  font-size: 1.35rem;
+  color: var(--text);
+  margin: 0.8rem 0 1.8rem 0;
+  padding: 0.5rem 0.0rem 1.0rem 0.0rem;
+  border-bottom: 1px solid var(--heading-line);
+}
+
+/* ── Per-module section ── */
+.module {
+  scroll-margin-top: 1rem;
+}
+
+.module + .module {
+  border-top: 1px solid var(--border);
+  padding-top: 2.5rem;
+  margin-top: 2.5rem;
+}
+
+.module-heading {
+  margin-bottom: 0.8rem;
+}
+
+.module-heading h2 {
+  font-family: 'Fira Code', 'Consolas', monospace;
+  font-size: 1.2rem;
+  color: var(--text);
+  margin: 0;
+}
+
+/* ── Doc prose ── */
+.doc-prose {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  /* max-width: 680px; */
+  margin: 0 0 1.1rem 0;
+}
+
+.doc-prose p { margin: 0; }
+.doc-prose p + p { margin-top: 0.6em; }
+
+.doc-prose code.language-sus {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.875em;
+  background: var(--bg-code);
+  color: var(--text);
+  display: block;
+  margin: 1rem 1.25rem;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+
+.doc-prose a {
+  color: var(--link);
+  text-decoration: none;
+}
+
+.doc-prose a:hover { text-decoration: underline; }
+
+/* ── Interface signature block ── */
+.interface-block {
+  background: var(--bg-subtle);
+  border-left: 3px solid var(--brand);
+  border-radius: 0 6px 6px 0;
+  overflow-x: auto;
+  margin-bottom: 1.1rem;
+}
+
+.interface-block pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  line-height: 1.65;
+}
+
+.interface-block code {
+  font-family: 'Fira Code', 'Consolas', monospace !important;
+  font-size: 0.875rem !important;
+  background: transparent !important;
+}
+
+/* ── Example block ── */
+.block-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--text-faint);
+  margin: 0 0 0.35rem 0;
+}
+
+/* ── Port diagram ── */
+.port-diagram {
+  margin: 0 0 1.4rem 0;
+  overflow-x: auto;
+}
+
+.port-diagram svg {
+  display: block;
+}

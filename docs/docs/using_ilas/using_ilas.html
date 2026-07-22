@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Debugging with ILAs - SUS Documentation</title>
+                
+
+        <!-- Custom HTML head -->
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+                <link rel="icon" href="../../favicon.svg">
+                        <link rel="shortcut icon" href="../../favicon.png">
+                <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+                <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+                <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+            </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../introduction.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="part-title">Intro To SUS</li><li class="chapter-item expanded "><a href="../../docs/installation.html"><strong aria-hidden="true">1.</strong> Installing SUS</a></li><li class="chapter-item expanded "><a href="../../docs/your_first_module.html"><strong aria-hidden="true">2.</strong> Your First Module</a></li><li class="chapter-item expanded "><a href="../../docs/conditionals.html"><strong aria-hidden="true">3.</strong> Conditionals</a></li><li class="chapter-item expanded "><a href="../../docs/compile_time_code/compile_time_code.html"><strong aria-hidden="true">4.</strong> Compile-Time Code</a></li><li class="chapter-item expanded "><a href="../../docs/integers.html"><strong aria-hidden="true">5.</strong> Bounded Integers</a></li><li class="chapter-item expanded "><a href="../../docs/clocks.html"><strong aria-hidden="true">6.</strong> Clocks</a></li><li class="chapter-item expanded "><a href="../../docs/ports_and_interfaces.html"><strong aria-hidden="true">7.</strong> Ports and Interfaces</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../docs/actions.html"><strong aria-hidden="true">7.1.</strong> Actions and Triggers</a></li></ol></li><li class="chapter-item expanded "><a href="../../docs/module_parameters.html"><strong aria-hidden="true">8.</strong> Module Parameters</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../docs/inference.html"><strong aria-hidden="true">8.1.</strong> Parameter Inference</a></li><li class="chapter-item expanded "><a href="../../docs/extern_modules.html"><strong aria-hidden="true">8.2.</strong> Extern Modules</a></li></ol></li><li class="chapter-item expanded "><a href="../../docs/latency_counting/latency_counting.html"><strong aria-hidden="true">9.</strong> Latency Counting</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../docs/latency_counting/latency_inference.html"><strong aria-hidden="true">9.1.</strong> Latency Inference</a></li><li class="chapter-item expanded "><a href="../../docs/latency_counting/domains.html"><strong aria-hidden="true">9.2.</strong> Domains</a></li><li class="chapter-item expanded "><a href="../../docs/latency_counting/resolving_errors.html"><strong aria-hidden="true">9.3.</strong> Resolving Errors</a></li><li class="chapter-item expanded "><a href="../../docs/latency_counting/splits.html"><strong aria-hidden="true">9.4.</strong> Splits</a></li><li class="chapter-item expanded "><a href="../../docs/latency_counting/algorithm.html"><strong aria-hidden="true">9.5.</strong> Latency Counting Algorithm</a></li></ol></li><li class="chapter-item expanded "><a href="../../docs/syntax/syntax.html"><strong aria-hidden="true">10.</strong> Syntax</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../docs/syntax/operators.html"><strong aria-hidden="true">10.1.</strong> Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../../docs/tensors/tensors.html"><strong aria-hidden="true">11.</strong> Tensors</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../docs/tensors/reductions.html"><strong aria-hidden="true">11.1.</strong> Reduction Operators</a></li></ol></li><li class="chapter-item expanded "><a href="../../docs/conventions/may_x_then_x.html"><strong aria-hidden="true">12.</strong> may_x then x idiom</a></li><li class="chapter-item expanded affix "><li class="part-title">Misc</li><li class="chapter-item expanded "><a href="../../compiler/debug.html"><strong aria-hidden="true">13.</strong> Debug Flags</a></li><li class="chapter-item expanded "><a href="../../compiler/how_sus_is_compiled.html"><strong aria-hidden="true">14.</strong> How SUS is compiled</a></li><li class="chapter-item expanded "><a href="../../docs/using_ilas/using_ilas.html" class="active"><strong aria-hidden="true">15.</strong> Debugging with ILAs</a></li><li class="chapter-item expanded affix "><li class="part-title">philosophy</li><li class="chapter-item expanded "><a href="../../philosophy/compiletime_and_runtime.html"><strong aria-hidden="true">16.</strong> Compiletime and Runtime</a></li><li class="chapter-item expanded "><a href="../../philosophy/control_flow.html"><strong aria-hidden="true">17.</strong> Control Flow</a></li><li class="chapter-item expanded "><a href="../../philosophy/design_decisions.html"><strong aria-hidden="true">18.</strong> Design Decisions</a></li><li class="chapter-item expanded "><a href="../../philosophy/instantiation.html"><strong aria-hidden="true">19.</strong> Instantiation</a></li><li class="chapter-item expanded "><a href="../../philosophy/interfaces.html"><strong aria-hidden="true">20.</strong> Interfaces</a></li><li class="chapter-item expanded "><a href="../../philosophy/latency.html"><strong aria-hidden="true">21.</strong> Latency</a></li><li class="chapter-item expanded "><a href="../../philosophy/library.html"><strong aria-hidden="true">22.</strong> Library</a></li><li class="chapter-item expanded "><a href="../../philosophy/optimization.html"><strong aria-hidden="true">23.</strong> Optimization</a></li><li class="chapter-item expanded "><a href="../../philosophy/state.html"><strong aria-hidden="true">24.</strong> State</a></li><li class="chapter-item expanded "><a href="../../philosophy/state_v_latency.html"><strong aria-hidden="true">25.</strong> State vs Latency</a></li><li class="chapter-item expanded "><a href="../../philosophy/template_troubles.html"><strong aria-hidden="true">26.</strong> The Trouble with Parsing Templates</a></li><li class="chapter-item expanded "><a href="../../philosophy/tensions.html"><strong aria-hidden="true">27.</strong> Tensions</a></li><li class="chapter-item expanded "><a href="../../philosophy/tree_sitter.html"><strong aria-hidden="true">28.</strong> Tree Sitter</a></li><li class="chapter-item expanded "><a href="../../philosophy/types.html"><strong aria-hidden="true">29.</strong> Types</a></li><li class="chapter-item expanded "><a href="../../philosophy/core-philosophy.html"><strong aria-hidden="true">30.</strong> Core Philosophy</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../philosophy/what-sus-gives-you.html"><strong aria-hidden="true">30.1.</strong> What SUS gives you</a></li><li class="chapter-item expanded "><a href="../../philosophy/planned.html"><strong aria-hidden="true">30.2.</strong> Planned</a></li><li class="chapter-item expanded "><a href="../../philosophy/what-sus-does-not-do.html"><strong aria-hidden="true">30.3.</strong> What SUS does not do</a></li><li class="chapter-item expanded "><a href="../../philosophy/example-of-some-sus-code-in-the-sus-vscode-language-server.html"><strong aria-hidden="true">30.4.</strong> SUS Code Examples</a></li></ol></li><li class="chapter-item expanded "><a href="../../philosophy/main-features-through-examples.html"><strong aria-hidden="true">31.</strong> Main Features through examples</a></li></ol>            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                                                <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                                            </div>
+
+                    <h1 class="menu-title">SUS Documentation</h1>
+
+                    <div class="right-buttons">
+                                                <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                                                                        
+                    </div>
+                </div>
+
+                                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="using-xilinx-integrated-logic-analyzer-for-sus-designs"><a class="header" href="#using-xilinx-integrated-logic-analyzer-for-sus-designs">Using Xilinx' Integrated Logic Analyzer for SUS Designs</a></h1>
+<p>If your simulator has failed you, and you're pulling out your hair staring at a failing hardware implementation, your last resort is the <a href="https://docs.amd.com/api/khub/documents/xKlVO5WOeewsgYv5RWUDUA/content">Integrated Logic Analyzer</a>. This is a small IP core that you instantiate into your design, which upon detecting a triggering signal, records all probe signals for 16384 cycles in its in-built BRAM. It only has inputs, and the IP core itself figures out how to connect itself to the JTag interface on the FPGA card. You need only instantiate it and wire it up to your signals. </p>
+<p><strong>The example in this tutorial is for using it within a SUS kernel in XRT on Noctua 2</strong></p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<h3 id="part-1-synthesizing-a-design-with-an-integrated-logic-analyzer"><a class="header" href="#part-1-synthesizing-a-design-with-an-integrated-logic-analyzer">Part 1: Synthesizing a design with an Integrated Logic Analyzer</a></h3>
+<ul>
+<li>Wire up an &quot;extern&quot; ILA module, to all the signals you would like to view. </li>
+<li>Creating the <code>my_cool_ila</code> IP core in <code>pack_kernel.tcl</code>. </li>
+<li>Synthesize your design. (Your kernel can be instantiated multiple times, Vivado automatically finds the ILA cores and connects them to it's debugging system)</li>
+</ul>
+<h3 id="part-2-running-your-design-and-viewing-the-recorded-ila-data"><a class="header" href="#part-2-running-your-design-and-viewing-the-recorded-ila-data">Part 2: Running your design and viewing the recorded ILA data</a></h3>
+<ul>
+<li>Open VNC on one of the FPGA nodes</li>
+<li>Load the Bitstream</li>
+<li>Open the vivado &quot;Hardware Debugger&quot;</li>
+<li>Set up your triggers</li>
+<li>Activate the ILA</li>
+<li>Execute your program</li>
+<li>Observe Waveforms</li>
+</ul>
+<h2 id="part-1-synthesizing"><a class="header" href="#part-1-synthesizing">Part 1: Synthesizing</a></h2>
+<h3 id="wire-up-an-extern-ila-module-to-all-the-signals-you-would-like-to-view"><a class="header" href="#wire-up-an-extern-ila-module-to-all-the-signals-you-would-like-to-view">Wire up an &quot;extern&quot; ILA module, to all the signals you would like to view.</a></h3>
+<p>In my case, I wanted to debug the AXI4 interface to memory for the Bursting Memory Writer. </p>
+<p>Start by creating an <code>extern module</code> for the ILA. In the next section we will instantiate the ILA IP core, but for now we'll declare it's interface, with all the probes we would want to view. They must be named <code>probeN</code> in ascending order. 
+(You can specify the widths of up to 1024 probes. By default they are 1-bit wide.)</p>
+<pre><code class="language-sus">extern module my_cool_ila{
+    domain clk
+    input bool probe0'0
+    input bool probe1'0
+    input bool probe2'0
+    input bool probe3'0
+    input bool probe4'0
+    input int#(FROM: 0, TO: 256) probe5'0
+    input bool probe6'0
+    input bool probe7'0
+    input bool probe8'0
+    input bool probe9'0
+    input bool probe10'0
+    input bool[2] probe11'0
+    input bool probe12'0
+    input bool probe13'0
+    input int#(FROM: 0, TO: 32) probe14'0
+    input bool probe15'0
+    input bool probe16'0
+    input bool probe17'0
+    input int#(FROM: 0, TO: pow2#(E: 32)) probe18'0
+    input int#(FROM: 0, TO: pow2#(E: 32)) probe19'0
+}
+</code></pre>
+<p>I put every signal into its own domain, such that no pipelining registers would affect the view of the signals. Perhaps if you're debugging a pipeline, this may be desirable. Adjust to taste. </p>
+<p><strong>Important: Note that the ports that aren't <code>bool</code> correspond to the wider integers</strong></p>
+<p>Once you have the <code>extern module my_cool_ila</code>, instantiate it and wire it up:</p>
+<pre><code class="language-sus">module bench_burst_writer#(int AXI_WIDTH) {
+    // ...
+    my_cool_ila ila
+
+    ila.probe0 = aresetn
+    ila.probe1 = ila_start
+    ila.probe2 = ila_finish
+
+    ila.probe3 = m_axi_awvalid
+    ila.probe4 = m_axi_awready
+    ila.probe5 = m_axi_awlen
+
+    ila.probe6 = m_axi_wvalid
+    ila.probe7 = m_axi_wready
+    ila.probe8 = m_axi_wlast
+
+    ila.probe9 = m_axi_bvalid
+    ila.probe10 = m_axi_bready
+    ila.probe11 = m_axi_bresp
+
+    ila.probe12 = writer.may_write
+    ila.probe13 = writer.write
+    ila.probe14 = writer.element_count
+    ila.probe15 = writer.write_is_last
+
+    ila.probe16 = grab_new_transfer
+    ila.probe17 = num_left_to_transfer_valid
+    ila.probe18 = num_left_to_transfer
+    ila.probe19 = num_repeats_remaining_to_finish
+}
+</code></pre>
+<p>Important considerations for wiring it up:
+You'll want a signal you can trigger the ILA on, as it can only . In this case, I used the <code>start</code> wire the <code>axi_ctrl_slave</code> produces. </p>
+<p><strong>Note: There's no need to explicitly specify that a given signal is your trigger right now. The ILA has functionality to be dynamically reconfigured to trigger on a wide range of conditions</strong></p>
+<p><strong>When choosing what signals to probe, consider carefully. Add any signal you believe might be useful in tracking down your issue, since a synthesis roundtrip can easily take 3 hours.</strong></p>
+<h3 id="adding-the-ip-core-to-pack_kerneltcl"><a class="header" href="#adding-the-ip-core-to-pack_kerneltcl">Adding the IP core to <code>pack_kernel.tcl</code></a></h3>
+<p>Now that you have the as-of-yet undefined ILA wired up in your SUS design, you can expliticly create it in your <code>pack_kernel.tcl</code>:</p>
+<pre><code># Existing pack_kernel.tcl code...
+
+set KERNEL_NAME burst_writer${AXI_WIDTH}
+
+create_project ${KERNEL_NAME} ./${KERNEL_NAME} -part $PART
+
+add_files -norecurse \
+{
+    ../../sus_codegen.sv \
+}
+
+# Add these lines:
+
+create_ip \
+        -name ila \
+        -vendor xilinx.com \
+        -library ip \
+        -version 6.2 \
+        -module_name my_cool_ila \
+        -dir ./ip_creation
+
+set_property -dict [list \
+  CONFIG.C_MONITOR_TYPE {Native} \
+  CONFIG.C_NUM_OF_PROBES {20} \
+  CONFIG.C_PROBE5_WIDTH {8} \
+  CONFIG.C_PROBE11_WIDTH {2} \
+  CONFIG.C_PROBE14_WIDTH {5} \
+  CONFIG.C_PROBE18_WIDTH {32} \
+  CONFIG.C_PROBE19_WIDTH {32} \
+  CONFIG.C_DATA_DEPTH {16384} \
+  CONFIG.C_TRIGOUT_EN {false} \
+  CONFIG.C_TRIGIN_EN {false} \
+  CONFIG.C_INPUT_PIPE_STAGES {0} \
+  CONFIG.C_EN_STRG_QUAL {1} \
+  CONFIG.C_ADV_TRIGGER {true} \
+  CONFIG.ALL_PROBE_SAME_MU {true} \
+] [get_ips my_cool_ila]
+
+# the rest of pack_kernel.tcl ....
+ipx::package_project -root_dir ./${KERNEL_NAME}_ip -vendor pc2 -library sus-designs -taxonomy /UserIP -import_files
+
+</code></pre>
+<p>You can configure <code>CONFIG.C_DATA_DEPTH</code> to a reasonable value for how much data you wish to collect in a single run. Note that this times the number of probe bits determines how much BRAM this ILA will synthesize. </p>
+<p>You can specify up to 1024 probes. By default they are 1-bit wide.</p>
+<p>For more configuration options, it is recommended to create the &quot;ILA&quot; IP core in Vivado, configure it in GUI, and copy over the generated TCL code from the TCL Console. </p>
+<p><strong>Note: ILAs consume BRAMs to store their samples. You must have enough free BRAM resources to store all samples. You may need to be conservative with the amount of cycles you record as you may quickly run out of BRAMs.</strong></p>
+<p><strong>Note: ILAs cannot use URAMs</strong></p>
+<h3 id="and-synthesize"><a class="header" href="#and-synthesize">And synthesize!</a></h3>
+<p><img src="engage.gif" alt="engage.gif" /></p>
+<p>This should be your normal way to build your bitstream. For this repository, that would be <code>make U280/overlay_hw.xclbin</code></p>
+<h4 id="when-your-flow-doesnt-generate-a-ltx-file"><a class="header" href="#when-your-flow-doesnt-generate-a-ltx-file">When your flow doesn't generate a .ltx file</a></h4>
+<p>The <code>.ltx</code> file contains information about your ILAs. Namely the names of the debug probes and their sizes. You need to load in this file to look at the waveforms. </p>
+<p><strong>You don't need to follow this step if you're using XRT.</strong></p>
+<p>Normally, when you write the bitstream, a <code>.ltx</code> file should be generated automatically. If it is not, you can open up your implemented Vivado project, and execute the following TCL command:</p>
+<p><code>write_debug_probes /path/to/file.ltx</code></p>
+<h2 id="part-2-analyzing"><a class="header" href="#part-2-analyzing">Part 2: Analyzing</a></h2>
+<h3 id="open-vnc-on-one-of-the-fpga-nodes"><a class="header" href="#open-vnc-on-one-of-the-fpga-nodes">Open VNC on one of the FPGA nodes</a></h3>
+<p>Use the VNC module on Noctua2:</p>
+<pre><code>[lennartv@n2fpga16 ~]$ ml tools/vnc/8.10
+[lennartv@n2fpga16 ~]$ VNC.sh
+</code></pre>
+<p>This will print an SSH command, like the following:</p>
+<pre><code>#############
+ssh -L 5901:/tmp/lennartv.runtimedir/vnc1 n2fpga16
+Afterwards connect with your local VNC client to your local port 5901
+#############
+</code></pre>
+<p>Use this ssh command to connect to the node.
+Since you likely don't yet have the fpga or compute nodes in your <code>.ssh/config</code>, here's a snippet that should help you:</p>
+<pre><code>Host noctua2-jump
+    HostName fe.noctua2.pc2.uni-paderborn.de
+    User lennartv
+    RequestTTY force
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+
+Host n2login1
+    HostName n2login1
+    User lennartv
+    ProxyJump noctua2-jump
+
+Host n2cn* n2gpu* n2fpga*
+    HostName %h
+    ProxyJump n2login1
+    User lennartv
+</code></pre>
+<h3 id="load-the-bitstream"><a class="header" href="#load-the-bitstream">Load the Bitstream</a></h3>
+<p>You should be on a node with your FPGA. First and foremost, load your program once, such that the bitstream has been loaded onto the FPGA. If you're working with a system such as <a href="github.com/esa-tu-darmstadt/tapasco">tapasco</a> and you have a <code>.bit</code> bitstream file, you can also just flash the bitstream with <code>tapasco-load-bitstream bitstream.bit</code>. </p>
+<h4 id="optional-add-a-way-to-pause-your-host-code-after-the-bitstream-loads-and-before-any-kernel-invocation-you-may-want-to-inspect"><a class="header" href="#optional-add-a-way-to-pause-your-host-code-after-the-bitstream-loads-and-before-any-kernel-invocation-you-may-want-to-inspect">Optional: Add a way to &quot;pause&quot; your host code after the bitstream loads (and before any kernel invocation you may want to inspect)</a></h4>
+<pre><code class="language-cpp">void debug_pause() {
+    std::cout &lt;&lt; &quot;Paused, press ENTER to continue...&quot; &lt;&lt; std::endl;
+    std::cin.ignore(std::numeric_limits&lt;std::streamsize&gt;::max(), '\n');
+}
+
+void main() {
+    xrt::device device = xrt::device(&quot;0000:a1:00.1&quot;);
+    xrt::xclbin xclbin = xrt::xclbin(&quot;overlay_hw.xclbin&quot;);
+    xrt::uuid xclbin_handle_ptr = xrt::uuid(device.load_xclbin(xclbin));
+
+    debug_pause();
+
+    // start running kernels
+}
+</code></pre>
+<h5 id="run-your-host-code-until-it-hits-the-pause-block"><a class="header" href="#run-your-host-code-until-it-hits-the-pause-block">Run your host code until it hits the pause block</a></h5>
+<p><code>./main.x</code></p>
+<h3 id="open-the-vivado-hardware-debugger"><a class="header" href="#open-the-vivado-hardware-debugger">Open the vivado &quot;Hardware Debugger&quot;</a></h3>
+<p>Create a new terminal and run <code>debug_hw --vivado --ltx_file /path/to/file.ltx</code>. This should open the hardware manager with your LTX file opened. </p>
+<p><img src="broken_debugger.png" alt="broken_hw_debugger" /></p>
+<p>It may open in a broken state, and in this case, refresh the &quot;localhost&quot; debug server. Then, connect to your card with &quot;Auto Connect&quot;. </p>
+<p><img src="hardware_manager_auto_connect.png" alt="hardware_manager_auto_connect" /></p>
+<p>It should now show all your ILAs. Select one of your ILAs.</p>
+<p><img src="ila_list.png" alt="ila_list.png" /></p>
+<p>If it doesn't show your probes yet, load your <code>.ltx</code> file by clicking &quot;Specify the probes file and refresh the device&quot;. </p>
+<p><img src="specify_probes_file.png" alt="Specify the probes file and refresh the device" /></p>
+<p><img src="example_using_chipscope.png" alt="example_using_chipscope.png" /></p>
+<p>You can see the waveforms in the main panel, bottom left you see the current status of the selected ILA. Bottom right are the triggers. </p>
+<h3 id="set-up-your-triggers"><a class="header" href="#set-up-your-triggers">Set up your triggers</a></h3>
+<p>On the bottom right, add a trigger. A trigger is a condition that the ILA looks for to start recording samples. This is because the memory to store samples is limited, and you only want to record the time span you're actually interested in. </p>
+<p><img src="trigger_example.png" alt="trigger_example" /></p>
+<p>A detailed documentation on using the hardware manager and setting the triggers can be found here:
+https://docs.xilinx.com/r/en-US/ug908-vivado-programming-debugging/Connecting-to-the-Hardware-Target-and-Programming-the-Device?tocId=xP8mrtmlSr~QgWEr5ZpJWA</p>
+<h3 id="activate-the-ila"><a class="header" href="#activate-the-ila">Activate the ILA.</a></h3>
+<p>&quot;activate&quot; the ILA on the bottom left. It will start collecting samples filling up half the buffer. Once the condition for your trigger is met, it will collect samples to fill the remainder of the buffer. You can configure where this midpoint is. </p>
+<p><img src="activate_trigger.png" alt="activate_trigger" /></p>
+<h3 id="continue-execution-of-your-executable"><a class="header" href="#continue-execution-of-your-executable">Continue execution of your executable.</a></h3>
+<p>Run your design. In doing this, your design should trigger the ILA you've activated. When you go back to the hardware manager, you should see some nice waveforms. </p>
+<h3 id="bonus-can-you-spot-the-axi-violation"><a class="header" href="#bonus-can-you-spot-the-axi-violation">Bonus: Can you spot the AXI violation?</a></h3>
+<p><img src="32_bit_ddr_30x2e_broken.png" alt="32_bit_ddr_30x2e_broken.png" /></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                                                    <a rel="prev" href="../../compiler/how_sus_is_compiled.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+                                                    <a rel="next" href="../../philosophy/compiletime_and_runtime.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                                    <a rel="prev" href="../../compiler/how_sus_is_compiled.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+                                    <a rel="next" href="../../philosophy/compiletime_and_runtime.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                            </nav>
+
+        </div>
+
+        
+        
+        
+                <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+        
+                <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+                <script type="text/javascript" src="../../sus-highlight.js"></script>
+        
+        
+    </body>
+</html>

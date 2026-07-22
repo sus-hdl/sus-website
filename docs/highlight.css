@@ -1,0 +1,63 @@
+/* Base */
+/*.language-sus.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #ffffff;
+  color: #24292e;
+}*/
+
+/* Interface keywords (distinct + prominent) */
+.language-sus.hljs .hljs-interface_keyword {
+  color: #6f42c1; /* refined purple */
+  font-weight: 600;
+}
+
+/* Keywords */
+.language-sus.hljs .hljs-keyword {
+  color: #005cc5; /* strong but readable blue */
+  font-weight: 600;
+}
+
+/* Literals */
+.language-sus.hljs .hljs-literal {
+  color: #005cc5;
+}
+
+/* Types */
+.language-sus.hljs .hljs-type {
+  color: #22863a; /* rich green, more readable than pure green */
+  font-weight: 600;
+}
+
+/* Strings */
+.language-sus.hljs .hljs-string {
+  color: #032f62; /* deep blue instead of brown (much cleaner) */
+}
+
+/* Numbers */
+.language-sus.hljs .hljs-number {
+  color: #b31d28; /* muted red instead of maroon */
+}
+
+/* Comments */
+.language-sus.hljs .hljs-comment {
+  color: #6a737d; /* neutral gray */
+  font-style: italic;
+}
+
+/* Built-ins */
+.language-sus.hljs .hljs-built_in {
+  color: #e36209; /* orange accent */
+}
+
+/* Titles */
+.language-sus.hljs .hljs-title,
+.language-sus.hljs .hljs-section {
+  font-weight: 600;
+}
+
+/* Operators */
+.language-sus.hljs .hljs-operator {
+  color: #d73a49;
+}
