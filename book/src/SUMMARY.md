@@ -25,7 +25,7 @@
   - [Operators](docs/syntax/operators.md)
 - [Tensors](docs/tensors/tensors.md)
   - [Reduction Operators](docs/tensors/reductions.md)
-- [May_X then X idiom](docs/conventions/may_x_then_x.md)
+- [may_x then x idiom](docs/conventions/may_x_then_x.md)
 
 # Misc
 - [Debug Flags](compiler/debug.md)
