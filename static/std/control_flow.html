@@ -22,6 +22,7 @@
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
 <li><a class="language-item-ref" href="fifo.html">fifo</a></li>
+<li><a class="language-item-ref" href="__top_modules.html">__top_modules</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -29,11 +30,13 @@
 <li><a class="language-item-ref" href="#SlowStateAdvanced">SlowStateAdvanced</a></li>
 <li><a class="language-item-ref" href="#SlowPipelineEnd">SlowPipelineEnd</a></li>
 <li><a class="language-item-ref" href="#SlowPipelineBegin">SlowPipelineBegin</a></li>
+<li><a class="language-item-ref" href="#SlowPut">SlowPut</a></li>
 <li><a class="language-item-ref" href="#ParallelWhile">ParallelWhile</a></li>
 <li><a class="language-item-ref" href="#ParallelState">ParallelState</a></li>
 <li><a class="language-item-ref" href="#ParallelStore">ParallelStore</a></li>
 <li><a class="language-item-ref" href="#Semaphore">Semaphore</a></li>
 <li><a class="language-item-ref" href="#SharedAcquireSemaphore">SharedAcquireSemaphore</a></li>
+<li><a class="language-item-ref" href="#MultiReduction">MultiReduction</a></li>
 </ul>
 </aside>
 <div class="doc-main">
@@ -247,6 +250,67 @@ when manage_adder.pipeline_stable {
     cur_sum = next_sum
     manage_adder.input_changed()
 } 
+</code></pre>
+</div>
+</section>
+<section class="module" id="SlowPut">
+<div class="module-heading"><h2>SlowPut #(T, int LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module SlowPut #(T, int LATENCY) {
+   domain put_side
+    output state bool may_put'0
+    action put'0 : T put_data'LATENCY
+   domain take_side
+    trigger take_available'0 : T take_data'0
+    action take'0
+   domain reset
+    action rst'0
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="215" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">SlowPut</text>
+<rect x="140" y="36" width="140" height="167" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="107" x2="280" y2="107" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="168" x2="280" y2="168" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">put_side</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="163" text-anchor="end" fill="#9b96aa" font-size="10">take_side</text>
+<text x="276" y="198" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<path d="M 140,88 C 210,88 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">put</text>
+<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">put_data</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">may_put</text>
+<line x1="112" y1="127" x2="140" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="127" text-anchor="end" dominant-baseline="middle" fill="#1a1227">take</text>
+<line x1="280" y1="127" x2="308" y2="127" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="127" dominant-baseline="middle" fill="#1a1227">take_available</text>
+<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">take_data</text>
+<line x1="112" y1="184" x2="140" y2="184" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="184" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+</svg></figure>
+<div class="doc-prose">
+<p>This module lets you take a value from a slow pipelined stream
+(where computing the value takes several pipeline stages, yet the validity of the resulting value is known immediately),
+and resynchronizes it to the valid wire by waiting until the pipeline is finished.</p>
+<p>Due to the waiting, this module constricts the throughput to <code>1/LATENCY</code> cycles.</p>
+<p>Usage:</p>
+<pre><code class="language-sus">SlowPut resynchronize_fifo_output
+FIFO take_stream
+when take_stream.may_pop &amp; resynchronize_fifo_output.may_put {
+    float my_float = take_stream.pop()
+    // Pipelined to 8 stages
+    float my_float_squared = fp32_mul(my_float, my_float)
+    resynchronize_fifo_output.put(my_float_squared)
+}
+// Once ready, we can take values from the SlowPut
+when resynchronize_fifo_output.take_available: float f_sq {
+    resynchronize_fifo_output.take()
+    //...
+}
 </code></pre>
 </div>
 </section>
@@ -472,6 +536,118 @@ In this case, the Semaphore should be set to <code>INITIAL_PERMITS=0</code>, and
 <div class="doc-prose">
 <p>Equivalent of combining multiple <a href="control_flow.html#Semaphore" title="control_flow.html#Semaphore">Semaphore</a>s together.
 The releases are independent, whereas <code>may_acquire</code> and <code>acquire_all</code> are shared among all.</p>
+</div>
+</section>
+<section class="module" id="MultiReduction">
+<div class="module-heading"><h2>MultiReduction #(T, T NEUTRAL_ELEMENT, int OPERATOR_LATENCY, int DATA_IN_LATENCY, int MAX_DATAS)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module MultiReduction #(T, T NEUTRAL_ELEMENT, int OPERATOR_LATENCY, int DATA_IN_LATENCY, int MAX_DATAS) {
+   domain operator_dom
+    trigger reduction_operator'DATA_IN_LATENCY : T op_left'DATA_IN_LATENCY, T op_right'DATA_IN_LATENCY -&gt; T op_result'DATA_IN_LATENCY+OPERATOR_LATENCY
+   domain push_dom
+    output bool may_push'0
+    action push'0 : T value_to_reduce'DATA_IN_LATENCY, bool last_in_wave'0
+    action finish_reduction'0 : -&gt; T reduced_data'noinfer#(V: DATA_IN_LATENCY+OPERATOR_LATENCY)
+   domain reset
+    action rst
+}</code></pre></div>
+<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="286" font-family="'Fira Code',monospace" font-size="11">
+<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
+<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">MultiReduction</text>
+<rect x="140" y="36" width="140" height="238" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
+<line x1="140" y1="129" x2="280" y2="129" stroke="#c0b8d4" stroke-width="1"/>
+<line x1="140" y1="239" x2="280" y2="239" stroke="#c0b8d4" stroke-width="1"/>
+<text x="276" y="124" text-anchor="end" fill="#9b96aa" font-size="10">operator_dom</text>
+<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
+<text x="276" y="234" text-anchor="end" fill="#9b96aa" font-size="10">push_dom</text>
+<text x="276" y="269" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<path d="M 140,66 C 210,66 210,88 280,88" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">OPERATOR_LATENCY</text>
+<path d="M 140,66 C 210,66 210,110 280,110" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="85" text-anchor="middle" font-size="10" fill="#22a85a">OPERATOR_LATENCY</text>
+<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">OPERATOR_LATENCY</text>
+<path d="M 140,171 C 210,171 210,149 280,149" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="157" text-anchor="middle" font-size="10" fill="#22a85a">DATA_IN_LATENCY</text>
+<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">op_result</text>
+<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">reduction_operator</text>
+<line x1="280" y1="88" x2="308" y2="88" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="88" dominant-baseline="middle" fill="#1a1227">op_left</text>
+<line x1="280" y1="110" x2="308" y2="110" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="110" dominant-baseline="middle" fill="#1a1227">op_right</text>
+<line x1="112" y1="149" x2="140" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="149" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
+<line x1="112" y1="171" x2="140" y2="171" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="171" text-anchor="end" dominant-baseline="middle" fill="#1a1227">value_to_reduce</text>
+<line x1="112" y1="193" x2="140" y2="193" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="193" text-anchor="end" dominant-baseline="middle" fill="#1a1227">last_in_wave</text>
+<line x1="112" y1="220" x2="140" y2="220" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="220" text-anchor="end" dominant-baseline="middle" fill="#1a1227">finish_reduction</text>
+<line x1="280" y1="149" x2="308" y2="149" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="149" dominant-baseline="middle" fill="#1a1227">may_push</text>
+<line x1="280" y1="176" x2="308" y2="176" stroke="#555" stroke-width="1.5"/>
+<text x="312" y="176" dominant-baseline="middle" fill="#1a1227">reduced_data</text>
+<line x1="112" y1="255" x2="140" y2="255" stroke="#555" stroke-width="1.5"/>
+<text x="108" y="255" text-anchor="end" dominant-baseline="middle" fill="#1a1227">rst</text>
+</svg></figure>
+<div class="doc-prose">
+<p>MultiReduction processes multiple concurrent reductions through a single shared <code>reduction_operator</code>.</p>
+<p>New to-be-reduced data is fed in through the <code>push()</code> interface. To accomodate the fact that it
+usually takes a few cycles to produce the input data, a latency-inferred parameter <code>DATA_IN_LATENCY</code>
+is provided that separates the control flow (<code>may_push</code>/<code>push()</code>/<code>finish_reduction</code>), from the data.</p>
+<p>A reduction operator is supplied by binding the <code>reduction_operator</code> trigger. It takes two arguments
+and produces a single output after exactly <code>OPERATOR_LATENCY</code> cycles.</p>
+<p>In this module we use the term “wave” to describe all independent elements coming in together.
+There can be between 1 and <code>MAX_DATAS</code> elements in a wave, the size of which is determined by
+measuring how long the first wave is until <code>last_in_wave</code> is asserted. Elements in subsequent
+waves are assumed to correspond to the elements in the first wave.</p>
+<p>Through the <code>may_push</code> backpressure interface, the module ensures that the prior reductions for the
+current element have finished, before allowing the next wave for this element to begin. This prevents
+operation on stale data. This backpressure only affects the throughput of the module in cases where
+the current wave is smaller than <code>OPERATOR_LATENCY + 2</code>. When the current wave is larger 100% throughput
+is possible.</p>
+<p>To simplify implementation of the internal memory, the very first element is added on to <code>NEUTRAL_ELEMENT</code>.</p>
+<p>Usage example:</p>
+<pre><code class="language-sus">module MultiplyReductions {
+    MultiReduction#(NEUTRAL_ELEMENT: 1.0, MAX_DATAS: 16) mr
+ 
+    when mr.reduction_operator : float op_left, float op_right -&gt; float op_result {
+        op_result = fp32_mul(op_left, op_right)
+    }
+ 
+    domain main
+    input bool values_to_mul_valid
+    input float[16] values_to_mul
+    input bool values_to_mul_last
+    trigger take_next_values
+    state int#(FROM: 0, TO: 16) cur_idx
+    state float[16] multiplied_results_store
+    trigger push_multiplied_results : float[16] multiplied_results
+    when values_to_mul_valid &amp; mr.may_push {
+        float input_val = fp32_add(3.14, values_to_mul[cur_idx])
+ 
+        bool is_last_in_wave = cur_idx == 15
+        mr.push(input_val, is_last_in_wave)
+        when is_last_in_wave {
+            take_next_values()
+        }
+        when values_to_mul_last {
+            multiplied_results_store[cur_idx] = mr.finish_reduction()
+ 
+            when is_last_in_wave {
+                push_multiplied_results(multiplied_results_store)
+            }
+        }
+        cur_idx = cur_idx + 1 mod 16
+    }
+ 
+    domain reset
+    action rst {
+        mr.rst()
+    }
+}
+</code></pre>
 </div>
 </section>
 </div>

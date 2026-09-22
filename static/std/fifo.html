@@ -22,6 +22,7 @@
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
 <li><a class="language-item-ref sidebar-current" href="fifo.html">fifo</a></li>
+<li><a class="language-item-ref" href="__top_modules.html">__top_modules</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -187,13 +188,13 @@ Let’s say it will not happen that <code>data_stream</code> is called when no s
 </div>
 </section>
 <section class="module" id="RippleFIFO">
-<div class="module-heading"><h2>RippleFIFO #(T, int DEPTH)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module RippleFIFO #(T, int DEPTH) {
+<div class="module-heading"><h2>RippleFIFO #(T, int DEPTH, int DATA_LATENCY)</h2></div>
+<div class="interface-block"><pre><code class="language-sus">module RippleFIFO #(T, int DEPTH, int DATA_LATENCY) {
    domain push_dom
     output bool may_push'0
-    action push'0 : T push_data'0
+    action push'0 : T push_data'DATA_LATENCY
    domain pop_dom
-    trigger pop_available'0 : T pop_data'0
+    trigger pop_available'0 : T pop_data'DATA_LATENCY
     action pop'0
    domain reset
     action rst
@@ -208,6 +209,10 @@ Let’s say it will not happen that <code>data_stream</code> is called when no s
 <text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
 <text x="276" y="163" text-anchor="end" fill="#9b96aa" font-size="10">pop_dom</text>
 <text x="276" y="198" text-anchor="end" fill="#9b96aa" font-size="10">reset</text>
+<path d="M 140,127 C 210,127 210,149 280,149" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="135" text-anchor="middle" font-size="10" fill="#22a85a">-DATA_LATENCY</text>
+<path d="M 140,88 C 210,88 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
+<text x="210" y="74" text-anchor="middle" font-size="10" fill="#22a85a">DATA_LATENCY</text>
 <line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
 <text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">push</text>
 <line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
@@ -226,7 +231,11 @@ Let’s say it will not happen that <code>data_stream</code> is called when no s
 <div class="doc-prose">
 <p>A FIFO implemented as a sequence of registers with a accompanying valid bit.</p>
 <p>Bandwidth limited to 1 element every 2 cycles.</p>
-<p>Use for very small FIFOs, in bandwidth-limited circumstances.</p>
+<p>Use for very small FIFOs, in bandwidth-non-critical circumstances.</p>
+<p>Additionally, this FIFO allows the data to be offset from the valid flags by
+an arbitrary amount, which is preserved on the output of the module.
+This allows you to do minor buffering on a line,
+without needing to compensate for pipeline latency beforehand.</p>
 </div>
 </section>
 <section class="module" id="JoiningFIFO">
