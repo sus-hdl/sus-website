@@ -22,7 +22,6 @@
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
 <li><a class="language-item-ref" href="fifo.html">fifo</a></li>
-<li><a class="language-item-ref" href="__top_modules.html">__top_modules</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -50,7 +49,7 @@
 <section class="module" id="IntToBool">
 <div class="module-heading"><h2>IntToBool</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module IntToBool {
-    interface IntToBool : int#(FROM: 0, TO: 2) i'0 -&gt; bool o'0
+    interface IntToBool : int#(0..2) i'0 -&gt; bool o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -70,7 +69,7 @@
 <section class="module" id="BoolToInt">
 <div class="module-heading"><h2>BoolToInt</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module BoolToInt {
-    interface BoolToInt : bool i'0 -&gt; int#(FROM: 0, TO: 2) o'0
+    interface BoolToInt : bool i'0 -&gt; int#(0..2) o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -90,7 +89,7 @@
 <section class="module" id="IntToBits">
 <div class="module-heading"><h2>IntToBits #(int NUM_BITS)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module IntToBits #(int NUM_BITS) {
-    interface IntToBits : int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0 -&gt; bool[NUM_BITS] bits'0
+    interface IntToBits : int#(-pow2 #(E: NUM_BITS - 1)..pow2 #(E: NUM_BITS - 1)) value'0 -&gt; bool[NUM_BITS] bits'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -112,7 +111,7 @@
 <section class="module" id="UIntToBits">
 <div class="module-heading"><h2>UIntToBits #(int NUM_BITS)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module UIntToBits #(int NUM_BITS) {
-    interface UIntToBits : int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0 -&gt; bool[NUM_BITS] bits'0
+    interface UIntToBits : int#(0..pow2 #(E: NUM_BITS)) value'0 -&gt; bool[NUM_BITS] bits'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -134,7 +133,7 @@
 <section class="module" id="BitsToInt">
 <div class="module-heading"><h2>BitsToInt #(int NUM_BITS)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module BitsToInt #(int NUM_BITS) {
-    interface BitsToInt : bool[NUM_BITS] bits'0 -&gt; int #(FROM: -pow2 #(E: NUM_BITS - 1), TO: pow2 #(E: NUM_BITS - 1)) value'0
+    interface BitsToInt : bool[NUM_BITS] bits'0 -&gt; int#(-pow2 #(E: NUM_BITS - 1)..pow2 #(E: NUM_BITS - 1)) value'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -156,7 +155,7 @@
 <section class="module" id="BitsToUInt">
 <div class="module-heading"><h2>BitsToUInt #(int NUM_BITS)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module BitsToUInt #(int NUM_BITS) {
-    interface BitsToUInt : bool[NUM_BITS] bits'0 -&gt; int #(FROM: 0, TO: pow2 #(E: NUM_BITS)) value'0
+    interface BitsToUInt : bool[NUM_BITS] bits'0 -&gt; int#(0..pow2 #(E: NUM_BITS)) value'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>

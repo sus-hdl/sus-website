@@ -37,9 +37,9 @@ We've explicitly mapped the clock, and all ports at appropriate absolute latenci
 - `bool x` => `logic x`
 - `float x` => `logic[31:0] x`
 - `double x` => `logic[63:0] x`
-- unsigned `int#(FROM: 0, TO: 256) x` => `logic[0:$clog2(256)] x`
-- signed `int#(FROM: -256, TO: 256) x` => `signed logic[0:$clog2(512)] x`
-- Arrays: `int#(FROM: 0, TO: 128)[5] x` => `logic[0:$clog2(256)] x[0:4]`
+- unsigned `int#(0..256) x` => `logic[0:$clog2(256)] x`
+- signed `int#(-256..256) x` => `signed logic[0:$clog2(512)] x`
+- Arrays: `int#(0..128)[5] x` => `logic[0:$clog2(256)] x[0:4]`
 - Except the lowest level of boolean array: `bool[5] x` => `logic[4:0] x`
 - Arrays of boolean arrays again become unpacked: `bool[5][20] x` => `logic[4:0] x[0:19]`
 
@@ -61,7 +61,7 @@ Maps to a SUS Extern Module:
 extern module PopCount #(int SIZE) (
     clock clk
     input bool[SIZE] bits,
-    output int#(FROM: 0, TO: SIZE+1) count
+    output int#(0..SIZE+1) count
 );
 endmodule
 ```

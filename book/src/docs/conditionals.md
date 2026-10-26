@@ -25,7 +25,7 @@ module CompileTime {
 When Example:
 ```sus
 module Abs {
-  input int#(FROM: -20, TO: 21) x
+  input int#(-20..21) x
   output int y
   
   when x < 0 {
@@ -44,9 +44,9 @@ The boolean "and" `&`, "or" `|`, and "xor" `^` operators are used to chain multi
 
 ```sus
 module Between {
-  input int#(FROM: 0, TO: 256) min
-  input int#(FROM: 0, TO: 256) max
-  input int#(FROM: 0, TO: 256) v
+  input int#(0..256) min
+  input int#(0..256) max
+  input int#(0..256) v
   output bool is_between
   
   when min <= x & x >= max {

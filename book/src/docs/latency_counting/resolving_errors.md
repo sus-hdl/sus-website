@@ -77,7 +77,7 @@ module Accumulator {
     RAM#(T: type float, DEPTH: NUM_PARALLEL_ACCUMULATORS) cur_totals
 
     trigger may_accumulate
-    action accumulate : float value, int#(FROM: 0, TO: NUM_PARALLEL_ACCUMULATORS) stream_id -> float total {
+    action accumulate : float value, int#(0..NUM_PARALLEL_ACCUMULATORS) stream_id -> float total {
         float cur_total = cur_totals.read(stream_id)
         float next_sum = fp32_add(cur_total, value) // Takes 11 cycles
         cur_totals.write(stream_id, next_sum)

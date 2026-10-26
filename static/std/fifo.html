@@ -22,7 +22,6 @@
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
 <li><a class="language-item-ref sidebar-current" href="fifo.html">fifo</a></li>
-<li><a class="language-item-ref" href="__top_modules.html">__top_modules</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -88,8 +87,8 @@ After <code>pop</code> is called, the data is returned, one or more cycles later
 You should not depend on <code>pop_data</code> for your decision to <code>pop</code>. If you need to do that, opt for <a href="fifo.html#FWFT" title="fifo.html#FWFT">FWFT</a> instead.</p>
 <p>Example where we’re moving data from <code>from_fifo</code>, adding one to it with wrap around, and pushing to <code>to_fifo</code>:</p>
 <pre><code class="language-sus">module TwoFIFOs {
-    FIFO#(T: type int#(FROM: 0, TO: 256), DEPTH: 128) from_fifo
-    FIFO#(T: type int#(FROM: 0, TO: 256), DEPTH: 128) to_fifo
+    FIFO#(T: type int#(0..256), DEPTH: 128) from_fifo
+    FIFO#(T: type int#(0..256), DEPTH: 128) to_fifo
  
     when from_fifo.may_pop &amp; to_fifo.may_push {
         int pop_data = from_fifo.pop()
@@ -159,9 +158,9 @@ The goal is to produce an <code>is_last</code> signal, based on the sequence len
 Since sequences can be back-to-back, num_left must be refresheable within a single cycle cycle, any number of cycles in a row.
 Let’s say it will not happen that <code>data_stream</code> is called when no segment is in the fifo for it.</p>
 <pre><code class="language-sus">module SplitIntoSegments {
-    FWFT#(T: type int#(FROM: 1, TO: 256), DEPTH: 128) segment_sizes_fifo
+    FWFT#(T: type int#(1..256), DEPTH: 128) segment_sizes_fifo
  
-    state int#(FROM: 0, TO: 256) num_left
+    state int#(0..256) num_left
     bool need_new_num_left = false
     when num_left == 0 {
         need_new_num_left = true

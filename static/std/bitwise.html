@@ -22,7 +22,6 @@
 <li><a class="language-item-ref sidebar-current" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref" href="memory.html">memory</a></li>
 <li><a class="language-item-ref" href="fifo.html">fifo</a></li>
-<li><a class="language-item-ref" href="__top_modules.html">__top_modules</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -40,7 +39,7 @@
 <section class="module" id="ToOneHot">
 <div class="module-heading"><h2>ToOneHot #(int SIZE)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module ToOneHot #(int SIZE) {
-    interface ToOneHot : int#(FROM: 0, TO: SIZE - 1) selection'0 -&gt; bool[SIZE] bits'0
+    interface ToOneHot : int#(0..SIZE - 1) selection'0 -&gt; bool[SIZE] bits'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -64,7 +63,7 @@ ToOneHot#(SIZE: 2)(0) == [true, false]
 <section class="module" id="FirstSetBit">
 <div class="module-heading"><h2>FirstSetBit #(int SIZE)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module FirstSetBit #(int SIZE) {
-    trigger is_nonzero : int#(FROM: 0, TO: SIZE) first_nonzero'0
+    trigger is_nonzero : int#(0..SIZE) first_nonzero'0
     action find : bool[SIZE] bits'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
@@ -98,7 +97,7 @@ when find_first_bit.is_nonzero : int first_nonzero {
 <section class="module" id="PopCount">
 <div class="module-heading"><h2>PopCount #(int SIZE)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module PopCount #(int SIZE) {
-    interface PopCount : bool[SIZE] bits'0 -&gt; int#(FROM: 0, TO: SIZE+1) popcount
+    interface PopCount : bool[SIZE] bits'0 -&gt; int#(0..SIZE+1) popcount
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -122,7 +121,7 @@ PopCount(8'b00111011) == 5
 <section class="module" id="BitwiseIntSplit">
 <div class="module-heading"><h2>BitwiseIntSplit #(int TO, int LOWER_BITS)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module BitwiseIntSplit #(int TO, int LOWER_BITS) {
-    interface BitwiseIntSplit : int#(FROM: 0, TO) v'0 -&gt; int#(FROM: 0, TO: UPPER_TO) upper'0, int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0
+    interface BitwiseIntSplit : int#(FROM: 0, TO) v'0 -&gt; int#(0..UPPER_TO) upper'0, int#(0..pow2#(E: LOWER_BITS)) lower'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -138,14 +137,14 @@ PopCount(8'b00111011) == 5
 <text x="312" y="88" dominant-baseline="middle" fill="#1a1227">lower</text>
 </svg></figure>
 <div class="doc-prose">
-<p>Splits the given integer. The upper <code>[LOWER_BITS:]</code> bits are returned as upper, the lower <code>[:LOWER_BITS]</code> bits are returned in lower
+<p>Splits the given integer. The upper <code>[LOWER_BITS..]</code> bits are returned as upper, the lower <code>[..LOWER_BITS]</code> bits are returned in lower
 See also <a href="bitwise.html#BitwiseIntConcat" title="bitwise.html#BitwiseIntConcat">BitwiseIntConcat</a>.</p>
 </div>
 </section>
 <section class="module" id="BitwiseIntConcat">
 <div class="module-heading"><h2>BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS) {
-    interface BitwiseIntConcat : int#(FROM: 0, TO: UPPER_TO) upper'0, int#(FROM: 0, TO: pow2#(E: LOWER_BITS)) lower'0 -&gt; int#(FROM: 0, TO: UPPER_TO * pow2#(E: LOWER_BITS)) v'0
+    interface BitwiseIntConcat : int#(0..UPPER_TO) upper'0, int#(0..pow2#(E: LOWER_BITS)) lower'0 -&gt; int#(0..UPPER_TO * pow2#(E: LOWER_BITS)) v'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -168,7 +167,7 @@ See also <a href="bitwise.html#BitwiseIntSplit" title="bitwise.html#BitwiseIntSp
 <section class="module" id="AlignToPow2">
 <div class="module-heading"><h2>AlignToPow2 #(int FROM, int TO, int LOWER_BITS)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module AlignToPow2 #(int FROM, int TO, int LOWER_BITS) {
-    interface AlignToPow2 : int#(FROM, TO) i'0 -&gt; int#(FROM: ALIGNED_FROM, TO: ALIGNED_TO) o'0
+    interface AlignToPow2 : int#(FROM, TO) i'0 -&gt; int#(ALIGNED_FROM..ALIGNED_TO) o'0
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -182,7 +181,7 @@ See also <a href="bitwise.html#BitwiseIntSplit" title="bitwise.html#BitwiseIntSp
 <text x="312" y="66" dominant-baseline="middle" fill="#1a1227">o</text>
 </svg></figure>
 <div class="doc-prose">
-<p>Sets the lower <code>[:LOWER_BITS]</code> bits to false, thus aligning the value
+<p>Sets the lower <code>[..LOWER_BITS]</code> bits to false, thus aligning the value
 Works for unsigned and signed integers alike.</p>
 </div>
 </section>

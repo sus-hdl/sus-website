@@ -16,7 +16,7 @@ In this example, we'll look at a `ToOneHot` module, shown below.
 
 ```sus
 module ToOneHot#(int SIZE) {
-  input int#(FROM: 0, TO: SIZE) idx
+  input int#(0..SIZE) idx
   output bool[SIZE] bits
   
   for int i in 0..5 {
@@ -30,7 +30,7 @@ During parsing and flattening, the above module is turned into a sequence of ins
 $0: Declaration("SIZE", GenerativeParameter, "int", ...)
 $2: Expression(IntConstant(0, ...))
 $1: Expression(VarRead("SIZE", ...))
-$3: Declaration("idx", Wire, "int#(FROM: $1, TO: $2)", ...)
+$3: Declaration("idx", Wire, "int#($1..$2)", ...)
 $4: Expression(VarRead("SIZE", ...))
 $5: Expression(IntConstant(0, ...))
 $6: Expression(IntConstant(5, ...))
@@ -54,7 +54,7 @@ After the `ToOneHot` has been abstract-typechecked, it may be instantiated with 
 After executing all the compile-time code, we are left with a module that effectively looks like:
 ```sus
 module ToOneHot_SIZE_5 {
-  input int#(FROM: 0, TO: 5) idx
+  input int#(0..5) idx
   output bool[5] bits
   
   bits[0] = idx == 0
@@ -77,7 +77,7 @@ If after execution no errors came up, the instantiated module proceeds to the fi
 Let's say we've got another module:
 ```sus
 module OneHotPlusOne {
-  input int#(FROM: 0, TO: 4) idx
+  input int#(0..4) idx
   output bool[] bits
   
   int idx_plus_one = idx + 1
@@ -92,10 +92,10 @@ module OneHotPlusOne {
 The bounds of `idx_plus_one` are inferred: 
 ```sus
 module OneHotPlusOne {
-  input int#(FROM: 0, TO: 4) idx
+  input int#(0..4) idx
   output bool[] bits
   
-  int#(FROM: 1, TO: 5) idx_plus_one = idx + 1
+  int#(1..5) idx_plus_one = idx + 1
   
   ToOneHot toh
   
@@ -107,10 +107,10 @@ module OneHotPlusOne {
 From this, the `SIZE` parameter of `toh` is inferred:
 ```sus
 module OneHotPlusOne {
-  input int#(FROM: 0, TO: 4) idx
+  input int#(0..4) idx
   output bool[] bits
   
-  int#(FROM: 1, TO: 5) idx_plus_one = idx + 1    // *
+  int#(1..5) idx_plus_one = idx + 1    // *
   
   ToOneHot#(SIZE: 5) toh
   
@@ -122,10 +122,10 @@ module OneHotPlusOne {
 `ToOneHot#(SIZE: 5)` is instantiated as `ToOneHot_SIZE_5`, and since its output port `output bool[5] bits` has a known size, we infer that our `bits` output should also have size 5:
 ```sus
 module OneHotPlusOne {
-  input int#(FROM: 0, TO: 4) idx
+  input int#(0..4) idx
   output bool[5] bits                            // *
   
-  int#(FROM: 1, TO: 5) idx_plus_one = idx + 1
+  int#(1..5) idx_plus_one = idx + 1
   
   ToOneHot_SIZE_5 toh                            // *
   

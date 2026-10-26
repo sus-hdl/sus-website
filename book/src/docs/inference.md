@@ -37,16 +37,16 @@ For example, let's take this `IntegerEquals` module:
 ```sus
 module IntegerEquals #(int FROM, int TO) {
     action IntegerEquals :
-        int#(FROM: FROM, TO: TO) a,
-        int#(FROM: FROM, TO: TO) b ->
+        int#(FROM..TO) a,
+        int#(FROM..TO) b ->
         bool result
 
     result = a == b
 }
 
 module UseIntegerEquals {
-    int#(FROM: 3, TO: 9) x
-    int#(FROM: -2, TO: 5) y
+    int#(3..9) x
+    int#(-2..5) y
 
     bool are_eq = IntegerEquals(x, y)
     // infers to IntegerEquals#(FROM: -2, TO: 9)

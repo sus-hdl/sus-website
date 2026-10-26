@@ -11,7 +11,7 @@ Inserting latency registers on every path that requires them is an incredibly te
 Imagine we wish to pipeline a "raise to the 17th power" module. We can implement this computation by multiplying `i` by itself 4 times, and then multiplying that by the original `i` once more. Now, because the critical path in this module is be quite long, we decide to add a few pipeline stages between the multipliers using the `reg` keyword, such that our critical path only ever includes two multipliers instead of 5. Latency Counting will then ensure that the parallel path (the original `i` copy), is delayed by the same amount by adding two registers on that path too.
 ```sus
 module pow17 {
-    input int#(FROM: 0, TO: 10) i
+    input int#(0..10) i
     output int o
 
 	    int i2  = i * i
@@ -27,9 +27,9 @@ module pow17 {
 Some languages that support pipelining constructs similar to this have the restriction that all inputs must be provided at the same time, and all outputs are produced at the same time, some number of clock cycles later. SUS does not have this restriction. The ports in a module will be assigned absolute latencies such that the inputs come in as late as possible, and the outputs are produced as early as possible, thereby packing the module together as compactly as possible. Using a module with such skewed port latencies may seem daunting and error-prone at first, but you'll notice that where this module is instantiated, the compiler will automatically adjust for its port latencies so you as the user don't have to worry about it. 
 ```sus
 module wonky_port_latencies {
-    input int#(FROM: 0, TO: 16)[4] factors
-	input int#(FROM: 0, TO: 16) add_to
-    input int#(FROM: 0, TO: 16) product 
+    input int#(0..16)[4] factors
+	input int#(0..16) add_to
+    input int#(0..16) product 
     output int total
 
 	reg int mul0 = factors[0] * factors[1]

@@ -22,7 +22,6 @@
 <li><a class="language-item-ref" href="bitwise.html">bitwise</a></li>
 <li><a class="language-item-ref sidebar-current" href="memory.html">memory</a></li>
 <li><a class="language-item-ref" href="fifo.html">fifo</a></li>
-<li><a class="language-item-ref" href="__top_modules.html">__top_modules</a></li>
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
@@ -38,7 +37,7 @@
 <section class="module" id="ROM">
 <div class="module-heading"><h2>ROM #(T, int DEPTH, T[DEPTH] DATA)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module ROM #(T, int DEPTH, T[DEPTH] DATA) {
-    action read : int #(FROM: 0, TO: DEPTH) index'0 -&gt; T output_data'1
+    action read : int#(0..DEPTH) index'0 -&gt; T output_data'1
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -58,9 +57,9 @@
 <div class="module-heading"><h2>RAM #(T, int DEPTH)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module RAM #(T, int DEPTH) {
    domain w_dom
-    action write'0 : int#(FROM: 0, TO: DEPTH) write_addr'0, T write_data'0
+    action write'0 : int#(0..DEPTH) write_addr'0, T write_data'0
    domain r_dom
-    action read'0 : int#(FROM: 0, TO: DEPTH) read_addr'0 -&gt; T read_data'1
+    action read'0 : int#(0..DEPTH) read_addr'0 -&gt; T read_data'1
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="202" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -93,11 +92,11 @@ The RAM has a write-after-read policy, so when writing and reading to the same a
 <div class="module-heading"><h2>DPRAM #(T, int DEPTH)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module DPRAM #(T, int DEPTH) {
    domain dom_a
-    action write_a'0 : int#(FROM: 0, TO: DEPTH) write_addr_a'0, T write_data_a'0
-    action read_a'0 : int#(FROM: 0, TO: DEPTH) read_addr_a'0 -&gt; T read_data_a'1
+    action write_a'0 : int#(0..DEPTH) write_addr_a'0, T write_data_a'0
+    action read_a'0 : int#(0..DEPTH) read_addr_a'0 -&gt; T read_data_a'1
    domain dom_b
-    action write_b'0 : int#(FROM: 0, TO: DEPTH) write_addr_b'0, T write_data_b'0
-    action read_b'0 : int#(FROM: 0, TO: DEPTH) read_addr_b'0 -&gt; T read_data_b'1
+    action write_b'0 : int#(0..DEPTH) write_addr_b'0, T write_data_b'0
+    action read_b'0 : int#(0..DEPTH) read_addr_b'0 -&gt; T read_data_b'1
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="322" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -143,9 +142,9 @@ The RAM has a write-after-read policy, so when writing and reading to the same a
 <div class="module-heading"><h2>RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module RAM_Unbalanced #(ElemT, int DEPTH, int WRITE_SIZE, int READ_SIZE) {
    domain w_dom
-    action write'0 : int#(FROM: 0, TO: DEPTH / WRITE_SIZE) write_addr'0, ElemT[WRITE_SIZE] write_data'0
+    action write'0 : int#(0..DEPTH / WRITE_SIZE) write_addr'0, ElemT[WRITE_SIZE] write_data'0
    domain r_dom
-    action read'0 : int#(FROM: 0, TO: DEPTH / READ_SIZE) read_addr'0 -&gt; ElemT[READ_SIZE] read_data'1
+    action read'0 : int#(0..DEPTH / READ_SIZE) read_addr'0 -&gt; ElemT[READ_SIZE] read_data'1
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="202" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>

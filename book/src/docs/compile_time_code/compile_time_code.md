@@ -26,7 +26,7 @@ module ShiftReg#(T, int DEPTH) {
     } else {
 		// Create a memory block, with a rotating index
         state T[DEPTH] mem
-        state int#(FROM: 0, TO: DEPTH) cur_idx
+        state int#(0..DEPTH) cur_idx
         initial cur_idx = 0
         cur_idx = cur_idx + 1 mod DEPTH
 
@@ -40,8 +40,8 @@ For loops express repeated structures. As the loop iterates, it repeatedly execu
 
 ```sus
 module Sums {
-    input int#(FROM: 0, TO: 16)[4] as
-    input int#(FROM: 0, TO: 16)[4] bs
+    input int#(0..16)[4] as
+    input int#(0..16)[4] bs
 	output int[10] rs
 
 	for int I in 0..4 {
@@ -65,7 +65,7 @@ module Sums {
 As an example, say we wish to implement the typical [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) interview question problem. We are given a number, if it's divisible by 3, output "fizz", when divisible by 5 "buzz", and "fizzbuzz" when divisible by both. Otherwise, the input number itself should be returned. We can do a direct implementation of it as shown below:
 ```sus
 module fizz_buzz {
-    input int#(FROM: 0, TO: 1000) v
+    input int#(0..1000) v
     output int fb
     
     gen int FIZZ = 888
@@ -93,7 +93,7 @@ Although this would be an adequate solution for hardware simulation, divide and 
 ```sus
 module fizz_buzz_gen {
 	gen int TABLE_SIZE = 1000
-    input int#(FROM: 0, TO: TABLE_SIZE) v
+    input int#(0..TABLE_SIZE) v
     output int fb
 
 	gen int FIZZ = 888

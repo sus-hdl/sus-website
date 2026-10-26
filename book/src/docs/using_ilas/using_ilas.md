@@ -33,7 +33,7 @@ extern module my_cool_ila{
     input bool probe2'0
     input bool probe3'0
     input bool probe4'0
-    input int#(FROM: 0, TO: 256) probe5'0
+    input int#(0..256) probe5'0
     input bool probe6'0
     input bool probe7'0
     input bool probe8'0
@@ -42,12 +42,12 @@ extern module my_cool_ila{
     input bool[2] probe11'0
     input bool probe12'0
     input bool probe13'0
-    input int#(FROM: 0, TO: 32) probe14'0
+    input int#(0..32) probe14'0
     input bool probe15'0
     input bool probe16'0
     input bool probe17'0
-    input int#(FROM: 0, TO: pow2#(E: 32)) probe18'0
-    input int#(FROM: 0, TO: pow2#(E: 32)) probe19'0
+    input int#(0..pow2#(E: 32)) probe18'0
+    input int#(0..pow2#(E: 32)) probe19'0
 }
 ```
 I put every signal into its own domain, such that no pipelining registers would affect the view of the signals. Perhaps if you're debugging a pipeline, this may be desirable. Adjust to taste. 

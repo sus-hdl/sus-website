@@ -8,10 +8,10 @@ An `action` can be thought of as a sort-of method on a submodule. It can take an
 module memory#(T, int DEPTH) {
     T[DEPTH] mem
 
-    action write: int#(FROM: 0, TO: DEPTH) wr_addr, T wr_data {
+    action write: int#(0..DEPTH) wr_addr, T wr_data {
         mem[wr_addr] = wr_data
     }
-    action read: int#(FROM: 0, TO: DEPTH) rd_addr -> T rd_data {
+    action read: int#(0..DEPTH) rd_addr -> T rd_data {
         rd_data = mem[rd_addr]
     }
 }
@@ -20,13 +20,13 @@ module memory#(T, int DEPTH) {
     T[DEPTH] mem
 
     input bool write
-    input int#(FROM: 0, TO: DEPTH) wr_addr
+    input int#(0..DEPTH) wr_addr
     input T wr_data 
     when write {
         mem[wr_addr] = wr_data
     }
     input bool read
-    input int#(FROM: 0, TO: DEPTH) rd_addr
+    input int#(0..DEPTH) rd_addr
     output T rd_data
     when read {
         rd_data = mem[rd_addr]

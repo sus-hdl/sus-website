@@ -26,8 +26,8 @@ module AddFloats {
 
     for int I in 0..4 {
         gen int SIZE = pow2#(E: I)
-        float[SIZE] lefts = float_reduction[I+1][SIZE:]
-        float[SIZE] rights = float_reduction[I+1][:SIZE]
+        float[SIZE] lefts = float_reduction[I+1][SIZE..]
+        float[SIZE] rights = float_reduction[I+1][..SIZE]
         // We do have to declare sums as a temporary array here to help type inference
         // May fix in future https://github.com/pc2/sus-compiler/issues/160
         float[SIZE] sums
