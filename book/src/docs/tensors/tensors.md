@@ -1,5 +1,7 @@
 # Tensors
 
+## Slicing Syntax
+
 Arrays are indexed with `arr[i]`. The index can be a compile-time value, or a runtime [bounded integer](../integers.md) whose bounds the compiler checks against the size of the array.
 
 A *slice* selects a contiguous part of an array and is itself an array of the same element type. The slice operators are:
@@ -32,4 +34,7 @@ bool[20][30] matrix
 bool[2][3] block = matrix[3 +.. 3][4..6]
 ```
 
-[Integer bounds](../integers.md#shorthand) use the same syntax: `int#(a..b)` is the type that holds exactly the indices `arr[a..b]` selects, and every slice form above is valid there too, for example `int#(0..256)` or `int#(0..=255)`. An `int#(0..N)` therefore always indexes a `T[N]` safely.
+The same slicing syntax is also used for [integer bounds](../integers.md#shorthand) and [`for` loop ranges](../compile_time_code/compile_time_code.md#for).
+
+## Multidimensional Slicing
+

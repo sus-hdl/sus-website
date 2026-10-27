@@ -58,6 +58,8 @@ module Sums {
 ```
 ![forLoops](forLoops.png)
 
+The range accepts the full [Slicing Syntax](../tensors/tensors.md#slicing-syntax). For example, `for int I in 1..=4` visits `1`, `2`, `3`, and `4`. 
+
 ## `while`
 **Not yet implemented.**
 

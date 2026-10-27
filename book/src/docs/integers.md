@@ -22,15 +22,6 @@ int five_bit_int = four_bit_int + seven
 // infers to int#(FROM: 7, TO: 23)
 ```
 
-### Shorthand
-The slicing syntax from [Tensor Slicing](tensors/tensors.md#indexing-and-slicing) can be used as a shorthand. For example `int#(3..6)` is shorthand for `int#(FROM: 3, TO: 6)`. Inclusive upper bounds are also supported: `int#(3..=5)`, as well as the other slicing syntaxes: `int#(16 +.. 8)` for `int#(FROM: 16, TO: 24)`, `int#(23 -.. 8)` for the same range counted down from `23`, and `int#(2 *.. 8)` is equivalent to `int#(FROM: 16, TO: 24)`. 
-
-```sus
-int#(0..16) four_bit_int
-int#(0..=15) also_four_bit_int
-int#(-pow2#(E: 31)..pow2#(E: 31)) i32
-```
-
 By defining integers as bounded instead of explicitly signed or unsigned at a given bitwidth, we sidestep many of the common pitfalls that plague integer operations in other HDLs, such as unexpected truncation if we used too few bits for the result of an operation, or Verilog's odd automatic coersion of signed values to unsigned if the other operand is unsigned. As an added benefit, these bounds let us perform compile-time boundschecks on any arrays we may want to index, as well as letting us define the interfaces of our modules more precisely. 
 
 After compilation, bounded integers do map to bitvectors, with the mapping to unsigned bitvectors for `FROM >= 0`, and signed bitvectors if `FROM < 0`. The size of these bitvectors is the minimum number of bits required to hold all the values in the range of the integer. For unsigned integers, this is simply `clog2#(V: TO)`. One could argue that for large integers with narrow bounds (such as `int#(FROM: 20, TO: 25)`) a narrower bitwidth could be used, but this would be confusing for anyone viewing such wires under a simulator. 
@@ -38,6 +29,14 @@ After compilation, bounded integers do map to bitvectors, with the mapping to un
 ```sus
 gen int INT_TO = 20
 sizeof#(T: type int#(FROM: 0, TO: INT_TO)) == clog2#(V: INT_TO)
+```
+
+### Shorthand
+The [Slicing Syntax](tensors/tensors.md#slicing-syntax) can be used as a shorthand. For example `int#(3..6)` is shorthand for `int#(FROM: 3, TO: 6)`. 
+
+```sus
+int#(0..16) four_bit_int
+int#(0..=15) also_four_bit_int
 ```
 
 ## Operators
