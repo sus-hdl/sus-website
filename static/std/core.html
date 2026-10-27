@@ -33,11 +33,8 @@
 </ul>
 <a href="#Modules" class="sidebar-title">Modules</a>
 <ul>
-<li><a class="language-item-ref" href="#LatencyOffset">LatencyOffset</a></li>
 <li><a class="language-item-ref" href="#LatencyCut">LatencyCut</a></li>
 <li><a class="language-item-ref" href="#CrossDomain">CrossDomain</a></li>
-<li><a class="language-item-ref" href="#LatencyOffsetAction">LatencyOffsetAction</a></li>
-<li><a class="language-item-ref" href="#LatencyOffsetActionNoData">LatencyOffsetActionNoData</a></li>
 </ul>
 <a href="#CompileTimeFunctions" class="sidebar-title">Compile-Time Functions</a>
 <ul>
@@ -93,29 +90,6 @@
 </div>
 </section>
 <h2 class="doc-section" id="Modules">Modules</h2>
-<section class="module" id="LatencyOffset">
-<div class="module-heading"><h2>LatencyOffset #(T, int OFFSET)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module LatencyOffset #(T, int OFFSET) {
-    interface LatencyOffset : T din'0 -&gt; T dout'OFFSET
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">LatencyOffset</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
-</svg></figure>
-<div class="doc-prose">
-<p>Unsafe builtin to circumvent the Latency Counting System. Connects <code>dout</code> to <code>din</code> without adding the requisite latency
-Or: used for negative latencies, for instance to implement Almost-Full FIFOs, stateful for loops, etc.</p>
-</div>
-</section>
 <section class="module" id="LatencyCut">
 <div class="module-heading"><h2>LatencyCut #(T)</h2></div>
 <div class="interface-block"><pre><code class="language-sus">module LatencyCut #(T) {
@@ -172,52 +146,6 @@ Internally implemented as a simple wire.</p>
 Important: This is a plain connection from a wire in one clock domain to a wire in another.
 This performs no synchronization or other data integrity measures!</p>
 </div>
-</section>
-<section class="module" id="LatencyOffsetAction">
-<div class="module-heading"><h2>LatencyOffsetAction #(T, int OFFSET, int DATA_DELAY)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module LatencyOffsetAction #(T, int OFFSET, int DATA_DELAY) {
-    action din'0 : T data_i'DATA_DELAY
-    trigger dout'OFFSET : T data_o'OFFSET+DATA_DELAY
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">LatencyOffsetAction</text>
-<rect x="140" y="36" width="140" height="71" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="102" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<path d="M 140,88 C 210,88 210,88 280,88" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="85" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
-<line x1="112" y1="88" x2="140" y2="88" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="88" text-anchor="end" dominant-baseline="middle" fill="#1a1227">data_i</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
-<line x1="280" y1="88" x2="308" y2="88" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="88" dominant-baseline="middle" fill="#1a1227">data_o</text>
-</svg></figure>
-</section>
-<section class="module" id="LatencyOffsetActionNoData">
-<div class="module-heading"><h2>LatencyOffsetActionNoData #(int OFFSET)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module LatencyOffsetActionNoData #(int OFFSET) {
-    action din'0
-    trigger dout'OFFSET
-}</code></pre></div>
-<figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
-<defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
-<text x="210" y="28" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1227">LatencyOffsetActionNoData</text>
-<rect x="140" y="36" width="140" height="49" fill="#f7f6fb" stroke="#c0b8d4" stroke-width="1.5" rx="2"/>
-<text x="276" y="80" text-anchor="end" fill="#9b96aa" font-size="10">default</text>
-<text x="144" y="50" fill="#5a5370" font-size="10">clock clk</text>
-<path d="M 140,66 C 210,66 210,66 280,66" stroke="#22a85a" fill="none" stroke-width="1.2" opacity="0.8" marker-start="url(#ah-green)"/>
-<text x="210" y="63" text-anchor="middle" font-size="10" fill="#22a85a">-OFFSET</text>
-<line x1="112" y1="66" x2="140" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="108" y="66" text-anchor="end" dominant-baseline="middle" fill="#1a1227">din</text>
-<line x1="280" y1="66" x2="308" y2="66" stroke="#555" stroke-width="1.5"/>
-<text x="312" y="66" dominant-baseline="middle" fill="#1a1227">dout</text>
-</svg></figure>
 </section>
 <h2 class="doc-section" id="CompileTimeFunctions">Compile-Time Functions</h2>
 <section class="module" id="__crash_compiler">

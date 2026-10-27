@@ -195,7 +195,7 @@
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="type">int</span> <span class="string">space_remaining</span> = (<span class="hdl-module">read_to_push</span>.<span class="string">out</span> - <span class="string">write_addr</span>) % <span class="variable">DEPTH</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">gen</span> <span class="type">int</span> <span class="variable">ALMOST_FULL_TRESHOLD</span> = <span class="variable">READY_SLACK</span> + <span class="number">1</span> <span class="comment">// +1 for the latency reg we introduce here</span><br>
           &nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">reg</span> <span class="type">bool</span> <span class="string">r</span> = <span class="string">space_remaining</span> >  <span class="variable">ALMOST_FULL_TRESHOLD</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="string">ready</span> = <span class="hdl-module">LatencyOffset</span> <span class="operator">#(</span><span class="variable">OFFSET</span>: -<span class="variable">ALMOST_FULL_TRESHOLD</span><span class="operator">)</span>(<span class="string">r</span>)<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="reg-state-inital">next</span>(<span class="variable">ALMOST_FULL_TRESHOLD</span>) <span class="string">ready</span> = <span class="string">r</span><br>
           }
         </pre>
       </div>
