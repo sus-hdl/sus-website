@@ -92,8 +92,30 @@ module use_iter {
 }
 ```
 
+## Functions
+You can also declare an action locally, which does not result in ports onto the module, but rather, must be called from within the module. As with calling actions on submodules, multiple calls to the same function in the same cycle conflict, and resolve to only the lexically latest call. 
+
+```sus
+module functions_example {
+	state int#(0..128) x
+	initial x = 0
+
+	function increase_x : int by {
+		x = x + by mod 128
+	}
+
+	action increase_by_5 {
+		increase_x(5)
+	}
+	action increase_by_10 {
+		increase_x(10)
+	}
+}
+```
+
 ## To recap
 
 - An `action` is for the parent module to signal one of its submodules
 - A `trigger` is for the submodule to signal its parent
+- A `function` is a local action: callable within the module, invisible outside it
 
