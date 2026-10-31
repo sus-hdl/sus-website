@@ -288,8 +288,7 @@ and only adds a bit of latency between when an element is <code>push</code>-ed, 
 </section>
 <section class="module" id="ShiftReg">
 <div class="module-heading"><h2>ShiftReg #(T, int LATENCY)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module ShiftReg #(T, int LATENCY) {
-    interface ShiftReg : T din'0 -&gt; T dout'LATENCY
+<div class="interface-block"><pre><code class="language-sus">module ShiftReg #(T, int LATENCY) : T din'0 -&gt; T dout'LATENCY {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>

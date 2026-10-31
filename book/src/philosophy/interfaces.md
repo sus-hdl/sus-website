@@ -12,14 +12,12 @@ To transfer data from one interface to another, use the `cross` keyword. To ensu
 Example implementation of `memory_block`:
 ```Verilog
 module memory_block<gen int DEPTH, T> {
-    interface write : T data, int addr, bool wr {
-        T[DEPTH] memory
+    T[DEPTH] memory
 
-        if wr {
-            memory[addr] = data
-        }
+    action write : T data, int addr {
+        memory[addr] = data
     }
-    interface read : int addr -> T data {
+    action read : int addr -> T data {
         cross memory
 
         data = memory[addr]
@@ -32,16 +30,14 @@ Actually, we can implement `rebase_latency` from [latency.md](latency.md).
 Example implementation of `rebase_latency`:
 ```Verilog
 // This module rebases the latency by an offset DELTA without adding registers. 
-module rebase_latency<gen int DELTA, T> : T data_in'0 -> T data_out'DELTA {
-    cross cross_o
-    data_out = cross_o
+module rebase_latency #(int DELTA, T) {
+    input T data_in'0
 
-    // Create an anonymous interface, such that we can break the latency dependency. 
-    interface _ {
-        cross data_in
+    // A separate latency domain breaks the latency dependency between data_in and data_out. 
+    domain rebased
+    output T data_out'DELTA
 
-        T cross_o = a
-    }
+    data_out = CrossDomain(data_in)
 }
 ```
 

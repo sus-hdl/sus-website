@@ -119,3 +119,53 @@ module functions_example {
 - A `trigger` is for the submodule to signal its parent
 - A `function` is a local action: callable within the module, invisible outside it
 
+## Shorthands: inline submodules
+
+Often a submodules are effectively a single functional pipeline. SUS has two shorthands for this, both of which instantiate the submodule inline and call its *main interface*. 
+
+A module whose ports are declared in the module header is a *function-style module*. It does not carry a validity wire, and should therefore be purely combinatorial (with pipeline stages). 
+
+```sus
+module Multiply #(int TO) : int#(0..TO) a, int#(0..TO) b -> int#(0..TO*TO) product {
+    product = a * b
+}
+/// Usage
+module UseMultiply {
+    int#(0..10) x = 3
+    int#(0..10) y = 5
+
+    // Calling the module by name instantiates it inline
+    int#(0..100) by_name = Multiply(x, y)
+
+    // The same main interface on an explicitly declared instance
+    Multiply#(TO: 10) instance
+    int#(0..100) by_instance = instance(x, y)
+}
+```
+
+Likewise, an `action` named after its module is that module's main interface. Calling the module by name then calls this action. 
+
+```sus
+module fp32_add {
+    // Wrap a float IP core that exposes fixed-latency AXI interfaces. 
+    fp32_add_ip ip
+    
+    action fp32_add : float a, float b -> float res {
+        ip.s_axis_a_tvalid = true
+        ip.s_axis_a_tdata = a
+        ip.s_axis_b_tvalid = true
+        ip.s_axis_b_tdata = b
+        bool _0 = ip.m_axis_result_tvalid // Tie off
+        res = ip.m_axis_result_tdata
+    } else {
+        ip.s_axis_a_tvalid = false
+        ip.s_axis_b_tvalid = false
+    }
+}
+/// Usage
+module Use_fp32_add {
+    action use_it : float a, float b -> float res {
+        res = fp32_add(a, b)
+    }
+}
+```

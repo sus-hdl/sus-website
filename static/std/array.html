@@ -43,8 +43,7 @@
 <h2 class="doc-section" id="Modules">Modules</h2>
 <section class="module" id="Repeat">
 <div class="module-heading"><h2>Repeat #(T, int SIZE)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module Repeat #(T, int SIZE) {
-    interface Repeat : T v'0 -&gt; T[SIZE] result'0
+<div class="interface-block"><pre><code class="language-sus">module Repeat #(T, int SIZE) : T v'0 -&gt; T[SIZE] result'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -65,8 +64,7 @@
 </section>
 <section class="module" id="Reverse">
 <div class="module-heading"><h2>Reverse #(T, int SIZE)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module Reverse #(T, int SIZE) {
-    interface Reverse : T[SIZE] v'0 -&gt; T[SIZE] result'0
+<div class="interface-block"><pre><code class="language-sus">module Reverse #(T, int SIZE) : T[SIZE] v'0 -&gt; T[SIZE] result'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -87,8 +85,7 @@
 </section>
 <section class="module" id="Concat">
 <div class="module-heading"><h2>Concat #(T, int SIZE_A, int SIZE_B)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module Concat #(T, int SIZE_A, int SIZE_B) {
-    interface Concat : T[SIZE_A] a'0, T[SIZE_B] b'0 -&gt; T[SIZE_A + SIZE_B] result'0
+<div class="interface-block"><pre><code class="language-sus">module Concat #(T, int SIZE_A, int SIZE_B) : T[SIZE_A] a'0, T[SIZE_B] b'0 -&gt; T[SIZE_A + SIZE_B] result'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -111,8 +108,7 @@
 </section>
 <section class="module" id="RotateLeft">
 <div class="module-heading"><h2>RotateLeft #(T, int ARRAY_LEN)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module RotateLeft #(T, int ARRAY_LEN) {
-    interface RotateLeft : T[ARRAY_LEN] data'0, int#(0..ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
+<div class="interface-block"><pre><code class="language-sus">module RotateLeft #(T, int ARRAY_LEN) : T[ARRAY_LEN] data'0, int#(0..ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -134,8 +130,7 @@
 </section>
 <section class="module" id="RotateRight">
 <div class="module-heading"><h2>RotateRight #(T, int ARRAY_LEN)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module RotateRight #(T, int ARRAY_LEN) {
-    interface RotateRight : T[ARRAY_LEN] data'0, int#(0..ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0
+<div class="interface-block"><pre><code class="language-sus">module RotateRight #(T, int ARRAY_LEN) : T[ARRAY_LEN] data'0, int#(0..ARRAY_LEN) offset'0 -&gt; T[ARRAY_LEN] rotated_data'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>

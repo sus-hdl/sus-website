@@ -10,7 +10,7 @@
 - [Compile-Time Code](docs/compile_time_code/compile_time_code.md)
 - [Bounded Integers](docs/integers.md)
 - [Clocks](docs/clocks.md)
-- [Ports and Interfaces](docs/ports_and_interfaces.md)
+- [Ports](docs/ports.md)
   - [Actions and Triggers](docs/actions.md)
 - [Module Parameters](docs/module_parameters.md)
   - [Parameter Inference](docs/inference.md)

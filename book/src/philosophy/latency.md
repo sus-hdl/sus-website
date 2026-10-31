@@ -58,8 +58,7 @@ We are given a directed graph of all wires and how they combinatorially depend o
 Example: 
 ```Verilog
 // timeline is omitted here, not important
-module Accumulator {
-    interface Accumulator : int term, bool done -> int total_out 
+module Accumulator : int term, bool done -> int total_out {
     state int total
 
     int new_total = total + term
@@ -84,8 +83,7 @@ On the edges are noted the minimum latency offsets in black. These are given. Th
 Sadly, while it appears reasonable to think it's possible to assign a determinable latency. Observe this contrived example:
 
 ```Verilog
-module NonDeterminableLatency {
-    interface NonDeterminableLatency : int a, int b -> int x, int y 
+module NonDeterminableLatency : int a, int b -> int x, int y {
     reg int a_d = a
     int t = a_d + b
     reg reg reg int a_dd = a
@@ -109,8 +107,7 @@ To this problem I only really see three options:
 
 Simply solve the above module by explicitly specifying latencies to the two inputs:
 ```Verilog
-module LatencySpecified {
-    interface LatencySpecified : int a'0, int b'1 -> int x, int y 
+module LatencySpecified : int a'0, int b'1 -> int x, int y {
     reg int a_d = a
     int t = a_d + b
     reg reg reg int a_dd = a

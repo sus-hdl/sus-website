@@ -38,8 +38,7 @@
 <h2 class="doc-section" id="Modules">Modules</h2>
 <section class="module" id="ToOneHot">
 <div class="module-heading"><h2>ToOneHot #(int SIZE)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module ToOneHot #(int SIZE) {
-    interface ToOneHot : int#(0..SIZE - 1) selection'0 -&gt; bool[SIZE] bits'0
+<div class="interface-block"><pre><code class="language-sus">module ToOneHot #(int SIZE) : int#(0..SIZE - 1) selection'0 -&gt; bool[SIZE] bits'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -96,8 +95,7 @@ when find_first_bit.is_nonzero : int first_nonzero {
 </section>
 <section class="module" id="PopCount">
 <div class="module-heading"><h2>PopCount #(int SIZE)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module PopCount #(int SIZE) {
-    interface PopCount : bool[SIZE] bits'0 -&gt; int#(0..SIZE+1) popcount
+<div class="interface-block"><pre><code class="language-sus">module PopCount #(int SIZE) : bool[SIZE] bits'0 -&gt; int#(0..SIZE+1) popcount {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -120,8 +118,7 @@ PopCount(8'b00111011) == 5
 </section>
 <section class="module" id="BitwiseIntSplit">
 <div class="module-heading"><h2>BitwiseIntSplit #(int TO, int LOWER_BITS)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module BitwiseIntSplit #(int TO, int LOWER_BITS) {
-    interface BitwiseIntSplit : int#(FROM: 0, TO) v'0 -&gt; int#(0..UPPER_TO) upper'0, int#(0..pow2#(E: LOWER_BITS)) lower'0
+<div class="interface-block"><pre><code class="language-sus">module BitwiseIntSplit #(int TO, int LOWER_BITS) : int#(FROM: 0, TO) v'0 -&gt; int#(0..(TO-1) / pow2#(E: LOWER_BITS) + 1) upper'0, int#(0..pow2#(E: LOWER_BITS)) lower'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -143,8 +140,7 @@ See also <a href="bitwise.html#BitwiseIntConcat" title="bitwise.html#BitwiseIntC
 </section>
 <section class="module" id="BitwiseIntConcat">
 <div class="module-heading"><h2>BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS) {
-    interface BitwiseIntConcat : int#(0..UPPER_TO) upper'0, int#(0..pow2#(E: LOWER_BITS)) lower'0 -&gt; int#(0..UPPER_TO * pow2#(E: LOWER_BITS)) v'0
+<div class="interface-block"><pre><code class="language-sus">module BitwiseIntConcat #(int UPPER_TO, int LOWER_BITS) : int#(0..UPPER_TO) upper'0, int#(0..pow2#(E: LOWER_BITS)) lower'0 -&gt; int#(0..UPPER_TO * pow2#(E: LOWER_BITS)) v'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="119" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
@@ -166,8 +162,7 @@ See also <a href="bitwise.html#BitwiseIntSplit" title="bitwise.html#BitwiseIntSp
 </section>
 <section class="module" id="AlignToPow2">
 <div class="module-heading"><h2>AlignToPow2 #(int FROM, int TO, int LOWER_BITS)</h2></div>
-<div class="interface-block"><pre><code class="language-sus">module AlignToPow2 #(int FROM, int TO, int LOWER_BITS) {
-    interface AlignToPow2 : int#(FROM, TO) i'0 -&gt; int#(ALIGNED_FROM..ALIGNED_TO) o'0
+<div class="interface-block"><pre><code class="language-sus">module AlignToPow2 #(int FROM, int TO, int LOWER_BITS) : int#(FROM, TO) i'0 -&gt; int#(FROM - (FROM mod clog2#(V: LOWER_BITS))..TO - (TO + 1 mod clog2#(V: LOWER_BITS))) o'0 {
 }</code></pre></div>
 <figure class="port-diagram"><svg xmlns="http://www.w3.org/2000/svg" width="420" height="97" font-family="'Fira Code',monospace" font-size="11">
 <defs><marker id="ah-green" markerWidth="5" markerHeight="5" refX="0" refY="2.5" orient="auto"><path d="M 5,0 L 0,2.5 L 5,5 Z" fill="#22a85a"/></marker><marker id="ah-red" markerWidth="5" markerHeight="5" refX="5" refY="2.5" orient="auto"><path d="M 0,0 L 5,2.5 L 0,5 Z" fill="#e53e3e"/></marker></defs>
