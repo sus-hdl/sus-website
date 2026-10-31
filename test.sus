@@ -1,0 +1,58 @@
+  module fizz_buzz_gen {
+
+              interface fizz_buzz_gen : int v -> int fb
+
+              gen int FIZZ = 888
+
+              gen int BUZZ = 555
+
+              gen int FIZZ_BUZZ = 888555
+
+              gen int TABLE_SIZE = 256
+
+
+      
+              gen int[TABLE_SIZE] lut
+
+
+      
+              for int i in 0..TABLE_SIZE {
+
+                  gen bool fizz = i % 3 == 0
+
+                  gen bool buzz = i % 5 == 0
+
+
+      
+                  gen int tbl_fb
+
+                  if fizz & buzz {
+
+                      tbl_fb = FIZZ_BUZZ
+
+                  } else if fizz {
+
+                      tbl_fb = FIZZ
+
+                  } else if buzz {
+
+                      tbl_fb = BUZZ
+
+                  } else {
+
+                      tbl_fb = i
+
+                  }
+
+
+      
+                  lut[i] = tbl_fb
+
+              }
+
+
+      
+              fb = lut[v]
+
+          }
+        
