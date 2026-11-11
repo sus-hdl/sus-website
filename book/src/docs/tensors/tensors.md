@@ -1,5 +1,29 @@
 # Tensors
 
+## Array Literals
+
+An array can be written out element by element: `[a, b, c]` is an array of three elements, which may be runtime wires or compile-time values. Literals nest for multidimensional arrays: `[[1, 2], [3, 4]]`.
+
+A literal may end with a *default element*, written `v ...`, which fills every remaining slot of the array. The size of such a literal is not fixed by the literal itself. It is inferred from where the literal is used: the declared type of the target, the slice it is written to, or the port it is connected to. The list of explicit elements before the default may be empty, and the default must be separated from the explicit elements by a comma.
+
+```sus
+output bool[8] zeros = [false ...]      // all eight bits false
+output int[4] ints = [1, 2, 0 ...]      // [1, 2, 0, 0]
+gen int[2][2] M = [[1, 2], [3 ...]]     // [[1, 2], [3, 3]]
+
+bool[64] data
+data[..32] = low_half
+data[32..] = [false ...]                // the slice width gives the size
+
+input bool v
+output bool[3] vs = [v ...]             // every element is driven by v
+
+state bool[8] flags
+initial flags = [false ...]
+```
+
+It is an error when the explicit elements do not fit the target (`int[2] x = [1, 2, 3, 0 ...]`), and when the size of a literal with a default cannot be inferred from its context.
+
 ## Slicing Syntax
 
 Arrays are indexed with `arr[i]`. The index can be a compile-time value, or a runtime [bounded integer](../integers.md) whose bounds the compiler checks against the size of the array.

@@ -1,5 +1,11 @@
 # Actions, Triggers and Conditional Bindings
-A very common pattern in hardware design is the coupling of data to a "valid" signal. Because it is so common, and there's no hardware overhead to implementing it, SUS provides a syntactic sugar for it named `action` and `trigger`. 
+A very common pattern in hardware design is the coupling of data to a "valid" signal. Because it is so common, and there's no hardware overhead to implementing it, SUS provides a syntactic sugar for such valid signals. 
+
+- An `action` is an `input` port with associated data. It must be called from a parent module. 
+- A `trigger` is an `output` port with associated data. It is called from within the module, and can be responded to by a parent module. 
+- A `function` is the local equivalent of an `action`. It does not create any input or output ports, and must be called from within the module. 
+
+## Actions
 
 An `action` can be thought of as a sort-of method on a submodule. It can take any number of inputs, and produce any number of outputs. When the action is "called", the effect is that the "valid" wire associated with the action (of the same name as the action itself) is set to "1". Important to know is that since an action still represents a physical connection on a module, it can only be used once per cycle. Don't try to call an action in a `for`-loop and expect it to be "executed" multiple times. 
 
@@ -113,11 +119,41 @@ module functions_example {
 }
 ```
 
-## To recap
+## Secondary bindings
 
-- An `action` is for the parent module to signal one of its submodules
-- A `trigger` is for the submodule to signal its parent
-- A `function` is a local action: callable within the module, invisible outside it
+You can "re-bind" an existing `action`, `trigger` or `function` by using a *conditional binding*, just like you would for a regular submodule's trigger. Importantly, for any conditional bindings that would write to an output port, you can only bind the outputs exactly once, so as not to conflict. 
+
+Any number of bindings may bind the *inputs* of an action, but at most one site may bind its *outputs*: either the declaration's own body, or a single `when ... -> ...` binding. Every other binding must leave out the `-> outputs` part. This keeps each output driven from one place, instead of from every binding under the same condition. 
+
+In fact, an `action`, `trigger` or `function` can be declared without the braces. In effect the braces in `action`, `trigger` and `function` are syntactic sugar for a conditional binding on them. 
+
+```sus
+module memory#(T, int DEPTH) {
+    state T[DEPTH] mem
+    output bool wrote
+
+    // Declarations without a body
+    action write : int#(0..DEPTH) wr_addr, T wr_data
+    action read : int#(0..DEPTH) rd_addr -> T rd_data
+
+    // Bindings that bind only the inputs can be used multiple times
+    when write : int#(0..DEPTH) addr, T data {
+        mem[addr] = data
+    }
+    when write : int#(0..DEPTH) addr, T data {
+        wrote = true
+    } else {
+        wrote = false
+    }
+
+    // There must only be one binding that writes to the outputs
+    when read : int#(0..DEPTH) addr -> T data {
+        data = mem[addr]
+    }
+}
+```
+
+The rule also applies to bindings of a submodule's triggers: `when submod.trig : T v {}` may appear many times, but only one `when submod.trig : T v -> T r {}` may bind its outputs. 
 
 ## Shorthands: inline submodules
 
